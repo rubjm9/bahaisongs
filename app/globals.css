@@ -1,0 +1,126 @@
+@layer reset, mui, app;
+
+@layer reset {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  html,
+  body {
+    margin: 0;
+    padding: 0;
+    min-height: 100%;
+  }
+
+  body {
+    background: var(--bs-bg-primary);
+    color: var(--bs-text-primary);
+    font-family:
+      var(--bs-font-sans),
+      'Inter',
+      system-ui,
+      -apple-system,
+      'Segoe UI',
+      sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  ::selection {
+    background: var(--bs-selection-bg);
+    color: var(--bs-selection-fg);
+  }
+}
+
+@layer app {
+  /* Fallback before next-themes resolves (dark) */
+  :root,
+  html.dark {
+    --bs-bg-primary: #050b1a;
+    --bs-bg-elevated: #0b1a33;
+    --bs-bg-glass: rgba(13, 37, 64, 0.55);
+    --bs-text-primary: #e6f0ff;
+    --bs-text-muted: #8aa1c4;
+    --bs-text-inverse: #050b1a;
+    --bs-border-subtle: rgba(110, 168, 254, 0.12);
+    --bs-border-strong: rgba(110, 168, 254, 0.24);
+    --bs-topbar-fade: linear-gradient(
+      180deg,
+      rgba(5, 11, 26, 0.85) 0%,
+      rgba(5, 11, 26, 0.55) 70%,
+      rgba(5, 11, 26, 0) 100%
+    );
+    --bs-hover-subtle: rgba(110, 168, 254, 0.08);
+    --bs-selection-bg: rgba(79, 209, 255, 0.32);
+    --bs-selection-fg: #050b1a;
+    --bs-sidebar-bg: rgba(5, 11, 26, 0.45);
+    --bs-nav-active-bg: rgba(79, 209, 255, 0.1);
+    --bs-shadow-card: 0 8px 32px rgba(0, 0, 0, 0.32);
+    --bs-shadow-glow: 0 0 24px rgba(79, 209, 255, 0.18);
+    --bs-shadow-glow-strong: 0 0 48px rgba(79, 209, 255, 0.32);
+    --bs-lyrics-fade: linear-gradient(180deg, transparent 0%, rgba(5, 11, 26, 0.9) 100%);
+    --bs-popover-bg: rgba(11, 26, 51, 0.92);
+    --bs-popover-shadow: 0 24px 64px rgba(0, 0, 0, 0.5);
+    --bs-focus-ring: 0 0 0 3px rgba(79, 209, 255, 0.1);
+  }
+
+  html.light {
+    --bs-bg-primary: #f0f4fa;
+    --bs-bg-elevated: #ffffff;
+    --bs-bg-glass: rgba(255, 255, 255, 0.72);
+    --bs-text-primary: #0d1f3c;
+    --bs-text-muted: #5a7399;
+    --bs-text-inverse: #ffffff;
+    --bs-border-subtle: rgba(30, 144, 255, 0.14);
+    --bs-border-strong: rgba(30, 144, 255, 0.26);
+    --bs-topbar-fade: linear-gradient(
+      180deg,
+      rgba(240, 244, 250, 0.92) 0%,
+      rgba(240, 244, 250, 0.65) 70%,
+      rgba(240, 244, 250, 0) 100%
+    );
+    --bs-hover-subtle: rgba(30, 144, 255, 0.08);
+    --bs-selection-bg: rgba(79, 209, 255, 0.35);
+    --bs-selection-fg: #0d1f3c;
+    --bs-sidebar-bg: rgba(255, 255, 255, 0.65);
+    --bs-nav-active-bg: rgba(79, 209, 255, 0.12);
+    --bs-shadow-card: 0 8px 32px rgba(15, 40, 80, 0.08);
+    --bs-shadow-glow: 0 0 24px rgba(79, 209, 255, 0.14);
+    --bs-shadow-glow-strong: 0 0 48px rgba(79, 209, 255, 0.22);
+    --bs-lyrics-fade: linear-gradient(180deg, transparent 0%, rgba(240, 244, 250, 0.95) 100%);
+    --bs-popover-bg: rgba(255, 255, 255, 0.96);
+    --bs-popover-shadow: 0 24px 64px rgba(15, 40, 80, 0.14);
+    --bs-focus-ring: 0 0 0 3px rgba(79, 209, 255, 0.14);
+  }
+
+  :root,
+  html.dark,
+  html.light {
+    --bs-accent-electric: #1e90ff;
+    --bs-accent-cyan: #4fd1ff;
+    --bs-accent-glow: #6ea8fe;
+    --bs-accent-indigo: #6366f1;
+    --bs-blur-md: 16px;
+    --bs-radius-lg: 20px;
+  }
+
+  @keyframes bs-spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  .bs-spin {
+    animation: bs-spin 0.9s linear infinite;
+  }
+}

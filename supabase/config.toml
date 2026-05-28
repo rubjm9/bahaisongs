@@ -1,0 +1,42 @@
+# Minimal Supabase local config — runs the standard stack on default ports.
+# Generated for the bahaisongs project. Adjust before deploying to a real
+# Supabase Cloud project.
+
+project_id = "bahaisongs"
+
+[api]
+enabled = true
+port = 54321
+schemas = ["public", "storage"]
+extra_search_path = ["public", "extensions"]
+
+[db]
+port = 54322
+shadow_port = 54320
+major_version = 15
+
+[studio]
+enabled = true
+port = 54323
+
+[auth]
+enabled = true
+site_url = "http://localhost:3000"
+additional_redirect_urls = ["http://localhost:3000/**"]
+jwt_expiry = 3600
+enable_signup = true
+enable_anonymous_sign_ins = false
+
+[auth.email]
+enable_signup = true
+enable_confirmations = false  # local-dev convenience; turn on for prod
+
+[storage]
+enabled = false  # We use Cloudflare R2, not Supabase Storage.
+
+[edge_runtime]
+enabled = true
+inspector_port = 8083
+
+[functions.sign-audio-url]
+verify_jwt = false  # public read of approved tracks

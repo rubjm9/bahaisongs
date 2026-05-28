@@ -1,0 +1,177 @@
+{
+  "brand": {
+    "name": "BahaiSongs.org",
+    "tagline": "Music, prayers and chord sheets from the Bahá'í community, in one place."
+  },
+  "settings": {
+    "theme": "Theme",
+    "themeSystem": "System",
+    "themeLight": "Light",
+    "themeDark": "Dark",
+    "themeAria": "Change interface theme"
+  },
+  "share": {
+    "hint": "Share this song with your group",
+    "ariaLabel": "Share",
+    "copied": "Link copied!"
+  },
+  "nav": {
+    "home": "Home",
+    "search": "Search",
+    "library": "Your library",
+    "suggest": "Suggest a song",
+    "favorites": "Favorites",
+    "collapseMenu": "Collapse menu",
+    "expandMenu": "Expand menu"
+  },
+  "home": {
+    "heroEyebrow": "Bahá'í Music · Lyrics · Chords",
+    "heroTitle": "Lyrics and chords to sing along Bahá'í Songs",
+    "heroSubtitle": "Lyrics, chords, presentation mode and discovery for a spiritual life.",
+    "cta": "Explore catalogue",
+    "heroStat": "{count} songs available"
+  },
+  "sections": {
+    "catalogSize": "{count} songs in the catalogue",
+    "seeAll": "See all",
+    "recentEyebrow": "New",
+    "recentTitle": "Recently added",
+    "recentDescription": "The latest additions to the catalogue.",
+    "chordsEyebrow": "Play along",
+    "chordsTitle": "With chords",
+    "chordsDescription": "Songs with chord charts — for guitar, ukulele or piano.",
+    "prayersEyebrow": "Devotional",
+    "prayersTitle": "Sung prayers",
+    "prayersDescription": "Bahá'í prayers set to music.",
+    "calmEyebrow": "Atmosphere",
+    "calmTitle": "Calm",
+    "calmDescription": "For reflection, meditation or rest."
+  },
+  "song": {
+    "eyebrow": "Song",
+    "by": "by",
+    "hasAudio": "Audio",
+    "hasChords": "Chords",
+    "noAudio": "Lyrics only",
+    "noAudioHint": "This song doesn't have audio in the catalogue yet.",
+    "playReady": "Play this song",
+    "playReadyHint": "Tap to listen. Controls appear in the player at the bottom.",
+    "lyricsTitle": "Lyrics"
+  },
+  "artist": {
+    "eyebrow": "Artist",
+    "trackCount": "{count, plural, =0 {No songs} =1 {1 song} other {# songs}}",
+    "allTracks": "All songs"
+  },
+  "category": {
+    "kind": {
+      "genre": "Genre",
+      "mood": "Mood",
+      "theme": "Theme",
+      "tag": "Tag"
+    },
+    "trackCount": "{count, plural, =0 {No songs} =1 {1 song} other {# songs}}"
+  },
+  "library": {
+    "eyebrow": "Catalogue",
+    "title": "All the music",
+    "totalCount": "{count} songs, sorted alphabetically",
+    "browseByCategory": "Browse by category",
+    "allTracks": "Full catalogue"
+  },
+  "search": {
+    "title": "Search the catalogue",
+    "placeholder": "Search by title, artist, lyrics or category…",
+    "resultsCount": "{count, plural, =0 {No results} =1 {1 result} other {# results}}",
+    "totalCatalog": "{count} songs in the catalogue",
+    "hintEyebrow": "Start typing",
+    "hintTitle": "Search by title, lyrics or chords",
+    "hintBody": "Instant filtering across the whole catalogue. Use ↑ ↓ to navigate and Enter to open.",
+    "emptyEyebrow": "No matches",
+    "emptyTitle": "Nothing matches “{query}”",
+    "emptyBody": "Try fewer letters, a word from the chorus or a different spelling.",
+    "seeAll": "See all results for “{query}” →",
+    "filters": {
+      "language": "Language",
+      "all": "All",
+      "es": "Español",
+      "en": "English",
+      "withChords": "With chords",
+      "withAudio": "With audio",
+      "reset": "Clear"
+    },
+    "loading": "Loading catalogue…"
+  },
+  "common": {
+    "loading": "Loading…",
+    "error": "Something went wrong.",
+    "retry": "Try again",
+    "previous": "Previous",
+    "next": "Next"
+  },
+  "auth": {
+    "signIn": "Sign in",
+    "signOut": "Sign out",
+    "magicLink": "Magic link",
+    "magicLinkPlaceholder": "you@email.com",
+    "magicLinkSent": "Check your inbox!",
+    "orContinueWith": "Or continue with",
+    "myPlaylists": "My playlists",
+    "favorites": "Favorites",
+    "profile": "Profile",
+    "signInToLike": "Sign in to save favorites",
+    "signInRequired": "Sign in to continue"
+  },
+  "playlist": {
+    "create": "New playlist",
+    "titleLabel": "Title",
+    "visibility": "Visibility",
+    "public": "Public",
+    "private": "Private",
+    "save": "Save",
+    "addTrack": "Add to playlist",
+    "removeTrack": "Remove",
+    "emptyFavorites": "You have no favorites yet",
+    "emptyPlaylists": "You have no playlists yet",
+    "newPlaylist": "New playlist"
+  },
+  "admin": {
+    "nav": {
+      "overview": "Overview",
+      "tracks": "Songs",
+      "categories": "Categories",
+      "playlists": "Playlists",
+      "artists": "Artists",
+      "users": "Users",
+      "suggestions": "Suggestions",
+      "backToSite": "Back to site"
+    },
+    "overview": {
+      "title": "Admin dashboard",
+      "statsTitle": "Overview",
+      "recentSuggestions": "Recent suggestions"
+    },
+    "common": {
+      "save": "Save changes",
+      "create": "Create",
+      "cancel": "Cancel",
+      "delete": "Delete",
+      "edit": "Edit",
+      "back": "Back",
+      "confirm": "Confirm",
+      "noResults": "No results",
+      "loading": "Loading…"
+    }
+  },
+  "lyrics": {
+    "chords": "Chords",
+    "transpose": "Transpose",
+    "capo": "Capo",
+    "fontSize": "Size",
+    "autoscroll": "Autoscroll",
+    "present": "Present",
+    "noLyrics": "No lyrics available yet.",
+    "exitPresentation": "Exit",
+    "keyHints": "Space: scroll · +/- transpose · ↑↓ size · ESC exit"
+  }
+}
