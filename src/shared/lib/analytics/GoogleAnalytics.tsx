@@ -1,36 +1,39 @@
 'use client';
 
-import Script from 'next/script';
 import { usePathname, useSearchParams } from 'next/navigation';
-import { useEffect } from 'react';
-import { GA_MEASUREMENT_ID, isGoogleAnalyticsEnabled, pageview } from './gtag';
+import { useEffect, useRef } from 'react';
+import { isGoogleAnalyticsEnabled, pageview } from './gtag';
 
-export function GoogleAnalytics() {
+/** Sends GA4 page_view on client navigations (initial view is handled by layout scripts). */
+export function GoogleAnalyticsPageViews() {
   const pathname = usePathname();
   const searchParams = useSearchParams();
+  const isFirstView = useRef(true);
 
   useEffect(() => {
     if (!isGoogleAnalyticsEnabled()) return;
+    if (isFirstView.current) {
+      isFirstView.current = false;
+      return;
+    }
+
     const query = searchParams.toString();
-    pageview(query ? `${pathname}?${query}` : pathname);
+    const url = query ? `${pathname}?${query}` : pathname;
+
+    const send = () => pageview(url);
+    if (typeof window.gtag === 'function') {
+      send();
+      return;
+    }
+
+    const id = window.setInterval(() => {
+      if (typeof window.gtag === 'function') {
+        window.clearInterval(id);
+        send();
+      }
+    }, 50);
+    return () => window.clearInterval(id);
   }, [pathname, searchParams]);
 
-  if (!isGoogleAnalyticsEnabled()) return null;
-
-  return (
-    <>
-      <Script
-        src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
-        strategy="afterInteractive"
-      />
-      <Script id="google-analytics-init" strategy="afterInteractive">
-        {`
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-          gtag('config', '${GA_MEASUREMENT_ID}', { send_page_view: false });
-        `}
-      </Script>
-    </>
-  );
+  return null;
 }
