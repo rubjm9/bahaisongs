@@ -7,6 +7,9 @@ import { TrackPlaceholder } from '@/features/catalog/components/TrackPlaceholder
 import { TrackList } from '@/features/catalog/components/TrackList';
 import { getTracksByArtist } from '@/server/data/catalog';
 import type { Locale } from '@/shared/lib/i18n/config';
+import { appPath } from '@/shared/lib/seo/paths';
+import { SITE_URL } from '@/shared/lib/seo/site';
+import { ArtistJsonLd, BreadcrumbJsonLd } from '@/shared/lib/seo/JsonLd';
 import { accent, cssVars } from '@/shared/theme/tokens';
 
 // Phase 3 ships a single canonical artist; future phases will join this against
@@ -31,9 +34,15 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   const { slug, locale } = await params;
   const profile = ARTIST_PROFILES[slug];
   if (!profile) return { title: 'BahaiSongs' };
+  const loc = locale as Locale;
+  const isEs = locale !== 'en';
+  const canonical = `${SITE_URL}${appPath(loc, `artist/${slug}`)}`;
   return {
-    title: profile.name,
+    title: isEs
+      ? `${profile.name} – Canciones bahá'ís | BahaiSongs`
+      : `${profile.name} – Bahá'í Songs | BahaiSongs`,
     description: profile.bio[locale === 'en' ? 'en' : 'es'],
+    alternates: { canonical },
   };
 }
 
@@ -45,9 +54,18 @@ export default async function ArtistPage({ params }: { params: Params }) {
   const tracks = await getTracksByArtist(slug);
   const t = await getTranslations('artist');
   const loc = locale as Locale;
+  const artistUrl = `${SITE_URL}${appPath(loc, `artist/${slug}`)}`;
+  const bio = profile.bio[loc === 'en' ? 'en' : 'es'];
 
   return (
     <Stack spacing={5} sx={{ maxWidth: 1100, mx: 'auto' }}>
+      <ArtistJsonLd name={profile.name} bio={bio} url={artistUrl} />
+      <BreadcrumbJsonLd
+        items={[
+          { name: 'Inicio', url: SITE_URL },
+          { name: profile.name, url: artistUrl },
+        ]}
+      />
       <Stack
         direction={{ xs: 'column', md: 'row' }}
         spacing={3}

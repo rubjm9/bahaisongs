@@ -17,6 +17,14 @@ import { getAllTracks, getTrackBySlug, getTrackNeighbours } from '@/server/data/
 import { accent, cssVars, radii } from '@/shared/theme/tokens';
 import type { Locale } from '@/shared/lib/i18n/config';
 import { trackCanonicalUrl, trackPath } from '@/shared/lib/seo/paths';
+import { SITE_URL } from '@/shared/lib/seo/site';
+import { MusicRecordingJsonLd, BreadcrumbJsonLd } from '@/shared/lib/seo/JsonLd';
+
+const DUPLICATE_SUFFIX_RE = /(-v?-?\d+)$/;
+
+function primarySlug(slug: string): string {
+  return slug.replace(DUPLICATE_SUFFIX_RE, '');
+}
 
 type Params = Promise<{ locale: string; slug: string }>;
 
@@ -29,16 +37,24 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   const { slug } = await params;
   const track = await getTrackBySlug(slug);
   if (!track) return { title: 'BahaiSongs' };
-  const canonical = trackCanonicalUrl(slug);
+
+  // Duplicate versions point canonical to the primary slug
+  const primary = primarySlug(slug);
+  const canonical = trackCanonicalUrl(primary);
+
+  const chordsLabel = track.hasChords ? ' y acordes' : '';
+  const description = `${track.title} – letra${chordsLabel} | Canción bahá'í en español. Escúchala y aprende a cantarla en BahaiSongs.`;
+
   return {
     title: track.title,
-    description: track.snippet,
+    description,
     alternates: { canonical },
     openGraph: {
       title: track.title,
-      description: track.snippet,
+      description,
       type: 'music.song',
       url: canonical,
+      images: [`${SITE_URL}/og-image.png`],
     },
   };
 }
@@ -54,9 +70,18 @@ export default async function SongPage({ params }: { params: Params }) {
   const { prev, next } = await getTrackNeighbours(slug);
   const loc = locale as Locale;
   const playable = toPlayable(track);
+  const canonicalUrl = trackCanonicalUrl(primarySlug(slug));
 
   return (
     <Box sx={{ maxWidth: 1100, mx: 'auto', paddingY: { xs: 2, md: 4 } }}>
+      <MusicRecordingJsonLd track={track} url={canonicalUrl} />
+      <BreadcrumbJsonLd
+        items={[
+          { name: 'Inicio', url: SITE_URL },
+          { name: 'Catálogo', url: `${SITE_URL}/library` },
+          { name: track.title, url: canonicalUrl },
+        ]}
+      />
       {/* Two-column grid on desktop: sticky meta-panel left, scrollable lyrics right */}
       <Box
         sx={{

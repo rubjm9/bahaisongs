@@ -1,11 +1,30 @@
 import { Stack, Typography, Box } from '@mui/material';
 import { setRequestLocale, getTranslations } from 'next-intl/server';
+import type { Metadata } from 'next';
 import { GradientText } from '@/shared/ui/GradientText';
 import { getAllTracks } from '@/server/data/catalog';
+import type { Locale } from '@/shared/lib/i18n/config';
+import { appPath } from '@/shared/lib/seo/paths';
+import { SITE_URL } from '@/shared/lib/seo/site';
 import { accent, cssVars } from '@/shared/theme/tokens';
 import { LibraryHubClient } from '@/features/library/components/LibraryHubClient';
 
 type Params = Promise<{ locale: string }>;
+
+export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
+  const { locale } = await params;
+  const isEs = locale !== 'en';
+  const canonical = `${SITE_URL}${appPath(locale as Locale, 'library')}`;
+  return {
+    title: isEs
+      ? "Catálogo de canciones bahá'ís – Letras y acordes | BahaiSongs"
+      : "Bahá'í Songs Catalog – Lyrics and Chords | BahaiSongs",
+    description: isEs
+      ? "Explora el catálogo completo de canciones bahá'ís en español: letra, acordes de guitarra y audio. Filtra por categoría, idioma y estilo musical."
+      : "Browse the full catalog of Bahá'í songs: lyrics, guitar chords and audio. Filter by category, language and musical style.",
+    alternates: { canonical },
+  };
+}
 
 export default async function LibraryPage({ params }: { params: Params }) {
   const { locale } = await params;
