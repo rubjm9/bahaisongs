@@ -21,8 +21,12 @@ port = 54323
 
 [auth]
 enabled = true
-site_url = "http://localhost:3000"
-additional_redirect_urls = ["http://localhost:3000/**"]
+# Cloud dashboard must match production; local values are for `supabase start` only.
+site_url = "https://bahaisongs.org"
+additional_redirect_urls = [
+  "https://bahaisongs.org/**",
+  "http://localhost:3000/**",
+]
 jwt_expiry = 3600
 enable_signup = true
 enable_anonymous_sign_ins = false

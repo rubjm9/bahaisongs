@@ -54,6 +54,23 @@ function maybeRedirectLegacySongPath(request: NextRequest): NextResponse | null 
 }
 
 /**
+ * Supabase sometimes redirects magic links to Site URL + ?code= instead of
+ * emailRedirectTo (/auth/callback). Send those to the route handler before
+ * any locale rewrite or RSC page load (avoids broken client bundles on /).
+ */
+function maybeRedirectAuthCode(request: NextRequest): NextResponse | null {
+  const { pathname, searchParams } = request.nextUrl;
+  if (pathname.startsWith('/auth/')) return null;
+
+  const code = searchParams.get('code');
+  if (!code) return null;
+
+  const url = request.nextUrl.clone();
+  url.pathname = '/auth/callback';
+  return NextResponse.redirect(url);
+}
+
+/**
  * Guard for /admin/* routes. Requires an authenticated Supabase session.
  * If unauthenticated, redirects to /?next=/admin so the login modal can
  * redirect back after sign-in.
@@ -98,6 +115,9 @@ async function adminGuard(request: NextRequest): Promise<NextResponse | null> {
 }
 
 export async function middleware(request: NextRequest) {
+  const authCodeRedirect = maybeRedirectAuthCode(request);
+  if (authCodeRedirect) return authCodeRedirect;
+
   // Admin guard runs first; returns a redirect or refreshed-cookie response.
   const adminResponse = await adminGuard(request);
   if (adminResponse) return adminResponse;
@@ -113,5 +133,6 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/((?!api|_next|_vercel|.*\\..*).*)'],
+  // Exclude /auth/* — callback route lives outside [locale]; intl middleware would 404 it.
+  matcher: ['/((?!api|auth|_next|_vercel|.*\\..*).*)'],
 };

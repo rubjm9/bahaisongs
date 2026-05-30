@@ -11,6 +11,15 @@ interface UseSignInResult {
   error: string | null;
 }
 
+function buildAuthCallbackUrl(): string {
+  const callback = new URL('/auth/callback', window.location.origin);
+  const next = new URLSearchParams(window.location.search).get('next');
+  if (next?.startsWith('/') && !next.startsWith('//')) {
+    callback.searchParams.set('next', next);
+  }
+  return callback.toString();
+}
+
 export function useSignIn(): UseSignInResult {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -22,10 +31,9 @@ export function useSignIn(): UseSignInResult {
     try {
       const { createClient } = await import('@/shared/lib/supabase/client');
       const supabase = createClient();
-      const redirectTo = `${window.location.origin}/auth/callback`;
       const { error: err } = await supabase.auth.signInWithOAuth({
         provider: 'google',
-        options: { redirectTo },
+        options: { redirectTo: buildAuthCallbackUrl() },
       });
       if (err) setError(err.message);
     } catch (e) {
@@ -44,7 +52,7 @@ export function useSignIn(): UseSignInResult {
       const supabase = createClient();
       const { error: err } = await supabase.auth.signInWithOtp({
         email,
-        options: { emailRedirectTo: `${window.location.origin}/auth/callback` },
+        options: { emailRedirectTo: buildAuthCallbackUrl() },
       });
       if (err) setError(err.message);
     } catch (e) {
