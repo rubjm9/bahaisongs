@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef } from 'react';
+import { useRef, useState, useCallback } from 'react';
 import { Box, IconButton, Stack, Slider } from '@mui/material';
 import {
   Play,
@@ -16,12 +16,13 @@ import {
 } from 'lucide-react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import { useLocale } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import { appPath, trackPath } from '@/shared/lib/seo/paths';
 import type { Locale } from '@/shared/lib/i18n/config';
 import { accent, cssVars, radii } from '@/shared/theme/tokens';
 import { GradientText } from '@/shared/ui/GradientText';
 import { mergeSx } from '@/shared/ui/sx';
+import { MobileNavLinks } from '@/shared/ui/MobileNav';
 import { LikeButton } from '@/features/favorites/components/LikeButton';
 import { usePlayerStore } from '../stores/playerStore';
 import { useQueueStore, selectCurrentTrack } from '../stores/queueStore';
@@ -30,6 +31,7 @@ import { usePlayerActions } from '../hooks/usePlayerActions';
 import { useMediaSession } from '../hooks/useMediaSession';
 import { usePlayerHydration } from '../hooks/usePlayerHydration';
 import { hasPlayableSource } from '../lib/sourceResolver';
+import { playRandomTrack } from '../lib/randomTrack';
 
 /**
  * The single, global player bar. Mounts the only `<audio>` element in the
@@ -43,6 +45,8 @@ export function PlayerBar() {
   useMediaSession(audioRef);
   const actions = usePlayerActions(audioRef);
   const locale = useLocale() as Locale;
+  const tPlayer = useTranslations('player');
+  const [randomLoading, setRandomLoading] = useState(false);
 
   const current = useQueueStore((s) => selectCurrentTrack(s));
   const status = usePlayerStore((s) => s.status);
@@ -64,6 +68,16 @@ export function PlayerBar() {
     useQueueStore.getState().applyShuffle(next);
   };
 
+  const onPlayRandom = useCallback(async () => {
+    if (randomLoading) return;
+    setRandomLoading(true);
+    try {
+      await playRandomTrack(actions.playList);
+    } finally {
+      setRandomLoading(false);
+    }
+  }, [actions.playList]);
+
   return (
     <Box
       component="footer"
@@ -72,7 +86,10 @@ export function PlayerBar() {
         position: 'fixed',
         left: { xs: 8, md: 'calc(var(--bs-sidebar-width, 240px) + 16px)' },
         right: { xs: 8, md: 16 },
-        bottom: { xs: 12, md: 16 },
+        bottom: {
+          xs: 'calc(12px + env(safe-area-inset-bottom, 0px))',
+          md: 16,
+        },
         zIndex: 8,
         transition: 'left 240ms cubic-bezier(0.19, 1, 0.22, 1)',
       }}
@@ -166,7 +183,11 @@ export function PlayerBar() {
                 border: `1px solid ${cssVars.borderStrong}`,
               }}
             >
-              {current?.title.charAt(0).toUpperCase() ?? '·'}
+              {hasTrack ? (
+                current!.title.charAt(0).toUpperCase()
+              ) : (
+                <Shuffle size={20} strokeWidth={2} aria-hidden />
+              )}
             </Box>
             <Stack direction="row" spacing={0.5} sx={{ minWidth: 0, alignItems: 'center' }}>
               {current ? (
@@ -224,18 +245,36 @@ export function PlayerBar() {
                       textOverflow: 'ellipsis',
                     }}
                   >
-                    <GradientText variant="aurora">Sin reproducción</GradientText>
+                    <GradientText variant="aurora">{tPlayer('idleTitle')}</GradientText>
                   </Box>
                   <Box
+                    component="button"
+                    type="button"
+                    onClick={() => void onPlayRandom()}
+                    disabled={randomLoading}
+                    aria-busy={randomLoading}
                     sx={{
-                      color: cssVars.textMuted,
+                      display: 'block',
+                      width: '100%',
+                      maxWidth: 280,
+                      mt: 0.25,
+                      p: 0,
+                      border: 'none',
+                      background: 'transparent',
+                      textAlign: 'left',
+                      cursor: randomLoading ? 'wait' : 'pointer',
+                      color: accent.cyan,
                       fontSize: '0.75rem',
-                      whiteSpace: 'nowrap',
+                      fontWeight: 500,
+                      lineHeight: 1.4,
+                      whiteSpace: { xs: 'normal', sm: 'nowrap' },
                       overflow: 'hidden',
                       textOverflow: 'ellipsis',
+                      '&:hover': randomLoading ? undefined : { textDecoration: 'underline' },
+                      '&:disabled': { opacity: 0.65 },
                     }}
                   >
-                    Elige una canción para empezar
+                    {randomLoading ? tPlayer('idleRandomLoading') : tPlayer('idleRandomCta')}
                   </Box>
                 </Box>
               )}
@@ -398,6 +437,17 @@ export function PlayerBar() {
               <SkipForward size={15} />
             </PlayerControl>
           </Stack>
+        </Box>
+
+        <Box
+          sx={{
+            display: { xs: 'block', md: 'none' },
+            borderTop: `1px solid ${cssVars.borderSubtle}`,
+            mt: 1,
+            pt: 1,
+          }}
+        >
+          <MobileNavLinks />
         </Box>
       </Box>
     </Box>

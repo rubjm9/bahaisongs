@@ -30,9 +30,10 @@ export default async function HomePage({ params }: { params: Params }) {
         title={t('heroTitle')}
         subtitle={t('heroSubtitle')}
         cta={t('cta')}
+        ctaSuggest={t('ctaSuggest')}
+        ctaHref={appPath(locale as Locale, 'library')}
+        ctaSuggestHref={appPath(locale as Locale, 'suggest')}
         brand={brand('name')}
-        tagline={brand('tagline')}
-        locale={locale}
         heroStat={t('heroStat', { count: allTracks.length })}
       />
 

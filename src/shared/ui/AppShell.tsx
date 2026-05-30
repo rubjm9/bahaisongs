@@ -4,13 +4,17 @@ import { Box } from '@mui/material';
 import { type ReactNode } from 'react';
 import { Sidebar } from './Sidebar';
 import { TopBar } from './TopBar';
-import { MobileNav } from './MobileNav';
 import { AtmosphereBackground } from './AtmosphereBackground';
 import { PlayerBar } from '@/features/player/components/PlayerBar';
 import { WhatsAppShareButton } from './WhatsAppShareButton';
 import { cssVars, accent } from '@/shared/theme/tokens';
 import { useSidebarCollapsed } from '@/shared/hooks/useSidebarCollapsed';
-import { SIDEBAR_WIDTH_COLLAPSED, SIDEBAR_WIDTH_EXPANDED } from './shellLayout';
+import {
+  DESKTOP_CONTENT_PADDING_BOTTOM,
+  MOBILE_CONTENT_PADDING_BOTTOM,
+  SIDEBAR_WIDTH_COLLAPSED,
+  SIDEBAR_WIDTH_EXPANDED,
+} from './shellLayout';
 
 interface Props {
   children: ReactNode;
@@ -71,8 +75,10 @@ export function AppShell({ children }: Props) {
           minWidth: 0,
           display: 'flex',
           flexDirection: 'column',
-          // Reserve space at the bottom so content doesn't hide behind the player
-          paddingBottom: { xs: '140px', md: '120px' },
+          paddingBottom: {
+            xs: MOBILE_CONTENT_PADDING_BOTTOM,
+            md: DESKTOP_CONTENT_PADDING_BOTTOM,
+          },
         }}
       >
         <TopBar />
@@ -92,7 +98,6 @@ export function AppShell({ children }: Props) {
         </Box>
       </Box>
 
-      <MobileNav />
       <PlayerBar />
       <WhatsAppShareButton />
     </Box>

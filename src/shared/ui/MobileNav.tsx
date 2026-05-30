@@ -5,7 +5,7 @@ import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import { Box, Stack } from '@mui/material';
 import { Home, Search, Library, Heart } from 'lucide-react';
-import { accent, cssVars } from '@/shared/theme/tokens';
+import { accent, cssVars, radii } from '@/shared/theme/tokens';
 import type { Locale } from '@/shared/lib/i18n/config';
 import { appPath, isAppPathActive } from '@/shared/lib/seo/paths';
 
@@ -20,31 +20,14 @@ const items: {
   { href: 'favorites', labelKey: 'favorites', Icon: Heart },
 ];
 
-export function MobileNav() {
+/** Nav links row — embedded inside the mobile player bar (not fixed on its own). */
+export function MobileNavLinks() {
   const t = useTranslations('nav');
   const locale = useLocale() as Locale;
   const pathname = usePathname() ?? appPath(locale);
 
   return (
-    <Box
-      component="nav"
-      aria-label="Primary"
-      sx={{
-        position: 'fixed',
-        bottom: 88,
-        left: 12,
-        right: 12,
-        zIndex: 9,
-        background: cssVars.bgGlass,
-        backdropFilter: 'blur(24px) saturate(140%)',
-        WebkitBackdropFilter: 'blur(24px) saturate(140%)',
-        border: `1px solid ${cssVars.borderSubtle}`,
-        borderRadius: 999,
-        paddingX: 1,
-        paddingY: 1,
-        display: { xs: 'block', md: 'none' },
-      }}
-    >
+    <Box component="nav" aria-label="Primary">
       <Stack direction="row" spacing={0.5} sx={{ justifyContent: 'space-between' }}>
         {items.map(({ href, labelKey, Icon }) => {
           const fullHref = appPath(locale, href);
@@ -54,6 +37,7 @@ export function MobileNav() {
               key={labelKey}
               href={fullHref}
               aria-label={t(labelKey)}
+              aria-current={isActive ? 'page' : undefined}
               style={{ flex: 1, textDecoration: 'none' }}
             >
               <Box
@@ -61,9 +45,9 @@ export function MobileNav() {
                   display: 'flex',
                   flexDirection: 'column',
                   alignItems: 'center',
-                  paddingY: 0.75,
+                  paddingY: 0.5,
                   gap: 0.25,
-                  borderRadius: 999,
+                  borderRadius: `${radii.sm}px`,
                   color: isActive ? accent.cyan : cssVars.textMuted,
                   background: isActive ? cssVars.navActiveBg : 'transparent',
                   transition: 'color 160ms, background-color 160ms',

@@ -27,8 +27,9 @@
   "home": {
     "heroEyebrow": "Bahá'í Music · Lyrics · Chords",
     "heroTitle": "Lyrics and chords to sing along Bahá'í Songs",
-    "heroSubtitle": "Lyrics, chords, presentation mode and discovery for a spiritual life.",
+    "heroSubtitle": "Find the song you're looking for and share it with your group to sing or play together, or listen to learn how it goes. Don't see a song we should have? Send it to us so we can grow the catalogue.",
     "cta": "Explore catalogue",
+    "ctaSuggest": "Add a song",
     "heroStat": "{count} songs available"
   },
   "sections": {
@@ -46,6 +47,11 @@
     "calmEyebrow": "Atmosphere",
     "calmTitle": "Calm",
     "calmDescription": "For reflection, meditation or rest."
+  },
+  "player": {
+    "idleTitle": "Nothing playing",
+    "idleRandomCta": "Play a random song",
+    "idleRandomLoading": "Finding a song…"
   },
   "song": {
     "eyebrow": "Song",

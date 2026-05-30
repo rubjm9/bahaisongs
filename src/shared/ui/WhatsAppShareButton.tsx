@@ -5,6 +5,7 @@ import { usePathname } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 import { Box, IconButton, Typography } from '@mui/material';
 import { accent, cssVars } from '@/shared/theme/tokens';
+import { MOBILE_WHATSAPP_BOTTOM } from '@/shared/ui/shellLayout';
 
 function WhatsAppIcon() {
   return (
@@ -90,7 +91,7 @@ export function WhatsAppShareButton() {
       sx={{
         position: 'fixed',
         right: { xs: 12, md: 20 },
-        bottom: { xs: 188, md: 132 },
+        bottom: { xs: MOBILE_WHATSAPP_BOTTOM, md: 132 },
         zIndex: 7,
         display: 'flex',
         flexDirection: 'row',

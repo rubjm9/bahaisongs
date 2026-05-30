@@ -27,8 +27,9 @@
   "home": {
     "heroEyebrow": "Música bahá'í · Letras · Acordes",
     "heroTitle": "Letras y acordes para cantar juntos canciones bahá'ís",
-    "heroSubtitle": "Letras, acordes, presentaciones y descubrimientos para acompañar la vida espiritual.",
+    "heroSubtitle": "Encuentra la canción que buscas y compártela con tu grupo para cantar o tocar juntos, o escúchala para saber cómo es. ¿No tenemos alguna canción? Envíala para que ampliemos el catálogo.",
     "cta": "Explorar catálogo",
+    "ctaSuggest": "Agregar canción",
     "heroStat": "{count} canciones disponibles"
   },
   "sections": {
@@ -46,6 +47,11 @@
     "calmEyebrow": "Atmósfera",
     "calmTitle": "Tranquilas",
     "calmDescription": "Para reflexionar, meditar o descansar."
+  },
+  "player": {
+    "idleTitle": "Sin reproducción",
+    "idleRandomCta": "Escuchar una canción al azar",
+    "idleRandomLoading": "Buscando canción…"
   },
   "song": {
     "eyebrow": "Canción",

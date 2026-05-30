@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { Box, Typography, Stack, Chip } from '@mui/material';
+import { Typography, Stack, Chip } from '@mui/material';
 import { motion } from 'framer-motion';
 import { GradientText } from '@/shared/ui/GradientText';
 import { GlowButton } from '@/shared/ui/GlowButton';
@@ -12,10 +12,10 @@ interface Props {
   title: string;
   subtitle: string;
   cta: string;
+  ctaSuggest: string;
+  ctaHref: string;
+  ctaSuggestHref: string;
   brand: string;
-  tagline?: string;
-  locale: string;
-  totalSongs?: number;
   heroStat?: string;
 }
 
@@ -24,9 +24,10 @@ export function HeroAtmosphere({
   title,
   subtitle,
   cta,
+  ctaSuggest,
+  ctaHref,
+  ctaSuggestHref,
   brand,
-  tagline,
-  locale,
   heroStat,
 }: Props) {
   return (
@@ -110,7 +111,7 @@ export function HeroAtmosphere({
         sx={{
           color: cssVars.textMuted,
           fontSize: { xs: '1.05rem', md: '1.25rem' },
-          maxWidth: 640,
+          maxWidth: 720,
           lineHeight: 1.55,
           m: 0,
         }}
@@ -118,36 +119,26 @@ export function HeroAtmosphere({
         {subtitle}
       </Typography>
 
-      <Box
+      <Stack
         component={motion.div}
+        direction={{ xs: 'column', sm: 'row' }}
+        spacing={1.5}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.5, duration: 0.6 }}
-        sx={{ mt: 1 }}
+        sx={{ mt: 1, alignItems: { xs: 'stretch', sm: 'center' } }}
       >
-        <Link href={`/${locale}/library`} style={{ textDecoration: 'none' }}>
-          <GlowButton tone="solid">{cta}</GlowButton>
+        <Link href={ctaHref} style={{ textDecoration: 'none' }}>
+          <GlowButton tone="solid" sx={{ width: { xs: '100%', sm: 'auto' } }}>
+            {cta}
+          </GlowButton>
         </Link>
-      </Box>
-
-      {tagline ? (
-        <Typography
-          component={motion.p}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.7, duration: 0.6 }}
-          sx={{
-            color: cssVars.textMuted,
-            fontSize: '0.85rem',
-            maxWidth: 520,
-            mt: 4,
-            fontStyle: 'italic',
-            m: 0,
-          }}
-        >
-          {tagline}
-        </Typography>
-      ) : null}
+        <Link href={ctaSuggestHref} style={{ textDecoration: 'none' }}>
+          <GlowButton tone="glass" sx={{ width: { xs: '100%', sm: 'auto' } }}>
+            {ctaSuggest}
+          </GlowButton>
+        </Link>
+      </Stack>
     </Stack>
   );
 }
