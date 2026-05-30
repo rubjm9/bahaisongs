@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import React from 'react';
 import { Avatar, Menu, MenuItem, ListItemIcon, ListItemText } from '@mui/material';
-import { ListMusic, Heart, LogOut } from 'lucide-react';
+import { ListMusic, Heart, LogOut, LayoutDashboard } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { useLocale } from 'next-intl';
 import Link from 'next/link';
@@ -85,6 +85,20 @@ export function UserAvatar({ profile }: Props) {
           </ListItemIcon>
           <ListItemText>{t('favorites')}</ListItemText>
         </MenuItem>
+
+        {profile?.role === 'admin' && (
+          <MenuItem
+            component={Link}
+            href="/admin"
+            onClick={() => setAnchor(null)}
+            sx={{ color: cssVars.textPrimary, fontSize: '0.9rem' }}
+          >
+            <ListItemIcon sx={{ color: cssVars.textMuted, minWidth: 32 }}>
+              <LayoutDashboard size={16} />
+            </ListItemIcon>
+            <ListItemText>{t('adminPanel')}</ListItemText>
+          </MenuItem>
+        )}
 
         <MenuItem
           onClick={async () => {

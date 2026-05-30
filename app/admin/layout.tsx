@@ -1,5 +1,7 @@
 import { redirect } from 'next/navigation';
+import { setRequestLocale } from 'next-intl/server';
 import type { ReactNode } from 'react';
+import { defaultLocale } from '@/shared/lib/i18n/config';
 import { getSupabaseServerClient } from '@/shared/lib/supabase/server';
 import { Providers } from '@/app/providers';
 import { getServerThemeMode, getServerThemePreference } from '@/shared/theme/serverTheme';
@@ -10,6 +12,8 @@ export const metadata = {
 };
 
 export default async function AdminLayout({ children }: { children: ReactNode }) {
+  setRequestLocale(defaultLocale);
+
   const supabase = await getSupabaseServerClient();
 
   const {

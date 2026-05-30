@@ -1,14 +1,16 @@
 'use client';
 
 import { useState } from 'react';
+import { authGoogleEnabled } from '@/shared/lib/supabase/auth-config';
 import { supabaseEnabled } from '@/shared/lib/supabase/env';
 
 interface UseSignInResult {
-  signInWithGoogle: () => Promise<void>;
-  signInWithMagicLink: (email: string) => Promise<void>;
+  signInWithGoogle: () => Promise<boolean>;
+  signInWithMagicLink: (email: string) => Promise<boolean>;
   signOut: () => Promise<void>;
   loading: boolean;
   error: string | null;
+  clearError: () => void;
 }
 
 function buildAuthCallbackUrl(): string {
@@ -24,8 +26,16 @@ export function useSignIn(): UseSignInResult {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  async function signInWithGoogle() {
-    if (!supabaseEnabled) return;
+  function clearError() {
+    setError(null);
+  }
+
+  async function signInWithGoogle(): Promise<boolean> {
+    if (!supabaseEnabled) return false;
+    if (!authGoogleEnabled) {
+      setError('provider_disabled');
+      return false;
+    }
     setLoading(true);
     setError(null);
     try {
@@ -35,16 +45,21 @@ export function useSignIn(): UseSignInResult {
         provider: 'google',
         options: { redirectTo: buildAuthCallbackUrl() },
       });
-      if (err) setError(err.message);
+      if (err) {
+        setError(normalizeAuthError(err.message));
+        return false;
+      }
+      return true;
     } catch (e) {
-      setError(e instanceof Error ? e.message : 'Unknown error');
+      setError(normalizeAuthError(e instanceof Error ? e.message : 'unknown'));
+      return false;
     } finally {
       setLoading(false);
     }
   }
 
-  async function signInWithMagicLink(email: string) {
-    if (!supabaseEnabled) return;
+  async function signInWithMagicLink(email: string): Promise<boolean> {
+    if (!supabaseEnabled) return false;
     setLoading(true);
     setError(null);
     try {
@@ -54,9 +69,14 @@ export function useSignIn(): UseSignInResult {
         email,
         options: { emailRedirectTo: buildAuthCallbackUrl() },
       });
-      if (err) setError(err.message);
+      if (err) {
+        setError(normalizeAuthError(err.message));
+        return false;
+      }
+      return true;
     } catch (e) {
-      setError(e instanceof Error ? e.message : 'Unknown error');
+      setError(normalizeAuthError(e instanceof Error ? e.message : 'unknown'));
+      return false;
     } finally {
       setLoading(false);
     }
@@ -78,5 +98,13 @@ export function useSignIn(): UseSignInResult {
     }
   }
 
-  return { signInWithGoogle, signInWithMagicLink, signOut, loading, error };
+  return { signInWithGoogle, signInWithMagicLink, signOut, loading, error, clearError };
+}
+
+function normalizeAuthError(message: string): string {
+  const lower = message.toLowerCase();
+  if (lower.includes('provider is not enabled') || lower.includes('unsupported provider')) {
+    return 'provider_disabled';
+  }
+  return message;
 }

@@ -1,9 +1,9 @@
 import type { Metadata, Viewport } from 'next';
 import Script from 'next/script';
 import { Suspense } from 'react';
-import { getLocale } from 'next-intl/server';
 import { GoogleAnalyticsPageViews } from '@/shared/lib/analytics/GoogleAnalytics';
 import { GoogleAnalyticsScripts } from '@/shared/lib/analytics/GoogleAnalyticsScripts';
+import { getRootHtmlLocale } from '@/shared/lib/i18n/rootLocale';
 import { inter, outfit } from '@/shared/theme/fonts';
 import { getServerThemeMode } from '@/shared/theme/serverTheme';
 import { THEME_COOKIE_NAME, THEME_STORAGE_KEY } from '@/shared/theme/themeStorage';
@@ -25,7 +25,7 @@ export const viewport: Viewport = {
 };
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
-  const [locale, initialMode] = await Promise.all([getLocale(), getServerThemeMode()]);
+  const [locale, initialMode] = await Promise.all([getRootHtmlLocale(), getServerThemeMode()]);
   return (
     <html
       lang={locale}
