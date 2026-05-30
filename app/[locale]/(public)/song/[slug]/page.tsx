@@ -34,7 +34,7 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
-  const { slug } = await params;
+  const { locale, slug } = await params;
   const track = await getTrackBySlug(slug);
   if (!track) return { title: 'BahaiSongs' };
 
@@ -42,8 +42,10 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   const primary = primarySlug(slug);
   const canonical = trackCanonicalUrl(primary);
 
-  const chordsLabel = track.hasChords ? ' y acordes' : '';
-  const description = `${track.title} – letra${chordsLabel} | Canción bahá'í en español. Escúchala y aprende a cantarla en BahaiSongs.`;
+  const isEs = locale !== 'en';
+  const description = isEs
+    ? `${track.title} – letra${track.hasChords ? ' y acordes' : ''} | Canción bahá'í en español. Escúchala y aprende a cantarla en BahaiSongs.`
+    : `${track.title} – lyrics${track.hasChords ? ' and chords' : ''} | Bahá'í song. Listen and learn to sing it on BahaiSongs.`;
 
   return {
     title: track.title,
@@ -54,7 +56,6 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
       description,
       type: 'music.song',
       url: canonical,
-      images: [`${SITE_URL}/og-image.png`],
     },
   };
 }

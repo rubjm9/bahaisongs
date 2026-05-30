@@ -68,7 +68,13 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
       ? `${label} – Canciones bahá'ís | BahaiSongs`
       : `${label} – Bahá'í Songs | BahaiSongs`,
     description,
-    alternates: { canonical },
+    alternates: {
+      canonical,
+      languages: {
+        es: `${SITE_URL}${appPath('es', `category/${slug}`)}`,
+        en: `${SITE_URL}${appPath('en', `category/${slug}`)}`,
+      },
+    },
   };
 }
 

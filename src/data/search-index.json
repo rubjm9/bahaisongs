@@ -6,11 +6,7 @@
     "language": "es",
     "hasChords": false,
     "hasAudio": false,
-    "categorySlugs": [
-      "cancion",
-      "oracion",
-      "tranquila"
-    ],
+    "categorySlugs": ["cancion", "oracion", "tranquila"],
     "snippet": "(Oración de ‘Abdu’l-Bahá) ¡Oh Dios! Guíame, protégeme, Ilumina la lámpara de mi corazón Y haz de mí una estrella brillante. Tú eres el Fuert…",
     "searchKey": "¡oh dios! guiame comunidad bahai (oracion de abdul-baha) ¡oh dios! guiame, protegeme, ilumina la lampara de mi corazon y haz de mi una estrella brillante. tu eres el fuert… cancion oracion tranquila"
   },
@@ -21,12 +17,7 @@
     "language": "es",
     "hasChords": true,
     "hasAudio": true,
-    "categorySlugs": [
-      "cancion",
-      "oracion",
-      "con-acordes",
-      "con-audio"
-    ],
+    "categorySlugs": ["cancion", "oracion", "con-acordes", "con-audio"],
     "snippet": "Sol Mim ¡oh hijo del hombre! Do Re Si me amas olvídate de ti mismo Sol Mim Si quieres mi agrado Do Re No consideres el tuyo Mim Sol Así tú m…",
     "searchKey": "¡oh hijo del hombre! si me amas olvidate de ti mismo comunidad bahai sol mim ¡oh hijo del hombre! do re si me amas olvidate de ti mismo sol mim si quieres mi agrado do re no consideres el tuyo mim sol asi tu m… cancion oracion con-acordes con-audio"
   },
@@ -37,9 +28,7 @@
     "language": "es",
     "hasChords": false,
     "hasAudio": false,
-    "categorySlugs": [
-      "cancion"
-    ],
+    "categorySlugs": ["cancion"],
     "snippet": "Esta es la historia de un héroe (es un relato de amor) de un personaje sencillo, generoso y servicial Cuenta la historia que un día a unos p…",
     "searchKey": "abdul-baha: mi heroe comunidad bahai esta es la historia de un heroe (es un relato de amor) de un personaje sencillo, generoso y servicial cuenta la historia que un dia a unos p… cancion"
   },
@@ -50,12 +39,7 @@
     "language": "es",
     "hasChords": true,
     "hasAudio": true,
-    "categorySlugs": [
-      "cancion",
-      "oracion",
-      "con-acordes",
-      "con-audio"
-    ],
+    "categorySlugs": ["cancion", "oracion", "con-acordes", "con-audio"],
     "snippet": "Sol Ooooooooooohhhhhh…. Do2 Ooooooooohhhhh… Sol Do2 Oh señor, a ti acudo en busca de amparo Re sol Hacia todos tus signos, vuelvo mi corazón…",
     "searchKey": "a ti acudo en busca de amparo comunidad bahai sol ooooooooooohhhhhh…. do2 ooooooooohhhhh… sol do2 oh senor, a ti acudo en busca de amparo re sol hacia todos tus signos, vuelvo mi corazon… cancion oracion con-acordes con-audio"
   },
@@ -66,10 +50,7 @@
     "language": "es",
     "hasChords": false,
     "hasAudio": true,
-    "categorySlugs": [
-      "cancion",
-      "con-audio"
-    ],
+    "categorySlugs": ["cancion", "con-audio"],
     "snippet": "",
     "searchKey": "al mundo amor comunidad bahai  cancion con-audio"
   },
@@ -80,10 +61,7 @@
     "language": "es",
     "hasChords": false,
     "hasAudio": false,
-    "categorySlugs": [
-      "cancion",
-      "muy-ritmica"
-    ],
+    "categorySlugs": ["cancion", "muy-ritmica"],
     "snippet": "(VERSO 1) A Si tú piensas G que tu barrio puede cambiar G algo mejor vendrá. Si tú hablas sobre cómo se logrará algo mejor vendrá. Si tú act…",
     "searchKey": "algo mejor vendra_proyecto de medios para la transformacion. comunidad bahai (verso 1) a si tu piensas g que tu barrio puede cambiar g algo mejor vendra. si tu hablas sobre como se lograra algo mejor vendra. si tu act… cancion muy-ritmica"
   },
@@ -94,9 +72,7 @@
     "language": "es",
     "hasChords": false,
     "hasAudio": true,
-    "categorySlugs": [
-      "cancion"
-    ],
+    "categorySlugs": ["cancion"],
     "snippet": "Esta versión se toca en el 3er traste. Disculpen la calidad del audio e interpretación. ☺ C Am Un puñado de almas anhelantes F Gm inspiradas…",
     "searchKey": "almas anhelantes comunidad bahai esta version se toca en el 3er traste. disculpen la calidad del audio e interpretacion. ☺ c am un punado de almas anhelantes f gm inspiradas… cancion"
   },
@@ -107,14 +83,20 @@
     "language": "es",
     "hasChords": true,
     "hasAudio": true,
-    "categorySlugs": [
-      "cancion",
-      "con-acordes",
-      "con-audio",
-      "muy-ritmica"
-    ],
+    "categorySlugs": ["cancion", "con-acordes", "con-audio", "muy-ritmica"],
     "snippet": "Intro: Am , F , C , G (bis) CORO Am F Están apareciendo C esas almas santas G esas almas santas. Am F Están ellas guiando C a la humanidad,…",
     "searchKey": "almas santas comunidad bahai intro: am , f , c , g (bis) coro am f estan apareciendo c esas almas santas g esas almas santas. am f estan ellas guiando c a la humanidad,… cancion con-acordes con-audio muy-ritmica"
+  },
+  {
+    "slug": "alok-sevenn-drop-new-song-the-wall-recreating-the-pink-floyd-classic",
+    "title": "Alok & Sevenn Drop New Song “The Wall” Recreating The Pink Floyd Classic",
+    "artist": "Comunidad Bahá'í",
+    "language": "es",
+    "hasChords": false,
+    "hasAudio": false,
+    "categorySlugs": ["cancion"],
+    "snippet": "Pink Floyd’s “The Wall” is one of those classics that, even if you don’t know who sings it or what the song is called, you know the song ins…",
+    "searchKey": "alok & sevenn drop new song “the wall” recreating the pink floyd classic comunidad bahai pink floyds “the wall” is one of those classics that, even if you dont know who sings it or what the song is called, you know the song ins… cancion"
   },
   {
     "slug": "amame",
@@ -123,10 +105,7 @@
     "language": "es",
     "hasChords": false,
     "hasAudio": false,
-    "categorySlugs": [
-      "cancion",
-      "tranquila"
-    ],
+    "categorySlugs": ["cancion", "tranquila"],
     "snippet": "(Palabra Oculta de Bahá’u’lláh; Música: Manuel Melgarejo) Ámame para que yo te ame. (x2) Si tú no me amas, Mi amor no puede de ningún modo a…",
     "searchKey": "amame comunidad bahai (palabra oculta de bahaullah; musica: manuel melgarejo) amame para que yo te ame. (x2) si tu no me amas, mi amor no puede de ningun modo a… cancion tranquila"
   },
@@ -137,11 +116,7 @@
     "language": "es",
     "hasChords": true,
     "hasAudio": true,
-    "categorySlugs": [
-      "cancion",
-      "con-acordes",
-      "con-audio"
-    ],
+    "categorySlugs": ["cancion", "con-acordes", "con-audio"],
     "snippet": "A F#m Cuando comprendes que la felicidad está en el servicio A F#m Y descubres poderes que se encuentran dentro de ti A F#m Te levantas a ac…",
     "searchKey": "amigo comunidad bahai a f#m cuando comprendes que la felicidad esta en el servicio a f#m y descubres poderes que se encuentran dentro de ti a f#m te levantas a ac… cancion con-acordes con-audio"
   },
@@ -152,9 +127,7 @@
     "language": "es",
     "hasChords": false,
     "hasAudio": true,
-    "categorySlugs": [
-      "cancion"
-    ],
+    "categorySlugs": ["cancion"],
     "snippet": "Sol Un joven astro brilla en este Día Fa Mi Se llama Anís y es de Zhunuz Lam Sol Su corazón alberga un tesoro Fa Mi Más infinito que su prop…",
     "searchKey": "anis comunidad bahai sol un joven astro brilla en este dia fa mi se llama anis y es de zhunuz lam sol su corazon alberga un tesoro fa mi mas infinito que su prop… cancion"
   },
@@ -165,10 +138,7 @@
     "language": "es",
     "hasChords": false,
     "hasAudio": true,
-    "categorySlugs": [
-      "cancion",
-      "con-audio"
-    ],
+    "categorySlugs": ["cancion", "con-audio"],
     "snippet": "Estamos preparados para descubrir la esencia y el concepto de la identidad. Todos buscamos un propósito que influya en los discursos de la s…",
     "searchKey": "arden tanto sus corazones comunidad bahai estamos preparados para descubrir la esencia y el concepto de la identidad. todos buscamos un proposito que influya en los discursos de la s… cancion con-audio"
   },
@@ -179,11 +149,7 @@
     "language": "es",
     "hasChords": true,
     "hasAudio": false,
-    "categorySlugs": [
-      "cancion",
-      "con-acordes",
-      "con-audio"
-    ],
+    "categorySlugs": ["cancion", "con-acordes", "con-audio"],
     "snippet": "DO Vicente es un jovencito como tú o como aquel, SOL tiene un grupo de amigos que les gusta la parranda. MI LAm MI LAm Una vez en una fiesta…",
     "searchKey": "atrevete a ser diferente comunidad bahai do vicente es un jovencito como tu o como aquel, sol tiene un grupo de amigos que les gusta la parranda. mi lam mi lam una vez en una fiesta… cancion con-acordes con-audio"
   },
@@ -194,11 +160,7 @@
     "language": "es",
     "hasChords": true,
     "hasAudio": true,
-    "categorySlugs": [
-      "cancion",
-      "con-acordes",
-      "con-audio"
-    ],
+    "categorySlugs": ["cancion", "con-acordes", "con-audio"],
     "snippet": "D G Hay corazones que igual que yo A D anhelan descubrir D G un sendero una dirección A D para poder seguir. D G Veo corazones que al avanza…",
     "searchKey": "avanzo con valor comunidad bahai d g hay corazones que igual que yo a d anhelan descubrir d g un sendero una direccion a d para poder seguir. d g veo corazones que al avanza… cancion con-acordes con-audio"
   },
@@ -209,11 +171,7 @@
     "language": "es",
     "hasChords": false,
     "hasAudio": true,
-    "categorySlugs": [
-      "cancion",
-      "con-audio",
-      "tranquila"
-    ],
+    "categorySlugs": ["cancion", "con-audio", "tranquila"],
     "snippet": "Nacido para ser un gran señor, Pudiste conocer la dicha en Tu juventud. Tu pueblo y Tu familia junto a Ti Dios todo Te lo dio: amor, riqueza…",
     "searchKey": "bahaullah, arde mi anhelo por ti comunidad bahai nacido para ser un gran senor, pudiste conocer la dicha en tu juventud. tu pueblo y tu familia junto a ti dios todo te lo dio: amor, riqueza… cancion con-audio tranquila"
   },
@@ -224,10 +182,7 @@
     "language": "es",
     "hasChords": false,
     "hasAudio": true,
-    "categorySlugs": [
-      "cancion",
-      "con-audio"
-    ],
+    "categorySlugs": ["cancion", "con-audio"],
     "snippet": "El tiempo exige declarar una batalla a la sociedad nos toca construir una armadura que sirva como escudo protector ouo... protector Comencem…",
     "searchKey": "batalla espiritual comunidad bahai el tiempo exige declarar una batalla a la sociedad nos toca construir una armadura que sirva como escudo protector ouo... protector comencem… cancion con-audio"
   },
@@ -238,13 +193,7 @@
     "language": "es",
     "hasChords": true,
     "hasAudio": false,
-    "categorySlugs": [
-      "cancion",
-      "oracion",
-      "con-acordes",
-      "con-audio",
-      "tranquila"
-    ],
+    "categorySlugs": ["cancion", "oracion", "con-acordes", "con-audio", "tranquila"],
     "snippet": "(La La7m La7 Re Sim Mi7) Bendito es el sitio Y la casa y el lugar Y la ciudad Y el corazón y la montaña Y el refugio Y la cueva Y el valle y…",
     "searchKey": "bendito es el sitio comunidad bahai (la la7m la7 re sim mi7) bendito es el sitio y la casa y el lugar y la ciudad y el corazon y la montana y el refugio y la cueva y el valle y… cancion oracion con-acordes con-audio tranquila"
   },
@@ -255,9 +204,7 @@
     "language": "es",
     "hasChords": false,
     "hasAudio": false,
-    "categorySlugs": [
-      "cancion"
-    ],
+    "categorySlugs": ["cancion"],
     "snippet": "Les voy a hablar de un ser tan santo como el más puro cristal SolM DoM Lam Fue la Aurora de un gran Día esperado largo tiempo Sim DoM ReM Un…",
     "searchKey": "bienamado bab (bicentenario del bab) comunidad bahai les voy a hablar de un ser tan santo como el mas puro cristal solm dom lam fue la aurora de un gran dia esperado largo tiempo sim dom rem un… cancion"
   },
@@ -268,11 +215,7 @@
     "language": "es",
     "hasChords": true,
     "hasAudio": true,
-    "categorySlugs": [
-      "cancion",
-      "con-acordes",
-      "con-audio"
-    ],
+    "categorySlugs": ["cancion", "con-acordes", "con-audio"],
     "snippet": "Bm F# Salí a caminar E y tropecé con una enorme piedra F# que me hizo dudar. Y quise renunciar darme la vuelta y regresar a casa en vez de c…",
     "searchKey": "caminando comunidad bahai bm f# sali a caminar e y tropece con una enorme piedra f# que me hizo dudar. y quise renunciar darme la vuelta y regresar a casa en vez de c… cancion con-acordes con-audio"
   },
@@ -283,11 +226,7 @@
     "language": "es",
     "hasChords": true,
     "hasAudio": true,
-    "categorySlugs": [
-      "cancion",
-      "con-acordes",
-      "con-audio"
-    ],
+    "categorySlugs": ["cancion", "con-acordes", "con-audio"],
     "snippet": "G Bm Una mañana Carito C G la brisa fresca sintió C G con los pies en el agua D G desde el muelle miró. Era un barco a vela solito en medio…",
     "searchKey": "carito comunidad bahai g bm una manana carito c g la brisa fresca sintio c g con los pies en el agua d g desde el muelle miro. era un barco a vela solito en medio… cancion con-acordes con-audio"
   },
@@ -298,10 +237,7 @@
     "language": "es",
     "hasChords": false,
     "hasAudio": true,
-    "categorySlugs": [
-      "cancion",
-      "con-audio"
-    ],
+    "categorySlugs": ["cancion", "con-audio"],
     "snippet": "Este es el círculo de estudio creemos de corazón en la promesa que muy pronto el mundo será mejor. Este es un sol que genera vida y brilla e…",
     "searchKey": "circulo de amor comunidad bahai este es el circulo de estudio creemos de corazon en la promesa que muy pronto el mundo sera mejor. este es un sol que genera vida y brilla e… cancion con-audio"
   },
@@ -312,11 +248,7 @@
     "language": "es",
     "hasChords": true,
     "hasAudio": true,
-    "categorySlugs": [
-      "cancion",
-      "con-acordes",
-      "con-audio"
-    ],
+    "categorySlugs": ["cancion", "con-acordes", "con-audio"],
     "snippet": "G Dm7 G Una vez más me encuentro aquí G Dm7 G vine a ver el sol salir G Dm7 G siento una brisa de tranquilidad. Traigo ideas que aclarar pre…",
     "searchKey": "claridad comunidad bahai g dm7 g una vez mas me encuentro aqui g dm7 g vine a ver el sol salir g dm7 g siento una brisa de tranquilidad. traigo ideas que aclarar pre… cancion con-acordes con-audio"
   },
@@ -327,11 +259,7 @@
     "language": "es",
     "hasChords": true,
     "hasAudio": true,
-    "categorySlugs": [
-      "cancion",
-      "con-acordes",
-      "con-audio"
-    ],
+    "categorySlugs": ["cancion", "con-acordes", "con-audio"],
     "snippet": "Bm A E Llegó el momento de empezar a trabajar Bm A E para adelante vamos ya. Bm A E Poquito a poco va llegando la vecindad Bm A E queremos e…",
     "searchKey": "combinando los talentos comunidad bahai bm a e llego el momento de empezar a trabajar bm a e para adelante vamos ya. bm a e poquito a poco va llegando la vecindad bm a e queremos e… cancion con-acordes con-audio"
   },
@@ -342,10 +270,7 @@
     "language": "es",
     "hasChords": true,
     "hasAudio": false,
-    "categorySlugs": [
-      "cancion",
-      "con-acordes"
-    ],
+    "categorySlugs": ["cancion", "con-acordes"],
     "snippet": "(Fa, Do, Rem, Lam) No se desanimen si sus esfuerzos son descartados Como siendo utópicos por las voces que se opondrían a cualquier sugerenc…",
     "searchKey": "confien comunidad bahai (fa, do, rem, lam) no se desanimen si sus esfuerzos son descartados como siendo utopicos por las voces que se opondrian a cualquier sugerenc… cancion con-acordes"
   },
@@ -356,11 +281,7 @@
     "language": "es",
     "hasChords": false,
     "hasAudio": false,
-    "categorySlugs": [
-      "cancion",
-      "oracion",
-      "con-audio"
-    ],
+    "categorySlugs": ["cancion", "oracion", "con-audio"],
     "snippet": "https://youtu.be/81eJ7ysdrTk \"Crea en mí un corazón puro, oh mi Dios, y renueva una conciencia tranquila dentro de mí, oh mi Esperanza. Por…",
     "searchKey": "crea en mi un corazon puro comunidad bahai https://youtu.be/81ej7ysdrtk \"crea en mi un corazon puro, oh mi dios, y renueva una conciencia tranquila dentro de mi, oh mi esperanza. por… cancion oracion con-audio"
   },
@@ -371,11 +292,7 @@
     "language": "es",
     "hasChords": true,
     "hasAudio": true,
-    "categorySlugs": [
-      "cancion",
-      "con-acordes",
-      "con-audio"
-    ],
+    "categorySlugs": ["cancion", "con-acordes", "con-audio"],
     "snippet": "C G/B Am F Miro mi reflejo C G/B Am F sin dejar de pensar C G/B Am F en la misma pregunta: C G/B Am F ¿Quién soy en verdad? Veo tanta injust…",
     "searchKey": "creacion celestial comunidad bahai c g/b am f miro mi reflejo c g/b am f sin dejar de pensar c g/b am f en la misma pregunta: c g/b am f ¿quien soy en verdad? veo tanta injust… cancion con-acordes con-audio"
   },
@@ -386,11 +303,7 @@
     "language": "es",
     "hasChords": true,
     "hasAudio": true,
-    "categorySlugs": [
-      "cancion",
-      "con-acordes",
-      "con-audio"
-    ],
+    "categorySlugs": ["cancion", "con-acordes", "con-audio"],
     "snippet": "Am C G D Llego a mi casa y me acuesto a pensar las burlas y chismes del día me hacen llorar siempre en la escuela surgen tantas discusiones…",
     "searchKey": "creados para amar comunidad bahai am c g d llego a mi casa y me acuesto a pensar las burlas y chismes del dia me hacen llorar siempre en la escuela surgen tantas discusiones… cancion con-acordes con-audio"
   },
@@ -401,11 +314,7 @@
     "language": "es",
     "hasChords": true,
     "hasAudio": true,
-    "categorySlugs": [
-      "cancion",
-      "muy-ritmica",
-      "con-acordes"
-    ],
+    "categorySlugs": ["cancion", "muy-ritmica", "con-acordes"],
     "snippet": "(Mi, Lam) Este mundo es como bosque Donde crecen muchas flores Este mundo es una selva Donde abunda la espesura Desafortunadamente El ambien…",
     "searchKey": "cumbia del jardinero comunidad bahai (mi, lam) este mundo es como bosque donde crecen muchas flores este mundo es una selva donde abunda la espesura desafortunadamente el ambien… cancion muy-ritmica con-acordes"
   },
@@ -416,10 +325,7 @@
     "language": "es",
     "hasChords": true,
     "hasAudio": false,
-    "categorySlugs": [
-      "cancion",
-      "con-acordes"
-    ],
+    "categorySlugs": ["cancion", "con-acordes"],
     "snippet": "(Lam , Sol, Fa, Mi) Dame un corazón que como un espejo pueda iluminarse con la luz de tu amor(x2) (Do, Sol, Lam, Fa) Y confiéreme un pensami…",
     "searchKey": "dame un corazon comunidad bahai (lam , sol, fa, mi) dame un corazon que como un espejo pueda iluminarse con la luz de tu amor(x2) (do, sol, lam, fa) y confiereme un pensami… cancion con-acordes"
   },
@@ -430,11 +336,7 @@
     "language": "es",
     "hasChords": true,
     "hasAudio": true,
-    "categorySlugs": [
-      "cancion",
-      "con-acordes",
-      "con-audio"
-    ],
+    "categorySlugs": ["cancion", "con-acordes", "con-audio"],
     "snippet": "E En la mañana al despertar Amaj7 Envuelto en la realidad E Las manecillas del reloj Amaj7 Me dicen siempre avanza, nunca mires atrás F#m G#…",
     "searchKey": "debo seguir comunidad bahai e en la manana al despertar amaj7 envuelto en la realidad e las manecillas del reloj amaj7 me dicen siempre avanza, nunca mires atras f#m g#… cancion con-acordes con-audio"
   },
@@ -445,11 +347,7 @@
     "language": "es",
     "hasChords": true,
     "hasAudio": true,
-    "categorySlugs": [
-      "cancion",
-      "con-acordes",
-      "con-audio"
-    ],
+    "categorySlugs": ["cancion", "con-acordes", "con-audio"],
     "snippet": "G D/F# Em Hoy siento el sol C D G en mi interior G D/F# Em C puedo entender con la visión D G del corazón Am C G D Me acarició la luz al ama…",
     "searchKey": "despertar comunidad bahai g d/f# em hoy siento el sol c d g en mi interior g d/f# em c puedo entender con la vision d g del corazon am c g d me acaricio la luz al ama… cancion con-acordes con-audio"
   },
@@ -460,11 +358,7 @@
     "language": "es",
     "hasChords": false,
     "hasAudio": false,
-    "categorySlugs": [
-      "cancion",
-      "con-audio",
-      "texto-sagrado"
-    ],
+    "categorySlugs": ["cancion", "con-audio", "texto-sagrado"],
     "snippet": "Di: Cuidado, oh pueblo de Bahá, no sea que los fuertes de la tierra os despojen de vuestra fortaleza, o aquellos que gobiernan el mundo os l…",
     "searchKey": "di: cuidado oh pueblo de baha comunidad bahai di: cuidado, oh pueblo de baha, no sea que los fuertes de la tierra os despojen de vuestra fortaleza, o aquellos que gobiernan el mundo os l… cancion con-audio texto-sagrado"
   },
@@ -475,11 +369,7 @@
     "language": "es",
     "hasChords": false,
     "hasAudio": false,
-    "categorySlugs": [
-      "cancion",
-      "oracion",
-      "tranquila"
-    ],
+    "categorySlugs": ["cancion", "oracion", "tranquila"],
     "snippet": "(Oración del Báb; Música: Itzvan Dely) Di: Dios satisface todo por sobre todo (bis) y nada en los cielos satisface y nada en la tierra satis…",
     "searchKey": "di: dios satisface comunidad bahai (oracion del bab; musica: itzvan dely) di: dios satisface todo por sobre todo (bis) y nada en los cielos satisface y nada en la tierra satis… cancion oracion tranquila"
   },
@@ -490,11 +380,7 @@
     "language": "es",
     "hasChords": false,
     "hasAudio": false,
-    "categorySlugs": [
-      "cancion",
-      "oracion",
-      "con-audio"
-    ],
+    "categorySlugs": ["cancion", "oracion", "con-audio"],
     "snippet": "Nadie puede librarnos de las dificultades salvo Dios. Di: ¡Alabado sea Dios! El es Dios. Todos, todos somos sus siervos y todos acatamos su…",
     "searchKey": "dificultades comunidad bahai nadie puede librarnos de las dificultades salvo dios. di: ¡alabado sea dios! el es dios. todos, todos somos sus siervos y todos acatamos su… cancion oracion con-audio"
   },
@@ -505,11 +391,7 @@
     "language": "es",
     "hasChords": true,
     "hasAudio": false,
-    "categorySlugs": [
-      "cancion",
-      "oracion",
-      "con-acordes"
-    ],
+    "categorySlugs": ["cancion", "oracion", "con-acordes"],
     "snippet": "Lam Mi Di: Dios satisface todo por sobre todo (x2) Rem Lam Y nada en los cielos satisface Rem Lam Y nada en la Tierra satisface Mi Lam Sino…",
     "searchKey": "dios satisface comunidad bahai lam mi di: dios satisface todo por sobre todo (x2) rem lam y nada en los cielos satisface rem lam y nada en la tierra satisface mi lam sino… cancion oracion con-acordes"
   },
@@ -520,11 +402,7 @@
     "language": "es",
     "hasChords": true,
     "hasAudio": true,
-    "categorySlugs": [
-      "cancion",
-      "con-acordes",
-      "con-audio"
-    ],
+    "categorySlugs": ["cancion", "con-acordes", "con-audio"],
     "snippet": "G C Oye, G esas dulces melodías C G donde están las bellas voces D G que despiertan la razón. Vamos, a mirar la realidad liberarnos de espej…",
     "searchKey": "dulces melodias comunidad bahai g c oye, g esas dulces melodias c g donde estan las bellas voces d g que despiertan la razon. vamos, a mirar la realidad liberarnos de espej… cancion con-acordes con-audio"
   },
@@ -535,11 +413,7 @@
     "language": "es",
     "hasChords": true,
     "hasAudio": true,
-    "categorySlugs": [
-      "cancion",
-      "con-acordes",
-      "con-audio"
-    ],
+    "categorySlugs": ["cancion", "con-acordes", "con-audio"],
     "snippet": "Gm Cm Hoy me encuentro en la playa y veo sólo perfección Gm Cm un sol ardiente, que da vida a toda la creación Gm Cm observo el mar y me inc…",
     "searchKey": "el arbol de la creacion comunidad bahai gm cm hoy me encuentro en la playa y veo solo perfeccion gm cm un sol ardiente, que da vida a toda la creacion gm cm observo el mar y me inc… cancion con-acordes con-audio"
   },
@@ -550,9 +424,7 @@
     "language": "es",
     "hasChords": false,
     "hasAudio": true,
-    "categorySlugs": [
-      "cancion"
-    ],
+    "categorySlugs": ["cancion"],
     "snippet": "Am G Am Mullá Ḥusayn, no te sientas solo Am G Am El Prometido te espera Am G Am Encendido con tu causa Lo debes buscar Am G Am Luego entrar…",
     "searchKey": "el bab, elegido de dios comunidad bahai am g am mulla husayn, no te sientas solo am g am el prometido te espera am g am encendido con tu causa lo debes buscar am g am luego entrar… cancion"
   },
@@ -563,10 +435,7 @@
     "language": "es",
     "hasChords": true,
     "hasAudio": false,
-    "categorySlugs": [
-      "cancion",
-      "con-acordes"
-    ],
+    "categorySlugs": ["cancion", "con-acordes"],
     "snippet": "DoM Oigan señores les vengo a contar ahora, SolM lo que ha pasado en una calle de mi barrio, SolM desde aquel día que llegó una señorita DoM…",
     "searchKey": "el camino del progreso comunidad bahai dom oigan senores les vengo a contar ahora, solm lo que ha pasado en una calle de mi barrio, solm desde aquel dia que llego una senorita dom… cancion con-acordes"
   },
@@ -577,10 +446,7 @@
     "language": "es",
     "hasChords": true,
     "hasAudio": false,
-    "categorySlugs": [
-      "cancion",
-      "con-acordes"
-    ],
+    "categorySlugs": ["cancion", "con-acordes"],
     "snippet": "Lam Mim Escucha hermano que llegaste aquí Lam Sol Creyendo hallar tu tierra prometida; Lam Mim No fue tu culpa tu ibas por allí Lam Sol Y te…",
     "searchKey": "el color de tu corazon comunidad bahai lam mim escucha hermano que llegaste aqui lam sol creyendo hallar tu tierra prometida; lam mim no fue tu culpa tu ibas por alli lam sol y te… cancion con-acordes"
   },
@@ -591,10 +457,7 @@
     "language": "es",
     "hasChords": false,
     "hasAudio": false,
-    "categorySlugs": [
-      "cancion",
-      "con-audio"
-    ],
+    "categorySlugs": ["cancion", "con-audio"],
     "snippet": "https://www.youtube.com/watch?v=dm2eMopZ7GM",
     "searchKey": "el equilibrio del mundo comunidad bahai https://www.youtube.com/watch?v=dm2emopz7gm cancion con-audio"
   },
@@ -605,10 +468,7 @@
     "language": "es",
     "hasChords": false,
     "hasAudio": true,
-    "categorySlugs": [
-      "cancion",
-      "con-audio"
-    ],
+    "categorySlugs": ["cancion", "con-audio"],
     "snippet": "",
     "searchKey": "el es bahaullah comunidad bahai  cancion con-audio"
   },
@@ -619,12 +479,7 @@
     "language": "es",
     "hasChords": false,
     "hasAudio": true,
-    "categorySlugs": [
-      "cancion",
-      "bab",
-      "bicentenario-bab",
-      "con-audio"
-    ],
+    "categorySlugs": ["cancion", "bab", "bicentenario-bab", "con-audio"],
     "snippet": "",
     "searchKey": "el es el amoroso (el bab) comunidad bahai  cancion bab bicentenario-bab con-audio"
   },
@@ -635,11 +490,7 @@
     "language": "es",
     "hasChords": false,
     "hasAudio": false,
-    "categorySlugs": [
-      "cancion",
-      "bab",
-      "con-audio"
-    ],
+    "categorySlugs": ["cancion", "bab", "con-audio"],
     "snippet": "El Heraldo es una canción sobre la vida del Báb, compuesta dentro del contexto del Bicentenario de su natalicio. La canción fue presentada p…",
     "searchKey": "el heraldo comunidad bahai el heraldo es una cancion sobre la vida del bab, compuesta dentro del contexto del bicentenario de su natalicio. la cancion fue presentada p… cancion bab con-audio"
   },
@@ -650,12 +501,7 @@
     "language": "es",
     "hasChords": false,
     "hasAudio": false,
-    "categorySlugs": [
-      "cancion",
-      "bab",
-      "bicentenario-bab",
-      "con-audio"
-    ],
+    "categorySlugs": ["cancion", "bab", "bicentenario-bab", "con-audio"],
     "snippet": "https://youtu.be/Hg-rVQ9joiI",
     "searchKey": "el heraldo comunidad bahai https://youtu.be/hg-rvq9joii cancion bab bicentenario-bab con-audio"
   },
@@ -666,10 +512,7 @@
     "language": "es",
     "hasChords": true,
     "hasAudio": true,
-    "categorySlugs": [
-      "cancion",
-      "con-acordes"
-    ],
+    "categorySlugs": ["cancion", "con-acordes"],
     "snippet": "(Sol, Do) Como una mañana de verano Como el canto de un ruiseñor Como un viento que sopla entre los árboles Enséñame a ser como tú Como las…",
     "searchKey": "el nuevo sol comunidad bahai (sol, do) como una manana de verano como el canto de un ruisenor como un viento que sopla entre los arboles ensename a ser como tu como las… cancion con-acordes"
   },
@@ -680,11 +523,7 @@
     "language": "es",
     "hasChords": false,
     "hasAudio": true,
-    "categorySlugs": [
-      "cancion",
-      "con-audio",
-      "tranquila"
-    ],
+    "categorySlugs": ["cancion", "con-audio", "tranquila"],
     "snippet": "",
     "searchKey": "el poder del amor comunidad bahai  cancion con-audio tranquila"
   },
@@ -695,10 +534,7 @@
     "language": "es",
     "hasChords": false,
     "hasAudio": true,
-    "categorySlugs": [
-      "cancion",
-      "con-audio"
-    ],
+    "categorySlugs": ["cancion", "con-audio"],
     "snippet": "Canción compuesta por Arsham Evoghli Rahbin con motivo del bicentenario del nacimiento de El Báb (1819 -2019) Texto: frases extraídas de los…",
     "searchKey": "el prometido (bicentenario del bab 1819​-​2019) comunidad bahai cancion compuesta por arsham evoghli rahbin con motivo del bicentenario del nacimiento de el bab (1819 -2019) texto: frases extraidas de los… cancion con-audio"
   },
@@ -709,11 +545,7 @@
     "language": "es",
     "hasChords": true,
     "hasAudio": true,
-    "categorySlugs": [
-      "cancion",
-      "con-acordes",
-      "con-audio"
-    ],
+    "categorySlugs": ["cancion", "con-acordes", "con-audio"],
     "snippet": "(la re mi) El sendero del valle, y el de la montaña El de tierra conocida Y la que aún nos es extraña Todos ellos convergen En el mismo luga…",
     "searchKey": "el sendero del valle comunidad bahai (la re mi) el sendero del valle, y el de la montana el de tierra conocida y la que aun nos es extrana todos ellos convergen en el mismo luga… cancion con-acordes con-audio"
   },
@@ -724,11 +556,7 @@
     "language": "es",
     "hasChords": true,
     "hasAudio": true,
-    "categorySlugs": [
-      "cancion",
-      "con-acordes",
-      "con-audio"
-    ],
+    "categorySlugs": ["cancion", "con-acordes", "con-audio"],
     "snippet": "Intro: Dm F Gm A7 Dm F Gm Con el sol de la mañana A7 Dm los exploradores van Dm F Gm a buscar nuevos senderos A7 Dm llenos de curiosidad. To…",
     "searchKey": "el son de la exploracion comunidad bahai intro: dm f gm a7 dm f gm con el sol de la manana a7 dm los exploradores van dm f gm a buscar nuevos senderos a7 dm llenos de curiosidad. to… cancion con-acordes con-audio"
   },
@@ -739,12 +567,7 @@
     "language": "es",
     "hasChords": false,
     "hasAudio": false,
-    "categorySlugs": [
-      "cancion",
-      "oracion",
-      "con-audio",
-      "texto-sagrado"
-    ],
+    "categorySlugs": ["cancion", "oracion", "con-audio", "texto-sagrado"],
     "snippet": "\"... El corcel de este Valle es la paciencia; sin ella, en esta jornada el caminante no arribará a ningún lugar ni alcanzará meta alguna. No…",
     "searchKey": "el valle de la busqueda comunidad bahai \"... el corcel de este valle es la paciencia; sin ella, en esta jornada el caminante no arribara a ningun lugar ni alcanzara meta alguna. no… cancion oracion con-audio texto-sagrado"
   },
@@ -755,12 +578,7 @@
     "language": "es",
     "hasChords": true,
     "hasAudio": false,
-    "categorySlugs": [
-      "cancion",
-      "con-acordes",
-      "con-audio",
-      "texto-sagrado"
-    ],
+    "categorySlugs": ["cancion", "con-acordes", "con-audio", "texto-sagrado"],
     "snippet": "Acordes: LaM, Sim, ReM. Estribillo: Sim, ReM, LaM Él, en verdad, ayudará a todo el que Le ayude, y recordará a todo el que Le recuerde. Esto…",
     "searchKey": "el, en verdad, ayudara a todo el que le ayude comunidad bahai acordes: lam, sim, rem. estribillo: sim, rem, lam el, en verdad, ayudara a todo el que le ayude, y recordara a todo el que le recuerde. esto… cancion con-acordes con-audio texto-sagrado"
   },
@@ -771,11 +589,7 @@
     "language": "es",
     "hasChords": true,
     "hasAudio": true,
-    "categorySlugs": [
-      "cancion",
-      "con-acordes",
-      "con-audio"
-    ],
+    "categorySlugs": ["cancion", "con-acordes", "con-audio"],
     "snippet": "Intro: G F C D G F C Hay momentos en que pienso en mi destino D G F C D y no encuentro una dirección muchos dicen que la vida es un camino q…",
     "searchKey": "encontrando mi destino comunidad bahai intro: g f c d g f c hay momentos en que pienso en mi destino d g f c d y no encuentro una direccion muchos dicen que la vida es un camino q… cancion con-acordes con-audio"
   },
@@ -786,11 +600,7 @@
     "language": "es",
     "hasChords": true,
     "hasAudio": true,
-    "categorySlugs": [
-      "cancion",
-      "con-acordes",
-      "con-audio"
-    ],
+    "categorySlugs": ["cancion", "con-acordes", "con-audio"],
     "snippet": "D Dsus2 Una mujer D Dsus2 intenta ver D Dsus2 en un espejo D Dsus2 su reflejo. Busca saber quién quiere ser ¿Por qué ella debe ser como ella…",
     "searchKey": "espejo comunidad bahai d dsus2 una mujer d dsus2 intenta ver d dsus2 en un espejo d dsus2 su reflejo. busca saber quien quiere ser ¿por que ella debe ser como ella… cancion con-acordes con-audio"
   },
@@ -801,11 +611,7 @@
     "language": "es",
     "hasChords": true,
     "hasAudio": true,
-    "categorySlugs": [
-      "cancion",
-      "con-acordes",
-      "con-audio"
-    ],
+    "categorySlugs": ["cancion", "con-acordes", "con-audio"],
     "snippet": "E G# Tengo un amigo en quien confiar A su serena voz me da tranquilidad B luz en la oscuridad. Tengo una amiga muy especial sus bellos conse…",
     "searchKey": "esta amistad comunidad bahai e g# tengo un amigo en quien confiar a su serena voz me da tranquilidad b luz en la oscuridad. tengo una amiga muy especial sus bellos conse… cancion con-acordes con-audio"
   },
@@ -816,11 +622,7 @@
     "language": "es",
     "hasChords": false,
     "hasAudio": true,
-    "categorySlugs": [
-      "cancion",
-      "con-audio",
-      "texto-sagrado"
-    ],
+    "categorySlugs": ["cancion", "con-audio", "texto-sagrado"],
     "snippet": "LA mi Caminar por donde no hay sendero RE Respirar donde no hay aire FA SOL Ver donde no hay luz- LA Eso es Fe. LA mi Gritar en el silencio…",
     "searchKey": "esto es fe comunidad bahai la mi caminar por donde no hay sendero re respirar donde no hay aire fa sol ver donde no hay luz- la eso es fe. la mi gritar en el silencio… cancion con-audio texto-sagrado"
   },
@@ -831,12 +633,7 @@
     "language": "es",
     "hasChords": true,
     "hasAudio": false,
-    "categorySlugs": [
-      "cancion",
-      "oracion",
-      "con-acordes",
-      "con-audio"
-    ],
+    "categorySlugs": ["cancion", "oracion", "con-acordes", "con-audio"],
     "snippet": "(Do, Sol, Lam, Mim) ¡Gloria a Ti, oh mi Dios! Si no fuera por las tribulaciones en Tu sendero ¿cómo podría conocerse a Tus amantes verdadero…",
     "searchKey": "gloria a ti comunidad bahai (do, sol, lam, mim) ¡gloria a ti, oh mi dios! si no fuera por las tribulaciones en tu sendero ¿como podria conocerse a tus amantes verdadero… cancion oracion con-acordes con-audio"
   },
@@ -847,9 +644,7 @@
     "language": "en",
     "hasChords": false,
     "hasAudio": false,
-    "categorySlugs": [
-      "cancion"
-    ],
+    "categorySlugs": ["cancion"],
     "snippet": "God is sufficient unto me. He is the All-sufficing (x2) Let the trusting trust Him Let the trusting trust (x3) https://www.youtube.com/watch…",
     "searchKey": "god is sufficient unto me comunidad bahai god is sufficient unto me. he is the all-sufficing (x2) let the trusting trust him let the trusting trust (x3) https://www.youtube.com/watch… cancion"
   },
@@ -860,10 +655,7 @@
     "language": "es",
     "hasChords": false,
     "hasAudio": true,
-    "categorySlugs": [
-      "cancion",
-      "con-audio"
-    ],
+    "categorySlugs": ["cancion", "con-audio"],
     "snippet": "Los niños son nuestra generación Deben desarrollar sus virtudes, Esa es nuestra función. (x2) Gracias a ti llegué a ser lo que soy Unidos so…",
     "searchKey": "gracias a ti (trolololo) comunidad bahai los ninos son nuestra generacion deben desarrollar sus virtudes, esa es nuestra funcion. (x2) gracias a ti llegue a ser lo que soy unidos so… cancion con-audio"
   },
@@ -874,11 +666,7 @@
     "language": "es",
     "hasChords": true,
     "hasAudio": true,
-    "categorySlugs": [
-      "cancion",
-      "con-acordes",
-      "con-audio"
-    ],
+    "categorySlugs": ["cancion", "con-acordes", "con-audio"],
     "snippet": "Am Fmaj7/A //: Yo soy el sol de la sabiduría Am Fmaj7/A y el océano del conocimiento Am Fmaj7/A animo a los desfallecidos Am Fmaj7/A y hago…",
     "searchKey": "halcon real comunidad bahai am fmaj7/a //: yo soy el sol de la sabiduria am fmaj7/a y el oceano del conocimiento am fmaj7/a animo a los desfallecidos am fmaj7/a y hago… cancion con-acordes con-audio"
   },
@@ -889,11 +677,7 @@
     "language": "es",
     "hasChords": false,
     "hasAudio": false,
-    "categorySlugs": [
-      "cancion",
-      "oracion",
-      "con-audio"
-    ],
+    "categorySlugs": ["cancion", "oracion", "con-audio"],
     "snippet": "Haz de mi oración, oh mi Señor, una fuente de aguas de vida para que yo viva tanto como perdure Tu soberania y haga mención de Ti en cada mu…",
     "searchKey": "haz de mi oracion comunidad bahai haz de mi oracion, oh mi senor, una fuente de aguas de vida para que yo viva tanto como perdure tu soberania y haga mencion de ti en cada mu… cancion oracion con-audio"
   },
@@ -904,11 +688,7 @@
     "language": "es",
     "hasChords": true,
     "hasAudio": false,
-    "categorySlugs": [
-      "cancion",
-      "oracion",
-      "con-acordes"
-    ],
+    "categorySlugs": ["cancion", "oracion", "con-acordes"],
     "snippet": "Mim La ¡Oh mi Señor! Haz de tu belleza Mim La mi alimento, de tu presencia Mim Re mi bebida, de tu agrado Do Mim mi esperanza y de tu alaban…",
     "searchKey": "haz de tu belleza mi alimento comunidad bahai mim la ¡oh mi senor! haz de tu belleza mim la mi alimento, de tu presencia mim re mi bebida, de tu agrado do mim mi esperanza y de tu alaban… cancion oracion con-acordes"
   },
@@ -919,13 +699,31 @@
     "language": "es",
     "hasChords": false,
     "hasAudio": false,
-    "categorySlugs": [
-      "cancion",
-      "oracion",
-      "con-audio"
-    ],
+    "categorySlugs": ["cancion", "oracion", "con-audio"],
     "snippet": "¡Oh mi Señor! Haz de tu belleza mi alimento y de tu presencia mi bebida; de tu agrado mi esperanza y de tu alabanza mi acción; de tu recuerd…",
     "searchKey": "haz de tu belleza mi alimento v.2 comunidad bahai ¡oh mi senor! haz de tu belleza mi alimento y de tu presencia mi bebida; de tu agrado mi esperanza y de tu alabanza mi accion; de tu recuerd… cancion oracion con-audio"
+  },
+  {
+    "slug": "hello-music",
+    "title": "Hello music!",
+    "artist": "Comunidad Bahá'í",
+    "language": "es",
+    "hasChords": false,
+    "hasAudio": false,
+    "categorySlugs": ["cancion"],
+    "snippet": "Welcome to WordPress Music Sites. This is your first post. Edit or delete it, then start writing!",
+    "searchKey": "hello music! comunidad bahai welcome to wordpress music sites. this is your first post. edit or delete it, then start writing! cancion"
+  },
+  {
+    "slug": "hello-world",
+    "title": "Hello world!",
+    "artist": "Comunidad Bahá'í",
+    "language": "es",
+    "hasChords": false,
+    "hasAudio": false,
+    "categorySlugs": [],
+    "snippet": "Welcome to WordPress. This is your first post. Edit or delete it, then start writing!",
+    "searchKey": "hello world! comunidad bahai welcome to wordpress. this is your first post. edit or delete it, then start writing! "
   },
   {
     "slug": "hermosa-flor",
@@ -934,11 +732,7 @@
     "language": "es",
     "hasChords": true,
     "hasAudio": true,
-    "categorySlugs": [
-      "cancion",
-      "con-acordes",
-      "con-audio"
-    ],
+    "categorySlugs": ["cancion", "con-acordes", "con-audio"],
     "snippet": "G Ella llegó Am F su mirada reflejaba una G dulce ilusión Am F un anhelo en esta vida G ser una luz Am F que acompaña, que orienta el alma G…",
     "searchKey": "hermosa flor comunidad bahai g ella llego am f su mirada reflejaba una g dulce ilusion am f un anhelo en esta vida g ser una luz am f que acompana, que orienta el alma g… cancion con-acordes con-audio"
   },
@@ -949,11 +743,7 @@
     "language": "es",
     "hasChords": true,
     "hasAudio": true,
-    "categorySlugs": [
-      "cancion",
-      "con-acordes",
-      "con-audio"
-    ],
+    "categorySlugs": ["cancion", "con-acordes", "con-audio"],
     "snippet": "D A A veces sientes que estás solo G A buscas nuevas formas de seguir D A bien comprendo tu dolor G A pues también me sucedió a mí. D A Un t…",
     "searchKey": "ilumina un corazon comunidad bahai d a a veces sientes que estas solo g a buscas nuevas formas de seguir d a bien comprendo tu dolor g a pues tambien me sucedio a mi. d a un t… cancion con-acordes con-audio"
   },
@@ -964,11 +754,7 @@
     "language": "es",
     "hasChords": true,
     "hasAudio": true,
-    "categorySlugs": [
-      "cancion",
-      "con-acordes",
-      "con-audio"
-    ],
+    "categorySlugs": ["cancion", "con-acordes", "con-audio"],
     "snippet": "A9 Bm/A He perdido la luz A9 Bm/A dónde se escondió A9 Bm/A alguien se la llevó A9 Bm/A o quizás escapó. Nada puedo ver en la oscuridad algo…",
     "searchKey": "jinete comunidad bahai a9 bm/a he perdido la luz a9 bm/a donde se escondio a9 bm/a alguien se la llevo a9 bm/a o quizas escapo. nada puedo ver en la oscuridad algo… cancion con-acordes con-audio"
   },
@@ -979,11 +765,7 @@
     "language": "es",
     "hasChords": true,
     "hasAudio": true,
-    "categorySlugs": [
-      "cancion",
-      "con-acordes",
-      "con-audio"
-    ],
+    "categorySlugs": ["cancion", "con-acordes", "con-audio"],
     "snippet": "Lam DoM SolM FaM Lam DoM SolM FaM Juntos podremos hacer brillar con ilusión Lam DoM SolM FaM Lam esa estrella que vive en nuestro corazón Re…",
     "searchKey": "juntos podremos comunidad bahai lam dom solm fam lam dom solm fam juntos podremos hacer brillar con ilusion lam dom solm fam lam esa estrella que vive en nuestro corazon re… cancion con-acordes con-audio"
   },
@@ -994,11 +776,7 @@
     "language": "es",
     "hasChords": false,
     "hasAudio": true,
-    "categorySlugs": [
-      "cancion",
-      "con-audio",
-      "texto-sagrado"
-    ],
+    "categorySlugs": ["cancion", "con-audio", "texto-sagrado"],
     "snippet": "",
     "searchKey": "la antigua belleza ha consentido ser encadenada comunidad bahai  cancion con-audio texto-sagrado"
   },
@@ -1009,9 +787,7 @@
     "language": "es",
     "hasChords": false,
     "hasAudio": false,
-    "categorySlugs": [
-      "cancion"
-    ],
+    "categorySlugs": ["cancion"],
     "snippet": "Hagámosle sitio a una nueva bandera Do Mi m Fa Sol que una y proteja a todas las demás. Do Mi m Fa Sol Ya basta de pugnas por patrias pequeñ…",
     "searchKey": "la bandera de la humanidad comunidad bahai hagamosle sitio a una nueva bandera do mi m fa sol que una y proteja a todas las demas. do mi m fa sol ya basta de pugnas por patrias pequen… cancion"
   },
@@ -1022,11 +798,7 @@
     "language": "es",
     "hasChords": true,
     "hasAudio": true,
-    "categorySlugs": [
-      "cancion",
-      "con-acordes",
-      "con-audio"
-    ],
+    "categorySlugs": ["cancion", "con-acordes", "con-audio"],
     "snippet": "Am Lo vi crecer G entre montañas de soledad Am y espesa adversidad. Am Y vi también G el paso firme en la tempestad Am de un pueblo al camin…",
     "searchKey": "la fiesta del pueblo comunidad bahai am lo vi crecer g entre montanas de soledad am y espesa adversidad. am y vi tambien g el paso firme en la tempestad am de un pueblo al camin… cancion con-acordes con-audio"
   },
@@ -1037,9 +809,7 @@
     "language": "es",
     "hasChords": false,
     "hasAudio": false,
-    "categorySlugs": [
-      "cancion"
-    ],
+    "categorySlugs": ["cancion"],
     "snippet": "(De los Escritos de Bahá’u’lláh; Música: Manuel Melgarejo) *La fuente de todo bien Es la confianza en Dios* (Bis) *Sumisión a Su mandato* (B…",
     "searchKey": "la fuente de todo bien comunidad bahai (de los escritos de bahaullah; musica: manuel melgarejo) *la fuente de todo bien es la confianza en dios* (bis) *sumision a su mandato* (b… cancion"
   },
@@ -1050,11 +820,7 @@
     "language": "es",
     "hasChords": true,
     "hasAudio": true,
-    "categorySlugs": [
-      "cancion",
-      "con-acordes",
-      "con-audio"
-    ],
+    "categorySlugs": ["cancion", "con-acordes", "con-audio"],
     "snippet": "FMaj7/C Am G Sonriendo el conductor del bus me dio D los buenos días. FMaj7/C Am G Su calor conmovió cada corazón D los encendía. FMaj7/C Am…",
     "searchKey": "la fuerza del amor comunidad bahai fmaj7/c am g sonriendo el conductor del bus me dio d los buenos dias. fmaj7/c am g su calor conmovio cada corazon d los encendia. fmaj7/c am… cancion con-acordes con-audio"
   },
@@ -1065,11 +831,7 @@
     "language": "es",
     "hasChords": true,
     "hasAudio": true,
-    "categorySlugs": [
-      "cancion",
-      "con-acordes",
-      "con-audio"
-    ],
+    "categorySlugs": ["cancion", "con-acordes", "con-audio"],
     "snippet": "A D Un caballo en su corral A D libre de preocupación A D disfrutando de su hogar A la vida ve pasar D jugando bajo el sol. El caballo en su…",
     "searchKey": "la llanura de la libertad comunidad bahai a d un caballo en su corral a d libre de preocupacion a d disfrutando de su hogar a la vida ve pasar d jugando bajo el sol. el caballo en su… cancion con-acordes con-audio"
   },
@@ -1080,11 +842,7 @@
     "language": "es",
     "hasChords": true,
     "hasAudio": true,
-    "categorySlugs": [
-      "cancion",
-      "con-acordes",
-      "con-audio"
-    ],
+    "categorySlugs": ["cancion", "con-acordes", "con-audio"],
     "snippet": "Em B7 A7 Veo tantas cosas que no entiendo Em B7 A7 quiero comprender a los demás Em B7 A7 quiero comprender el universo, tan inmenso Em B7 A…",
     "searchKey": "la luz del conocimiento comunidad bahai em b7 a7 veo tantas cosas que no entiendo em b7 a7 quiero comprender a los demas em b7 a7 quiero comprender el universo, tan inmenso em b7 a… cancion con-acordes con-audio"
   },
@@ -1095,9 +853,7 @@
     "language": "es",
     "hasChords": false,
     "hasAudio": false,
-    "categorySlugs": [
-      "cancion"
-    ],
+    "categorySlugs": ["cancion"],
     "snippet": "Te ofrendamos estos versos Recordando tu mirada Que penetra el pensamiento Que da vida a muchas almas El poder que ya irradiabas No podía so…",
     "searchKey": "la mirada de baha comunidad bahai te ofrendamos estos versos recordando tu mirada que penetra el pensamiento que da vida a muchas almas el poder que ya irradiabas no podia so… cancion"
   },
@@ -1108,11 +864,7 @@
     "language": "es",
     "hasChords": true,
     "hasAudio": false,
-    "categorySlugs": [
-      "cancion",
-      "con-acordes",
-      "muy-ritmica"
-    ],
+    "categorySlugs": ["cancion", "con-acordes", "muy-ritmica"],
     "snippet": "Mim Sim Este es el momento para levantarse en compromiso, Mim La Este es el momento de entregarnos al servicio, Mim Sim Este es el momento p…",
     "searchKey": "la oportunidad, tu momento comunidad bahai mim sim este es el momento para levantarse en compromiso, mim la este es el momento de entregarnos al servicio, mim sim este es el momento p… cancion con-acordes muy-ritmica"
   },
@@ -1123,11 +875,7 @@
     "language": "es",
     "hasChords": true,
     "hasAudio": true,
-    "categorySlugs": [
-      "cancion",
-      "con-acordes",
-      "con-audio"
-    ],
+    "categorySlugs": ["cancion", "con-acordes", "con-audio"],
     "snippet": "DoM SolM Posado sobre un árbol esta el Fénix FaM DoM cantando sus sagradas melodías. SolM Lam Su voz es como el néctar de la miel FaM SolM y…",
     "searchKey": "la promesa del fenix comunidad bahai dom solm posado sobre un arbol esta el fenix fam dom cantando sus sagradas melodias. solm lam su voz es como el nectar de la miel fam solm y… cancion con-acordes con-audio"
   },
@@ -1138,11 +886,7 @@
     "language": "es",
     "hasChords": false,
     "hasAudio": false,
-    "categorySlugs": [
-      "cancion",
-      "con-audio",
-      "texto-sagrado"
-    ],
+    "categorySlugs": ["cancion", "con-audio", "texto-sagrado"],
     "snippet": "\"¡OH HIJO DEL SER! Con las manos del poder te hice y con los dedos de la fuerza te cree y dentro de ti puse la esencia de mi luz. Conténtate…",
     "searchKey": "las manos del poder comunidad bahai \"¡oh hijo del ser! con las manos del poder te hice y con los dedos de la fuerza te cree y dentro de ti puse la esencia de mi luz. contentate… cancion con-audio texto-sagrado"
   },
@@ -1153,11 +897,7 @@
     "language": "es",
     "hasChords": true,
     "hasAudio": true,
-    "categorySlugs": [
-      "cancion",
-      "con-acordes",
-      "con-audio"
-    ],
+    "categorySlugs": ["cancion", "con-acordes", "con-audio"],
     "snippet": "Intro: A C#m F#m E D E A C#m F#m Sé que ahora hay muchas cosas D E que tú anhelas descubrir A C#m F#m en tu mente hay todo un mundo D E que…",
     "searchKey": "lo que veo en ti comunidad bahai intro: a c#m f#m e d e a c#m f#m se que ahora hay muchas cosas d e que tu anhelas descubrir a c#m f#m en tu mente hay todo un mundo d e que… cancion con-acordes con-audio"
   },
@@ -1168,11 +908,7 @@
     "language": "es",
     "hasChords": true,
     "hasAudio": true,
-    "categorySlugs": [
-      "cancion",
-      "con-acordes",
-      "con-audio"
-    ],
+    "categorySlugs": ["cancion", "con-acordes", "con-audio"],
     "snippet": "Am Si queremos revivir Si queremos revivir Dm Am Y regenerar los pueblos Dm Am Los jóvenes son el presente Si queremos revivir Si queremos r…",
     "searchKey": "los jovenes son el presente comunidad bahai am si queremos revivir si queremos revivir dm am y regenerar los pueblos dm am los jovenes son el presente si queremos revivir si queremos r… cancion con-acordes con-audio"
   },
@@ -1183,11 +919,7 @@
     "language": "es",
     "hasChords": true,
     "hasAudio": true,
-    "categorySlugs": [
-      "cancion",
-      "con-acordes",
-      "con-audio"
-    ],
+    "categorySlugs": ["cancion", "con-acordes", "con-audio"],
     "snippet": "D B7 Em Mis ojos abro en este día A7 D B7 Em y veo un mundo de colores que inundan mi ser. A7 D B7 Em Escucho un canto que ilumina A7 D A7 D…",
     "searchKey": "luces y colores comunidad bahai d b7 em mis ojos abro en este dia a7 d b7 em y veo un mundo de colores que inundan mi ser. a7 d b7 em escucho un canto que ilumina a7 d a7 d… cancion con-acordes con-audio"
   },
@@ -1198,11 +930,7 @@
     "language": "es",
     "hasChords": true,
     "hasAudio": true,
-    "categorySlugs": [
-      "cancion",
-      "con-acordes",
-      "con-audio"
-    ],
+    "categorySlugs": ["cancion", "con-acordes", "con-audio"],
     "snippet": "G D Am C Muchos días han pasado y cosas han cambiado G D Am C siento que mi corazón despertó G D Am C cómo fue que la injusticia terminó rei…",
     "searchKey": "manantial comunidad bahai g d am c muchos dias han pasado y cosas han cambiado g d am c siento que mi corazon desperto g d am c como fue que la injusticia termino rei… cancion con-acordes con-audio"
   },
@@ -1213,10 +941,7 @@
     "language": "es",
     "hasChords": false,
     "hasAudio": true,
-    "categorySlugs": [
-      "cancion",
-      "con-audio"
-    ],
+    "categorySlugs": ["cancion", "con-audio"],
     "snippet": "",
     "searchKey": "mi luz es manifiesta, no puede ser oscurecida comunidad bahai  cancion con-audio"
   },
@@ -1227,11 +952,7 @@
     "language": "es",
     "hasChords": true,
     "hasAudio": true,
-    "categorySlugs": [
-      "cancion",
-      "con-acordes",
-      "con-audio"
-    ],
+    "categorySlugs": ["cancion", "con-acordes", "con-audio"],
     "snippet": "(LaM, ReM, MiM, LaM) Mientras pienso en mi futuro por venir Mis talentos sé que debo descubrir Y tomando las correctas decisiones, Si me esf…",
     "searchKey": "mi meta es servir comunidad bahai (lam, rem, mim, lam) mientras pienso en mi futuro por venir mis talentos se que debo descubrir y tomando las correctas decisiones, si me esf… cancion con-acordes con-audio"
   },
@@ -1242,10 +963,7 @@
     "language": "es",
     "hasChords": false,
     "hasAudio": true,
-    "categorySlugs": [
-      "cancion",
-      "con-audio"
-    ],
+    "categorySlugs": ["cancion", "con-audio"],
     "snippet": "Mi nombre es ‘Abdu’l-Bahá [literalmente el Siervo de Bahá]. Mi cualificación, ‘Abdu’l-Bahá. Mi realidad es ‘Abdu’l-Bahá. Mi alabanza, ‘Abdu’…",
     "searchKey": "mi nombre es abdul-baha comunidad bahai mi nombre es abdul-baha [literalmente el siervo de baha]. mi cualificacion, abdul-baha. mi realidad es abdul-baha. mi alabanza, abdu… cancion con-audio"
   },
@@ -1256,9 +974,7 @@
     "language": "es",
     "hasChords": false,
     "hasAudio": false,
-    "categorySlugs": [
-      "cancion"
-    ],
+    "categorySlugs": ["cancion"],
     "snippet": "Allá donde el viento habla En donde quieras tú Allá donde las personas Necesiten de tu luz Hablaré, enseñaré Mi vida entera entregaré Enseña…",
     "searchKey": "mi vida entregare comunidad bahai alla donde el viento habla en donde quieras tu alla donde las personas necesiten de tu luz hablare, ensenare mi vida entera entregare ensena… cancion"
   },
@@ -1269,10 +985,7 @@
     "language": "es",
     "hasChords": false,
     "hasAudio": true,
-    "categorySlugs": [
-      "cancion",
-      "muy-ritmica"
-    ],
+    "categorySlugs": ["cancion", "muy-ritmica"],
     "snippet": "Intro: G,C9 G Tu mundo se derrumba,el camino se te nubla C9 buscas y no encuentras cómo escapar. G Tus sueños se perdieron en la sombra de t…",
     "searchKey": "mira mas alla-proyecto de medios para la transformacion. comunidad bahai intro: g,c9 g tu mundo se derrumba,el camino se te nubla c9 buscas y no encuentras como escapar. g tus suenos se perdieron en la sombra de t… cancion muy-ritmica"
   },
@@ -1283,10 +996,7 @@
     "language": "es",
     "hasChords": true,
     "hasAudio": false,
-    "categorySlugs": [
-      "cancion",
-      "con-acordes"
-    ],
+    "categorySlugs": ["cancion", "con-acordes"],
     "snippet": "(La, Mi, Fa#m, Re) (La, La7, Re, Mi) (Fa#m, Mi) No se oh mi Dios que fuego es el que encendiste en tu dominio No se oh mi Dios que fuego es…",
     "searchKey": "no se comunidad bahai (la, mi, fa#m, re) (la, la7, re, mi) (fa#m, mi) no se oh mi dios que fuego es el que encendiste en tu dominio no se oh mi dios que fuego es… cancion con-acordes"
   },
@@ -1297,11 +1007,7 @@
     "language": "es",
     "hasChords": true,
     "hasAudio": true,
-    "categorySlugs": [
-      "cancion",
-      "con-acordes",
-      "con-audio"
-    ],
+    "categorySlugs": ["cancion", "con-acordes", "con-audio"],
     "snippet": "G D Una nueva raza va surgiendo C Jóvenes hoy preocupados G Por lo que hay en todos lados Con talento y capacidad Jóvenes contentos van A se…",
     "searchKey": "nueva raza comunidad bahai g d una nueva raza va surgiendo c jovenes hoy preocupados g por lo que hay en todos lados con talento y capacidad jovenes contentos van a se… cancion con-acordes con-audio"
   },
@@ -1312,10 +1018,7 @@
     "language": "es",
     "hasChords": false,
     "hasAudio": true,
-    "categorySlugs": [
-      "cancion",
-      "con-audio"
-    ],
+    "categorySlugs": ["cancion", "con-audio"],
     "snippet": "",
     "searchKey": "observar el ayuno comunidad bahai  cancion con-audio"
   },
@@ -1326,12 +1029,7 @@
     "language": "es",
     "hasChords": true,
     "hasAudio": false,
-    "categorySlugs": [
-      "cancion",
-      "oracion",
-      "con-acordes",
-      "tranquila"
-    ],
+    "categorySlugs": ["cancion", "oracion", "con-acordes", "tranquila"],
     "snippet": "La11 Oh Caminante en el sendero de Dios Sol2 Toma tu porción del océano La11 De su gracia y no te prives Sol2 De las cosas que yacen ocultas…",
     "searchKey": "oh caminante comunidad bahai la11 oh caminante en el sendero de dios sol2 toma tu porcion del oceano la11 de su gracia y no te prives sol2 de las cosas que yacen ocultas… cancion oracion con-acordes tranquila"
   },
@@ -1342,11 +1040,7 @@
     "language": "es",
     "hasChords": false,
     "hasAudio": false,
-    "categorySlugs": [
-      "cancion",
-      "con-audio",
-      "texto-sagrado"
-    ],
+    "categorySlugs": ["cancion", "con-audio", "texto-sagrado"],
     "snippet": "\"¡OH HIJO DEL SER! Haz mención de mi en mi tierra para que en mi cielo Yo te recuerde, así encontraran solaz mis ojos y los tuyos.\" - Baha'u…",
     "searchKey": "oh hijo del ser!  haz mencion de mi en mi tierra comunidad bahai \"¡oh hijo del ser! haz mencion de mi en mi tierra para que en mi cielo yo te recuerde, asi encontraran solaz mis ojos y los tuyos.\" - bahau… cancion con-audio texto-sagrado"
   },
@@ -1357,13 +1051,7 @@
     "language": "es",
     "hasChords": false,
     "hasAudio": true,
-    "categorySlugs": [
-      "cancion",
-      "oracion",
-      "con-audio",
-      "palabra-oculta",
-      "ritmica"
-    ],
+    "categorySlugs": ["cancion", "oracion", "con-audio", "palabra-oculta", "ritmica"],
     "snippet": "(Palabra Oculta de Bahá’u’lláh; Música: Leonor Dely) Oh Mi siervo (x4) Purifica tu corazón de la malevolencia (Bis) Y libre de la envidia (B…",
     "searchKey": "oh mi siervo-leonor dely comunidad bahai (palabra oculta de bahaullah; musica: leonor dely) oh mi siervo (x4) purifica tu corazon de la malevolencia (bis) y libre de la envidia (b… cancion oracion con-audio palabra-oculta ritmica"
   },
@@ -1374,10 +1062,7 @@
     "language": "es",
     "hasChords": false,
     "hasAudio": false,
-    "categorySlugs": [
-      "cancion",
-      "texto-sagrado"
-    ],
+    "categorySlugs": ["cancion", "texto-sagrado"],
     "snippet": "https://www.youtube.com/watch?v=D5LkYa9EmV8",
     "searchKey": "oh mi siervo! rompe las cadenas de este mundo comunidad bahai https://www.youtube.com/watch?v=d5lkya9emv8 cancion texto-sagrado"
   },
@@ -1388,12 +1073,7 @@
     "language": "es",
     "hasChords": true,
     "hasAudio": false,
-    "categorySlugs": [
-      "cancion",
-      "oracion",
-      "con-acordes",
-      "con-audio"
-    ],
+    "categorySlugs": ["cancion", "oracion", "con-acordes", "con-audio"],
     "snippet": "Acordes: Fa#M, Sim, Lam Do#m, Sim, Lam Oh Señor, haz radiante a este joven y confiere tu generosidad a esta pobre criatura otórgale conocimi…",
     "searchKey": "oracion jovenes - abdul-baha comunidad bahai acordes: fa#m, sim, lam do#m, sim, lam oh senor, haz radiante a este joven y confiere tu generosidad a esta pobre criatura otorgale conocimi… cancion oracion con-acordes con-audio"
   },
@@ -1404,11 +1084,7 @@
     "language": "es",
     "hasChords": false,
     "hasAudio": false,
-    "categorySlugs": [
-      "cancion",
-      "oracion",
-      "con-audio"
-    ],
+    "categorySlugs": ["cancion", "oracion", "con-audio"],
     "snippet": "¡Oh Tú, Cuyas pruebas son la medicina curativa para quienes están cerca de Ti, Cuya espada es el deseo ardiente de todos los que Te aman, Cu…",
     "searchKey": "oracion pruebas y dificultades comunidad bahai ¡oh tu, cuyas pruebas son la medicina curativa para quienes estan cerca de ti, cuya espada es el deseo ardiente de todos los que te aman, cu… cancion oracion con-audio"
   },
@@ -1419,11 +1095,7 @@
     "language": "es",
     "hasChords": true,
     "hasAudio": true,
-    "categorySlugs": [
-      "cancion",
-      "con-acordes",
-      "con-audio"
-    ],
+    "categorySlugs": ["cancion", "con-acordes", "con-audio"],
     "snippet": "(Coro) Do Mim Fa Sol Para qué perder el tiempo con insultos y desprecios Do Mim Fa Sol La belleza de tu alma no la mancharán los necios Rem…",
     "searchKey": "para que perder el tiempo comunidad bahai (coro) do mim fa sol para que perder el tiempo con insultos y desprecios do mim fa sol la belleza de tu alma no la mancharan los necios rem… cancion con-acordes con-audio"
   },
@@ -1434,12 +1106,7 @@
     "language": "es",
     "hasChords": true,
     "hasAudio": true,
-    "categorySlugs": [
-      "cancion",
-      "con-acordes",
-      "con-audio",
-      "muy-ritmica"
-    ],
+    "categorySlugs": ["cancion", "con-acordes", "con-audio", "muy-ritmica"],
     "snippet": "(LaM, MiM, MiM, LaM...) Lalalalalá (x4) Pedrito ha llegado al barrio Chongón Él toca la guitarra y juega futbol. Un día decidido salió a bus…",
     "searchKey": "pedrito comunidad bahai (lam, mim, mim, lam...) lalalalala (x4) pedrito ha llegado al barrio chongon el toca la guitarra y juega futbol. un dia decidido salio a bus… cancion con-acordes con-audio muy-ritmica"
   },
@@ -1450,11 +1117,7 @@
     "language": "es",
     "hasChords": true,
     "hasAudio": true,
-    "categorySlugs": [
-      "cancion",
-      "con-acordes",
-      "con-audio"
-    ],
+    "categorySlugs": ["cancion", "con-acordes", "con-audio"],
     "snippet": "(Mim Do Sol Re) Aaahhhh…. aaaahhh Aaaahhhh… aaaaaahh (BIS x2) A veces siento que no hago lo correcto Entonces vienes tu y me ayudas con tu a…",
     "searchKey": "por eso gracias comunidad bahai (mim do sol re) aaahhhh…. aaaahhh aaaahhhh… aaaaaahh (bis x2) a veces siento que no hago lo correcto entonces vienes tu y me ayudas con tu a… cancion con-acordes con-audio"
   },
@@ -1465,11 +1128,7 @@
     "language": "es",
     "hasChords": true,
     "hasAudio": false,
-    "categorySlugs": [
-      "cancion",
-      "con-acordes",
-      "con-audio"
-    ],
+    "categorySlugs": ["cancion", "con-acordes", "con-audio"],
     "snippet": "Acordes: Mim, LaM, Mim, LaM, Mim, LaM, ReM... Estribillo - SolM, ReM, LaM Cuando busco en mi vida, pienso en ti y es más colorida esperanza,…",
     "searchKey": "prejoven comunidad bahai acordes: mim, lam, mim, lam, mim, lam, rem... estribillo - solm, rem, lam cuando busco en mi vida, pienso en ti y es mas colorida esperanza,… cancion con-acordes con-audio"
   },
@@ -1480,11 +1139,7 @@
     "language": "es",
     "hasChords": false,
     "hasAudio": true,
-    "categorySlugs": [
-      "cancion",
-      "oracion",
-      "con-audio"
-    ],
+    "categorySlugs": ["cancion", "oracion", "con-audio"],
     "snippet": "",
     "searchKey": "puro como una perla comunidad bahai  cancion oracion con-audio"
   },
@@ -1495,9 +1150,7 @@
     "language": "es",
     "hasChords": false,
     "hasAudio": false,
-    "categorySlugs": [
-      "cancion"
-    ],
+    "categorySlugs": ["cancion"],
     "snippet": "(Escritos de Abdu’l-Bahá; Música: Leonor Dely) Ama a los hijos de los hombres, Y participa de sus pesares Sé de aquellos que promueven la pa…",
     "searchKey": "que cada amanecer… comunidad bahai (escritos de abdul-baha; musica: leonor dely) ama a los hijos de los hombres, y participa de sus pesares se de aquellos que promueven la pa… cancion"
   },
@@ -1508,9 +1161,7 @@
     "language": "es",
     "hasChords": false,
     "hasAudio": false,
-    "categorySlugs": [
-      "cancion"
-    ],
+    "categorySlugs": ["cancion"],
     "snippet": "Revivo Recoge tus fuerzas, por qué no sales de ahí? Te importa lo que digan los demás de ti Hablamos y reímos, nos reunimos de igual a igual…",
     "searchKey": "revivo comunidad bahai revivo recoge tus fuerzas, por que no sales de ahi? te importa lo que digan los demas de ti hablamos y reimos, nos reunimos de igual a igual… cancion"
   },
@@ -1521,11 +1172,7 @@
     "language": "es",
     "hasChords": true,
     "hasAudio": true,
-    "categorySlugs": [
-      "cancion",
-      "con-acordes",
-      "con-audio"
-    ],
+    "categorySlugs": ["cancion", "con-acordes", "con-audio"],
     "snippet": "Intro: Dm Am Dm ¡Tun tun! Suena la puerta y es mi mamá, sí Es hora de levantarse Ella ya preparó el desayuno y se va a trabajar Eso me motiv…",
     "searchKey": "ritmo celestial comunidad bahai intro: dm am dm ¡tun tun! suena la puerta y es mi mama, si es hora de levantarse ella ya preparo el desayuno y se va a trabajar eso me motiv… cancion con-acordes con-audio"
   },
@@ -1536,12 +1183,7 @@
     "language": "es",
     "hasChords": false,
     "hasAudio": true,
-    "categorySlugs": [
-      "cancion",
-      "oracion",
-      "con-audio",
-      "tranquila"
-    ],
+    "categorySlugs": ["cancion", "oracion", "con-audio", "tranquila"],
     "snippet": "(Palabra Oculta de Bahá’u’lláh; Música: Manuel Melgarejo) *Rompe las cadenas de este mundo Y libera tu alma de la prisión del yo.* (Bis) Apr…",
     "searchKey": "rompe las cadenas comunidad bahai (palabra oculta de bahaullah; musica: manuel melgarejo) *rompe las cadenas de este mundo y libera tu alma de la prision del yo.* (bis) apr… cancion oracion con-audio tranquila"
   },
@@ -1552,11 +1194,7 @@
     "language": "es",
     "hasChords": true,
     "hasAudio": true,
-    "categorySlugs": [
-      "cancion",
-      "con-acordes",
-      "con-audio"
-    ],
+    "categorySlugs": ["cancion", "con-acordes", "con-audio"],
     "snippet": "Autor: Flores (inspirado en palabras ocultas de Bahá'u'lláh del árabe nº52, 53 y del persa nº3, 38 y 40), interpretada por Daniel Mantas, gu…",
     "searchKey": "rompe tu jaula comunidad bahai autor: flores (inspirado en palabras ocultas de bahaullah del arabe nº52, 53 y del persa nº3, 38 y 40), interpretada por daniel mantas, gu… cancion con-acordes con-audio"
   },
@@ -1567,10 +1205,7 @@
     "language": "es",
     "hasChords": true,
     "hasAudio": false,
-    "categorySlugs": [
-      "cancion",
-      "con-acordes"
-    ],
+    "categorySlugs": ["cancion", "con-acordes"],
     "snippet": "Sol Do Sol A‐Dicen que algo nuevo está sucediendo en el pueblo. Sol Do Sol Desde que una luz ha llegado a mi barrio. Re Y empezó a brillar……",
     "searchKey": "sabor a comunidad comunidad bahai sol do sol a‐dicen que algo nuevo esta sucediendo en el pueblo. sol do sol desde que una luz ha llegado a mi barrio. re y empezo a brillar…… cancion con-acordes"
   },
@@ -1581,11 +1216,7 @@
     "language": "es",
     "hasChords": true,
     "hasAudio": true,
-    "categorySlugs": [
-      "cancion",
-      "con-acordes",
-      "con-audio"
-    ],
+    "categorySlugs": ["cancion", "con-acordes", "con-audio"],
     "snippet": "(Fa Do Sol Lam) Glorificaré tu alabanza en cada rincón Revelaré todo el amor, Que inevitablemente removerá Los velos en ojos de la humanidad…",
     "searchKey": "sacrificare comunidad bahai (fa do sol lam) glorificare tu alabanza en cada rincon revelare todo el amor, que inevitablemente removera los velos en ojos de la humanidad… cancion con-acordes con-audio"
   },
@@ -1596,10 +1227,7 @@
     "language": "es",
     "hasChords": false,
     "hasAudio": true,
-    "categorySlugs": [
-      "cancion",
-      "con-audio"
-    ],
+    "categorySlugs": ["cancion", "con-audio"],
     "snippet": "Letra: Pasajes de Los Escritos de Bahá'u'lláh, CXXX Música: Carlos Bannik Sé generoso en la prosperidad y agradecido en la adversidad. Sé di…",
     "searchKey": "se generoso en la prosperidad comunidad bahai letra: pasajes de los escritos de bahaullah, cxxx musica: carlos bannik se generoso en la prosperidad y agradecido en la adversidad. se di… cancion con-audio"
   },
@@ -1610,10 +1238,7 @@
     "language": "es",
     "hasChords": true,
     "hasAudio": false,
-    "categorySlugs": [
-      "cancion",
-      "con-acordes"
-    ],
+    "categorySlugs": ["cancion", "con-acordes"],
     "snippet": "Am G El timbre suena y salen ya Am al patio todos van G en las gradas un grupo riendo está Am y juegan fútbol lo demás G Carlos está buscand…",
     "searchKey": "se valiente comunidad bahai am g el timbre suena y salen ya am al patio todos van g en las gradas un grupo riendo esta am y juegan futbol lo demas g carlos esta buscand… cancion con-acordes"
   },
@@ -1624,11 +1249,7 @@
     "language": "es",
     "hasChords": true,
     "hasAudio": true,
-    "categorySlugs": [
-      "cancion",
-      "con-acordes",
-      "con-audio"
-    ],
+    "categorySlugs": ["cancion", "con-acordes", "con-audio"],
     "snippet": "E B Siento un deseo en mi corazón C#m A fuerte anhelo de transformación E B tengo la esperanza de esa luz hallar C#m A B luz que teje sueños…",
     "searchKey": "sembrando futuro comunidad bahai e b siento un deseo en mi corazon c#m a fuerte anhelo de transformacion e b tengo la esperanza de esa luz hallar c#m a b luz que teje suenos… cancion con-acordes con-audio"
   },
@@ -1639,11 +1260,7 @@
     "language": "es",
     "hasChords": false,
     "hasAudio": true,
-    "categorySlugs": [
-      "cancion",
-      "con-audio",
-      "texto-sagrado"
-    ],
+    "categorySlugs": ["cancion", "con-audio", "texto-sagrado"],
     "snippet": "“Si consideraras este mundo y te dieras cuenta de cuan fugaces son las cosas que pertenecen a el, escogerías no hollar ningún sendero except…",
     "searchKey": "si consideraras este mundo comunidad bahai “si consideraras este mundo y te dieras cuenta de cuan fugaces son las cosas que pertenecen a el, escogerias no hollar ningun sendero except… cancion con-audio texto-sagrado"
   },
@@ -1654,10 +1271,7 @@
     "language": "es",
     "hasChords": false,
     "hasAudio": false,
-    "categorySlugs": [
-      "cancion",
-      "oracion"
-    ],
+    "categorySlugs": ["cancion", "oracion"],
     "snippet": "(Fragmento de una oración de Bahá’u’lláh) Si es tu agrado hazme crecer, hazme crecer *Como una tierna hierba En las praderas de Tu amor* (bi…",
     "searchKey": "si es tu agrado comunidad bahai (fragmento de una oracion de bahaullah) si es tu agrado hazme crecer, hazme crecer *como una tierna hierba en las praderas de tu amor* (bi… cancion oracion"
   },
@@ -1668,10 +1282,7 @@
     "language": "es",
     "hasChords": true,
     "hasAudio": false,
-    "categorySlugs": [
-      "cancion",
-      "con-acordes"
-    ],
+    "categorySlugs": ["cancion", "con-acordes"],
     "snippet": "(Sim, re, mi, la#2) Si no existiera el amor Que quedaría Que quedaría De la realidad Primero estad listos Para sacrificar La vida del uno po…",
     "searchKey": "si no existiera el amor comunidad bahai (sim, re, mi, la#2) si no existiera el amor que quedaria que quedaria de la realidad primero estad listos para sacrificar la vida del uno po… cancion con-acordes"
   },
@@ -1682,11 +1293,7 @@
     "language": "es",
     "hasChords": false,
     "hasAudio": true,
-    "categorySlugs": [
-      "cancion",
-      "con-audio",
-      "tranquila"
-    ],
+    "categorySlugs": ["cancion", "con-audio", "tranquila"],
     "snippet": "Si tan solo hacéis el esfuerzo (x2) Con seguridad brillarán esos esplendores, Derramarán su lluvia (x2) Esas nubes de misericordia…aaa…aaa…a…",
     "searchKey": "si tan solo haceis el esfuerzo comunidad bahai si tan solo haceis el esfuerzo (x2) con seguridad brillaran esos esplendores, derramaran su lluvia (x2) esas nubes de misericordia…aaa…aaa…a… cancion con-audio tranquila"
   },
@@ -1697,9 +1304,7 @@
     "language": "es",
     "hasChords": false,
     "hasAudio": false,
-    "categorySlugs": [
-      "cancion"
-    ],
+    "categorySlugs": ["cancion"],
     "snippet": "Siyahamba cuca ne cuen cos, siyahamba cuca ne cuen cos (bis) Siyahamba… Siyahamba (uuu) Siyahamba cuca ne cuen cos (bis) We are marching in…",
     "searchKey": "siyahamba comunidad bahai siyahamba cuca ne cuen cos, siyahamba cuca ne cuen cos (bis) siyahamba… siyahamba (uuu) siyahamba cuca ne cuen cos (bis) we are marching in… cancion"
   },
@@ -1710,11 +1315,7 @@
     "language": "es",
     "hasChords": false,
     "hasAudio": true,
-    "categorySlugs": [
-      "cancion",
-      "bab",
-      "con-audio"
-    ],
+    "categorySlugs": ["cancion", "bab", "con-audio"],
     "snippet": "",
     "searchKey": "sobrevuelo del qaim comunidad bahai  cancion bab con-audio"
   },
@@ -1725,11 +1326,7 @@
     "language": "es",
     "hasChords": false,
     "hasAudio": true,
-    "categorySlugs": [
-      "cancion",
-      "con-audio",
-      "tranquila"
-    ],
+    "categorySlugs": ["cancion", "con-audio", "tranquila"],
     "snippet": "(De los Escritos de Bahá’u’lláh) ¡Oh amigos! No descuidéis las virtudes Con que habéis sido dotados Ni seáis negligentes Con vuestro alto de…",
     "searchKey": "sois las estrellas comunidad bahai (de los escritos de bahaullah) ¡oh amigos! no descuideis las virtudes con que habeis sido dotados ni seais negligentes con vuestro alto de… cancion con-audio tranquila"
   },
@@ -1740,11 +1337,7 @@
     "language": "es",
     "hasChords": true,
     "hasAudio": true,
-    "categorySlugs": [
-      "cancion",
-      "con-acordes",
-      "con-audio"
-    ],
+    "categorySlugs": ["cancion", "con-acordes", "con-audio"],
     "snippet": "Por Mary Davis G D Ṭáhirih, la pura C G Consuelo de los ojos C G Lo que daría por conocerte a ti Am D Fuente de inspiración G D Tú tenías la…",
     "searchKey": "tahirih comunidad bahai por mary davis g d tahirih, la pura c g consuelo de los ojos c g lo que daria por conocerte a ti am d fuente de inspiracion g d tu tenias la… cancion con-acordes con-audio"
   },
@@ -1755,11 +1348,7 @@
     "language": "es",
     "hasChords": true,
     "hasAudio": true,
-    "categorySlugs": [
-      "cancion",
-      "con-acordes",
-      "con-audio"
-    ],
+    "categorySlugs": ["cancion", "con-acordes", "con-audio"],
     "snippet": "Autor desconocido Música por Joan Lincoln Am F El tiempo solo su gloria aumentará G7 Em Las edades la celebrarán Am Dm Fue el heraldo de un…",
     "searchKey": "tahirih, la pura comunidad bahai autor desconocido musica por joan lincoln am f el tiempo solo su gloria aumentara g7 em las edades la celebraran am dm fue el heraldo de un… cancion con-acordes con-audio"
   },
@@ -1770,10 +1359,7 @@
     "language": "es",
     "hasChords": false,
     "hasAudio": true,
-    "categorySlugs": [
-      "cancion",
-      "con-audio"
-    ],
+    "categorySlugs": ["cancion", "con-audio"],
     "snippet": "",
     "searchKey": "te ofrendamos estos versos comunidad bahai  cancion con-audio"
   },
@@ -1784,12 +1370,7 @@
     "language": "es",
     "hasChords": true,
     "hasAudio": false,
-    "categorySlugs": [
-      "cancion",
-      "con-acordes",
-      "con-audio",
-      "texto-sagrado"
-    ],
+    "categorySlugs": ["cancion", "con-acordes", "con-audio", "texto-sagrado"],
     "snippet": "Bahá'u'lláh - Palabras Ocultas nº59 del Árabe. Acordes: DoM, ReM, Mim. ¡Oh hijo del Ser! Tu corazón es Mi morada, santifícalo para Mi descen…",
     "searchKey": "tu corazon es mi morada comunidad bahai bahaullah - palabras ocultas nº59 del arabe. acordes: dom, rem, mim. ¡oh hijo del ser! tu corazon es mi morada, santificalo para mi descen… cancion con-acordes con-audio texto-sagrado"
   },
@@ -1800,11 +1381,7 @@
     "language": "es",
     "hasChords": false,
     "hasAudio": false,
-    "categorySlugs": [
-      "cancion",
-      "oracion",
-      "tranquila"
-    ],
+    "categorySlugs": ["cancion", "oracion", "tranquila"],
     "snippet": "(Palabra Oculta de Bahá’u’lláh; Música: Alicia Perdú) ¡Oh Hijo del Hombre! Tú eres mi dominio y mi dominio no perece, ¿Por qué temes perecer…",
     "searchKey": "tu eres mi dominio comunidad bahai (palabra oculta de bahaullah; musica: alicia perdu) ¡oh hijo del hombre! tu eres mi dominio y mi dominio no perece, ¿por que temes perecer… cancion oracion tranquila"
   },
@@ -1815,12 +1392,7 @@
     "language": "es",
     "hasChords": true,
     "hasAudio": true,
-    "categorySlugs": [
-      "cancion",
-      "oracion",
-      "con-acordes",
-      "con-audio"
-    ],
+    "categorySlugs": ["cancion", "oracion", "con-acordes", "con-audio"],
     "snippet": "SOL Tú eres mi lámpara DO. RE. SOL y mi luz esta en ti SOL tu eres mi lámpara DO. RE. SOL y mi luz esta en ti RE. SOL obtén de ella su DO re…",
     "searchKey": "tu eres mi lampara comunidad bahai sol tu eres mi lampara do. re. sol y mi luz esta en ti sol tu eres mi lampara do. re. sol y mi luz esta en ti re. sol obten de ella su do re… cancion oracion con-acordes con-audio"
   },
@@ -1831,10 +1403,7 @@
     "language": "es",
     "hasChords": false,
     "hasAudio": true,
-    "categorySlugs": [
-      "cancion",
-      "muy-ritmica"
-    ],
+    "categorySlugs": ["cancion", "muy-ritmica"],
     "snippet": "A E D E Cuando no haya camino que recorrer Cuando mires al frente y esté todo al revés. Cuando sientas en tu alma esa gran necesidad De enco…",
     "searchKey": "tu huella_grupo prejuvenil islas canarias comunidad bahai a e d e cuando no haya camino que recorrer cuando mires al frente y este todo al reves. cuando sientas en tu alma esa gran necesidad de enco… cancion muy-ritmica"
   },
@@ -1845,11 +1414,7 @@
     "language": "es",
     "hasChords": false,
     "hasAudio": false,
-    "categorySlugs": [
-      "cancion",
-      "oracion",
-      "tranquila"
-    ],
+    "categorySlugs": ["cancion", "oracion", "tranquila"],
     "snippet": "(Oración de ‘Abdu’l-Bahá) ¡Oh Dios, mi Dios! Tú me ves, Tú me conoces; Tú eres mi asilo y mi refugio. A nadie he buscado, ni a nadie buscaré…",
     "searchKey": "tu me ves, tu me conoces comunidad bahai (oracion de abdul-baha) ¡oh dios, mi dios! tu me ves, tu me conoces; tu eres mi asilo y mi refugio. a nadie he buscado, ni a nadie buscare… cancion oracion tranquila"
   },
@@ -1860,12 +1425,7 @@
     "language": "es",
     "hasChords": true,
     "hasAudio": true,
-    "categorySlugs": [
-      "cancion",
-      "oracion",
-      "con-acordes",
-      "con-audio"
-    ],
+    "categorySlugs": ["cancion", "oracion", "con-acordes", "con-audio"],
     "snippet": "Mim W Mim Tu nombre es mi curación, oh mi Dios, Do W Y el recuerdo de Ti es mi remedio Mim W Mim Mi proximidad de Ti es mi esperanza Do W Y…",
     "searchKey": "tu nombre es mi curacion v.1 comunidad bahai mim w mim tu nombre es mi curacion, oh mi dios, do w y el recuerdo de ti es mi remedio mim w mim mi proximidad de ti es mi esperanza do w y… cancion oracion con-acordes con-audio"
   },
@@ -1876,13 +1436,7 @@
     "language": "es",
     "hasChords": true,
     "hasAudio": false,
-    "categorySlugs": [
-      "cancion",
-      "oracion",
-      "con-acordes",
-      "con-audio",
-      "texto-sagrado"
-    ],
+    "categorySlugs": ["cancion", "oracion", "con-acordes", "con-audio", "texto-sagrado"],
     "snippet": "Tu nombre es mi curacion, oh mi Dios, y el recuerdo de Ti es mi remedio. La G Cm G Cm G Bm proximidad a Ti es mi esperanza y el amor a Ti es…",
     "searchKey": "tu nombre es mi curacion v.2 comunidad bahai tu nombre es mi curacion, oh mi dios, y el recuerdo de ti es mi remedio. la g cm g cm g bm proximidad a ti es mi esperanza y el amor a ti es… cancion oracion con-acordes con-audio texto-sagrado"
   },
@@ -1893,11 +1447,7 @@
     "language": "es",
     "hasChords": true,
     "hasAudio": true,
-    "categorySlugs": [
-      "cancion",
-      "con-acordes",
-      "con-audio"
-    ],
+    "categorySlugs": ["cancion", "con-acordes", "con-audio"],
     "snippet": "(ReM, Solm, Sim, SolM, LaM) Para poder cuidar el medio ambiente Hay que tener cariño y siempre estar pendiente Con el coraje y la compasión…",
     "searchKey": "unete al cambio comunidad bahai (rem, solm, sim, solm, lam) para poder cuidar el medio ambiente hay que tener carino y siempre estar pendiente con el coraje y la compasion… cancion con-acordes con-audio"
   },
@@ -1908,11 +1458,7 @@
     "language": "es",
     "hasChords": false,
     "hasAudio": true,
-    "categorySlugs": [
-      "cancion",
-      "con-audio",
-      "texto-sagrado"
-    ],
+    "categorySlugs": ["cancion", "con-audio", "texto-sagrado"],
     "snippet": "¡Oh vosotros, siervos del Sagrado Umbral! Las triunfantes huestes del Concurso Celestial, formadas y en orden de batalla en los Reinos de lo…",
     "searchKey": "valiente caballero comunidad bahai ¡oh vosotros, siervos del sagrado umbral! las triunfantes huestes del concurso celestial, formadas y en orden de batalla en los reinos de lo… cancion con-audio texto-sagrado"
   },
@@ -1923,9 +1469,7 @@
     "language": "es",
     "hasChords": false,
     "hasAudio": true,
-    "categorySlugs": [
-      "cancion"
-    ],
+    "categorySlugs": ["cancion"],
     "snippet": "Estribillo: A D A Vengan a la puerta D G D Vengan a la puerta A Bm La Gloria de Dios arribará por A D La puerta del oriente Em A Que todos l…",
     "searchKey": "vengan a la puerta comunidad bahai estribillo: a d a vengan a la puerta d g d vengan a la puerta a bm la gloria de dios arribara por a d la puerta del oriente em a que todos l… cancion"
   },
@@ -1936,9 +1480,7 @@
     "language": "es",
     "hasChords": false,
     "hasAudio": true,
-    "categorySlugs": [
-      "cancion"
-    ],
+    "categorySlugs": ["cancion"],
     "snippet": "Ver lo bueno Por David Hunt C Cada día quiero mejorar F7 Y hago esfuerzo al andar C Sé que me ayuda a avanzar G7 C Si lo bueno tiendo a mira…",
     "searchKey": "ver lo bueno comunidad bahai ver lo bueno por david hunt c cada dia quiero mejorar f7 y hago esfuerzo al andar c se que me ayuda a avanzar g7 c si lo bueno tiendo a mira… cancion"
   },
@@ -1949,11 +1491,7 @@
     "language": "es",
     "hasChords": true,
     "hasAudio": false,
-    "categorySlugs": [
-      "cancion",
-      "con-acordes",
-      "con-audio"
-    ],
+    "categorySlugs": ["cancion", "con-acordes", "con-audio"],
     "snippet": "Recitado: Dicen que cada persona trabaja sólo para su propio bien y que a otros debe superar. Dicen que en mí no pueden confiar que muy poco…",
     "searchKey": "ver mas alla comunidad bahai recitado: dicen que cada persona trabaja solo para su propio bien y que a otros debe superar. dicen que en mi no pueden confiar que muy poco… cancion con-acordes con-audio"
   },
@@ -1964,11 +1502,7 @@
     "language": "es",
     "hasChords": false,
     "hasAudio": false,
-    "categorySlugs": [
-      "cancion",
-      "con-audio",
-      "ritmica"
-    ],
+    "categorySlugs": ["cancion", "con-audio", "ritmica"],
     "snippet": "ReM, DoM, SolM (Casi toda la canción). DoM, SolM, ReM (En la parte final). No a las falsas dicotomías Integra los aspectos de tu vida Es nec…",
     "searchKey": "vida de servicio comunidad bahai rem, dom, solm (casi toda la cancion). dom, solm, rem (en la parte final). no a las falsas dicotomias integra los aspectos de tu vida es nec… cancion con-audio ritmica"
   },
@@ -1979,11 +1513,7 @@
     "language": "es",
     "hasChords": false,
     "hasAudio": false,
-    "categorySlugs": [
-      "cancion",
-      "oracion",
-      "tranquila"
-    ],
+    "categorySlugs": ["cancion", "oracion", "tranquila"],
     "snippet": "(Palabra Oculta de Bahá’u’lláh; Música: Manuel Melgarejo) *Vuelve tu rostro hacia el Mío Y renuncia a todo salvo a Mí.* (bis) *Pues Mi sober…",
     "searchKey": "vuelve tu rostro hacia el mio comunidad bahai (palabra oculta de bahaullah; musica: manuel melgarejo) *vuelve tu rostro hacia el mio y renuncia a todo salvo a mi.* (bis) *pues mi sober… cancion oracion tranquila"
   },
@@ -1994,11 +1524,19 @@
     "language": "es",
     "hasChords": false,
     "hasAudio": false,
-    "categorySlugs": [
-      "cancion",
-      "con-audio"
-    ],
+    "categorySlugs": ["cancion", "con-audio"],
     "snippet": "https://m.youtube.com/watch?v=0wSojZ8zBFU",
     "searchKey": "vuestra vision comunidad bahai https://m.youtube.com/watch?v=0wsojz8zbfu cancion con-audio"
+  },
+  {
+    "slug": "wave-racer-returns-with-lively-new-single-auto",
+    "title": "Wave Racer Returns With Lively New Single “Auto”",
+    "artist": "Comunidad Bahá'í",
+    "language": "es",
+    "hasChords": false,
+    "hasAudio": false,
+    "categorySlugs": ["cancion"],
+    "snippet": "Nam felis ipsum, eleifend sit amet sodales pellentesque, commodo sit amet elit. Etiam convallis urna id justo faucibus tempor. Nunc volutpat…",
+    "searchKey": "wave racer returns with lively new single “auto” comunidad bahai nam felis ipsum, eleifend sit amet sodales pellentesque, commodo sit amet elit. etiam convallis urna id justo faucibus tempor. nunc volutpat… cancion"
   }
 ]

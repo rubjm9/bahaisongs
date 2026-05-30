@@ -6,7 +6,16 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: '*',
       allow: '/',
-      disallow: ['/api/', '/auth/'],
+      // Internal/auth routes + legacy WordPress paths that add no SEO value
+      disallow: [
+        '/api/',
+        '/auth/',
+        '/page/',
+        '/__trashed',
+        '/bahaisongs.org/',
+        '/?s=',
+        '/wp-',
+      ],
     },
     sitemap: `${SITE_URL}/sitemap.xml`,
   };

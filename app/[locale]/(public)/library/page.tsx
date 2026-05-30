@@ -22,7 +22,13 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
     description: isEs
       ? "Explora el catálogo completo de canciones bahá'ís en español: letra, acordes de guitarra y audio. Filtra por categoría, idioma y estilo musical."
       : "Browse the full catalog of Bahá'í songs: lyrics, guitar chords and audio. Filter by category, language and musical style.",
-    alternates: { canonical },
+    alternates: {
+      canonical,
+      languages: {
+        es: `${SITE_URL}${appPath('es', 'library')}`,
+        en: `${SITE_URL}${appPath('en', 'library')}`,
+      },
+    },
   };
 }
 
