@@ -1,5 +1,3 @@
-'use client';
-
 import { Box, Skeleton, Typography } from '@mui/material';
 import { cssVars, radii } from '@/shared/theme/tokens';
 import type { LucideIcon } from 'lucide-react';
