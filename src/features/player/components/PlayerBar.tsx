@@ -41,6 +41,7 @@ import { playRandomTrack } from '../lib/randomTrack';
 export function PlayerBar() {
   usePlayerHydration();
   const audioRef = useRef<HTMLAudioElement | null>(null);
+  const randomLoadingRef = useRef(false);
   useAudioElement(audioRef);
   useMediaSession(audioRef);
   const actions = usePlayerActions(audioRef);
@@ -69,11 +70,13 @@ export function PlayerBar() {
   };
 
   const onPlayRandom = useCallback(async () => {
-    if (randomLoading) return;
+    if (randomLoadingRef.current) return;
+    randomLoadingRef.current = true;
     setRandomLoading(true);
     try {
       await playRandomTrack(actions.playList);
     } finally {
+      randomLoadingRef.current = false;
       setRandomLoading(false);
     }
   }, [actions.playList]);
@@ -183,8 +186,8 @@ export function PlayerBar() {
                 border: `1px solid ${cssVars.borderStrong}`,
               }}
             >
-              {hasTrack ? (
-                current!.title.charAt(0).toUpperCase()
+              {current ? (
+                current.title.charAt(0).toUpperCase()
               ) : (
                 <Shuffle size={20} strokeWidth={2} aria-hidden />
               )}
