@@ -2,6 +2,8 @@ import createNextIntlPlugin from 'next-intl/plugin';
 
 const withNextIntl = createNextIntlPlugin('./src/shared/lib/i18n/request.ts');
 
+const PRODUCTION_ORIGIN = 'https://bahaisongs.org';
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
@@ -14,6 +16,20 @@ const nextConfig = {
   },
   async redirects() {
     return [
+      // Canonical host: apex only (no www)
+      {
+        source: '/:path*',
+        has: [{ type: 'host', value: 'www.bahaisongs.org' }],
+        destination: `${PRODUCTION_ORIGIN}/:path*`,
+        permanent: true,
+      },
+      // Staging/dev host → production (path + query preserved by Next.js)
+      {
+        source: '/:path*',
+        has: [{ type: 'host', value: 'dev.bahaisongs.org' }],
+        destination: `${PRODUCTION_ORIGIN}/:path*`,
+        permanent: true,
+      },
       {
         source: '/category/canciones',
         destination: '/category/cancion',
