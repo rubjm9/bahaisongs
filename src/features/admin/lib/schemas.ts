@@ -41,6 +41,12 @@ export const trackMetaSchema = z.object({
 });
 export type TrackMetaFormValues = z.infer<typeof trackMetaSchema>;
 
+export const lyricsEditorSchema = z.object({
+  body_plain: z.string().max(20000).nullish(),
+  body_chordpro: z.string().max(20000).nullish(),
+});
+export type LyricsEditorFormValues = z.infer<typeof lyricsEditorSchema>;
+
 export const lyricsSchema = z.object({
   locale: z.string().min(2).max(5),
   body_plain: z.string().max(20000).nullish(),

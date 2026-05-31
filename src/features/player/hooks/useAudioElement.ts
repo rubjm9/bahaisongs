@@ -38,16 +38,23 @@ export function useAudioElement(audioRef: RefObject<HTMLAudioElement | null>) {
           return;
         }
         const source = resolveSource(track);
+        if (source.kind === 'youtube') {
+          // YouTube tracks are handled by YoutubeFloatingPlayer; keep the
+          // native audio element silent and reset its src.
+          audio.pause();
+          audio.removeAttribute('src');
+          audio.load();
+          lastSrcRef.current = null;
+          usePlayerStore.getState().setError(null);
+          // Setting 'loading' triggers the YoutubeFloatingPlayer to start
+          // playback (playing prop = true while loading or playing).
+          usePlayerStore.getState().setStatus('loading');
+          return;
+        }
         if (source.kind !== 'mp3') {
-          // Phase 4 only wires MP3; YouTube and unavailable surface as errors
-          // in the UI but don't crash the player.
           usePlayerStore
             .getState()
-            .setError(
-              source.kind === 'youtube'
-                ? 'youtube-source-not-yet-supported'
-                : 'no-source-available',
-            );
+            .setError('no-source-available');
           usePlayerStore.getState().setStatus('error');
           return;
         }

@@ -31,3 +31,8 @@ export const supabaseEnv = {
 export const supabaseEnabled =
   typeof process.env.NEXT_PUBLIC_SUPABASE_URL === 'string' &&
   process.env.NEXT_PUBLIC_SUPABASE_URL.length > 0;
+
+/** True when the service role key is configured (server-only, optional). */
+export const hasServiceRoleKey =
+  typeof process.env.SUPABASE_SERVICE_ROLE_KEY === 'string' &&
+  process.env.SUPABASE_SERVICE_ROLE_KEY.length > 0;

@@ -4,13 +4,14 @@ import { useState, useRef, useEffect, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import { Box, Stack, IconButton, Tooltip, Typography } from '@mui/material';
 import { X, Music2, ChevronUp, ChevronDown, Play, Pause, Plus, Minus } from 'lucide-react';
-import { parseLyrics } from '../lib/chordParser';
+import { parseLyrics, parseChordProLyrics, isChordProFormat } from '../lib/chordParser';
 import { getCapoAdjustedDisplay } from '../lib/transpose';
 import { ChordPair } from './ChordPair';
 import { accent, cssVars, radii } from '@/shared/theme/tokens';
 
 interface Props {
   lyrics: string;
+  lyricsChordPro?: string | undefined;
   hasChords: boolean;
   trackTitle: string;
   artistName: string;
@@ -19,6 +20,7 @@ interface Props {
 
 export function PresentationViewer({
   lyrics,
+  lyricsChordPro,
   hasChords,
   trackTitle,
   artistName,
@@ -40,7 +42,9 @@ export function PresentationViewer({
   const hudTimerRef = useRef<ReturnType<typeof setTimeout>>(null);
   const touchStartYRef = useRef<number>(0);
 
-  const stanzas = parseLyrics(lyrics);
+  const stanzas = lyricsChordPro && isChordProFormat(lyricsChordPro)
+    ? parseChordProLyrics(lyricsChordPro)
+    : parseLyrics(lyrics);
 
   // HUD fade after 3s of no interaction
   const resetHudTimer = useCallback(() => {

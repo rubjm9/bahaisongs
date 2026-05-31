@@ -85,7 +85,7 @@ export function AdminSidebar({ pendingSuggestions }: Props) {
           '&:hover': { background: cssVars.hoverSubtle },
         }}
       >
-        <BrandMark icon="monogram" size={28} />
+        <BrandMark icon="monogram" showWordmark={false} size={28} />
         <Box>
           <Typography
             variant="caption"

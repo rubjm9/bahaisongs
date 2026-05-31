@@ -66,7 +66,7 @@ export default async function TrackDetailPage({ params }: { params: Params }) {
   return (
     <>
       <AdminTopBar title={isNew ? 'Nueva canción' : 'Editar canción'} />
-      <Box sx={{ px: { xs: 2, md: 3 }, py: 3, maxWidth: 900, mx: 'auto' }}>
+      <Box sx={{ px: { xs: 2.5, md: 4 }, py: 3, maxWidth: 1280, mx: 'auto', width: '100%' }}>
         <TrackForm
           track={track}
           trackCategories={trackCategories}

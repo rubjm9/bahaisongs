@@ -198,6 +198,7 @@ export default async function SongPage({ params }: { params: Params }) {
           </Typography>
           <LyricsViewer
             lyrics={track.lyrics}
+            lyricsChordPro={track.lyricsChordPro}
             hasChords={track.hasChords}
             trackSlug={track.slug}
             locale={locale}

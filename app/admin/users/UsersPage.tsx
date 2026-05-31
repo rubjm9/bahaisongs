@@ -1,6 +1,7 @@
 import { Box } from '@mui/material';
 import { getSupabaseServiceClient } from '@/shared/lib/supabase/server';
 import { getSupabaseServerClient } from '@/shared/lib/supabase/server';
+import { hasServiceRoleKey } from '@/shared/lib/supabase/env';
 import { AdminTopBar } from '@/features/admin/components/AdminTopBar';
 import { UsersClient } from './UsersClient';
 
@@ -26,12 +27,13 @@ export default async function UsersPage() {
     .order('created_at' as never, { ascending: false })
     .limit(200);
 
-  // Fetch emails using the service role (only accessible server-side)
-  const service = getSupabaseServiceClient();
-  const { data: authUsers } = await service.auth.admin.listUsers();
   const emailMap = new Map<string, string>();
-  for (const u of authUsers?.users ?? []) {
-    emailMap.set(u.id, u.email ?? '');
+  if (hasServiceRoleKey) {
+    const service = getSupabaseServiceClient();
+    const { data: authUsers } = await service.auth.admin.listUsers();
+    for (const u of authUsers?.users ?? []) {
+      emailMap.set(u.id, u.email ?? '');
+    }
   }
 
   interface ProfileRow { id: string; display_name: string | null; role: string; locale: string; created_at: string }

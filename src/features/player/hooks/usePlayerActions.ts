@@ -3,6 +3,7 @@
 import { useCallback, type RefObject } from 'react';
 import { usePlayerStore } from '../stores/playerStore';
 import { selectCurrentTrack, useQueueStore } from '../stores/queueStore';
+import { resolveSource } from '../lib/sourceResolver';
 import type { PlayableTrack } from '../lib/types';
 
 /**
@@ -11,6 +12,16 @@ import type { PlayableTrack } from '../lib/types';
  */
 export function usePlayerActions(audioRef: RefObject<HTMLAudioElement | null>) {
   const togglePlayPause = useCallback(() => {
+    const current = selectCurrentTrack(useQueueStore.getState());
+    if (current && resolveSource(current).kind === 'youtube') {
+      const s = usePlayerStore.getState().status;
+      if (s === 'playing') {
+        usePlayerStore.getState().setStatus('paused');
+      } else if (s === 'paused' || s === 'idle' || s === 'error') {
+        usePlayerStore.getState().setStatus('playing');
+      }
+      return;
+    }
     const audio = audioRef.current;
     if (!audio) return;
     if (audio.paused) {
@@ -24,6 +35,12 @@ export function usePlayerActions(audioRef: RefObject<HTMLAudioElement | null>) {
 
   const seekTo = useCallback(
     (seconds: number) => {
+      const current = selectCurrentTrack(useQueueStore.getState());
+      if (current && resolveSource(current).kind === 'youtube') {
+        usePlayerStore.getState().setSeekTrigger(seconds);
+        usePlayerStore.getState().setPosition(seconds);
+        return;
+      }
       const audio = audioRef.current;
       if (!audio) return;
       const clamped = Math.max(0, Math.min(seconds, audio.duration || seconds));
@@ -46,6 +63,17 @@ export function usePlayerActions(audioRef: RefObject<HTMLAudioElement | null>) {
   }, []);
 
   const prev = useCallback(() => {
+    const current = selectCurrentTrack(useQueueStore.getState());
+    if (current && resolveSource(current).kind === 'youtube') {
+      const position = usePlayerStore.getState().position;
+      if (position > 3) {
+        usePlayerStore.getState().setSeekTrigger(0);
+        usePlayerStore.getState().setPosition(0);
+        return;
+      }
+      useQueueStore.getState().prev();
+      return;
+    }
     const audio = audioRef.current;
     if (audio && audio.currentTime > 3) {
       // Restart the current track on prev when more than 3s have elapsed

@@ -3,11 +3,11 @@ import Script from 'next/script';
 import { Suspense } from 'react';
 import { GoogleAnalyticsPageViews } from '@/shared/lib/analytics/GoogleAnalytics';
 import { GoogleAnalyticsScripts } from '@/shared/lib/analytics/GoogleAnalyticsScripts';
-import { getRootHtmlLocale } from '@/shared/lib/i18n/rootLocale';
 import { inter, outfit } from '@/shared/theme/fonts';
-import { getServerThemeMode } from '@/shared/theme/serverTheme';
 import { THEME_COOKIE_NAME, THEME_STORAGE_KEY } from '@/shared/theme/themeStorage';
 import './globals.css';
+
+export const runtime = 'edge';
 
 export const metadata: Metadata = {
   title: { default: 'BahaiSongs', template: '%s · BahaiSongs' },
@@ -24,12 +24,11 @@ export const viewport: Viewport = {
   initialScale: 1,
 };
 
-export default async function RootLayout({ children }: { children: React.ReactNode }) {
-  const [locale, initialMode] = await Promise.all([getRootHtmlLocale(), getServerThemeMode()]);
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html
-      lang={locale}
-      className={`${inter.variable} ${outfit.variable} ${initialMode}`}
+      lang="es"
+      className={`${inter.variable} ${outfit.variable}`}
       suppressHydrationWarning
     >
       <head>

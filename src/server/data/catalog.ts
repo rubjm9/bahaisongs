@@ -26,7 +26,10 @@ export interface CatalogTrack {
   categorySlugs: string[];
   snippet: string;
   lyrics: string;
+  /** ChordPro-formatted lyrics (inline [Am]text format). Preferred over `lyrics` when present. */
+  lyricsChordPro?: string;
   legacyAudioUrl?: string;
+  youtubeId?: string;
   publishedAt?: string;
 }
 

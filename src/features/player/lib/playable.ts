@@ -7,6 +7,7 @@ interface PlayableInputTrack {
   artistSlug: string;
   language: PlayableTrack['language'];
   legacyAudioUrl?: string;
+  youtubeId?: string;
 }
 
 /**
@@ -23,6 +24,7 @@ export function toPlayable(track: PlayableInputTrack): PlayableTrack {
     language: track.language,
   };
   if (track.legacyAudioUrl) out.audioUrl = track.legacyAudioUrl;
+  if (track.youtubeId) out.youtubeId = track.youtubeId;
   return out;
 }
 

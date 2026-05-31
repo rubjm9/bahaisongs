@@ -1,7 +1,6 @@
 'use server';
 
 import { revalidatePath } from 'next/cache';
-import { getSupabaseServiceClient } from '@/shared/lib/supabase/server';
 import { getSupabaseServerClient } from '@/shared/lib/supabase/server';
 import type { UserRole } from '@/shared/lib/supabase/types';
 
@@ -26,15 +25,13 @@ async function requireAdmin() {
 }
 
 export async function setUserRole(userId: string, role: UserRole) {
-  const { callerId } = await requireAdmin();
+  const { supabase, callerId } = await requireAdmin();
 
   if (userId === callerId) {
     throw new Error('No puedes cambiar tu propio rol');
   }
 
-  // Use service client to update role (bypasses RLS safely for admin action)
-  const service = getSupabaseServiceClient();
-  const { error } = await service
+  const { error } = await supabase
     .from('profiles')
     .update({ role } as never)
     .eq('id' as never, userId);

@@ -88,12 +88,8 @@ export function CategoriesClient({ initialCategories }: Props) {
             prev.map((c) => (c.id === editingCategory.id ? { ...c, ...values } : c)),
           );
         } else {
-          await createCategory(values);
-          // Optimistic: add with placeholder id
-          setCategories((prev) => [
-            ...prev,
-            { id: crypto.randomUUID(), ...values },
-          ]);
+          const created = await createCategory(values);
+          setCategories((prev) => [...prev, created]);
         }
         setDialogOpen(false);
       } catch (e) {

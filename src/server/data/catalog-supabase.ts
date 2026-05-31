@@ -8,7 +8,7 @@ const CATALOG_JOIN = `
   id, slug, title, language, published_at, cover_path,
   artists:primary_artist_id (name, slug),
   track_sources (kind, source_ref, is_primary),
-  lyrics (body_plain, has_chords, locale),
+  lyrics (body_plain, body_chordpro, has_chords, locale),
   track_categories (
     categories:category_id (slug)
   )

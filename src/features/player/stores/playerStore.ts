@@ -16,6 +16,11 @@ interface PlayerState {
   position: number;
   duration: number;
   error: string | null;
+
+  // YouTube floating player controls
+  youtubePlayerOpen: boolean;
+  /** Imperative seek trigger. The YouTube player watches this and seeks when it changes. */
+  seekTrigger: { seconds: number; ts: number } | null;
 }
 
 interface PlayerActions {
@@ -28,15 +33,19 @@ interface PlayerActions {
   setPosition: (p: number) => void;
   setDuration: (d: number) => void;
   setError: (e: string | null) => void;
+  setSeekTrigger: (seconds: number) => void;
+  setYoutubePlayerOpen: (open: boolean) => void;
 
   reset: () => void;
 }
 
-const ephemeral = (): Pick<PlayerState, 'status' | 'position' | 'duration' | 'error'> => ({
+const ephemeral = (): Pick<PlayerState, 'status' | 'position' | 'duration' | 'error' | 'youtubePlayerOpen' | 'seekTrigger'> => ({
   status: 'idle',
   position: 0,
   duration: 0,
   error: null,
+  youtubePlayerOpen: true,
+  seekTrigger: null,
 });
 
 export const usePlayerStore = create<PlayerState & PlayerActions>()(
@@ -62,6 +71,8 @@ export const usePlayerStore = create<PlayerState & PlayerActions>()(
         setPosition: (position) => set({ position }),
         setDuration: (duration) => set({ duration }),
         setError: (error) => set({ error }),
+        setSeekTrigger: (seconds) => set({ seekTrigger: { seconds, ts: Date.now() } }),
+        setYoutubePlayerOpen: (youtubePlayerOpen) => set({ youtubePlayerOpen }),
 
         reset: () => set(ephemeral()),
       }),

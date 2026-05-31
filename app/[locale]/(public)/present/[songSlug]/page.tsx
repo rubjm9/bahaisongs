@@ -20,6 +20,7 @@ export default async function PresentationPage({ params }: { params: Params }) {
   return (
     <PresentationViewer
       lyrics={track.lyrics}
+      lyricsChordPro={track.lyricsChordPro}
       hasChords={track.hasChords}
       trackTitle={track.title}
       artistName={track.artist}

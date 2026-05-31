@@ -28,11 +28,17 @@ export async function createCategory(values: CategoryFormValues) {
   if (!parsed.success) throw new Error('Invalid data');
 
   const supabase = await requireAdmin();
-  const { error } = await supabase.from('categories').insert(parsed.data as never);
+  const { data, error } = await supabase
+    .from('categories')
+    .insert(parsed.data as never)
+    .select('id, slug, name_es, name_en, kind')
+    .single();
   if (error) throw new Error(error.message);
 
   revalidateTag('categories');
   revalidatePath('/admin/categories');
+
+  return data as { id: string; slug: string; name_es: string; name_en: string; kind: string };
 }
 
 export async function updateCategory(id: string, values: Partial<CategoryFormValues>) {

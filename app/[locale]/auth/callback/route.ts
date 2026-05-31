@@ -1,3 +1,5 @@
+export const runtime = 'edge';
+
 /**
  * Locale-prefixed alias for the auth callback.
  * next-intl middleware rewrites `/auth/callback` → `/es/auth/callback` on

@@ -1,6 +1,7 @@
 'use client';
 
 import { useRef, useState, useCallback } from 'react';
+import dynamic from 'next/dynamic';
 import { Box, IconButton, Stack, Slider } from '@mui/material';
 import {
   Play,
@@ -30,8 +31,14 @@ import { useAudioElement } from '../hooks/useAudioElement';
 import { usePlayerActions } from '../hooks/usePlayerActions';
 import { useMediaSession } from '../hooks/useMediaSession';
 import { usePlayerHydration } from '../hooks/usePlayerHydration';
-import { hasPlayableSource } from '../lib/sourceResolver';
+import { hasPlayableSource, resolveSource } from '../lib/sourceResolver';
 import { playRandomTrack } from '../lib/randomTrack';
+
+const YoutubeFloatingPlayer = dynamic(
+  () =>
+    import('./YoutubeFloatingPlayer').then((m) => ({ default: m.YoutubeFloatingPlayer })),
+  { ssr: false },
+);
 
 /**
  * The single, global player bar. Mounts the only `<audio>` element in the
@@ -62,6 +69,7 @@ export function PlayerBar() {
   const isLoading = status === 'loading';
   const hasTrack = current !== null;
   const playable = current ? hasPlayableSource(current) : false;
+  const isYoutubeTrack = current ? resolveSource(current).kind === 'youtube' : false;
 
   const onShuffleToggle = () => {
     const next = !shuffleOn;
@@ -82,21 +90,23 @@ export function PlayerBar() {
   }, [actions.playList]);
 
   return (
-    <Box
-      component="footer"
-      aria-label="Reproductor"
-      sx={{
-        position: 'fixed',
-        left: { xs: 8, md: 'calc(var(--bs-sidebar-width, 240px) + 16px)' },
-        right: { xs: 8, md: 16 },
-        bottom: {
-          xs: 'calc(12px + env(safe-area-inset-bottom, 0px))',
-          md: 16,
-        },
-        zIndex: 8,
-        transition: 'left 240ms cubic-bezier(0.19, 1, 0.22, 1)',
-      }}
-    >
+    <>
+      <YoutubeFloatingPlayer />
+      <Box
+        component="footer"
+        aria-label="Reproductor"
+        sx={{
+          position: 'fixed',
+          left: { xs: 8, md: 'calc(var(--bs-sidebar-width, 240px) + 16px)' },
+          right: { xs: 8, md: 16 },
+          bottom: {
+            xs: 'calc(12px + env(safe-area-inset-bottom, 0px))',
+            md: 16,
+          },
+          zIndex: 8,
+          transition: 'left 240ms cubic-bezier(0.19, 1, 0.22, 1)',
+        }}
+      >
       <audio
         ref={audioRef}
         id="bs-global-audio"
@@ -229,9 +239,13 @@ export function PlayerBar() {
                       </Link>
                       {!playable
                         ? ' · sin audio'
-                        : duration > 0
-                          ? ` · ${formatTime(position)} / ${formatTime(duration)}`
-                          : ''}
+                        : isYoutubeTrack
+                          ? duration > 0
+                            ? ` · ${formatTime(position)} / ${formatTime(duration)}`
+                            : ' · YouTube'
+                          : duration > 0
+                            ? ` · ${formatTime(position)} / ${formatTime(duration)}`
+                            : ''}
                     </Box>
                   </Box>
                   <LikeButton trackId={current.slug} trackSlug={current.slug} />
@@ -454,6 +468,7 @@ export function PlayerBar() {
         </Box>
       </Box>
     </Box>
+    </>
   );
 }
 

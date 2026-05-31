@@ -2,9 +2,9 @@
 
 import { useState, useRef, useEffect, useCallback } from 'react';
 import Link from 'next/link';
-import { Box, Stack, IconButton, Tooltip, Slider, Typography } from '@mui/material';
+import { Box, Stack, Button, IconButton, Tooltip, Slider, Typography } from '@mui/material';
 import { Music2, ChevronUp, ChevronDown, Play, Pause, Maximize2, Plus, Minus } from 'lucide-react';
-import { parseLyrics } from '../lib/chordParser';
+import { parseLyrics, parseChordProLyrics, isChordProFormat } from '../lib/chordParser';
 import { getCapoAdjustedDisplay } from '../lib/transpose';
 import { ChordPair } from './ChordPair';
 import { accent, cssVars, radii } from '@/shared/theme/tokens';
@@ -13,13 +13,14 @@ import { appPath } from '@/shared/lib/seo/paths';
 
 interface Props {
   lyrics: string;
+  lyricsChordPro?: string | undefined;
   hasChords: boolean;
   trackSlug: string;
   locale: string;
 }
 
-export function LyricsViewer({ lyrics, hasChords, trackSlug, locale }: Props) {
-  const [showChords, setShowChords] = useState(hasChords);
+export function LyricsViewer({ lyrics, lyricsChordPro, hasChords, trackSlug, locale }: Props) {
+  const [showChords, setShowChords] = useState(false);
   const [transpose, setTranspose] = useState(0);
   const [capo, setCapo] = useState(0);
   const [fontSize, setFontSize] = useState(100);
@@ -30,7 +31,10 @@ export function LyricsViewer({ lyrics, hasChords, trackSlug, locale }: Props) {
   const rafRef = useRef<number>(0);
   const lastTimestampRef = useRef<number>(0);
 
-  const stanzas = parseLyrics(lyrics);
+  // Prefer ChordPro inline format when available; fall back to legacy dual-line format
+  const stanzas = lyricsChordPro && isChordProFormat(lyricsChordPro)
+    ? parseChordProLyrics(lyricsChordPro)
+    : parseLyrics(lyrics);
 
   const startScroll = useCallback(() => {
     const el = containerRef.current;
@@ -126,19 +130,24 @@ export function LyricsViewer({ lyrics, hasChords, trackSlug, locale }: Props) {
       >
         {/* Toggle chords */}
         {hasChords ? (
-          <Tooltip title="Acordes" arrow>
-            <IconButton
-              size="small"
-              onClick={() => setShowChords((v) => !v)}
-              sx={{
-                ...toolbarBtnSx,
-                color: showChords ? accent.glow : cssVars.textMuted,
-                background: showChords ? `${accent.glow}18` : 'transparent',
-              }}
-            >
-              <Music2 size={16} />
-            </IconButton>
-          </Tooltip>
+          <Button
+            size="small"
+            onClick={() => setShowChords((v) => !v)}
+            aria-label="Mostrar/ocultar acordes"
+            aria-pressed={showChords}
+            startIcon={<Music2 size={16} />}
+            sx={{
+              ...toolbarBtnSx,
+              textTransform: 'none',
+              fontSize: '0.75rem',
+              fontWeight: 600,
+              px: 1,
+              color: showChords ? accent.glow : cssVars.textMuted,
+              background: showChords ? `${accent.glow}18` : 'transparent',
+            }}
+          >
+            Mostrar/ocultar acordes
+          </Button>
         ) : null}
 
         {/* Transpose controls */}

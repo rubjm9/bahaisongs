@@ -7,10 +7,11 @@ import { useAdminDrawer } from '../context/adminDrawerContext';
 
 interface Props {
   title?: string;
+  description?: string;
   actions?: React.ReactNode;
 }
 
-export function AdminTopBar({ title, actions }: Props) {
+export function AdminTopBar({ title, description, actions }: Props) {
   const { openDrawer } = useAdminDrawer();
 
   return (
@@ -23,8 +24,9 @@ export function AdminTopBar({ title, actions }: Props) {
         display: 'flex',
         alignItems: 'center',
         gap: 2,
-        px: { xs: 2, md: 3 },
-        height: 56,
+        px: { xs: 2.5, md: 4 },
+        py: { xs: 2, md: 2.5 },
+        minHeight: 72,
         background: cssVars.bgElevated,
         borderBottom: `1px solid ${cssVars.borderSubtle}`,
         backdropFilter: 'blur(16px)',
@@ -41,9 +43,19 @@ export function AdminTopBar({ title, actions }: Props) {
       </IconButton>
 
       {title && (
-        <Typography variant="body1" sx={{ fontWeight: 600, color: cssVars.textPrimary, flex: 1 }}>
-          {title}
-        </Typography>
+        <Box sx={{ flex: 1, minWidth: 0 }}>
+          <Typography
+            variant="h6"
+            sx={{ fontWeight: 600, color: cssVars.textPrimary, lineHeight: 1.3, fontSize: '1.125rem' }}
+          >
+            {title}
+          </Typography>
+          {description && (
+            <Typography variant="body2" sx={{ color: cssVars.textMuted, mt: 0.5, lineHeight: 1.5 }}>
+              {description}
+            </Typography>
+          )}
+        </Box>
       )}
       {!title && <Box sx={{ flex: 1 }} />}
 

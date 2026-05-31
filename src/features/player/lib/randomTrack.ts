@@ -9,6 +9,7 @@ interface CatalogRow {
   artistSlug: string;
   language: PlayableTrack['language'];
   legacyAudioUrl?: string;
+  youtubeId?: string;
 }
 
 let cachedPlayable: PlayableTrack[] | null = null;

@@ -25,17 +25,24 @@ export function StatCard({ title, value, subtitle, Icon, loading = false, accent
   return (
     <Box
       sx={{
-        p: 3,
+        height: '100%',
+        minHeight: 148,
+        pt: 3.5,
+        pb: 3,
+        px: 3,
         borderRadius: `${radii.lg}px`,
         background: cssVars.bgElevated,
         border: `1px solid ${cssVars.borderSubtle}`,
         display: 'flex',
         flexDirection: 'column',
-        gap: 1.5,
+        gap: 2,
         position: 'relative',
         overflow: 'hidden',
-        transition: 'border-color 200ms',
-        '&:hover': { borderColor: cssVars.borderStrong },
+        transition: 'border-color 200ms, box-shadow 200ms',
+        '&:hover': {
+          borderColor: cssVars.borderStrong,
+          boxShadow: `0 8px 24px ${accentColor}12`,
+        },
         '&::before': {
           content: '""',
           position: 'absolute',
@@ -48,15 +55,16 @@ export function StatCard({ title, value, subtitle, Icon, loading = false, accent
         },
       }}
     >
-      <Box sx={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between' }}>
+      <Box sx={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 2 }}>
         <Typography
           variant="caption"
           sx={{
             color: cssVars.textMuted,
-            fontSize: '0.75rem',
+            fontSize: '0.8125rem',
             fontWeight: 600,
-            textTransform: 'uppercase',
-            letterSpacing: '0.06em',
+            letterSpacing: '0.02em',
+            lineHeight: 1.4,
+            pt: 0.25,
           }}
         >
           {title}
@@ -64,10 +72,10 @@ export function StatCard({ title, value, subtitle, Icon, loading = false, accent
         {Icon && (
           <Box
             sx={{
-              width: 32,
-              height: 32,
+              width: 40,
+              height: 40,
               borderRadius: `${radii.md}px`,
-              background: `${accentColor}18`,
+              background: `${accentColor}14`,
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
@@ -75,20 +83,23 @@ export function StatCard({ title, value, subtitle, Icon, loading = false, accent
               flexShrink: 0,
             }}
           >
-            <Icon size={16} />
+            <Icon size={18} strokeWidth={1.75} />
           </Box>
         )}
       </Box>
 
       {loading ? (
-        <Skeleton variant="text" width={80} height={40} />
+        <Skeleton variant="text" width={80} height={48} sx={{ mt: 'auto' }} />
       ) : (
         <Typography
-          variant="h4"
+          variant="h3"
           sx={{
             fontWeight: 700,
+            fontSize: { xs: '2rem', md: '2.25rem' },
             color: cssVars.textPrimary,
             lineHeight: 1,
+            fontVariantNumeric: 'tabular-nums',
+            mt: 'auto',
           }}
         >
           {value ?? '—'}
@@ -96,7 +107,10 @@ export function StatCard({ title, value, subtitle, Icon, loading = false, accent
       )}
 
       {subtitle && (
-        <Typography variant="caption" sx={{ color: cssVars.textMuted, fontSize: '0.75rem' }}>
+        <Typography
+          variant="body2"
+          sx={{ color: cssVars.textMuted, fontSize: '0.8125rem', lineHeight: 1.5 }}
+        >
           {subtitle}
         </Typography>
       )}

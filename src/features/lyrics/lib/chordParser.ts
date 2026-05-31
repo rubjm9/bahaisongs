@@ -129,3 +129,112 @@ function isSectionHeader(line: string): boolean {
     /^(CORO|ESTROFA|INTRO|PUENTE|VERSO|BRIDGE|CHORUS|VERSE|PRE-CORO|PRECORO)\b/i.test(t)
   );
 }
+
+// ─── ChordPro inline parser ────────────────────────────────────────────────
+
+/**
+ * Detect whether a string uses ChordPro inline format ([Am]text).
+ * Used to auto-select the correct parser.
+ */
+export function isChordProFormat(text: string): boolean {
+  return /\[[A-G][^\]]{0,10}\]|\[(?:Do|Re|Mi|Fa|Sol|La|Si)[^\]]{0,10}\]/i.test(text);
+}
+
+/**
+ * Parse a single ChordPro line like "[G]Amazing [C]grace how [G]sweet"
+ * into a LyricBlock with a space-separated chord string and plain lyric text.
+ *
+ * ChordPro directives ({title: …}, {start_of_chorus}, etc.) are treated as
+ * section headers so the viewer can render them as such.
+ */
+function parseChordProLine(line: string): LyricBlock {
+  // Directives: {title: …}, {start_of_chorus}, {comment: …}, etc.
+  const directiveRe = /^\{([^:}]+)(?::\s*([^}]*))?\}/;
+  const directive = directiveRe.exec(line);
+  if (directive) {
+    const name = directive[1]?.trim().toLowerCase() ?? '';
+    const value = directive[2]?.trim() ?? '';
+    if (name === 'title' || name === 't') return { lyric: value };
+    if (name === 'comment' || name === 'c') return { lyric: value };
+    if (name.startsWith('start_of_') || name.startsWith('end_of_')) {
+      const sectionName = (name.startsWith('start_of_') ? name.slice(9) : name.slice(7)).toUpperCase();
+      return { lyric: value || sectionName };
+    }
+    // Other directives (subtitle, artist, key, tempo, etc.) — skip silently
+    return { lyric: '' };
+  }
+
+  if (!line.trim()) return { lyric: '' };
+
+  // Scan for [chord] tokens inline
+  const chords: string[] = [];
+  const lyricParts: string[] = [];
+
+  let rest = line;
+  while (rest.length > 0) {
+    const bracketIdx = rest.indexOf('[');
+    if (bracketIdx === -1) {
+      lyricParts.push(rest);
+      break;
+    }
+    // Text before the bracket
+    if (bracketIdx > 0) lyricParts.push(rest.slice(0, bracketIdx));
+
+    const closeIdx = rest.indexOf(']', bracketIdx);
+    if (closeIdx === -1) {
+      // Malformed — treat remaining as lyric
+      lyricParts.push(rest);
+      break;
+    }
+    chords.push(rest.slice(bracketIdx + 1, closeIdx));
+    rest = rest.slice(closeIdx + 1);
+  }
+
+  const lyric = lyricParts.join('').trimEnd();
+  const chordLine = chords.length > 0 ? chords.join(' ') : undefined;
+
+  return chordLine !== undefined ? { chords: chordLine, lyric } : { lyric };
+}
+
+/**
+ * Parse a ChordPro-formatted song into stanzas of LyricBlocks.
+ *
+ * Blank lines separate stanzas; directives are turned into section headers.
+ */
+export function parseChordProLyrics(text: string): LyricStanza[] {
+  if (!text?.trim()) return [];
+
+  const rawLines = text.split('\n');
+  const stanzas: LyricStanza[] = [];
+  let currentBlocks: LyricBlock[] = [];
+
+  for (const raw of rawLines) {
+    const line = raw.trimEnd();
+
+    if (!line.trim()) {
+      // Blank line — flush stanza
+      if (currentBlocks.length > 0) {
+        stanzas.push({ blocks: currentBlocks });
+        currentBlocks = [];
+      }
+      continue;
+    }
+
+    const block = parseChordProLine(line);
+
+    // Skip silent directives
+    if (block.lyric === '' && !block.chords) continue;
+
+    // Section headers split stanzas
+    if (!block.chords && isSectionHeader(block.lyric)) {
+      if (currentBlocks.length > 0) stanzas.push({ blocks: currentBlocks });
+      currentBlocks = [block];
+      continue;
+    }
+
+    currentBlocks.push(block);
+  }
+
+  if (currentBlocks.length > 0) stanzas.push({ blocks: currentBlocks });
+  return stanzas;
+}
