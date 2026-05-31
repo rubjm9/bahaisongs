@@ -1,0 +1,6 @@
+# Cloudflare Pages — required for @cloudflare/next-on-pages (Node.js APIs in the Worker).
+# See https://developers.cloudflare.com/pages/functions/wrangler-configuration/
+name = "bahaisongs"
+pages_build_output_dir = ".vercel/output/static"
+compatibility_date = "2024-09-23"
+compatibility_flags = ["nodejs_compat"]
