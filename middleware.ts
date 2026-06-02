@@ -3,7 +3,7 @@ import { type NextRequest, NextResponse } from 'next/server';
 import { createServerClient } from '@supabase/ssr';
 import { routing } from './src/shared/lib/i18n/routing';
 import { defaultLocale, locales, type Locale } from './src/shared/lib/i18n/config';
-import { isKnownTrackSlug, isReservedSegment } from './src/shared/lib/seo/track-slugs';
+import { isReservedSegment } from './src/shared/lib/seo/track-slugs';
 
 const intlMiddleware = createMiddleware(routing);
 
@@ -29,7 +29,7 @@ function maybeRewriteFlatTrackUrl(request: NextRequest): NextResponse | null {
   if (segments.length !== 1) return null;
 
   const slug = segments[0]!;
-  if (isReservedSegment(slug) || !isKnownTrackSlug(slug)) return null;
+  if (isReservedSegment(slug)) return null;
 
   const locale = localeFromRequest(request);
   const url = request.nextUrl.clone();
@@ -46,7 +46,7 @@ function maybeRedirectLegacySongPath(request: NextRequest): NextResponse | null 
   if (segments.length !== 2 || segments[0] !== 'song') return null;
 
   const slug = segments[1]!;
-  if (isReservedSegment(slug) || !isKnownTrackSlug(slug)) return null;
+  if (isReservedSegment(slug)) return null;
 
   const url = request.nextUrl.clone();
   url.pathname = `/${slug}`;
