@@ -9,6 +9,7 @@ import { PlayerBar } from '@/features/player/components/PlayerBar';
 import { WhatsAppShareButton } from './WhatsAppShareButton';
 import { cssVars, accent } from '@/shared/theme/tokens';
 import { useSidebarCollapsed } from '@/shared/hooks/useSidebarCollapsed';
+import { AuthPrefetch } from '@/features/auth/components/AuthPrefetch';
 import {
   DESKTOP_CONTENT_PADDING_BOTTOM,
   MOBILE_CONTENT_PADDING_BOTTOM,
@@ -33,7 +34,9 @@ export function AppShell({ children }: Props) {
   const sidebarWidth = collapsed ? SIDEBAR_WIDTH_COLLAPSED : SIDEBAR_WIDTH_EXPANDED;
 
   return (
-    <Box
+    <>
+      <AuthPrefetch />
+      <Box
       sx={{
         minHeight: '100dvh',
         display: 'flex',
@@ -101,5 +104,6 @@ export function AppShell({ children }: Props) {
       <PlayerBar />
       <WhatsAppShareButton />
     </Box>
+    </>
   );
 }

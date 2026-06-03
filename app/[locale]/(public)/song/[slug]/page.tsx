@@ -159,7 +159,7 @@ export default async function SongPage({ params }: { params: Params }) {
                   </Box>
                 </Box>
                 <LikeButton trackId={track.slug} trackSlug={track.slug} />
-                <AddToPlaylistButton trackId={track.slug} />
+                <AddToPlaylistButton trackSlug={track.slug} />
               </Stack>
             </GlassPanel>
           ) : (
@@ -179,7 +179,7 @@ export default async function SongPage({ params }: { params: Params }) {
                   </Box>
                 </Box>
                 <LikeButton trackId={track.slug} trackSlug={track.slug} />
-                <AddToPlaylistButton trackId={track.slug} />
+                <AddToPlaylistButton trackSlug={track.slug} />
               </Stack>
             </GlassPanel>
           )}

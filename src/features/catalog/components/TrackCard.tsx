@@ -3,7 +3,7 @@ import { Box, Stack, Chip } from '@mui/material';
 import { Music, BookOpen } from 'lucide-react';
 import { TrackPlaceholder } from './TrackPlaceholder';
 import { PlayButton } from '@/features/player/components/PlayButton';
-import { AddToPlaylistButton } from '@/features/playlists/components/AddToPlaylistButton';
+import { TrackAddToPlaylistSlot } from '@/features/playlists/components/TrackAddToPlaylistSlot';
 import { accent, cssVars, radii } from '@/shared/theme/tokens';
 import type { Locale } from '@/shared/lib/i18n/config';
 import { trackPath } from '@/shared/lib/seo/paths';
@@ -119,13 +119,11 @@ export function TrackCard({ track, locale: _locale, queue, queueIndex }: Props) 
                   <BookOpen size={12} />
                 </Box>
               ) : null}
-              <Box
+              <TrackAddToPlaylistSlot
+                trackSlug={track.slug}
                 className="bs-card-add-playlist"
                 sx={{ opacity: 0, transition: 'opacity 160ms', ml: 'auto' }}
-                onClick={(e) => e.preventDefault()}
-              >
-                <AddToPlaylistButton trackId={track.slug} />
-              </Box>
+              />
             </Stack>
           </Box>
         </Stack>

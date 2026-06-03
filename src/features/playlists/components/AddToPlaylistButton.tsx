@@ -22,30 +22,14 @@ import { CreatePlaylistModal } from './CreatePlaylistModal';
 import { useUser } from '@/features/auth/hooks/useUser';
 import { useLoginPrompt } from '@/features/auth/hooks/useLoginPrompt';
 import { supabaseEnabled } from '@/shared/lib/supabase/env';
+import { addTrackToPlaylist } from '../lib/playlist-tracks';
 
 interface Props {
-  trackId: string;
+  /** Track slug from the catalogue (resolved to tracks.id before insert). */
+  trackSlug: string;
 }
 
-async function addTrackToPlaylist(playlistId: string, trackId: string): Promise<void> {
-  if (!supabaseEnabled) return;
-  const { createClient } = await import('@/shared/lib/supabase/client');
-  const supabase = createClient();
-  const { data: existing } = await supabase
-    .from('playlist_tracks')
-    .select('position')
-    .eq('playlist_id' as never, playlistId)
-    .order('position' as never, { ascending: false })
-    .limit(1);
-  const nextPos = (existing as unknown as { position: number }[] | null)?.[0]?.position ?? -1;
-  await supabase.from('playlist_tracks').upsert({
-    playlist_id: playlistId,
-    track_id: trackId,
-    position: nextPos + 1,
-  } as never);
-}
-
-export function AddToPlaylistButton({ trackId }: Props) {
+export function AddToPlaylistButton({ trackSlug }: Props) {
   const t = useTranslations('playlist');
   const { user } = useUser();
   const openLogin = useLoginPrompt((s) => s.open);
@@ -56,9 +40,24 @@ export function AddToPlaylistButton({ trackId }: Props) {
 
   async function handleAddToPlaylist(playlistId: string) {
     setAdding(playlistId);
-    await addTrackToPlaylist(playlistId, trackId);
+
+    if (!supabaseEnabled) {
+      setAdding(null);
+      return;
+    }
+
+    const { createClient } = await import('@/shared/lib/supabase/client');
+    const supabase = createClient();
+    const result = await addTrackToPlaylist(supabase, playlistId, trackSlug);
+
     setAdding(null);
+    if (result.ok) setAnchorEl(null);
+  }
+
+  function openCreatePlaylistModal() {
     setAnchorEl(null);
+    (document.activeElement as HTMLElement | null)?.blur();
+    setCreateOpen(true);
   }
 
   if (!user) {
@@ -184,10 +183,7 @@ export function AddToPlaylistButton({ trackId }: Props) {
               {playlists.length > 0 ? <Divider sx={{ my: 0.5 }} /> : null}
               <ListItem disablePadding>
                 <ListItemButton
-                  onClick={() => {
-                    setAnchorEl(null);
-                    setCreateOpen(true);
-                  }}
+                  onClick={openCreatePlaylistModal}
                   sx={{ borderRadius: `${radii.sm}px`, color: cssVars.accentElectric }}
                 >
                   <PlusCircle size={14} style={{ marginRight: 8 }} />
@@ -202,7 +198,11 @@ export function AddToPlaylistButton({ trackId }: Props) {
         </Box>
       </Popover>
 
-      <CreatePlaylistModal open={createOpen} onClose={() => setCreateOpen(false)} />
+      <CreatePlaylistModal
+        open={createOpen}
+        onClose={() => setCreateOpen(false)}
+        trackSlug={trackSlug}
+      />
     </>
   );
 }

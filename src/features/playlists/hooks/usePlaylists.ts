@@ -46,6 +46,7 @@ export function usePlaylists() {
       return (data as unknown as Record<string, unknown>[]).map(toPlaylist);
     },
     enabled: !userLoading && !!user,
+    staleTime: 60_000,
   });
 
   const { mutateAsync: createPlaylist } = useMutation({
@@ -100,7 +101,7 @@ export function usePlaylists() {
       const supabase = createClient();
       await supabase
         .from('playlists')
-        .update({ visibility, updated_at: new Date().toISOString() } as never)
+        .update({ visibility, updated_at: Date.now().toISOString() } as never)
         .eq('id' as never, playlistId)
         .eq('owner_id' as never, user.id);
     },

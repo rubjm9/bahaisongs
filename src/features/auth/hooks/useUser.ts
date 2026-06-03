@@ -1,12 +1,19 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
 import type { User } from '@supabase/supabase-js';
 import type { getSupabaseBrowserClient } from '@/shared/lib/supabase/client';
 import { supabaseEnabled } from '@/shared/lib/supabase/env';
 import type { Profile } from '@/entities/user';
 
+export const AUTH_QUERY_KEY = ['auth'] as const;
+
 type SupabaseAny = ReturnType<typeof getSupabaseBrowserClient>;
+
+interface AuthState {
+  user: User | null;
+  profile: Profile | null;
+}
 
 interface UseUserResult {
   user: User | null;
@@ -17,7 +24,6 @@ interface UseUserResult {
 async function loadProfile(
   supabase: SupabaseAny,
   userId: string,
-  active: { current: boolean },
 ): Promise<Profile | null> {
   const { data } = await supabase
     .from('profiles')
@@ -25,7 +31,7 @@ async function loadProfile(
     .eq('id' as never, userId)
     .single();
 
-  if (!active.current || !data) return null;
+  if (!data) return null;
 
   const row = data as unknown as {
     id: string;
@@ -45,65 +51,35 @@ async function loadProfile(
   return p;
 }
 
+export async function fetchAuthState(): Promise<AuthState> {
+  if (!supabaseEnabled) {
+    return { user: null, profile: null };
+  }
+
+  const { createClient } = await import('@/shared/lib/supabase/client');
+  const supabase = createClient();
+  const {
+    data: { session },
+  } = await supabase.auth.getSession();
+  const user = session?.user ?? null;
+  const profile = user ? await loadProfile(supabase, user.id) : null;
+
+  return { user, profile };
+}
+
 export function useUser(): UseUserResult {
-  const [user, setUser] = useState<User | null>(null);
-  const [profile, setProfile] = useState<Profile | null>(null);
-  const [loading, setLoading] = useState(supabaseEnabled);
+  const { data, isPending } = useQuery({
+    queryKey: AUTH_QUERY_KEY,
+    queryFn: fetchAuthState,
+    enabled: supabaseEnabled,
+    staleTime: 5 * 60_000,
+  });
 
-  useEffect(() => {
-    if (!supabaseEnabled) return;
+  const loading = supabaseEnabled && isPending;
 
-    const activeRef = { current: true };
-
-    async function init(): Promise<() => void> {
-      const { createClient } = await import('@/shared/lib/supabase/client');
-      const supabase = createClient();
-
-      const {
-        data: { session },
-      } = await supabase.auth.getSession();
-
-      let unsubscribe: (() => void) | null = null;
-
-      if (activeRef.current) {
-        setUser(session?.user ?? null);
-        if (session?.user) {
-          const p = await loadProfile(supabase, session.user.id, activeRef);
-          if (p && activeRef.current) setProfile(p);
-        }
-        setLoading(false);
-
-        const {
-          data: { subscription },
-        } = supabase.auth.onAuthStateChange((_event, sess) => {
-          if (!activeRef.current) return;
-          setUser(sess?.user ?? null);
-          if (sess?.user) {
-            void loadProfile(supabase, sess.user.id, activeRef).then((p) => {
-              if (p && activeRef.current) setProfile(p);
-            });
-          } else {
-            setProfile(null);
-          }
-          setLoading(false);
-        });
-
-        unsubscribe = () => subscription.unsubscribe();
-      }
-
-      return () => unsubscribe?.();
-    }
-
-    let cleanup: (() => void) | undefined;
-    void init().then((fn) => {
-      cleanup = fn;
-    });
-
-    return () => {
-      activeRef.current = false;
-      cleanup?.();
-    };
-  }, []);
-
-  return { user, profile, loading };
+  return {
+    user: data?.user ?? null,
+    profile: data?.profile ?? null,
+    loading,
+  };
 }

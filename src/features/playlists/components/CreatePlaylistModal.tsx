@@ -21,13 +21,17 @@ import { X } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { cssVars, radii } from '@/shared/theme/tokens';
 import { usePlaylists } from '../hooks/usePlaylists';
+import { supabaseEnabled } from '@/shared/lib/supabase/env';
+import { addTrackToPlaylist } from '../lib/playlist-tracks';
 
 interface Props {
   open: boolean;
   onClose: () => void;
+  /** When set, the new playlist receives this track after creation. */
+  trackSlug?: string;
 }
 
-export function CreatePlaylistModal({ open, onClose }: Props) {
+export function CreatePlaylistModal({ open, onClose, trackSlug }: Props) {
   const t = useTranslations('playlist');
   const { createPlaylist } = usePlaylists();
   const [title, setTitle] = useState('');
@@ -37,7 +41,14 @@ export function CreatePlaylistModal({ open, onClose }: Props) {
   async function handleSubmit() {
     if (!title.trim()) return;
     setLoading(true);
-    await createPlaylist({ title: title.trim(), visibility });
+    const playlist = await createPlaylist({ title: title.trim(), visibility });
+
+    if (playlist && trackSlug && supabaseEnabled) {
+      const { createClient } = await import('@/shared/lib/supabase/client');
+      const supabase = createClient();
+      await addTrackToPlaylist(supabase, playlist.id, trackSlug);
+    }
+
     setLoading(false);
     setTitle('');
     setVisibility('private');
@@ -50,6 +61,7 @@ export function CreatePlaylistModal({ open, onClose }: Props) {
       onClose={onClose}
       maxWidth="xs"
       fullWidth
+      disableRestoreFocus
       PaperProps={{
         sx: {
           background: cssVars.bgElevated,
