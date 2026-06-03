@@ -11,6 +11,14 @@ export const accent = {
   indigo: '#6366F1',
 } as const;
 
+/** Extended palette for decorative placeholders — do not use for text or interactive states. */
+export const accentExtended = {
+  magenta: '#EC4899',
+  teal: '#0D9488',
+  amber: '#F59E0B',
+  violet: '#8B5CF6',
+} as const;
+
 export type ThemeMode = 'light' | 'dark';
 
 export interface SemanticPalette {

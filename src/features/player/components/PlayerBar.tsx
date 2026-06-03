@@ -23,7 +23,7 @@ import type { Locale } from '@/shared/lib/i18n/config';
 import { accent, cssVars, radii } from '@/shared/theme/tokens';
 import { GradientText } from '@/shared/ui/GradientText';
 import { mergeSx } from '@/shared/ui/sx';
-import { MobileNavLinks } from '@/shared/ui/MobileNav';
+import { MOBILE_NAV_HEIGHT } from '@/shared/ui/shellLayout';
 import { LikeButton } from '@/features/favorites/components/LikeButton';
 import { usePlayerStore } from '../stores/playerStore';
 import { useQueueStore, selectCurrentTrack } from '../stores/queueStore';
@@ -100,7 +100,7 @@ export function PlayerBar() {
           left: { xs: 8, md: 'calc(var(--bs-sidebar-width, 240px) + 16px)' },
           right: { xs: 8, md: 16 },
           bottom: {
-            xs: 'calc(12px + env(safe-area-inset-bottom, 0px))',
+            xs: `calc(${MOBILE_NAV_HEIGHT} + 8px + env(safe-area-inset-bottom, 0px))`,
             md: 16,
           },
           zIndex: 8,
@@ -406,7 +406,7 @@ export function PlayerBar() {
             />
           </Stack>
 
-          {/* Móvil — anterior + play + siguiente */}
+          {/* Móvil — aleatorio + anterior + play + siguiente + repetir */}
           <Stack
             direction="row"
             spacing={0.25}
@@ -417,6 +417,15 @@ export function PlayerBar() {
               alignItems: 'center',
             }}
           >
+            <PlayerControl
+              aria-label="Aleatorio"
+              active={shuffleOn}
+              onClick={onShuffleToggle}
+              disabled={!hasTrack}
+              sx={{ width: 28, height: 28 }}
+            >
+              <Shuffle size={14} />
+            </PlayerControl>
             <PlayerControl
               aria-label="Anterior"
               onClick={() => actions.prev()}
@@ -453,19 +462,18 @@ export function PlayerBar() {
             >
               <SkipForward size={15} />
             </PlayerControl>
+            <PlayerControl
+              aria-label="Repetir"
+              active={repeat !== 'off'}
+              onClick={() => usePlayerStore.getState().cycleRepeat()}
+              disabled={!hasTrack}
+              sx={{ width: 28, height: 28 }}
+            >
+              {repeat === 'one' ? <Repeat1 size={14} /> : <Repeat size={14} />}
+            </PlayerControl>
           </Stack>
         </Box>
 
-        <Box
-          sx={{
-            display: { xs: 'block', md: 'none' },
-            borderTop: `1px solid ${cssVars.borderSubtle}`,
-            mt: 1,
-            pt: 1,
-          }}
-        >
-          <MobileNavLinks />
-        </Box>
       </Box>
     </Box>
     </>

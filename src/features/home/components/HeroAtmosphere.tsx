@@ -32,11 +32,11 @@ export function HeroAtmosphere({
 }: Props) {
   return (
     <Stack
-      spacing={4}
+      spacing={{ xs: 2.5, md: 4 }}
       sx={{
         maxWidth: 880,
         mx: 'auto',
-        paddingY: { xs: 6, md: 10 },
+        paddingY: { xs: 3, md: 8 },
         position: 'relative',
       }}
     >
@@ -94,7 +94,7 @@ export function HeroAtmosphere({
         transition={{ delay: 0.2, duration: 0.7 }}
         variant="h1"
         sx={{
-          fontSize: 'clamp(2.2rem, 3.5vw + 1rem, 4.5rem)',
+          fontSize: 'clamp(1.9rem, 5vw + 0.5rem, 4.5rem)',
           lineHeight: 1.05,
           fontWeight: 700,
           m: 0,

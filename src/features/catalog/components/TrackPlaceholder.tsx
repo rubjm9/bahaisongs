@@ -1,5 +1,5 @@
 import { Box } from '@mui/material';
-import { accent, cssVars, radii } from '@/shared/theme/tokens';
+import { accent, accentExtended, cssVars, radii } from '@/shared/theme/tokens';
 import { mergeSx } from '@/shared/ui/sx';
 import type { SxProps, Theme } from '@mui/material/styles';
 
@@ -10,19 +10,29 @@ interface Props {
   sx?: SxProps<Theme>;
 }
 
+// 8 gradient pairs: [from-color, to-color, angle]
+const GRADIENT_PALETTES: [string, string, number][] = [
+  [accent.indigo, accent.cyan, 135],
+  [accent.electric, accent.glow, 150],
+  [accentExtended.magenta, accent.indigo, 120],
+  [accent.indigo, accentExtended.violet, 160],
+  [accentExtended.teal, accent.electric, 145],
+  [accent.cyan, accentExtended.teal, 130],
+  [accentExtended.amber, accent.glow, 140],
+  [accentExtended.violet, accentExtended.magenta, 155],
+];
+
 /**
  * Typographic placeholder used in place of cover art. Per the design system
  * rule, no screen should depend on imagery to feel premium — we derive a
- * one-letter monogram from the title over the aurora gradient.
+ * one-letter monogram from the title over a deterministic gradient.
  *
- * The variation comes from a deterministic hash of the slug-ish title, which
- * picks one of four gradient rotations so a list of placeholders doesn't look
- * uniform.
+ * 8 palettes via hash so a list of placeholders has clear visual variety.
  */
 export function TrackPlaceholder({ title, size = 48, sx }: Props) {
   const initial = title.trim().charAt(0).toUpperCase() || '·';
   const hash = simpleHash(title);
-  const rotation = (hash % 4) * 30 + 120; // 120, 150, 180, 210
+  const [from, to, angle] = GRADIENT_PALETTES[hash % 8]!;
   const isNumeric = typeof size === 'number';
 
   return (
@@ -36,13 +46,13 @@ export function TrackPlaceholder({ title, size = 48, sx }: Props) {
           borderRadius: `${radii.md}px`,
           display: 'grid',
           placeItems: 'center',
-          background: `linear-gradient(${rotation}deg, ${accent.indigo}55 0%, ${accent.electric}55 50%, ${accent.cyan}55 100%)`,
+          background: `linear-gradient(${angle}deg, ${from}55 0%, ${to}55 100%)`,
           color: cssVars.textPrimary,
           fontWeight: 700,
           fontSize: isNumeric ? `${Math.round(size * 0.42)}px` : '28%',
           letterSpacing: '0.04em',
           border: `1px solid ${cssVars.borderSubtle}`,
-          textShadow: `0 0 18px ${accent.cyan}55`,
+          textShadow: `0 0 18px ${to}55`,
         },
         sx,
       )}

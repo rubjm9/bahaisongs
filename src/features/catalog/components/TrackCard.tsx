@@ -1,9 +1,12 @@
+'use client';
+
 import Link from 'next/link';
 import { Box, Stack, Chip } from '@mui/material';
 import { Music, BookOpen } from 'lucide-react';
 import { TrackPlaceholder } from './TrackPlaceholder';
 import { PlayButton } from '@/features/player/components/PlayButton';
 import { TrackAddToPlaylistSlot } from '@/features/playlists/components/TrackAddToPlaylistSlot';
+import { useIsCurrentTrack } from '@/features/player/hooks/useIsCurrentTrack';
 import { accent, cssVars, radii } from '@/shared/theme/tokens';
 import type { Locale } from '@/shared/lib/i18n/config';
 import { trackPath } from '@/shared/lib/seo/paths';
@@ -21,6 +24,7 @@ interface Props {
 
 export function TrackCard({ track, locale: _locale, queue, queueIndex }: Props) {
   const href = trackPath(track.slug);
+  const { isCurrent } = useIsCurrentTrack(track.slug);
   return (
     <Box
       sx={{
@@ -36,17 +40,19 @@ export function TrackCard({ track, locale: _locale, queue, queueIndex }: Props) 
           sx={{
             padding: 1.5,
             borderRadius: `${radii.lg}px`,
-            background: cssVars.bgGlass,
+            background: isCurrent ? cssVars.navActiveBg : cssVars.bgGlass,
             backdropFilter: 'blur(16px)',
             WebkitBackdropFilter: 'blur(16px)',
-            border: `1px solid ${cssVars.borderSubtle}`,
+            border: `1px solid ${isCurrent ? accent.cyan : cssVars.borderSubtle}`,
             alignItems: 'center',
             minHeight: 88,
-            transition: 'transform 200ms, border-color 200ms, box-shadow 200ms',
+            transition: 'transform 200ms, border-color 200ms, box-shadow 200ms, background-color 200ms',
             '&:hover': {
               transform: 'translateY(-2px)',
-              borderColor: cssVars.borderStrong,
-              boxShadow: '0 16px 32px rgba(0,0,0,0.32)',
+              borderColor: isCurrent ? accent.cyan : cssVars.borderStrong,
+              boxShadow: isCurrent
+                ? `0 16px 32px rgba(79,209,255,0.18)`
+                : '0 16px 32px rgba(0,0,0,0.32)',
             },
           }}
         >
@@ -129,7 +135,7 @@ export function TrackCard({ track, locale: _locale, queue, queueIndex }: Props) 
         </Stack>
       </Link>
 
-      {/* Play overlay on artwork — desktop hover only */}
+      {/* Play overlay on artwork — always visible on mobile, hover on desktop */}
       <Box
         className="bs-track-card-play"
         sx={{
@@ -139,12 +145,12 @@ export function TrackCard({ track, locale: _locale, queue, queueIndex }: Props) 
           transform: 'translateY(-50%)',
           width: 68,
           height: 68,
-          display: { xs: 'none', md: 'flex' },
+          display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
           borderRadius: `${radii.md}px`,
           background: 'rgba(0,0,0,0.42)',
-          opacity: 0,
+          opacity: { xs: 1, md: 0 },
           transition: 'opacity 180ms',
           zIndex: 2,
         }}

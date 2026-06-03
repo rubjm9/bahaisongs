@@ -6,6 +6,7 @@ import { useTranslations } from 'next-intl';
 import { Box, IconButton, Typography } from '@mui/material';
 import { Share2 } from 'lucide-react';
 import { accent, cssVars } from '@/shared/theme/tokens';
+import { MOBILE_NAV_HEIGHT, MOBILE_PLAYER_HEIGHT } from './shellLayout';
 
 function ShareSpeechBubble({ children }: { children: ReactNode }) {
   return (
@@ -105,7 +106,10 @@ export function ShareButton() {
       sx={{
         position: 'fixed',
         right: { xs: 12, md: 20 },
-        bottom: { xs: 188, md: 132 },
+        bottom: {
+          xs: `calc(${MOBILE_NAV_HEIGHT} + ${MOBILE_PLAYER_HEIGHT} + 16px + env(safe-area-inset-bottom, 0px))`,
+          md: 132,
+        },
         zIndex: 7,
         display: 'flex',
         flexDirection: 'row',

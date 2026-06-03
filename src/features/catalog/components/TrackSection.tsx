@@ -102,7 +102,7 @@ export function TrackSection({
           '& > *': {
             scrollSnapAlign: { xs: 'start' },
             flexShrink: { xs: 0 },
-            width: { xs: 168, md: 'auto' },
+            width: { xs: 220, md: 'auto' },
           },
         }}
       >
