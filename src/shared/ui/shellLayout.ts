@@ -8,7 +8,7 @@ export const SIDEBAR_COLLAPSED_STORAGE_KEY = 'bahaisongs:sidebar-collapsed';
 export const MOBILE_NAV_HEIGHT = '56px';
 
 /** Mobile player bar height (floats above the nav bar when a track is playing). */
-export const MOBILE_PLAYER_HEIGHT = '76px';
+export const MOBILE_PLAYER_HEIGHT = '100px';
 
 /** Fixed bottom chrome constants. */
 export const SHELL_LAYOUT_VARS = {

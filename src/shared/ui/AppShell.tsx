@@ -7,7 +7,7 @@ import { TopBar } from './TopBar';
 import { AtmosphereBackground } from './AtmosphereBackground';
 import { PlayerBar } from '@/features/player/components/PlayerBar';
 import { MobileBottomNav } from './MobileBottomNav';
-import { ShareButton } from './ShareButton';
+import { WhatsAppShareButton } from './WhatsAppShareButton';
 import { cssVars, accent } from '@/shared/theme/tokens';
 import { useSidebarCollapsed } from '@/shared/hooks/useSidebarCollapsed';
 import { AuthPrefetch } from '@/features/auth/components/AuthPrefetch';
@@ -104,7 +104,7 @@ export function AppShell({ children }: Props) {
 
       <PlayerBar />
       <MobileBottomNav />
-      <ShareButton />
+      <WhatsAppShareButton />
     </Box>
     </>
   );

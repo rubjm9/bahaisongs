@@ -47,7 +47,7 @@ export function TopBar() {
           </Link>
           <SearchPalette />
         </Stack>
-        <Stack direction="row" spacing={1.5} sx={{ alignItems: 'center' }}>
+        <Stack direction="row" spacing={1} sx={{ alignItems: 'center', flexShrink: 0 }}>
           <ThemeSwitcher />
           <LocaleSwitcher />
           <AuthMenu />

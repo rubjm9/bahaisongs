@@ -406,7 +406,7 @@ export function PlayerBar() {
             />
           </Stack>
 
-          {/* Móvil — aleatorio + anterior + play + siguiente + repetir */}
+          {/* Móvil — anterior + play + siguiente */}
           <Stack
             direction="row"
             spacing={0.25}
@@ -417,15 +417,6 @@ export function PlayerBar() {
               alignItems: 'center',
             }}
           >
-            <PlayerControl
-              aria-label="Aleatorio"
-              active={shuffleOn}
-              onClick={onShuffleToggle}
-              disabled={!hasTrack}
-              sx={{ width: 28, height: 28 }}
-            >
-              <Shuffle size={14} />
-            </PlayerControl>
             <PlayerControl
               aria-label="Anterior"
               onClick={() => actions.prev()}
@@ -461,15 +452,6 @@ export function PlayerBar() {
               sx={{ width: 32, height: 32 }}
             >
               <SkipForward size={15} />
-            </PlayerControl>
-            <PlayerControl
-              aria-label="Repetir"
-              active={repeat !== 'off'}
-              onClick={() => usePlayerStore.getState().cycleRepeat()}
-              disabled={!hasTrack}
-              sx={{ width: 28, height: 28 }}
-            >
-              {repeat === 'one' ? <Repeat1 size={14} /> : <Repeat size={14} />}
             </PlayerControl>
           </Stack>
         </Box>
