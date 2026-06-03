@@ -144,12 +144,21 @@
     "visibility": "Visibility",
     "public": "Public",
     "private": "Private",
+    "unlisted": "Unlisted",
     "save": "Save",
     "addTrack": "Add to playlist",
     "removeTrack": "Remove",
     "emptyFavorites": "You have no favorites yet",
     "emptyPlaylists": "You have no playlists yet",
-    "newPlaylist": "New playlist"
+    "newPlaylist": "New playlist",
+    "myPlaylists": "My playlists",
+    "signIn": "Sign in",
+    "signInToAddToPlaylist": "Sign in to add to playlists",
+    "sharePlaylist": "Share",
+    "linkCopied": "Link copied!",
+    "trackCount": "{count, plural, =0 {No songs} =1 {1 song} other {# songs}}",
+    "changeVisibilityToShare": "Make it public to share",
+    "makePublic": "Make public"
   },
   "admin": {
     "nav": {

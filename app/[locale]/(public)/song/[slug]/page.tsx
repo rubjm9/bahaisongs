@@ -11,6 +11,7 @@ import { LyricsViewer } from '@/features/lyrics/components/LyricsViewer';
 import { categoryLabel, categoryKindColor } from '@/features/catalog/lib/category-labels';
 import { PlayButton } from '@/features/player/components/PlayButton';
 import { LikeButton } from '@/features/favorites/components/LikeButton';
+import { AddToPlaylistButton } from '@/features/playlists/components/AddToPlaylistButton';
 import { toPlayable } from '@/features/player/lib/playable';
 import { getAllTracks, getTrackBySlug, getTrackNeighbours } from '@/server/data/catalog';
 import { accent, cssVars, radii } from '@/shared/theme/tokens';
@@ -158,6 +159,7 @@ export default async function SongPage({ params }: { params: Params }) {
                   </Box>
                 </Box>
                 <LikeButton trackId={track.slug} trackSlug={track.slug} />
+                <AddToPlaylistButton trackId={track.slug} />
               </Stack>
             </GlassPanel>
           ) : (
@@ -177,6 +179,7 @@ export default async function SongPage({ params }: { params: Params }) {
                   </Box>
                 </Box>
                 <LikeButton trackId={track.slug} trackSlug={track.slug} />
+                <AddToPlaylistButton trackId={track.slug} />
               </Stack>
             </GlassPanel>
           )}

@@ -1,28 +1,36 @@
-import { setRequestLocale } from 'next-intl/server';
+import { setRequestLocale, getTranslations } from 'next-intl/server';
 import { Stack, Typography, Box, Chip } from '@mui/material';
 import { GradientText } from '@/shared/ui/GradientText';
 import { GlassPanel } from '@/shared/ui/GlassPanel';
 import { accent, cssVars } from '@/shared/theme/tokens';
 import { PlaylistEditorWrapper } from '@/features/playlists/components/PlaylistEditorWrapper';
+import { PlaylistShareButton } from '@/features/playlists/components/PlaylistShareButton';
 import { supabaseEnabled } from '@/shared/lib/supabase/env';
 import type { Playlist } from '@/entities/playlist';
 
 type Params = Promise<{ locale: string; slug: string }>;
 
-async function fetchPlaylist(slug: string): Promise<Playlist | null> {
+async function fetchPlaylist(slug: string): Promise<Playlist & { trackCount: number } | null> {
   if (!supabaseEnabled) return null;
   try {
     const { getSupabaseServerClient } = await import('@/shared/lib/supabase/server');
     const supabase = await getSupabaseServerClient();
-    const { data } = await supabase.from('playlists').select('*').eq('slug', slug).single();
+    const { data } = await supabase
+      .from('playlists')
+      .select('*, playlist_tracks(count)')
+      .eq('slug', slug)
+      .single();
     if (!data) return null;
     const row = data as Record<string, unknown>;
-    const pl: Playlist = {
+    const countArr = row.playlist_tracks as { count: number }[] | null;
+    const trackCount = countArr?.[0]?.count ?? 0;
+    const pl: Playlist & { trackCount: number } = {
       id: row.id as string,
       slug: row.slug as string,
       title: row.title as string,
       visibility: (row.visibility as 'public' | 'private' | 'unlisted') ?? 'private',
       tracks: [],
+      trackCount,
     };
     if (row.description) pl.description = row.description as string;
     if (row.owner_id) pl.ownerId = row.owner_id as string;
@@ -50,6 +58,7 @@ async function getCurrentUserId(): Promise<string | null> {
 export default async function PlaylistPage({ params }: { params: Params }) {
   const { locale, slug } = await params;
   setRequestLocale(locale);
+  const t = await getTranslations('playlist');
   const [playlist, userId] = await Promise.all([fetchPlaylist(slug), getCurrentUserId()]);
 
   if (!playlist) {
@@ -89,9 +98,9 @@ export default async function PlaylistPage({ params }: { params: Params }) {
             {playlist.description}
           </Typography>
         ) : null}
-        <Box sx={{ mt: 1.5 }}>
+        <Stack direction="row" spacing={1.5} sx={{ mt: 2, alignItems: 'center', flexWrap: 'wrap', gap: 1 }}>
           <Chip
-            label={playlist.visibility}
+            label={playlist.visibility === 'public' ? t('public') : playlist.visibility === 'unlisted' ? t('unlisted') : t('private')}
             size="small"
             sx={{
               fontSize: '0.7rem',
@@ -102,7 +111,23 @@ export default async function PlaylistPage({ params }: { params: Params }) {
               border: `1px solid ${cssVars.borderSubtle}`,
             }}
           />
-        </Box>
+          <Chip
+            label={t('trackCount', { count: playlist.trackCount })}
+            size="small"
+            sx={{
+              fontSize: '0.7rem',
+              fontWeight: 600,
+              color: cssVars.textMuted,
+              background: cssVars.hoverSubtle,
+              border: `1px solid ${cssVars.borderSubtle}`,
+            }}
+          />
+          <PlaylistShareButton
+            playlistId={playlist.id}
+            visibility={playlist.visibility}
+            isOwner={isOwner}
+          />
+        </Stack>
       </Box>
 
       <PlaylistEditorWrapper playlistId={playlist.id} isOwner={isOwner} />

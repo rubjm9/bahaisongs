@@ -8,12 +8,20 @@ import { GlowButton } from '@/shared/ui/GlowButton';
 import { cssVars } from '@/shared/theme/tokens';
 import { supabaseEnabled } from '@/shared/lib/supabase/env';
 import { useUser } from '../hooks/useUser';
+import { useLoginPrompt } from '../hooks/useLoginPrompt';
 import { UserAvatar } from './UserAvatar';
 import { LoginModal } from './LoginModal';
 
 export function AuthMenu() {
   const t = useTranslations('auth');
   const [loginOpen, setLoginOpen] = useState(false);
+  const { isOpen: promptOpen, close: closePrompt } = useLoginPrompt();
+
+  const isOpen = loginOpen || promptOpen;
+  const handleClose = () => {
+    setLoginOpen(false);
+    closePrompt();
+  };
 
   if (!supabaseEnabled) {
     return (
@@ -30,7 +38,7 @@ export function AuthMenu() {
   return (
     <>
       <AuthMenuInner onOpenLogin={() => setLoginOpen(true)} />
-      <LoginModal open={loginOpen} onClose={() => setLoginOpen(false)} />
+      <LoginModal open={isOpen} onClose={handleClose} />
     </>
   );
 }

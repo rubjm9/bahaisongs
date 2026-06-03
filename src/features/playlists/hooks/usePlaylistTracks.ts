@@ -9,6 +9,13 @@ interface PlaylistTrackRow {
   position: number;
   added_at: string;
   track_id: string;
+  track: {
+    id: string;
+    slug: string;
+    title: string;
+    language: string;
+    primary_artist: { name: string } | null;
+  } | null;
 }
 
 export function usePlaylistTracks(playlistId: string | null) {
@@ -24,23 +31,33 @@ export function usePlaylistTracks(playlistId: string | null) {
       const supabase = createClient();
       const { data, error } = await supabase
         .from('playlist_tracks')
-        .select('*')
+        .select(
+          `position, added_at, track_id,
+           track:tracks (
+             id, slug, title, language,
+             primary_artist:artists!primary_artist_id (name)
+           )`,
+        )
         .eq('playlist_id' as never, playlistId)
         .order('position' as never, { ascending: true });
       if (error) return [];
       const rows = data as unknown as PlaylistTrackRow[];
-      return rows.map((row) => ({
-        position: row.position,
-        addedAt: row.added_at,
-        track: {
-          id: row.track_id,
-          slug: row.track_id,
-          title: '',
-          language: 'es',
-          hasChords: false,
-          hasAudio: false,
-        },
-      }));
+      return rows.map((row) => {
+        const artistName = row.track?.primary_artist?.name;
+        return {
+          position: row.position,
+          addedAt: row.added_at,
+          track: {
+            id: row.track?.id ?? row.track_id,
+            slug: row.track?.slug ?? row.track_id,
+            title: row.track?.title ?? '',
+            language: row.track?.language ?? 'es',
+            ...(artistName ? { primaryArtistName: artistName } : {}),
+            hasChords: false,
+            hasAudio: false,
+          },
+        };
+      });
     },
     enabled: !!playlistId,
   });

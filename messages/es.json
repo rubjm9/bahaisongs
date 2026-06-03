@@ -144,12 +144,21 @@
     "visibility": "Visibilidad",
     "public": "Pública",
     "private": "Privada",
+    "unlisted": "No listada",
     "save": "Guardar",
     "addTrack": "Añadir a playlist",
     "removeTrack": "Eliminar",
     "emptyFavorites": "Todavía no tienes favoritos",
     "emptyPlaylists": "Todavía no tienes playlists",
-    "newPlaylist": "Nueva playlist"
+    "newPlaylist": "Nueva playlist",
+    "myPlaylists": "Mis playlists",
+    "signIn": "Entrar",
+    "signInToAddToPlaylist": "Inicia sesión para añadir a playlists",
+    "sharePlaylist": "Compartir",
+    "linkCopied": "¡Enlace copiado!",
+    "trackCount": "{count, plural, =0 {Sin canciones} =1 {1 canción} other {# canciones}}",
+    "changeVisibilityToShare": "Hazla pública para compartir",
+    "makePublic": "Hacer pública"
   },
   "admin": {
     "nav": {

@@ -3,6 +3,7 @@ import { Box, Stack, Chip } from '@mui/material';
 import { Music, BookOpen } from 'lucide-react';
 import { TrackPlaceholder } from './TrackPlaceholder';
 import { PlayButton } from '@/features/player/components/PlayButton';
+import { AddToPlaylistButton } from '@/features/playlists/components/AddToPlaylistButton';
 import { accent, cssVars, radii } from '@/shared/theme/tokens';
 import type { Locale } from '@/shared/lib/i18n/config';
 import { trackPath } from '@/shared/lib/seo/paths';
@@ -47,6 +48,7 @@ export function TrackRow({ track, locale: _locale, queue, queueIndex, position }
               borderColor: cssVars.borderSubtle,
             },
             '&:hover .bs-row-play': { opacity: 1 },
+            '&:hover .bs-row-add-playlist': { opacity: 1 },
           }}
         >
           {position !== undefined ? (
@@ -137,6 +139,13 @@ export function TrackRow({ track, locale: _locale, queue, queueIndex, position }
                 <BookOpen size={14} />
               </Box>
             ) : null}
+            <Box
+              className="bs-row-add-playlist"
+              sx={{ opacity: { xs: 1, md: 0 }, transition: 'opacity 160ms' }}
+              onClick={(e) => e.preventDefault()}
+            >
+              <AddToPlaylistButton trackId={track.slug} />
+            </Box>
           </Stack>
         </Stack>
       </Link>

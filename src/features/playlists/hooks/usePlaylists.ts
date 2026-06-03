@@ -10,6 +10,8 @@ interface CreatePlaylistInput {
   visibility: 'public' | 'private';
 }
 
+type PlaylistVisibility = 'public' | 'private' | 'unlisted';
+
 function toPlaylist(row: Record<string, unknown>): Playlist {
   const pl: Playlist = {
     id: row.id as string,
@@ -85,10 +87,34 @@ export function usePlaylists() {
     },
   });
 
+  const { mutateAsync: updateVisibility } = useMutation({
+    mutationFn: async ({
+      playlistId,
+      visibility,
+    }: {
+      playlistId: string;
+      visibility: PlaylistVisibility;
+    }): Promise<void> => {
+      if (!supabaseEnabled || !user) return;
+      const { createClient } = await import('@/shared/lib/supabase/client');
+      const supabase = createClient();
+      await supabase
+        .from('playlists')
+        .update({ visibility, updated_at: new Date().toISOString() } as never)
+        .eq('id' as never, playlistId)
+        .eq('owner_id' as never, user.id);
+    },
+    onSuccess: () => {
+      void qc.invalidateQueries({ queryKey });
+    },
+  });
+
   return {
     playlists,
     loading: isLoading || userLoading,
     createPlaylist,
     deletePlaylist,
+    updateVisibility: (playlistId: string, visibility: PlaylistVisibility) =>
+      updateVisibility({ playlistId, visibility }),
   };
 }
