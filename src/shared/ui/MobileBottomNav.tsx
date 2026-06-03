@@ -124,13 +124,13 @@ export function MobileBottomNav() {
               <Link
                 key={item.labelKey}
                 href={fullHref}
-                aria-label={tNav(item.labelKey as 'home' | 'discover' | 'library')}
+                aria-label={tNav(item.labelKey)}
                 aria-current={isActive ? 'page' : undefined}
                 style={{ flex: 1, textDecoration: 'none' }}
               >
                 <NavItemContent
                   Icon={item.Icon}
-                  label={tNav(item.labelKey as 'home' | 'discover' | 'library')}
+                  label={tNav(item.labelKey)}
                   isActive={isActive}
                 />
               </Link>
