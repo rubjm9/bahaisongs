@@ -4,20 +4,19 @@ import { useTranslations, useLocale } from 'next-intl';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import { Box, Stack } from '@mui/material';
-import { Home, Search, Library, Heart } from 'lucide-react';
+import { Compass, Home, Library } from 'lucide-react';
 import { accent, cssVars, radii } from '@/shared/theme/tokens';
 import type { Locale } from '@/shared/lib/i18n/config';
 import { appPath, isAppPathActive } from '@/shared/lib/seo/paths';
 
 const items: {
   href: string;
-  labelKey: 'home' | 'search' | 'library' | 'favorites';
+  labelKey: 'home' | 'discover' | 'library';
   Icon: typeof Home;
 }[] = [
   { href: '', labelKey: 'home', Icon: Home },
-  { href: 'search', labelKey: 'search', Icon: Search },
+  { href: 'discover', labelKey: 'discover', Icon: Compass },
   { href: 'library', labelKey: 'library', Icon: Library },
-  { href: 'favorites', labelKey: 'favorites', Icon: Heart },
 ];
 
 /** Nav links row — embedded inside the mobile player bar (not fixed on its own). */

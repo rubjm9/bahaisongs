@@ -1,6 +1,11 @@
 import 'server-only';
 import { cache } from 'react';
 import catalogJson from '@/data/catalog.json';
+import {
+  TRACK_LANGUAGES,
+  isTrackLanguage,
+  type TrackLanguage,
+} from '@/features/catalog/lib/track-languages';
 import { supabaseEnabled } from '@/shared/lib/supabase/env';
 import {
   getAllTracksSupabase,
@@ -20,7 +25,7 @@ export interface CatalogTrack {
   title: string;
   artistSlug: string;
   artist: string;
-  language: 'es' | 'en' | 'pt';
+  language: 'es' | 'en' | 'pt' | 'hu';
   hasChords: boolean;
   hasAudio: boolean;
   categorySlugs: string[];
@@ -77,7 +82,9 @@ export async function getRecentTracks(limit = 12): Promise<CatalogTrack[]> {
 }
 
 /** Tracks for a specific language code. */
-export async function getTracksByLanguage(language: 'es' | 'en' | 'pt'): Promise<CatalogTrack[]> {
+export async function getTracksByLanguage(
+  language: 'es' | 'en' | 'pt' | 'hu',
+): Promise<CatalogTrack[]> {
   const all = await getAllTracks();
   return all.filter((t) => t.language === language);
 }
@@ -102,3 +109,22 @@ export async function getActiveCategorySlugs(): Promise<string[]> {
   for (const t of catalog) for (const c of t.categorySlugs) set.add(c);
   return [...set].sort();
 }
+
+export interface CatalogLanguageOption {
+  code: TrackLanguage;
+  count: number;
+}
+
+/** Distinct track languages present in the catalogue (from Supabase or static JSON). */
+export const getCatalogLanguages = cache(async (): Promise<CatalogLanguageOption[]> => {
+  const catalog = await getAllTracks();
+  const counts = new Map<TrackLanguage, number>();
+  for (const t of catalog) {
+    if (!isTrackLanguage(t.language)) continue;
+    counts.set(t.language, (counts.get(t.language) ?? 0) + 1);
+  }
+  return TRACK_LANGUAGES.filter((code) => counts.has(code)).map((code) => ({
+    code,
+    count: counts.get(code)!,
+  }));
+});

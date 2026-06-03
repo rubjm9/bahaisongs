@@ -20,7 +20,11 @@ insert into public.categories (slug, name_es, name_en, kind) values
   ('feliz',               'Feliz',              'Joyful',         'mood'),
   ('con-acordes',         'Con acordes',        'With chords',    'tag'),
   ('con-audio',           'Con audio',          'With audio',     'tag'),
-  ('bicentenario-bab',    'Bicentenario del Báb','Báb bicentenary','theme')
+  ('bicentenario-bab',    'Bicentenario del Báb','Báb bicentenary','theme'),
+  ('bahaiblog-studio',    'Baha''i Blog studio', 'Baha''i Blog studio', 'tag'),
+  ('bahaiblog-recording', 'Baha''i Blog recording artist', 'Baha''i Blog recording artist', 'tag'),
+  ('bahaiblog-community', 'Baha''i Blog community', 'Baha''i Blog community', 'tag'),
+  ('bahaiblog-hip-hop',   'Baha''i Blog hip hop', 'Baha''i Blog hip hop', 'tag')
 on conflict (slug) do update set
   name_es = excluded.name_es,
   name_en = excluded.name_en,

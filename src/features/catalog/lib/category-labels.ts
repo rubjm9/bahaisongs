@@ -30,6 +30,10 @@ const CATEGORY_LABELS: Record<string, CategoryDescriptor> = {
   'con-acordes': { es: 'Con acordes', en: 'With chords', kind: 'tag' },
   'con-audio': { es: 'Con audio', en: 'With audio', kind: 'tag' },
   'bicentenario-bab': { es: 'Bicentenario del Báb', en: 'Báb bicentenary', kind: 'theme' },
+  'bahaiblog-studio': { es: 'Baha\'i Blog studio', en: 'Baha\'i Blog studio', kind: 'tag' },
+  'bahaiblog-recording': { es: 'Baha\'i Blog recording artist', en: 'Baha\'i Blog recording artist', kind: 'tag' },
+  'bahaiblog-community': { es: 'Baha\'i Blog community', en: 'Baha\'i Blog community', kind: 'tag' },
+  'bahaiblog-hip-hop': { es: 'Baha\'i Blog hip hop', en: 'Baha\'i Blog hip hop', kind: 'tag' },
 };
 
 function fallback(slug: string): string {

@@ -5,7 +5,7 @@ import { useLocale } from 'next-intl';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import { Box, IconButton, Stack, Tooltip } from '@mui/material';
-import { Home, Search, Library, Heart, PanelLeftClose, PanelLeftOpen } from 'lucide-react';
+import { Compass, Home, Library, PanelLeftClose, PanelLeftOpen } from 'lucide-react';
 import { BrandMark } from './BrandMark';
 import { cssVars, radii, accent } from '@/shared/theme/tokens';
 import { SIDEBAR_WIDTH_COLLAPSED, SIDEBAR_WIDTH_EXPANDED } from './shellLayout';
@@ -16,15 +16,14 @@ import { appPath, isAppPathActive, trackPath } from '@/shared/lib/seo/paths';
 
 interface NavItem {
   href: string;
-  labelKey: 'home' | 'search' | 'library' | 'favorites';
+  labelKey: 'home' | 'discover' | 'library';
   Icon: typeof Home;
 }
 
 const navItems: NavItem[] = [
   { href: '', labelKey: 'home', Icon: Home },
-  { href: 'search', labelKey: 'search', Icon: Search },
+  { href: 'discover', labelKey: 'discover', Icon: Compass },
   { href: 'library', labelKey: 'library', Icon: Library },
-  { href: 'favorites', labelKey: 'favorites', Icon: Heart },
 ];
 
 interface SidebarProps {

@@ -1,10 +1,11 @@
 import Fuse, { type IFuseOptions } from 'fuse.js';
+import type { TrackLanguage } from '@/features/catalog/lib/track-languages';
 
 export interface SearchEntry {
   slug: string;
   title: string;
   artist: string;
-  language: 'es' | 'en' | 'pt';
+  language: TrackLanguage;
   hasChords: boolean;
   hasAudio: boolean;
   categorySlugs: string[];
@@ -22,7 +23,7 @@ export interface SearchResult {
 }
 
 export interface SearchFilters {
-  language?: 'es' | 'en' | 'pt' | 'all';
+  language?: TrackLanguage | 'all';
   hasChords?: boolean;
   hasAudio?: boolean;
   /** Restrict to entries that include ALL of these category slugs. */

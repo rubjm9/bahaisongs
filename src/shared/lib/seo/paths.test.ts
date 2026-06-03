@@ -25,6 +25,8 @@ describe('seo paths', () => {
     expect(isAppPathActive('es', 'library', '/library')).toBe(true);
     expect(isAppPathActive('es', 'library', '/library/extra')).toBe(true);
     expect(isAppPathActive('en', 'library', '/en/library')).toBe(true);
+    expect(isAppPathActive('es', 'discover', '/discover')).toBe(true);
+    expect(isAppPathActive('en', 'discover', '/en/discover')).toBe(true);
     expect(isAppPathActive('es', '', '/')).toBe(true);
   });
 });

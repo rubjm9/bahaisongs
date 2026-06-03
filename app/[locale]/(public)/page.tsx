@@ -31,7 +31,7 @@ export default async function HomePage({ params }: { params: Params }) {
         subtitle={t('heroSubtitle')}
         cta={t('cta')}
         ctaSuggest={t('ctaSuggest')}
-        ctaHref={appPath(locale as Locale, 'library')}
+        ctaHref={appPath(locale as Locale, 'discover')}
         ctaSuggestHref={appPath(locale as Locale, 'suggest')}
         brand={brand('name')}
         heroStat={t('heroStat', { count: allTracks.length })}
@@ -43,7 +43,7 @@ export default async function HomePage({ params }: { params: Params }) {
         description={tSections('recentDescription')}
         tracks={recent}
         locale={locale as Locale}
-        seeAllHref={appPath(locale as Locale, 'library')}
+        seeAllHref={appPath(locale as Locale, 'discover')}
         seeAllLabel={tSections('seeAll')}
       />
 

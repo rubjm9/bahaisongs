@@ -11,7 +11,7 @@ export interface PlayableTrack {
   title: string;
   artist: string;
   artistSlug: string;
-  language: 'es' | 'en' | 'pt';
+  language: 'es' | 'en' | 'pt' | 'hu';
   /** Direct MP3 URL — Phase 4 uses the legacy https URL; Phase 7 replaces it
    * with the Edge Function call that returns a signed R2 URL. */
   audioUrl?: string;

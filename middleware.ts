@@ -38,6 +38,28 @@ function maybeRewriteFlatTrackUrl(request: NextRequest): NextResponse | null {
 }
 
 /**
+ * Legacy `/search` → `/discover` (query string preserved).
+ */
+function maybeRedirectSearchToDiscover(request: NextRequest): NextResponse | null {
+  const { pathname } = request.nextUrl;
+  const segments = pathname.split('/').filter(Boolean);
+
+  if (segments.length === 1 && segments[0] === 'search') {
+    const url = request.nextUrl.clone();
+    url.pathname = '/discover';
+    return NextResponse.redirect(url, 308);
+  }
+
+  if (segments.length === 2 && segments[0] === 'en' && segments[1] === 'search') {
+    const url = request.nextUrl.clone();
+    url.pathname = '/en/discover';
+    return NextResponse.redirect(url, 308);
+  }
+
+  return null;
+}
+
+/**
  * Legacy `/song/:slug` (default locale) → flat `/:slug`.
  */
 function maybeRedirectLegacySongPath(request: NextRequest): NextResponse | null {
@@ -121,6 +143,9 @@ export async function middleware(request: NextRequest) {
   // Admin guard runs first; returns a redirect or refreshed-cookie response.
   const adminResponse = await adminGuard(request);
   if (adminResponse) return adminResponse;
+
+  const searchRedirect = maybeRedirectSearchToDiscover(request);
+  if (searchRedirect) return searchRedirect;
 
   const legacySongRedirect = maybeRedirectLegacySongPath(request);
   if (legacySongRedirect) return legacySongRedirect;

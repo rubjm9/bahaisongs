@@ -18,12 +18,12 @@ const MAX_INLINE_RESULTS = 6;
 
 /**
  * The topbar's instant-search affordance. Renders a `SearchBox` and a floating
- * results palette that filters as you type. Full results live at `/search`.
+ * results palette that filters as you type. Full results live at `/discover`.
  *
  * Keyboard:
  *   `/`        focus the box (when nothing else has focus)
  *   `↑` / `↓`  move active result
- *   `Enter`    navigate to active result, or to /search if none focused
+ *   `Enter`    navigate to active result, or to /discover if none focused
  *   `Esc`      close palette / clear query
  */
 export function SearchPalette() {
@@ -85,7 +85,7 @@ export function SearchPalette() {
           setOpen(false);
         } else if (trimmed.length > 0) {
           addEntry(query);
-          router.push(`${appPath(locale, 'search')}?q=${encodeURIComponent(trimmed)}`);
+          router.push(`${appPath(locale, 'discover')}?q=${encodeURIComponent(trimmed)}`);
           setOpen(false);
         }
       }
@@ -109,6 +109,7 @@ export function SearchPalette() {
         ref={boxRef}
         value={query}
         onChange={setQuery}
+        placeholder={t('placeholder')}
         onFocus={() => setOpen(true)}
         onBlur={() => {
           // Defer so click on a result registers before close
@@ -195,7 +196,7 @@ export function SearchPalette() {
                   onMouseDown={(e: React.MouseEvent) => e.preventDefault()}
                   onClick={() => {
                     addEntry(query);
-                    router.push(`${appPath(locale, 'search')}?q=${encodeURIComponent(query.trim())}`);
+                    router.push(`${appPath(locale, 'discover')}?q=${encodeURIComponent(query.trim())}`);
                     setOpen(false);
                   }}
                   sx={{

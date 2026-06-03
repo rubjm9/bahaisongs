@@ -6,7 +6,7 @@
     "artist": "Comunidad Bahá'í",
     "language": "es",
     "hasChords": false,
-    "hasAudio": true,
+    "hasAudio": false,
     "categorySlugs": [
       "cancion",
       "oracion",
@@ -14,8 +14,7 @@
     ],
     "snippet": "(Oración de ‘Abdu’l-Bahá) ¡Oh Dios! Guíame, protégeme, Ilumina la lámpara de mi corazón Y haz de mí una estrella brillante. Tú eres el Fuert…",
     "lyrics": "(Oración de ‘Abdu’l-Bahá)\n\n¡Oh Dios! Guíame, protégeme,\n\nIlumina la lámpara de mi corazón\n\nY haz de mí una estrella brillante.\n\nTú eres el Fuerte y el Poderoso.",
-    "publishedAt": "2018-12-16 10:23:35",
-    "youtubeId": "dQw4w9WgXcQ"
+    "publishedAt": "2018-12-16 10:23:35"
   },
   {
     "slug": "oh-hijo-del-hombre",

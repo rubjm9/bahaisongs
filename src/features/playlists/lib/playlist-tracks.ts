@@ -1,11 +1,13 @@
-import type { SupabaseClient } from '@supabase/supabase-js';
+import type { createClient } from '@/shared/lib/supabase/client';
+
+type AppSupabaseClient = ReturnType<typeof createClient>;
 
 const UUID_RE =
   /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
 
 /** Slug from the UI or a tracks.id UUID for playlist_tracks.track_id. */
 export async function resolveTrackUuid(
-  supabase: SupabaseClient,
+  supabase: AppSupabaseClient,
   slugOrId: string,
 ): Promise<string | null> {
   if (UUID_RE.test(slugOrId)) return slugOrId;
@@ -25,7 +27,7 @@ export type AddTrackToPlaylistResult =
   | { ok: false; reason: 'disabled' | 'track_not_found' | 'db_error'; message?: string };
 
 export async function addTrackToPlaylist(
-  supabase: SupabaseClient,
+  supabase: AppSupabaseClient,
   playlistId: string,
   slugOrId: string,
 ): Promise<AddTrackToPlaylistResult> {

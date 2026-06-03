@@ -64,7 +64,7 @@ export function UserAvatar({ profile }: Props) {
       >
         <MenuItem
           component={Link}
-          href={appPath(locale, 'library')}
+          href={appPath(locale, 'playlists')}
           onClick={() => setAnchor(null)}
           sx={{ color: cssVars.textPrimary, fontSize: '0.9rem' }}
         >

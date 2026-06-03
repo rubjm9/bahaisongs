@@ -46,9 +46,10 @@ export const SearchBox = forwardRef<SearchBoxHandle, Props>(function SearchBox(
   },
   ref,
 ) {
-  const t = useTranslations('nav');
+  const tDiscover = useTranslations('discover');
   const inputRef = useRef<HTMLInputElement | null>(null);
   const [kbdHint, setKbdHint] = useState('/');
+  const defaultPlaceholder = tDiscover('placeholder');
 
   useEffect(() => {
     const mac = /Mac|iPhone|iPad|iPod/.test(navigator.platform ?? navigator.userAgent);
@@ -115,7 +116,7 @@ export const SearchBox = forwardRef<SearchBoxHandle, Props>(function SearchBox(
         {...(onFocus ? { onFocus } : {})}
         {...(onBlur ? { onBlur } : {})}
         onKeyDown={handleKey}
-        placeholder={placeholder ?? t('search')}
+        placeholder={placeholder ?? defaultPlaceholder}
         type="search"
         autoComplete="off"
         spellCheck={false}

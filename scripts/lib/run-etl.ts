@@ -21,6 +21,11 @@
 import { createClient } from '@supabase/supabase-js';
 import { AwsClient } from 'aws4fetch';
 import type { ParsedTrack } from './wordpress-parser';
+import {
+  downloadLegacyMp3,
+  uploadMp3ToR2,
+  upsertPrimaryMp3Source,
+} from './audio-migration';
 
 const DEFAULT_ARTIST_SLUG = 'comunidad-bahai';
 const DEFAULT_ARTIST_NAME = "Comunidad Bahá'í";
@@ -130,30 +135,10 @@ export async function runEtl(tracks: readonly ParsedTrack[], opts: RunOpts): Pro
     // 5. Audio migration (canciones.bahai.es → R2)
     if (!opts.noAudio && aws && t.enclosureUrl) {
       try {
-        const res = await fetch(t.enclosureUrl);
-        if (!res.ok) throw new Error(`download ${res.status}`);
-        const buf = await res.arrayBuffer();
         const r2Key = `audio/${trackId}/legacy.mp3`;
-        const putUrl = `${r2Endpoint}/${r2Bucket}/${encodeURI(r2Key)}`;
-        const put = await aws.fetch(putUrl, {
-          method: 'PUT',
-          body: buf,
-          headers: { 'Content-Type': 'audio/mpeg' },
-        });
-        if (!put.ok) throw new Error(`R2 put ${put.status}`);
-
-        // Make this the primary source — first delete the existing primary, then insert.
-        await supabase.from('track_sources').update({ is_primary: false }).eq('track_id', trackId);
-        const { error: srcErr } = await supabase.from('track_sources').upsert(
-          {
-            track_id: trackId,
-            kind: 'mp3_r2',
-            source_ref: r2Key,
-            is_primary: true,
-          },
-          { onConflict: 'track_id,source_ref' },
-        );
-        if (srcErr) throw new Error(srcErr.message);
+        const buf = await downloadLegacyMp3(t.enclosureUrl);
+        await uploadMp3ToR2(aws, r2Endpoint, r2Bucket, r2Key, buf);
+        await upsertPrimaryMp3Source(supabase, trackId, r2Key);
         audioOk++;
       } catch (err) {
         audioFail++;

@@ -6,6 +6,8 @@ import Link from 'next/link';
 import { useTranslations } from 'next-intl';
 import { useLocale } from 'next-intl';
 import { accent, cssVars } from '@/shared/theme/tokens';
+import type { Locale } from '@/shared/lib/i18n/config';
+import { appPath } from '@/shared/lib/seo/paths';
 import { useLikes } from '../hooks/useLikes';
 
 interface LikedTrack {
@@ -20,7 +22,7 @@ interface Props {
 
 export function FavoritesPage({ allTracks = [] }: Props) {
   const t = useTranslations('playlist');
-  const locale = useLocale();
+  const locale = useLocale() as Locale;
   const { likedIds, loading: likesLoading } = useLikes();
 
   if (likesLoading) {
@@ -82,7 +84,7 @@ export function FavoritesPage({ allTracks = [] }: Props) {
             Explora el catálogo y pulsa ♡ en cualquier canción para guardarla aquí.
           </Typography>
         </Box>
-        <Link href={`/${locale}/library`} style={{ textDecoration: 'none' }}>
+        <Link href={appPath(locale, 'discover')} style={{ textDecoration: 'none' }}>
           <Box
             sx={{
               mt: 1,

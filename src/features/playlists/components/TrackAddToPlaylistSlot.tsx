@@ -1,5 +1,6 @@
 'use client';
 
+import type { MouseEvent } from 'react';
 import { Box, type SxProps, type Theme } from '@mui/material';
 import { AddToPlaylistButton } from './AddToPlaylistButton';
 
@@ -13,9 +14,9 @@ interface Props {
 export function TrackAddToPlaylistSlot({ trackSlug, className, sx }: Props) {
   return (
     <Box
-      className={className}
-      sx={sx}
-      onClick={(e) => {
+      {...(className !== undefined ? { className } : {})}
+      {...(sx !== undefined ? { sx } : {})}
+      onClick={(e: MouseEvent) => {
         e.preventDefault();
         e.stopPropagation();
       }}

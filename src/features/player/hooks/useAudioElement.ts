@@ -3,6 +3,7 @@
 import { useEffect, useRef, type RefObject } from 'react';
 import { usePlayerStore } from '../stores/playerStore';
 import { selectCurrentTrack, useQueueStore } from '../stores/queueStore';
+import { resolvePlaybackUrl } from '../lib/resolveAudioUrl';
 import { resolveSource } from '../lib/sourceResolver';
 
 /**
@@ -24,61 +25,79 @@ export function useAudioElement(audioRef: RefObject<HTMLAudioElement | null>) {
 
   // === Track changes: update src and attempt playback ===
   useEffect(() => {
-    return useQueueStore.subscribe(
+    let cancelled = false;
+
+    const unsub = useQueueStore.subscribe(
       (state) => selectCurrentTrack(state),
       (track) => {
-        const audio = audioRef.current;
-        if (!audio) return;
-        if (!track) {
-          audio.pause();
-          audio.removeAttribute('src');
-          audio.load();
-          lastSrcRef.current = null;
-          usePlayerStore.getState().reset();
-          return;
-        }
-        const source = resolveSource(track);
-        if (source.kind === 'youtube') {
-          // YouTube tracks are handled by YoutubeFloatingPlayer; keep the
-          // native audio element silent and reset its src.
-          audio.pause();
-          audio.removeAttribute('src');
-          audio.load();
-          lastSrcRef.current = null;
-          usePlayerStore.getState().setError(null);
-          // Setting 'loading' triggers the YoutubeFloatingPlayer to start
-          // playback (playing prop = true while loading or playing).
-          usePlayerStore.getState().setStatus('loading');
-          return;
-        }
-        if (source.kind !== 'mp3') {
-          usePlayerStore
-            .getState()
-            .setError('no-source-available');
-          usePlayerStore.getState().setStatus('error');
-          return;
-        }
-        if (source.url === lastSrcRef.current) return;
-        lastSrcRef.current = source.url;
-        usePlayerStore.getState().setError(null);
-        usePlayerStore.getState().setStatus('loading');
-        audio.src = source.url;
-        audio.load();
-        void audio.play().catch((err) => {
-          // Browsers may refuse autoplay without user interaction. Stay in
-          // 'paused' state so the play button is visible.
-          if (err instanceof DOMException && err.name === 'NotAllowedError') {
-            usePlayerStore.getState().setStatus('paused');
-          } else {
-            usePlayerStore.getState().setStatus('error');
+        void (async () => {
+          const audio = audioRef.current;
+          if (!audio || cancelled) return;
+          if (!track) {
+            audio.pause();
+            audio.removeAttribute('src');
+            audio.load();
+            lastSrcRef.current = null;
+            usePlayerStore.getState().reset();
+            return;
+          }
+          const source = resolveSource(track);
+          if (source.kind === 'youtube') {
+            // YouTube tracks are handled by YoutubeFloatingPlayer; keep the
+            // native audio element silent and reset its src.
+            audio.pause();
+            audio.removeAttribute('src');
+            audio.load();
+            lastSrcRef.current = null;
+            usePlayerStore.getState().setError(null);
+            // Setting 'loading' triggers the YoutubeFloatingPlayer to start
+            // playback (playing prop = true while loading or playing).
+            usePlayerStore.getState().setStatus('loading');
+            return;
+          }
+          if (source.kind !== 'mp3') {
             usePlayerStore
               .getState()
-              .setError(err instanceof Error ? err.message : 'playback-failed');
+              .setError('no-source-available');
+            usePlayerStore.getState().setStatus('error');
+            return;
           }
-        });
+
+          usePlayerStore.getState().setError(null);
+          usePlayerStore.getState().setStatus('loading');
+
+          const playbackUrl = await resolvePlaybackUrl(track.slug, source.url);
+          if (cancelled || !audio) return;
+          if (!playbackUrl) {
+            usePlayerStore.getState().setError('no-source-available');
+            usePlayerStore.getState().setStatus('error');
+            return;
+          }
+          if (playbackUrl === lastSrcRef.current) return;
+          lastSrcRef.current = playbackUrl;
+          audio.src = playbackUrl;
+          audio.load();
+          void audio.play().catch((err) => {
+            // Browsers may refuse autoplay without user interaction. Stay in
+            // 'paused' state so the play button is visible.
+            if (err instanceof DOMException && err.name === 'NotAllowedError') {
+              usePlayerStore.getState().setStatus('paused');
+            } else {
+              usePlayerStore.getState().setStatus('error');
+              usePlayerStore
+                .getState()
+                .setError(err instanceof Error ? err.message : 'playback-failed');
+            }
+          });
+        })();
       },
       { fireImmediately: true },
     );
+
+    return () => {
+      cancelled = true;
+      unsub();
+    };
   }, [audioRef]);
 
   // === Volume / muted mirroring ===

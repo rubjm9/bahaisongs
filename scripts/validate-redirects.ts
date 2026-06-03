@@ -13,8 +13,8 @@ import { TRACK_SLUGS } from '../src/shared/lib/seo/track-slugs';
 const LEGACY_REDIRECTS: Record<string, string> = {
   '/category/canciones': '/category/cancion',
   '/category/oraciones': '/category/oracion',
-  '/category/canciones-espanol': '/library?language=es',
-  '/category/english': '/library?language=en',
+  '/category/canciones-espanol': '/discover?language=es',
+  '/category/english': '/discover?language=en',
   '/contribuir-con-una-nueva-cancion': '/suggest',
 };
 
@@ -31,7 +31,7 @@ function normalizePath(url: string): string {
 function expectedTarget(path: string): string | 'track' | 'ok' {
   if (path === '/' || path === '') return 'ok';
   if (LEGACY_REDIRECTS[path]) return LEGACY_REDIRECTS[path];
-  if (/^\/page\/\d+$/.test(path)) return '/library';
+  if (/^\/page\/\d+$/.test(path)) return '/discover';
   if (/^\/(es|en)\/song\/[^/]+$/.test(path) || /^\/song\/[^/]+$/.test(path)) {
     const slug = path.split('/').pop()!;
     return `/${slug}`;
@@ -40,7 +40,7 @@ function expectedTarget(path: string): string | 'track' | 'ok' {
   if (segments.length === 1 && TRACK_SLUGS.has(segments[0]!)) return 'track';
   if (path.startsWith('/category/')) return 'ok';
   if (
-    ['/library', '/search', '/suggest', '/favorites', '/en', '/en/library'].includes(path) ||
+    ['/library', '/discover', '/search', '/suggest', '/favorites', '/playlists', '/en', '/en/library', '/en/discover'].includes(path) ||
     path.startsWith('/en/')
   ) {
     return 'ok';

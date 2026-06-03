@@ -8,8 +8,10 @@ export const TRACK_SLUGS = new Set(
 /** First-path segments used by the app router (not track slugs). */
 export const RESERVED_SEGMENTS = new Set([
   'search',
+  'discover',
   'library',
   'favorites',
+  'playlists',
   'suggest',
   'category',
   'artist',

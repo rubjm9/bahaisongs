@@ -101,7 +101,7 @@ export function usePlaylists() {
       const supabase = createClient();
       await supabase
         .from('playlists')
-        .update({ visibility, updated_at: Date.now().toISOString() } as never)
+        .update({ visibility, updated_at: new Date().toISOString() } as never)
         .eq('id' as never, playlistId)
         .eq('owner_id' as never, user.id);
     },
