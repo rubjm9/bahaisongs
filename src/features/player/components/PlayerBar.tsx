@@ -31,6 +31,7 @@ import { useAudioElement } from '../hooks/useAudioElement';
 import { usePlayerActions } from '../hooks/usePlayerActions';
 import { useMediaSession } from '../hooks/useMediaSession';
 import { usePlayerHydration } from '../hooks/usePlayerHydration';
+import { usePlayAnalytics } from '../hooks/usePlayAnalytics';
 import { hasPlayableSource, resolveSource } from '../lib/sourceResolver';
 import { playRandomTrack } from '../lib/randomTrack';
 
@@ -47,6 +48,7 @@ const YoutubeFloatingPlayer = dynamic(
  */
 export function PlayerBar() {
   usePlayerHydration();
+  usePlayAnalytics();
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const randomLoadingRef = useRef(false);
   useAudioElement(audioRef);

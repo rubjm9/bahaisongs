@@ -29,6 +29,7 @@ interface TrackRow {
   artists: { name: string } | null;
   _count_sources: number;
   _has_chords: boolean;
+  _play_count: number;
 }
 
 interface Props {
@@ -117,6 +118,23 @@ export function TracksClient({ initialTracks }: Props) {
             </Box>
           </Tooltip>
         </Stack>
+      ),
+    },
+    {
+      key: 'plays',
+      label: 'Reproducciones',
+      width: 110,
+      align: 'right',
+      render: (row) => (
+        <Typography
+          variant="body2"
+          sx={{
+            color: row._play_count > 0 ? cssVars.textPrimary : cssVars.textMuted,
+            fontVariantNumeric: 'tabular-nums',
+          }}
+        >
+          {row._play_count.toLocaleString('es')}
+        </Typography>
       ),
     },
     {

@@ -7,6 +7,8 @@ export type RepeatMode = 'off' | 'one' | 'all';
  * full lyrics never reach the player code.
  */
 export interface PlayableTrack {
+  /** Supabase track uuid — required to log play_events. */
+  id?: string;
   slug: string;
   title: string;
   artist: string;

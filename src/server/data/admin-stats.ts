@@ -1,5 +1,5 @@
 import 'server-only';
-import { getSupabaseServerClient } from '@/shared/lib/supabase/server';
+import { getSupabaseServerClient, getSupabaseServiceClient } from '@/shared/lib/supabase/server';
 
 export interface AdminStats {
   totalTracks: number;
@@ -17,6 +17,7 @@ export interface AdminStats {
 
 export async function getAdminStats(): Promise<AdminStats> {
   const supabase = await getSupabaseServerClient();
+  const statsClient = getSupabaseServiceClient();
 
   const now = new Date();
   const sevenDaysAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000).toISOString();
@@ -61,8 +62,8 @@ export async function getAdminStats(): Promise<AdminStats> {
       .select('*', { count: 'exact', head: true })
       .eq('status' as never, 'pending'),
     supabase.from('playlists').select('*', { count: 'exact', head: true }),
-    supabase.from('play_events').select('*', { count: 'exact', head: true }),
-    supabase
+    statsClient.from('play_events').select('*', { count: 'exact', head: true }),
+    statsClient
       .from('play_events')
       .select('*', { count: 'exact', head: true })
       .gte('played_at' as never, sevenDaysAgo),

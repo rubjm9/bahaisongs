@@ -32,6 +32,7 @@ export function mapTrackRowToCatalogTrack(row: TrackDbRow): CatalogTrack {
   });
 
   const mapped: CatalogTrack = {
+    id: row.id,
     slug: row.slug,
     title: row.title,
     artistSlug: artist?.slug ?? '',

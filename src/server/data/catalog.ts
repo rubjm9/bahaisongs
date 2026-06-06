@@ -21,6 +21,8 @@ import {
  * to the client bundle.
  */
 export interface CatalogTrack {
+  /** Present when loaded from Supabase; required for play analytics. */
+  id?: string;
   slug: string;
   title: string;
   artistSlug: string;

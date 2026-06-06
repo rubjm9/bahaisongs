@@ -1,5 +1,6 @@
 import { Box } from '@mui/material';
 import { getSupabaseServerClient } from '@/shared/lib/supabase/server';
+import { getPlayCountsByTrackId } from '@/server/data/play-counts';
 import { AdminTopBar } from '@/features/admin/components/AdminTopBar';
 import { TracksClient } from './TracksClient';
 
@@ -13,6 +14,7 @@ interface TrackRow {
   artists: { name: string } | null;
   _count_sources: number;
   _has_chords: boolean;
+  _play_count: number;
 }
 
 export default async function TracksPage() {
@@ -39,6 +41,8 @@ export default async function TracksPage() {
     .from('artists')
     .select('id, name, slug')
     .order('name' as never);
+
+  const playCounts = await getPlayCountsByTrackId();
 
   interface RawTrack {
     id: string;
@@ -69,6 +73,7 @@ export default async function TracksPage() {
       artists: artistName ? { name: artistName } : null,
       _count_sources: (t.track_sources ?? []).length,
       _has_chords: hasChords,
+      _play_count: playCounts.get(t.id) ?? 0,
     };
   });
 

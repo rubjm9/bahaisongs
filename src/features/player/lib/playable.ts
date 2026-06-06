@@ -1,6 +1,7 @@
 import type { PlayableTrack } from '@/features/player/lib/types';
 
 interface PlayableInputTrack {
+  id?: string;
   slug: string;
   title: string;
   artist: string;
@@ -17,6 +18,7 @@ interface PlayableInputTrack {
  */
 export function toPlayable(track: PlayableInputTrack): PlayableTrack {
   const out: PlayableTrack = {
+    ...(track.id ? { id: track.id } : {}),
     slug: track.slug,
     title: track.title,
     artist: track.artist,
