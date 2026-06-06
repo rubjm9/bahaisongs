@@ -12,7 +12,6 @@ export default async function HomePage({ params }: { params: Params }) {
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations('home');
-  const brand = await getTranslations('brand');
   const tSections = await getTranslations('sections');
 
   const [allTracks, recent, withChords, prayers, calm] = await Promise.all([
@@ -33,8 +32,8 @@ export default async function HomePage({ params }: { params: Params }) {
         ctaSuggest={t('ctaSuggest')}
         ctaHref={appPath(locale as Locale, 'discover')}
         ctaSuggestHref={appPath(locale as Locale, 'suggest')}
-        brand={brand('name')}
-        heroStat={t('heroStat', { count: allTracks.length })}
+        heroStatCount={allTracks.length}
+        heroStatLabel={t('heroStatLabel')}
       />
 
       <TrackSection

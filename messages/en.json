@@ -22,6 +22,9 @@
     "suggest": "Suggest a song",
     "favorites": "Favorites",
     "playlists": "Playlists",
+    "yourPlaylists": "Your playlists",
+    "createPlaylist": "Create playlist",
+    "viewAllPlaylists": "View all",
     "collapseMenu": "Collapse menu",
     "expandMenu": "Expand menu"
   },
@@ -30,8 +33,8 @@
     "heroTitle": "Lyrics and chords to sing along Bahá'í Songs",
     "heroSubtitle": "Find the song you're looking for and share it with your group to sing or play together, or listen to learn how it goes. Don't see a song we should have? Send it to us so we can grow the catalogue.",
     "cta": "Explore catalogue",
-    "ctaSuggest": "Add a song",
-    "heroStat": "{count} songs available"
+    "ctaSuggest": "Suggest a song",
+    "heroStatLabel": "songs available"
   },
   "sections": {
     "catalogSize": "{count} songs in the catalogue",
@@ -79,6 +82,13 @@
     },
     "trackCount": "{count, plural, =0 {No songs} =1 {1 song} other {# songs}}"
   },
+  "catalog": {
+    "tooltips": {
+      "language": "Lyrics language: {language}",
+      "audio": "Audio available to play in the player",
+      "chords": "Includes chords to sing or play along"
+    }
+  },
   "discover": {
     "title": "Discover music",
     "subtitle": "Search and explore the catalogue",
@@ -118,7 +128,13 @@
       "en": "English",
       "withChords": "With chords",
       "withAudio": "With audio",
-      "reset": "Clear"
+      "reset": "Clear",
+      "tooltips": {
+        "all": "Show songs in every catalogue language",
+        "language": "Only songs in {language}",
+        "withChords": "Only songs that include chord charts",
+        "withAudio": "Only songs with an audio file to play"
+      }
     },
     "loading": "Loading catalogue…"
   },

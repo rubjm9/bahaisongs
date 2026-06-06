@@ -1,11 +1,11 @@
 'use client';
 
 import Link from 'next/link';
-import { Typography, Stack, Chip } from '@mui/material';
+import { Typography, Stack, Box } from '@mui/material';
 import { motion } from 'framer-motion';
 import { GradientText } from '@/shared/ui/GradientText';
 import { GlowButton } from '@/shared/ui/GlowButton';
-import { accent, cssVars } from '@/shared/theme/tokens';
+import { accent, cssVars, radii } from '@/shared/theme/tokens';
 
 interface Props {
   eyebrow: string;
@@ -15,8 +15,8 @@ interface Props {
   ctaSuggest: string;
   ctaHref: string;
   ctaSuggestHref: string;
-  brand: string;
-  heroStat?: string;
+  heroStatCount?: number;
+  heroStatLabel?: string;
 }
 
 export function HeroAtmosphere({
@@ -27,8 +27,8 @@ export function HeroAtmosphere({
   ctaSuggest,
   ctaHref,
   ctaSuggestHref,
-  brand,
-  heroStat,
+  heroStatCount,
+  heroStatLabel,
 }: Props) {
   return (
     <Stack
@@ -40,52 +40,80 @@ export function HeroAtmosphere({
         position: 'relative',
       }}
     >
-      <Stack direction="row" spacing={1.5} sx={{ alignItems: 'center', flexWrap: 'wrap', gap: 1 }}>
-        <Chip
-          label={brand}
-          sx={{
-            background: cssVars.bgGlass,
-            color: accent.cyan,
-            border: `1px solid ${cssVars.borderSubtle}`,
-            backdropFilter: 'blur(16px)',
-            WebkitBackdropFilter: 'blur(16px)',
-            fontWeight: 600,
-            letterSpacing: '0.08em',
-            textTransform: 'uppercase',
-            fontSize: '0.7rem',
-          }}
-        />
-        {heroStat ? (
-          <Chip
-            label={heroStat}
-            sx={{
-              background: `${accent.indigo}18`,
-              color: cssVars.textMuted,
-              border: `1px solid ${cssVars.borderSubtle}`,
-              fontSize: '0.68rem',
-              fontWeight: 500,
-              letterSpacing: '0.04em',
-            }}
-          />
-        ) : null}
-      </Stack>
-
-      <Typography
-        component={motion.p}
+      <Box
+        component={motion.div}
         initial={{ opacity: 0, y: 8 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.1, duration: 0.6 }}
         sx={{
-          color: cssVars.textMuted,
-          letterSpacing: '0.12em',
-          textTransform: 'uppercase',
-          fontSize: '0.75rem',
-          fontWeight: 500,
-          m: 0,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          gap: 2,
+          flexWrap: 'wrap',
         }}
       >
-        {eyebrow}
-      </Typography>
+        <Typography
+          component="p"
+          sx={{
+            color: cssVars.textMuted,
+            letterSpacing: '0.12em',
+            textTransform: 'uppercase',
+            fontSize: '0.75rem',
+            fontWeight: 500,
+            m: 0,
+          }}
+        >
+          {eyebrow}
+        </Typography>
+        {heroStatCount != null && heroStatLabel ? (
+          <Box
+            component="p"
+            role="status"
+            sx={{
+              m: 0,
+              flexShrink: 0,
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: 1,
+              px: 1.5,
+              py: 0.75,
+              borderRadius: radii.pill,
+              background: cssVars.bgGlass,
+              border: `1px solid ${cssVars.borderSubtle}`,
+              backdropFilter: 'blur(16px)',
+              WebkitBackdropFilter: 'blur(16px)',
+              boxShadow: `0 0 24px ${accent.cyan}14`,
+            }}
+          >
+            <Typography
+              component="span"
+              sx={{
+                color: accent.cyan,
+                fontWeight: 700,
+                fontSize: '1rem',
+                lineHeight: 1,
+                fontVariantNumeric: 'tabular-nums',
+                letterSpacing: '-0.02em',
+              }}
+            >
+              {heroStatCount.toLocaleString()}
+            </Typography>
+            <Typography
+              component="span"
+              sx={{
+                color: cssVars.textMuted,
+                fontSize: '0.75rem',
+                fontWeight: 500,
+                letterSpacing: '0.02em',
+                lineHeight: 1.2,
+              }}
+            >
+              {heroStatLabel}
+            </Typography>
+          </Box>
+        ) : null}
+      </Box>
 
       <Typography
         component={motion.h1}

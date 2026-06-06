@@ -22,6 +22,9 @@
     "suggest": "Sugerir canción",
     "favorites": "Favoritos",
     "playlists": "Playlists",
+    "yourPlaylists": "Tus playlists",
+    "createPlaylist": "Crear playlist",
+    "viewAllPlaylists": "Ver todas",
     "collapseMenu": "Contraer menú",
     "expandMenu": "Expandir menú"
   },
@@ -30,8 +33,8 @@
     "heroTitle": "Letras y acordes para cantar juntos canciones bahá'ís",
     "heroSubtitle": "Encuentra la canción que buscas y compártela con tu grupo para cantar o tocar juntos, o escúchala para saber cómo es. ¿No tenemos alguna canción? Envíala para que ampliemos el catálogo.",
     "cta": "Explorar catálogo",
-    "ctaSuggest": "Agregar canción",
-    "heroStat": "{count} canciones disponibles"
+    "ctaSuggest": "Sugerir canción",
+    "heroStatLabel": "canciones disponibles"
   },
   "sections": {
     "catalogSize": "{count} canciones en el catálogo",
@@ -79,6 +82,13 @@
     },
     "trackCount": "{count, plural, =0 {Sin canciones} =1 {1 canción} other {# canciones}}"
   },
+  "catalog": {
+    "tooltips": {
+      "language": "Idioma de la letra: {language}",
+      "audio": "Audio disponible para escuchar en el reproductor",
+      "chords": "Incluye acordes para acompañar al cantar o tocar"
+    }
+  },
   "discover": {
     "title": "Descubrir música",
     "subtitle": "Busca y explora el catálogo",
@@ -113,12 +123,18 @@
     "seeAll": "Ver todos los resultados de «{query}» →",
     "filters": {
       "language": "Idioma",
-      "all": "Todos",
+      "all": "Todas",
       "es": "Español",
       "en": "English",
       "withChords": "Con acordes",
       "withAudio": "Con audio",
-      "reset": "Limpiar"
+      "reset": "Limpiar",
+      "tooltips": {
+        "all": "Muestra canciones en todos los idiomas del catálogo",
+        "language": "Solo canciones en {language}",
+        "withChords": "Solo canciones con acordes para guitarra, ukelele o piano",
+        "withAudio": "Solo canciones con archivo de audio para escuchar"
+      }
     },
     "loading": "Cargando catálogo…"
   },

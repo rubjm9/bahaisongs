@@ -5,8 +5,9 @@ import { useLocale } from 'next-intl';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import { Box, IconButton, Stack, Tooltip } from '@mui/material';
-import { Compass, Home, Library, PanelLeftClose, PanelLeftOpen } from 'lucide-react';
+import { Compass, Home, Library, MessageSquarePlus, PanelLeftClose, PanelLeftOpen } from 'lucide-react';
 import { BrandMark } from './BrandMark';
+import { SidebarPlaylists } from './SidebarPlaylists';
 import { cssVars, radii, accent } from '@/shared/theme/tokens';
 import { SIDEBAR_WIDTH_COLLAPSED, SIDEBAR_WIDTH_EXPANDED } from './shellLayout';
 import { useQueueStore, selectCurrentTrack } from '@/features/player/stores/queueStore';
@@ -16,7 +17,7 @@ import { appPath, isAppPathActive, trackPath } from '@/shared/lib/seo/paths';
 
 interface NavItem {
   href: string;
-  labelKey: 'home' | 'discover' | 'library';
+  labelKey: 'home' | 'discover' | 'library' | 'suggest';
   Icon: typeof Home;
 }
 
@@ -24,6 +25,7 @@ const navItems: NavItem[] = [
   { href: '', labelKey: 'home', Icon: Home },
   { href: 'discover', labelKey: 'discover', Icon: Compass },
   { href: 'library', labelKey: 'library', Icon: Library },
+  { href: 'suggest', labelKey: 'suggest', Icon: MessageSquarePlus },
 ];
 
 interface SidebarProps {
@@ -166,6 +168,8 @@ export function Sidebar({ collapsed, onToggleCollapsed }: SidebarProps) {
           );
         })}
       </Stack>
+
+      <SidebarPlaylists collapsed={collapsed} />
 
       <Box sx={{ flex: 1 }} />
 

@@ -1,6 +1,7 @@
 'use client';
 
-import { Box, Stack, Chip } from '@mui/material';
+import { useTranslations } from 'next-intl';
+import { Box, Stack, Chip, Tooltip } from '@mui/material';
 import { Music, Mic2 } from 'lucide-react';
 import Link from 'next/link';
 import { HighlightedText } from './HighlightedText';
@@ -8,6 +9,11 @@ import { TrackPlaceholder } from './TrackPlaceholder';
 import type { SearchResult } from '@/features/catalog/lib/search-engine';
 import { accent, cssVars, radii } from '@/shared/theme/tokens';
 import { trackPath } from '@/shared/lib/seo/paths';
+import {
+  isTrackLanguage,
+  trackLanguageLabels,
+  type TrackLanguage,
+} from '@/features/catalog/lib/track-languages';
 
 interface Props {
   result: SearchResult;
@@ -19,7 +25,13 @@ interface Props {
 }
 
 export function SearchResultItem({ result, locale: _locale, active = false, itemRef, onSelect }: Props) {
+  const t = useTranslations('catalog.tooltips');
   const { entry, matches } = result;
+  const languageLabel =
+    isTrackLanguage(entry.language) ? trackLanguageLabels[entry.language as TrackLanguage] : entry.language;
+  const languageTooltip = entry.hasAudio
+    ? `${t('language', { language: languageLabel })}. ${t('audio')}`
+    : t('language', { language: languageLabel });
   const href = trackPath(entry.slug);
   const titleRanges = matches.get('title') ?? [];
   const snippetRanges = matches.get('snippet') ?? [];
@@ -82,47 +94,51 @@ export function SearchResultItem({ result, locale: _locale, active = false, item
         </Box>
 
         <Stack direction="row" spacing={0.75} sx={{ alignItems: 'center', flexShrink: 0 }}>
-          {entry.hasAudio ? (
-            <Chip
-              size="small"
-              icon={<Music size={12} />}
-              label={entry.language.toUpperCase()}
-              sx={{
-                background: cssVars.navActiveBg,
-                color: accent.cyan,
-                border: `1px solid ${cssVars.borderSubtle}`,
-                fontSize: '0.65rem',
-                fontWeight: 600,
-                height: 22,
-                '& .MuiChip-icon': { color: accent.cyan, ml: 0.5 },
-              }}
-            />
-          ) : (
-            <Chip
-              size="small"
-              label={entry.language.toUpperCase()}
-              sx={{
-                background: cssVars.hoverSubtle,
-                color: cssVars.textMuted,
-                border: `1px solid ${cssVars.borderSubtle}`,
-                fontSize: '0.65rem',
-                fontWeight: 600,
-                height: 22,
-              }}
-            />
-          )}
+          <Tooltip title={languageTooltip} arrow placement="top">
+            {entry.hasAudio ? (
+              <Chip
+                size="small"
+                icon={<Music size={12} />}
+                label={entry.language.toUpperCase()}
+                sx={{
+                  background: cssVars.navActiveBg,
+                  color: accent.cyan,
+                  border: `1px solid ${cssVars.borderSubtle}`,
+                  fontSize: '0.65rem',
+                  fontWeight: 600,
+                  height: 22,
+                  '& .MuiChip-icon': { color: accent.cyan, ml: 0.5 },
+                }}
+              />
+            ) : (
+              <Chip
+                size="small"
+                label={entry.language.toUpperCase()}
+                sx={{
+                  background: cssVars.hoverSubtle,
+                  color: cssVars.textMuted,
+                  border: `1px solid ${cssVars.borderSubtle}`,
+                  fontSize: '0.65rem',
+                  fontWeight: 600,
+                  height: 22,
+                }}
+              />
+            )}
+          </Tooltip>
           {entry.hasChords ? (
-            <Box
-              aria-label="Has chords"
-              title="Acordes disponibles"
-              sx={{
-                color: accent.glow,
-                display: 'inline-flex',
-                alignItems: 'center',
-              }}
-            >
-              <Mic2 size={14} />
-            </Box>
+            <Tooltip title={t('chords')} arrow placement="top">
+              <Box
+                component="span"
+                aria-label={t('chords')}
+                sx={{
+                  color: accent.glow,
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                }}
+              >
+                <Mic2 size={14} />
+              </Box>
+            </Tooltip>
           ) : null}
         </Stack>
       </Stack>

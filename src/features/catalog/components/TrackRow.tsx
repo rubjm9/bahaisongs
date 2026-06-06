@@ -1,5 +1,8 @@
+'use client';
+
 import Link from 'next/link';
-import { Box, Stack, Chip } from '@mui/material';
+import { useTranslations } from 'next-intl';
+import { Box, Stack, Chip, Tooltip } from '@mui/material';
 import { Music, BookOpen } from 'lucide-react';
 import { TrackPlaceholder } from './TrackPlaceholder';
 import { PlayButton } from '@/features/player/components/PlayButton';
@@ -8,6 +11,11 @@ import { accent, cssVars, radii } from '@/shared/theme/tokens';
 import type { Locale } from '@/shared/lib/i18n/config';
 import { trackPath } from '@/shared/lib/seo/paths';
 import type { PlayableTrack } from '@/features/player/lib/types';
+import {
+  isTrackLanguage,
+  trackLanguageLabels,
+  type TrackLanguage,
+} from '@/features/catalog/lib/track-languages';
 
 interface Props {
   track: PlayableTrack & {
@@ -29,7 +37,10 @@ interface Props {
  * navigate.
  */
 export function TrackRow({ track, locale: _locale, queue, queueIndex, position }: Props) {
+  const t = useTranslations('catalog.tooltips');
   const href = trackPath(track.slug);
+  const languageLabel =
+    isTrackLanguage(track.language) ? trackLanguageLabels[track.language as TrackLanguage] : track.language;
   return (
     <Box sx={{ position: 'relative' }}>
       <Link href={href} style={{ textDecoration: 'none', display: 'block' }}>
@@ -109,35 +120,41 @@ export function TrackRow({ track, locale: _locale, queue, queueIndex, position }
           </Box>
 
           <Stack direction="row" spacing={0.75} sx={{ alignItems: 'center', flexShrink: 0 }}>
-            <Chip
-              size="small"
-              label={track.language.toUpperCase()}
-              sx={{
-                height: 22,
-                fontSize: '0.65rem',
-                fontWeight: 600,
-                background: cssVars.hoverSubtle,
-                color: cssVars.textMuted,
-                border: `1px solid ${cssVars.borderSubtle}`,
-              }}
-            />
+            <Tooltip title={t('language', { language: languageLabel })} arrow placement="top">
+              <Chip
+                size="small"
+                label={track.language.toUpperCase()}
+                sx={{
+                  height: 22,
+                  fontSize: '0.65rem',
+                  fontWeight: 600,
+                  background: cssVars.hoverSubtle,
+                  color: cssVars.textMuted,
+                  border: `1px solid ${cssVars.borderSubtle}`,
+                }}
+              />
+            </Tooltip>
             {track.hasAudio ? (
-              <Box
-                aria-hidden
-                title="Audio disponible"
-                sx={{ display: 'inline-flex', color: accent.cyan }}
-              >
-                <Music size={14} />
-              </Box>
+              <Tooltip title={t('audio')} arrow placement="top">
+                <Box
+                  component="span"
+                  aria-label={t('audio')}
+                  sx={{ display: 'inline-flex', color: accent.cyan }}
+                >
+                  <Music size={14} />
+                </Box>
+              </Tooltip>
             ) : null}
             {track.hasChords ? (
-              <Box
-                aria-hidden
-                title="Acordes disponibles"
-                sx={{ display: 'inline-flex', color: accent.glow }}
-              >
-                <BookOpen size={14} />
-              </Box>
+              <Tooltip title={t('chords')} arrow placement="top">
+                <Box
+                  component="span"
+                  aria-label={t('chords')}
+                  sx={{ display: 'inline-flex', color: accent.glow }}
+                >
+                  <BookOpen size={14} />
+                </Box>
+              </Tooltip>
             ) : null}
             <TrackAddToPlaylistSlot
               trackSlug={track.slug}

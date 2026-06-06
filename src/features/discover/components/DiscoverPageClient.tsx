@@ -4,7 +4,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { useLocale, useTranslations } from 'next-intl';
-import { Box, Divider, Stack, Chip, Typography } from '@mui/material';
+import { Box, Divider, Stack, Chip, Tooltip, Typography } from '@mui/material';
 import { motion } from 'framer-motion';
 import { GradientText } from '@/shared/ui/GradientText';
 import { SearchBox } from '@/features/catalog/components/SearchBox';
@@ -78,10 +78,12 @@ export function DiscoverPageClient({
     [language, withChords, withAudio],
   );
 
-  const { results, loading, totalEntries } = useSearch(query, {
+  const { results, loading } = useSearch(query, {
     limit: PAGE_LIMIT,
     filters,
   });
+
+  const catalogCount = allTracks.length;
 
   const browseTracks = useMemo(() => {
     let list = [...allTracks];
@@ -114,7 +116,7 @@ export function DiscoverPageClient({
           {t('subtitle')}
         </Typography>
         <Typography sx={{ color: cssVars.textMuted, mt: 0.5, fontSize: '0.85rem' }}>
-          {t('totalCatalog', { count: totalEntries })}
+          {t('totalCatalog', { count: catalogCount })}
         </Typography>
       </Box>
 
@@ -129,6 +131,7 @@ export function DiscoverPageClient({
       >
         <FilterChip
           label={tFilters('all')}
+          tooltip={tFilters('tooltips.all')}
           active={language === 'all'}
           onClick={() => setLanguage('all')}
         />
@@ -136,6 +139,7 @@ export function DiscoverPageClient({
           <FilterChip
             key={code}
             label={trackLanguageLabels[code]}
+            tooltip={tFilters('tooltips.language', { language: trackLanguageLabels[code] })}
             count={count}
             active={language === code}
             onClick={() => setLanguage(code)}
@@ -149,11 +153,13 @@ export function DiscoverPageClient({
         />
         <FilterChip
           label={tFilters('withChords')}
+          tooltip={tFilters('tooltips.withChords')}
           active={withChords}
           onClick={() => setWithChords((v) => !v)}
         />
         <FilterChip
           label={tFilters('withAudio')}
+          tooltip={tFilters('tooltips.withAudio')}
           active={withAudio}
           onClick={() => setWithAudio((v) => !v)}
         />
@@ -249,34 +255,38 @@ export function DiscoverPageClient({
 
 function FilterChip({
   label,
+  tooltip,
   count,
   active,
   onClick,
 }: {
   label: string;
+  tooltip: string;
   count?: number;
   active: boolean;
   onClick: () => void;
 }) {
   const chipLabel = count !== undefined ? `${label} (${count})` : label;
   return (
-    <Chip
-      label={chipLabel}
-      onClick={onClick}
-      sx={{
-        background: active ? 'rgba(79,209,255,0.14)' : cssVars.bgGlass,
-        color: active ? accent.cyan : cssVars.textMuted,
-        border: `1px solid ${active ? cssVars.borderStrong : cssVars.borderSubtle}`,
-        backdropFilter: 'blur(12px)',
-        WebkitBackdropFilter: 'blur(12px)',
-        fontWeight: 500,
-        borderRadius: `${radii.pill}px`,
-        transition: 'all 160ms',
-        '&:hover': {
-          background: 'rgba(79,209,255,0.10)',
-          color: cssVars.textPrimary,
-        },
-      }}
-    />
+    <Tooltip title={tooltip} arrow placement="top">
+      <Chip
+        label={chipLabel}
+        onClick={onClick}
+        sx={{
+          background: active ? 'rgba(79,209,255,0.14)' : cssVars.bgGlass,
+          color: active ? accent.cyan : cssVars.textMuted,
+          border: `1px solid ${active ? cssVars.borderStrong : cssVars.borderSubtle}`,
+          backdropFilter: 'blur(12px)',
+          WebkitBackdropFilter: 'blur(12px)',
+          fontWeight: 500,
+          borderRadius: `${radii.pill}px`,
+          transition: 'all 160ms',
+          '&:hover': {
+            background: 'rgba(79,209,255,0.10)',
+            color: cssVars.textPrimary,
+          },
+        }}
+      />
+    </Tooltip>
   );
 }

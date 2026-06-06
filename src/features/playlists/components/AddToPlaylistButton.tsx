@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import {
   IconButton,
+  Tooltip,
   Popover,
   Box,
   List,
@@ -63,14 +64,16 @@ export function AddToPlaylistButton({ trackSlug }: Props) {
   if (!user) {
     return (
       <>
-        <IconButton
-          size="small"
-          aria-label={t('signInToAddToPlaylist')}
-          onClick={(e) => setAnchorEl(e.currentTarget)}
-          sx={{ color: cssVars.textMuted, '&:hover': { color: cssVars.accentElectric } }}
-        >
-          <ListPlus size={18} />
-        </IconButton>
+        <Tooltip title={t('signInToAddToPlaylist')} arrow placement="top">
+          <IconButton
+            size="small"
+            aria-label={t('signInToAddToPlaylist')}
+            onClick={(e) => setAnchorEl(e.currentTarget)}
+            sx={{ color: cssVars.textMuted, '&:hover': { color: cssVars.accentElectric } }}
+          >
+            <ListPlus size={18} />
+          </IconButton>
+        </Tooltip>
 
         <Popover
           open={Boolean(anchorEl)}
@@ -119,14 +122,16 @@ export function AddToPlaylistButton({ trackSlug }: Props) {
 
   return (
     <>
-      <IconButton
-        size="small"
-        aria-label={t('addTrack')}
-        onClick={(e) => setAnchorEl(e.currentTarget)}
-        sx={{ color: cssVars.textMuted, '&:hover': { color: cssVars.accentElectric } }}
-      >
-        <ListPlus size={18} />
-      </IconButton>
+      <Tooltip title={t('addTrack')} arrow placement="top">
+        <IconButton
+          size="small"
+          aria-label={t('addTrack')}
+          onClick={(e) => setAnchorEl(e.currentTarget)}
+          sx={{ color: cssVars.textMuted, '&:hover': { color: cssVars.accentElectric } }}
+        >
+          <ListPlus size={18} />
+        </IconButton>
+      </Tooltip>
 
       <Popover
         open={Boolean(anchorEl)}
