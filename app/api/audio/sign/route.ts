@@ -1,4 +1,5 @@
-import { NextRequest, NextResponse } from 'next/server';
+import type { NextRequest } from 'next/server';
+import { NextResponse } from 'next/server';
 import { getSupabaseAnonClient } from '@/shared/lib/supabase/server';
 import { signedGetUrl, DEFAULT_READ_TTL_SECONDS } from '@/shared/lib/r2/signing';
 
@@ -11,7 +12,11 @@ function hasR2Config(): boolean {
   );
 }
 
-type TrackSourceRow = { kind: string; source_ref: string; is_primary: boolean };
+interface TrackSourceRow {
+  kind: string;
+  source_ref: string;
+  is_primary: boolean;
+}
 
 interface TrackSignRow {
   id: string;

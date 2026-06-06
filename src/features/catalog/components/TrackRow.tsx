@@ -14,7 +14,6 @@ import type { PlayableTrack } from '@/features/player/lib/types';
 import {
   isTrackLanguage,
   trackLanguageLabels,
-  type TrackLanguage,
 } from '@/features/catalog/lib/track-languages';
 
 interface Props {
@@ -40,7 +39,7 @@ export function TrackRow({ track, locale: _locale, queue, queueIndex, position }
   const t = useTranslations('catalog.tooltips');
   const href = trackPath(track.slug);
   const languageLabel =
-    isTrackLanguage(track.language) ? trackLanguageLabels[track.language as TrackLanguage] : track.language;
+    isTrackLanguage(track.language) ? trackLanguageLabels[track.language] : track.language;
   return (
     <Box sx={{ position: 'relative' }}>
       <Link href={href} style={{ textDecoration: 'none', display: 'block' }}>

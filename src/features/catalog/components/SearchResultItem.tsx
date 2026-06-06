@@ -12,7 +12,6 @@ import { trackPath } from '@/shared/lib/seo/paths';
 import {
   isTrackLanguage,
   trackLanguageLabels,
-  type TrackLanguage,
 } from '@/features/catalog/lib/track-languages';
 
 interface Props {
@@ -28,7 +27,7 @@ export function SearchResultItem({ result, locale: _locale, active = false, item
   const t = useTranslations('catalog.tooltips');
   const { entry, matches } = result;
   const languageLabel =
-    isTrackLanguage(entry.language) ? trackLanguageLabels[entry.language as TrackLanguage] : entry.language;
+    isTrackLanguage(entry.language) ? trackLanguageLabels[entry.language] : entry.language;
   const languageTooltip = entry.hasAudio
     ? `${t('language', { language: languageLabel })}. ${t('audio')}`
     : t('language', { language: languageLabel });
