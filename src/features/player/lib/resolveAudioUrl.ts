@@ -1,7 +1,7 @@
 /**
  * Resuelve la URL de reproducción para una pista.
  * - URLs legacy (https://…) se usan directamente.
- * - Claves R2 (audio/{uuid}/legacy.mp3) pasan por la Edge Function sign-audio-url.
+ * - Claves R2 (audio/{uuid}/legacy.mp3) pasan por `/api/audio/sign`.
  */
 
 const signedUrlCache = new Map<string, { url: string; expiresAt: number }>();
@@ -24,23 +24,21 @@ export async function fetchSignedAudioUrl(slug: string): Promise<string | null> 
     return cached.url;
   }
 
-  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-  const anonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
-  if (!supabaseUrl || !anonKey) return null;
+  const signUrl = `/api/audio/sign?track=${encodeURIComponent(slug)}`;
 
-  const res = await fetch(
-    `${supabaseUrl}/functions/v1/sign-audio-url?track=${encodeURIComponent(slug)}`,
-    { headers: { Authorization: `Bearer ${anonKey}` } },
-  );
+  try {
+    const res = await fetch(signUrl);
+    if (!res.ok) return null;
 
-  if (!res.ok) return null;
-
-  const data = (await res.json()) as SignAudioResponse;
-  signedUrlCache.set(slug, {
-    url: data.url,
-    expiresAt: new Date(data.expiresAt).getTime(),
-  });
-  return data.url;
+    const data = (await res.json()) as SignAudioResponse;
+    signedUrlCache.set(slug, {
+      url: data.url,
+      expiresAt: new Date(data.expiresAt).getTime(),
+    });
+    return data.url;
+  } catch {
+    return null;
+  }
 }
 
 /**

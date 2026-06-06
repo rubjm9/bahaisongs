@@ -50,16 +50,17 @@ serve(async (req: Request) => {
   // `track_sources` already restricts to public read, so anon key is enough.
   const { data, error } = await supabase
     .from('tracks')
-    .select('id, slug, published_at, sources:track_sources(kind, source_ref, is_primary)')
+    .select('id, slug, published_at, track_sources (kind, source_ref, is_primary)')
     .eq('slug', trackSlug)
     .maybeSingle();
 
   if (error) return json({ error: 'lookup-failed', detail: error.message }, 500);
   if (!data || !data.published_at) return json({ error: 'not-found' }, 404);
 
-  const primary = (
-    data.sources as { kind: string; source_ref: string; is_primary: boolean }[]
-  ).find((s) => s.is_primary && s.kind === 'mp3_r2');
+  const sources = data.track_sources as { kind: string; source_ref: string; is_primary: boolean }[];
+  const primary =
+    sources.find((s) => s.is_primary && s.kind === 'mp3_r2') ??
+    sources.find((s) => s.kind === 'mp3_r2');
 
   if (!primary) return json({ error: 'audio-unavailable' }, 410);
 
