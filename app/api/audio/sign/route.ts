@@ -3,6 +3,8 @@ import { NextResponse } from 'next/server';
 import { getSupabaseAnonClient } from '@/shared/lib/supabase/server';
 import { signedGetUrl, DEFAULT_READ_TTL_SECONDS } from '@/shared/lib/r2/signing';
 
+export const runtime = 'edge';
+
 function hasR2Config(): boolean {
   return !!(
     process.env.R2_ACCOUNT_ID &&
