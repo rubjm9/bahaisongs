@@ -9,8 +9,17 @@ interface SuggestionRow {
   created_at: string;
   payload: Record<string, unknown>;
   submitter_name: string | null;
+  submitter_email: string | null;
   review_notes: string | null;
   upload_path: string | null;
+}
+
+function resolveSubmitterName(
+  profileName: string | null,
+  submitterName: string | null,
+  submitterEmail: string | null,
+): string {
+  return profileName ?? submitterName ?? submitterEmail ?? 'Anónimo';
 }
 
 export default async function SuggestionsPage() {
@@ -20,6 +29,7 @@ export default async function SuggestionsPage() {
     .from('suggestions')
     .select(`
       id, status, created_at, payload, review_notes, upload_path,
+      submitter_name, submitter_email,
       profiles:submitted_by (display_name)
     `)
     .order('created_at' as never, { ascending: false })
@@ -32,20 +42,27 @@ export default async function SuggestionsPage() {
     payload: Record<string, unknown>;
     review_notes: string | null;
     upload_path: string | null;
+    submitter_name: string | null;
+    submitter_email: string | null;
     profiles: { display_name: string | null } | { display_name: string | null }[] | null;
   }
 
-  const rows: SuggestionRow[] = ((data ?? []) as RawSuggestion[]).map((s) => ({
-    id: s.id,
-    status: s.status,
-    created_at: s.created_at,
-    payload: s.payload ?? {},
-    review_notes: s.review_notes,
-    upload_path: s.upload_path,
-    submitter_name: Array.isArray(s.profiles)
+  const rows: SuggestionRow[] = ((data ?? []) as RawSuggestion[]).map((s) => {
+    const profileName = Array.isArray(s.profiles)
       ? (s.profiles[0]?.display_name ?? null)
-      : (s.profiles?.display_name ?? null),
-  }));
+      : (s.profiles?.display_name ?? null);
+
+    return {
+      id: s.id,
+      status: s.status,
+      created_at: s.created_at,
+      payload: s.payload ?? {},
+      review_notes: s.review_notes,
+      upload_path: s.upload_path,
+      submitter_name: resolveSubmitterName(profileName, s.submitter_name, s.submitter_email),
+      submitter_email: s.submitter_email,
+    };
+  });
 
   return (
     <>

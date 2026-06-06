@@ -329,7 +329,9 @@ export interface Database {
       suggestions: {
         Row: {
           id: string;
-          submitted_by: string;
+          submitted_by: string | null;
+          submitter_name: string | null;
+          submitter_email: string | null;
           status: SuggestionStatus;
           payload: Record<string, unknown>;
           upload_path: string | null;
@@ -341,7 +343,9 @@ export interface Database {
         };
         Insert: {
           id?: string;
-          submitted_by: string;
+          submitted_by?: string | null;
+          submitter_name?: string | null;
+          submitter_email?: string | null;
           status?: SuggestionStatus;
           payload: Record<string, unknown>;
           upload_path?: string | null;
@@ -350,6 +354,9 @@ export interface Database {
           reviewed_at?: string | null;
         };
         Update: {
+          submitted_by?: string | null;
+          submitter_name?: string | null;
+          submitter_email?: string | null;
           status?: SuggestionStatus;
           payload?: Record<string, unknown>;
           upload_path?: string | null;

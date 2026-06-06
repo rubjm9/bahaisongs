@@ -28,8 +28,108 @@ interface SuggestionRow {
   created_at: string;
   payload: Record<string, unknown>;
   submitter_name: string | null;
+  submitter_email: string | null;
   review_notes: string | null;
   upload_path: string | null;
+}
+
+function payloadArtist(payload: Record<string, unknown>): string | null {
+  if (typeof payload.artistName === 'string' && payload.artistName) return payload.artistName;
+  if (typeof payload.artist === 'string' && payload.artist) return payload.artist;
+  return null;
+}
+
+function payloadSource(payload: Record<string, unknown>): { kind?: string; ref?: string } | null {
+  const source = payload.source;
+  if (source && typeof source === 'object' && !Array.isArray(source)) {
+    const record = source as Record<string, unknown>;
+    const parsed: { kind?: string; ref?: string } = {};
+    if (typeof record.kind === 'string') parsed.kind = record.kind;
+    if (typeof record.ref === 'string') parsed.ref = record.ref;
+    return parsed;
+  }
+  return null;
+}
+
+function hasAudioSource(row: SuggestionRow): boolean {
+  if (row.upload_path) return true;
+  const source = payloadSource(row.payload);
+  return !!(source?.ref && (source.kind === 'youtube' || source.kind === 'mp3_r2'));
+}
+
+function DetailField({ label, value }: { label: string; value: string | null | undefined }) {
+  if (!value) return null;
+  return (
+    <Box>
+      <Typography variant="caption" sx={{ color: cssVars.textMuted, fontWeight: 600, display: 'block', mb: 0.25 }}>
+        {label}
+      </Typography>
+      <Typography variant="body2" sx={{ whiteSpace: 'pre-wrap', wordBreak: 'break-word' }}>
+        {value}
+      </Typography>
+    </Box>
+  );
+}
+
+function SuggestionDetail({ row }: { row: SuggestionRow }) {
+  const [showRaw, setShowRaw] = useState(false);
+  const source = payloadSource(row.payload);
+  const categories = Array.isArray(row.payload.categorySlugs)
+    ? row.payload.categorySlugs.filter((s): s is string => typeof s === 'string').join(', ')
+    : null;
+
+  return (
+    <Stack spacing={2}>
+      <DetailField label="Título" value={typeof row.payload.title === 'string' ? row.payload.title : null} />
+      <DetailField label="Artista" value={payloadArtist(row.payload)} />
+      <DetailField label="Idioma" value={typeof row.payload.language === 'string' ? row.payload.language : null} />
+      <DetailField label="Categorías" value={categories} />
+      <DetailField
+        label="Fuente de audio"
+        value={
+          source?.kind && source.ref
+            ? `${source.kind === 'youtube' ? 'YouTube' : 'MP3'}: ${source.ref}`
+            : row.upload_path ?? null
+        }
+      />
+      <DetailField
+        label="Letra (texto)"
+        value={typeof row.payload.lyricsPlain === 'string' ? row.payload.lyricsPlain : null}
+      />
+      <DetailField
+        label="Letra (ChordPro)"
+        value={typeof row.payload.lyricsChordPro === 'string' ? row.payload.lyricsChordPro : null}
+      />
+      <DetailField label="Notas del submitter" value={typeof row.payload.notes === 'string' ? row.payload.notes : null} />
+      <DetailField
+        label="Contacto"
+        value={[row.submitter_name, row.submitter_email].filter(Boolean).join(' · ') || null}
+      />
+
+      <Button size="small" variant="text" onClick={() => setShowRaw((v) => !v)} sx={{ alignSelf: 'flex-start' }}>
+        {showRaw ? 'Ocultar JSON' : 'Ver JSON completo'}
+      </Button>
+      {showRaw && (
+        <Box
+          component="pre"
+          sx={{
+            fontSize: '0.75rem',
+            background: cssVars.bgPrimary,
+            border: `1px solid ${cssVars.borderSubtle}`,
+            borderRadius: `${radii.md}px`,
+            p: 2,
+            overflow: 'auto',
+            whiteSpace: 'pre-wrap',
+            wordBreak: 'break-word',
+            maxHeight: 240,
+            color: cssVars.textPrimary,
+          }}
+        >
+          {JSON.stringify(row.payload, null, 2)}
+        </Box>
+      )}
+    </Stack>
+  );
 }
 
 const STATUS_LABEL: Record<string, string> = { pending: 'Pendiente', approved: 'Aprobada', rejected: 'Rechazada', withdrawn: 'Retirada' };
@@ -88,7 +188,7 @@ export function SuggestionsClient({ initialSuggestions }: Props) {
       width: 140,
       render: (row) => (
         <Typography variant="body2" sx={{ color: cssVars.textMuted }}>
-          {typeof row.payload.artist === 'string' ? row.payload.artist : '—'}
+          {payloadArtist(row.payload) ?? '—'}
         </Typography>
       ),
     },
@@ -99,14 +199,14 @@ export function SuggestionsClient({ initialSuggestions }: Props) {
       align: 'center',
       render: (row) => (
         <Chip
-          label={row.upload_path ? 'Sí' : 'No'}
+          label={hasAudioSource(row) ? 'Sí' : 'No'}
           size="small"
           sx={{
             fontSize: '0.65rem',
             height: 20,
             fontWeight: 600,
-            background: row.upload_path ? 'rgba(79,209,255,0.15)' : 'transparent',
-            color: row.upload_path ? '#4FD1FF' : cssVars.textMuted,
+            background: hasAudioSource(row) ? 'rgba(79,209,255,0.15)' : 'transparent',
+            color: hasAudioSource(row) ? '#4FD1FF' : cssVars.textMuted,
           }}
         />
       ),
@@ -185,23 +285,7 @@ export function SuggestionsClient({ initialSuggestions }: Props) {
         <DialogContent>
           {detailSuggestion && (
             <Stack spacing={2}>
-              <Box
-                component="pre"
-                sx={{
-                  fontSize: '0.75rem',
-                  background: cssVars.bgPrimary,
-                  border: `1px solid ${cssVars.borderSubtle}`,
-                  borderRadius: `${radii.md}px`,
-                  p: 2,
-                  overflow: 'auto',
-                  whiteSpace: 'pre-wrap',
-                  wordBreak: 'break-word',
-                  maxHeight: 300,
-                  color: cssVars.textPrimary,
-                }}
-              >
-                {JSON.stringify(detailSuggestion.payload, null, 2)}
-              </Box>
+              <SuggestionDetail row={detailSuggestion} />
               {detailSuggestion.review_notes && (
                 <Box sx={{ p: 1.5, borderRadius: `${radii.md}px`, background: cssVars.bgPrimary, border: `1px solid ${cssVars.borderSubtle}` }}>
                   <Typography variant="caption" sx={{ color: cssVars.textMuted, display: 'block', mb: 0.5, fontWeight: 600 }}>Notas de revisión</Typography>
