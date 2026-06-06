@@ -1,5 +1,4 @@
 import { z } from 'zod';
-import { TRACK_LANGUAGES } from '@/features/catalog/lib/track-languages';
 import { knownCategorySlugs } from '@/features/catalog/lib/category-labels';
 
 const categorySlugSet = new Set(knownCategorySlugs());
@@ -17,11 +16,18 @@ export function extractYoutubeRef(value: string): string | null {
 const baseFields = {
   title: z.string().trim().min(1, 'required').max(300),
   artistName: z.string().trim().max(200).optional(),
-  language: z.enum(TRACK_LANGUAGES),
+  language: z
+    .string()
+    .trim()
+    .min(2, 'invalidLanguage')
+    .max(10, 'invalidLanguage')
+    .regex(/^[a-z]{2}(-[a-z]{2})?$/i, 'invalidLanguage'),
+  languageLabel: z.string().trim().max(80).optional(),
   categorySlugs: z
     .array(z.string())
     .max(8)
     .refine((slugs) => slugs.every((s) => categorySlugSet.has(s)), 'invalidCategory'),
+  suggestedCategory: z.string().trim().max(100).optional(),
   sourceKind: z.enum(['mp3_r2', 'youtube']),
   youtubeUrl: z.string().trim().optional(),
   lyricsPlain: z.string().trim().max(20000).optional(),
@@ -81,7 +87,9 @@ export function buildSuggestionPayload(data: SuggestFormValues) {
     title: data.title,
     artistName: data.artistName?.trim() ? data.artistName.trim() : undefined,
     language: data.language,
+    languageLabel: data.languageLabel?.trim() ? data.languageLabel.trim() : undefined,
     categorySlugs: data.categorySlugs,
+    suggestedCategory: data.suggestedCategory?.trim() ? data.suggestedCategory.trim() : undefined,
     hasChords: data.hasChords,
     lyricsPlain: data.lyricsPlain ?? undefined,
     lyricsChordPro: data.lyricsChordPro ?? undefined,

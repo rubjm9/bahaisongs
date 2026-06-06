@@ -3,7 +3,7 @@ import type { Metadata } from 'next';
 import { setRequestLocale, getTranslations } from 'next-intl/server';
 import type { Locale } from '@/shared/lib/i18n/config';
 import { knownCategorySlugs } from '@/features/catalog/lib/category-labels';
-import { getActiveCategorySlugs } from '@/server/data/catalog';
+import { getActiveCategorySlugs, getArtistNames } from '@/server/data/catalog';
 import { GradientText } from '@/shared/ui/GradientText';
 import { accent, cssVars } from '@/shared/theme/tokens';
 import { SuggestForm } from '@/features/suggestions/components/SuggestForm';
@@ -24,7 +24,7 @@ export default async function SuggestPage({ params }: { params: Params }) {
   setRequestLocale(locale);
   const t = await getTranslations('suggest');
 
-  const activeSlugs = await getActiveCategorySlugs();
+  const [activeSlugs, artistNames] = await Promise.all([getActiveCategorySlugs(), getArtistNames()]);
   const known = new Set(knownCategorySlugs());
   const categorySlugs = activeSlugs.filter((slug) => known.has(slug));
 
@@ -51,7 +51,7 @@ export default async function SuggestPage({ params }: { params: Params }) {
         </Typography>
       </Box>
 
-      <SuggestForm locale={locale as Locale} categorySlugs={categorySlugs} />
+      <SuggestForm locale={locale as Locale} categorySlugs={categorySlugs} artistNames={artistNames} />
     </Stack>
   );
 }

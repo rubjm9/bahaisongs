@@ -14,6 +14,7 @@ import {
   getTracksByCategorySupabase,
   getRecentTracksSupabase,
 } from './catalog-supabase';
+import { getSupabaseAnonClient } from '@/shared/lib/supabase/server';
 
 /**
  * Full catalogue track shape. Mirrors the output of
@@ -129,4 +130,23 @@ export const getCatalogLanguages = cache(async (): Promise<CatalogLanguageOption
     code,
     count: counts.get(code)!,
   }));
+});
+
+/** Sorted unique artist names for autocomplete in suggestion form. */
+export const getArtistNames = cache(async (): Promise<string[]> => {
+  if (supabaseEnabled) {
+    const supabase = getSupabaseAnonClient();
+    const { data } = await supabase.from('artists').select('name').order('name' as never);
+    if (data?.length) {
+      const names = data
+        .map((row) => (row as { name: string | null }).name)
+        .filter((name): name is string => !!name?.trim());
+      return [...new Set(names)].sort((a, b) => a.localeCompare(b, 'es'));
+    }
+  }
+  const names = new Set<string>();
+  for (const track of jsonCatalog) {
+    if (track.artist.trim()) names.add(track.artist.trim());
+  }
+  return [...names].sort((a, b) => a.localeCompare(b, 'es'));
 });

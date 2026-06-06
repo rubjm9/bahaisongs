@@ -6,10 +6,12 @@ export interface SuggestionPayload {
   title: string;
   artistName?: string;
   language: string;
+  languageLabel?: string;
   lyricsPlain?: string;
   lyricsChordPro?: string;
   hasChords: boolean;
   categorySlugs: string[];
+  suggestedCategory?: string;
   source: {
     kind: TrackSourceKind;
     /** R2 incoming path when kind === 'mp3_r2'; YouTube URL or id when 'youtube'. */

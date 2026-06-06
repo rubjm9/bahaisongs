@@ -82,8 +82,18 @@ function SuggestionDetail({ row }: { row: SuggestionRow }) {
     <Stack spacing={2}>
       <DetailField label="Título" value={typeof row.payload.title === 'string' ? row.payload.title : null} />
       <DetailField label="Artista" value={payloadArtist(row.payload)} />
-      <DetailField label="Idioma" value={typeof row.payload.language === 'string' ? row.payload.language : null} />
+      <DetailField label="Idioma" value={
+        typeof row.payload.language === 'string'
+          ? typeof row.payload.languageLabel === 'string' && row.payload.languageLabel
+            ? `${row.payload.languageLabel} (${row.payload.language})`
+            : row.payload.language
+          : null
+      } />
       <DetailField label="Categorías" value={categories} />
+      <DetailField
+        label="Categoría propuesta"
+        value={typeof row.payload.suggestedCategory === 'string' ? row.payload.suggestedCategory : null}
+      />
       <DetailField
         label="Fuente de audio"
         value={

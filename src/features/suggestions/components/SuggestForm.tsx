@@ -1,9 +1,10 @@
 'use client';
 
-import { useState, useTransition } from 'react';
+import { useCallback, useRef, useState, useTransition } from 'react';
 import { useTranslations } from 'next-intl';
 import {
   Alert,
+  Autocomplete,
   Box,
   Button,
   Checkbox,
@@ -21,7 +22,7 @@ import {
   ToggleButtonGroup,
   Typography,
 } from '@mui/material';
-import { CheckCircle2, Music, Youtube } from 'lucide-react';
+import { CheckCircle2, Music, Plus, Youtube } from 'lucide-react';
 import type { Locale } from '@/shared/lib/i18n/config';
 import { categoryLabel } from '@/features/catalog/lib/category-labels';
 import { TRACK_LANGUAGES, trackLanguageLabels } from '@/features/catalog/lib/track-languages';
@@ -34,6 +35,7 @@ import { GlowButton } from '@/shared/ui/GlowButton';
 interface Props {
   locale: Locale;
   categorySlugs: string[];
+  artistNames: string[];
 }
 
 function sectionTitle(text: string) {
@@ -53,21 +55,32 @@ function sectionTitle(text: string) {
   );
 }
 
-export function SuggestForm({ locale, categorySlugs }: Props) {
+function isMp3File(file: File): boolean {
+  return file.type === 'audio/mpeg' || file.name.toLowerCase().endsWith('.mp3');
+}
+
+export function SuggestForm({ locale, categorySlugs, artistNames }: Props) {
   const t = useTranslations('suggest');
   const { user, profile, loading: authLoading } = useUser();
   const openLogin = useLoginPrompt((s) => s.open);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const [suggestionId, setSuggestionId] = useState(() => crypto.randomUUID());
-  const [sourceKind, setSourceKind] = useState<'mp3_r2' | 'youtube'>('youtube');
+  const [sourceKind, setSourceKind] = useState<'mp3_r2' | 'youtube'>('mp3_r2');
   const [title, setTitle] = useState('');
   const [artistName, setArtistName] = useState('');
   const [language, setLanguage] = useState<(typeof TRACK_LANGUAGES)[number]>('es');
+  const [useCustomLanguage, setUseCustomLanguage] = useState(false);
+  const [customLanguageCode, setCustomLanguageCode] = useState('');
+  const [customLanguageLabel, setCustomLanguageLabel] = useState('');
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
+  const [showSuggestedCategory, setShowSuggestedCategory] = useState(false);
+  const [suggestedCategory, setSuggestedCategory] = useState('');
   const [youtubeUrl, setYoutubeUrl] = useState('');
   const [mp3File, setMp3File] = useState<File | null>(null);
   const [uploadPath, setUploadPath] = useState<string | null>(null);
   const [uploadProgress, setUploadProgress] = useState<number | null>(null);
+  const [isDragOver, setIsDragOver] = useState(false);
   const [lyricsPlain, setLyricsPlain] = useState('');
   const [lyricsChordPro, setLyricsChordPro] = useState('');
   const [hasChords, setHasChords] = useState(false);
@@ -86,6 +99,7 @@ export function SuggestForm({ locale, categorySlugs }: Props) {
     'required',
     'invalidEmail',
     'invalidCategory',
+    'invalidLanguage',
     'youtubeRequired',
     'invalidYoutube',
     'uploadRequired',
@@ -114,6 +128,22 @@ export function SuggestForm({ locale, categorySlugs }: Props) {
       prev.includes(slug) ? prev.filter((s) => s !== slug) : [...prev, slug],
     );
   }
+
+  const pickMp3File = useCallback((file: File | null) => {
+    if (!file) return;
+    if (!isMp3File(file)) {
+      setFieldErrors((prev) => ({ ...prev, uploadPath: 'uploadRequired' }));
+      return;
+    }
+    setMp3File(file);
+    setUploadPath(null);
+    setUploadProgress(null);
+    setFieldErrors((prev) => {
+      const next = { ...prev };
+      delete next.uploadPath;
+      return next;
+    });
+  }, []);
 
   async function uploadMp3(file: File): Promise<string> {
     const res = await fetch('/api/suggestion-upload-url', {
@@ -148,11 +178,18 @@ export function SuggestForm({ locale, categorySlugs }: Props) {
     setTitle('');
     setArtistName('');
     setLanguage('es');
+    setUseCustomLanguage(false);
+    setCustomLanguageCode('');
+    setCustomLanguageLabel('');
     setSelectedCategories([]);
+    setShowSuggestedCategory(false);
+    setSuggestedCategory('');
+    setSourceKind('mp3_r2');
     setYoutubeUrl('');
     setMp3File(null);
     setUploadPath(null);
     setUploadProgress(null);
+    setIsDragOver(false);
     setLyricsPlain('');
     setLyricsChordPro('');
     setHasChords(false);
@@ -171,54 +208,61 @@ export function SuggestForm({ locale, categorySlugs }: Props) {
     setFormError(null);
     setFieldErrors({});
 
+    const resolvedLanguage = useCustomLanguage ? customLanguageCode.trim().toLowerCase() : language;
+    const resolvedLanguageLabel = useCustomLanguage
+      ? customLanguageLabel.trim() || undefined
+      : undefined;
+
     startTransition(() => {
       void (async () => {
-      try {
-        let resolvedUploadPath = uploadPath;
+        try {
+          let resolvedUploadPath = uploadPath;
 
-        if (sourceKind === 'mp3_r2') {
-          if (!mp3File && !resolvedUploadPath) {
-            setFieldErrors({ uploadPath: 'uploadRequired' });
+          if (sourceKind === 'mp3_r2') {
+            if (!mp3File && !resolvedUploadPath) {
+              setFieldErrors({ uploadPath: 'uploadRequired' });
+              return;
+            }
+            if (mp3File && !resolvedUploadPath) {
+              setUploadProgress(0);
+              resolvedUploadPath = await uploadMp3(mp3File);
+              setUploadPath(resolvedUploadPath);
+            }
+          }
+
+          const result = await submitSuggestion({
+            suggestionId,
+            title,
+            artistName: artistName || undefined,
+            language: resolvedLanguage,
+            languageLabel: resolvedLanguageLabel,
+            categorySlugs: selectedCategories,
+            suggestedCategory: suggestedCategory.trim() || undefined,
+            sourceKind,
+            youtubeUrl: sourceKind === 'youtube' ? youtubeUrl : undefined,
+            lyricsPlain: lyricsPlain || undefined,
+            lyricsChordPro: lyricsChordPro || undefined,
+            hasChords,
+            notes: notes || undefined,
+            submitterName: submitterName || undefined,
+            submitterEmail: submitterEmail || undefined,
+            rightsConfirmed: rightsConfirmed as true,
+            uploadPath: resolvedUploadPath ?? undefined,
+          });
+
+          if (!result.ok) {
+            if (result.fieldErrors) {
+              setFieldErrors(result.fieldErrors);
+            }
+            setFormError(errorMessage(result.error));
             return;
           }
-          if (mp3File && !resolvedUploadPath) {
-            setUploadProgress(0);
-            resolvedUploadPath = await uploadMp3(mp3File);
-            setUploadPath(resolvedUploadPath);
-          }
+
+          setSuccess(true);
+        } catch {
+          setFormError(errorMessage('uploadFailed'));
+          setUploadProgress(null);
         }
-
-        const result = await submitSuggestion({
-          suggestionId,
-          title,
-          artistName: artistName || undefined,
-          language,
-          categorySlugs: selectedCategories,
-          sourceKind,
-          youtubeUrl: sourceKind === 'youtube' ? youtubeUrl : undefined,
-          lyricsPlain: lyricsPlain || undefined,
-          lyricsChordPro: lyricsChordPro || undefined,
-          hasChords,
-          notes: notes || undefined,
-          submitterName: submitterName || undefined,
-          submitterEmail: submitterEmail || undefined,
-          rightsConfirmed: rightsConfirmed as true,
-          uploadPath: resolvedUploadPath ?? undefined,
-        });
-
-        if (!result.ok) {
-          if (result.fieldErrors) {
-            setFieldErrors(result.fieldErrors);
-          }
-          setFormError(errorMessage(result.error));
-          return;
-        }
-
-        setSuccess(true);
-      } catch {
-        setFormError(errorMessage('uploadFailed'));
-        setUploadProgress(null);
-      }
       })();
     });
   }
@@ -268,28 +312,81 @@ export function SuggestForm({ locale, categorySlugs }: Props) {
               error={!!fieldErrors.title}
               helperText={fieldErrors.title ? errorMessage(fieldErrors.title) : undefined}
             />
-            <TextField
-              label={t('artistName')}
-              placeholder={t('artistPlaceholder')}
-              value={artistName}
-              onChange={(e) => setArtistName(e.target.value)}
-              fullWidth
-              size="small"
+            <Autocomplete
+              freeSolo
+              options={artistNames}
+              inputValue={artistName}
+              onInputChange={(_, value) => setArtistName(value)}
+              renderInput={(params) => {
+                const { InputLabelProps: _ilp, ...rest } = params;
+                return (
+                  <TextField
+                    {...rest}
+                    label={t('artistName')}
+                    placeholder={t('artistPlaceholder')}
+                    size="small"
+                  />
+                );
+              }}
             />
-            <FormControl fullWidth size="small">
-              <InputLabel>{t('language')}</InputLabel>
-              <Select
-                value={language}
-                label={t('language')}
-                onChange={(e) => setLanguage(e.target.value as (typeof TRACK_LANGUAGES)[number])}
-              >
-                {TRACK_LANGUAGES.map((code) => (
-                  <MenuItem key={code} value={code}>
-                    {trackLanguageLabels[code]}
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
+            {!useCustomLanguage ? (
+              <Stack spacing={1}>
+                <FormControl fullWidth size="small">
+                  <InputLabel>{t('language')}</InputLabel>
+                  <Select
+                    value={language}
+                    label={t('language')}
+                    onChange={(e) => setLanguage(e.target.value as (typeof TRACK_LANGUAGES)[number])}
+                  >
+                    {TRACK_LANGUAGES.map((code) => (
+                      <MenuItem key={code} value={code}>
+                        {trackLanguageLabels[code]}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                </FormControl>
+                <Button
+                  size="small"
+                  startIcon={<Plus size={14} />}
+                  onClick={() => setUseCustomLanguage(true)}
+                  sx={{ alignSelf: 'flex-start', color: cssVars.textMuted }}
+                >
+                  {t('addLanguage')}
+                </Button>
+              </Stack>
+            ) : (
+              <Stack spacing={1.5}>
+                <TextField
+                  label={t('customLanguageCode')}
+                  placeholder={t('customLanguageCodePlaceholder')}
+                  value={customLanguageCode}
+                  onChange={(e) => setCustomLanguageCode(e.target.value)}
+                  fullWidth
+                  size="small"
+                  error={!!fieldErrors.language}
+                  helperText={fieldErrors.language ? errorMessage(fieldErrors.language) : undefined}
+                />
+                <TextField
+                  label={t('customLanguageLabel')}
+                  placeholder={t('customLanguageLabelPlaceholder')}
+                  value={customLanguageLabel}
+                  onChange={(e) => setCustomLanguageLabel(e.target.value)}
+                  fullWidth
+                  size="small"
+                />
+                <Button
+                  size="small"
+                  onClick={() => {
+                    setUseCustomLanguage(false);
+                    setCustomLanguageCode('');
+                    setCustomLanguageLabel('');
+                  }}
+                  sx={{ alignSelf: 'flex-start', color: cssVars.textMuted }}
+                >
+                  {t('backToLanguageList')}
+                </Button>
+              </Stack>
+            )}
             {categorySlugs.length > 0 && (
               <Box>
                 <Typography variant="body2" sx={{ mb: 1, color: cssVars.textMuted }}>
@@ -298,7 +395,7 @@ export function SuggestForm({ locale, categorySlugs }: Props) {
                 <Typography variant="caption" sx={{ display: 'block', mb: 1.5, color: cssVars.textMuted }}>
                   {t('categoriesHint')}
                 </Typography>
-                <Stack direction="row" flexWrap="wrap" gap={1}>
+                <Stack direction="row" flexWrap="wrap" gap={1} alignItems="center">
                   {categorySlugs.map((slug) => {
                     const selected = selectedCategories.includes(slug);
                     return (
@@ -314,7 +411,31 @@ export function SuggestForm({ locale, categorySlugs }: Props) {
                       />
                     );
                   })}
+                  <Chip
+                    icon={<Plus size={14} />}
+                    label={t('suggestCategory')}
+                    onClick={() => setShowSuggestedCategory((v) => !v)}
+                    variant={showSuggestedCategory || suggestedCategory ? 'filled' : 'outlined'}
+                    sx={{
+                      borderRadius: '999px',
+                      borderStyle: 'dashed',
+                      borderColor: accent.cyan,
+                      background: showSuggestedCategory ? `${accent.cyan}18` : 'transparent',
+                      '& .MuiChip-icon': { ml: 0.5 },
+                    }}
+                  />
                 </Stack>
+                {showSuggestedCategory && (
+                  <TextField
+                    label={t('suggestCategory')}
+                    placeholder={t('suggestCategoryPlaceholder')}
+                    value={suggestedCategory}
+                    onChange={(e) => setSuggestedCategory(e.target.value)}
+                    fullWidth
+                    size="small"
+                    sx={{ mt: 1.5 }}
+                  />
+                )}
               </Box>
             )}
           </Stack>
@@ -330,13 +451,13 @@ export function SuggestForm({ locale, categorySlugs }: Props) {
               size="small"
               sx={{ mb: 1 }}
             >
-              <ToggleButton value="youtube">
-                <Youtube size={16} style={{ marginRight: 6 }} />
-                {t('sourceYoutube')}
-              </ToggleButton>
               <ToggleButton value="mp3_r2">
                 <Music size={16} style={{ marginRight: 6 }} />
                 {t('sourceMp3')}
+              </ToggleButton>
+              <ToggleButton value="youtube">
+                <Youtube size={16} style={{ marginRight: 6 }} />
+                {t('sourceYoutube')}
               </ToggleButton>
             </ToggleButtonGroup>
 
@@ -353,27 +474,54 @@ export function SuggestForm({ locale, categorySlugs }: Props) {
               />
             ) : (
               <Box>
-                <Button variant="outlined" component="label" size="small" sx={{ mb: 1 }}>
-                  {t('mp3Label')}
-                  <input
-                    type="file"
-                    hidden
-                    accept="audio/mpeg,.mp3"
-                    onChange={(e) => {
-                      const file = e.target.files?.[0] ?? null;
-                      setMp3File(file);
-                      setUploadPath(null);
-                      setUploadProgress(null);
-                    }}
-                  />
-                </Button>
-                <FormHelperText sx={{ ml: 0 }}>{t('mp3Hint')}</FormHelperText>
-                {mp3File && (
-                  <Typography variant="caption" sx={{ display: 'block', mt: 1, color: cssVars.textMuted }}>
-                    {mp3File.name}
-                    {uploadPath ? ` — ${t('mp3Ready')}` : ''}
+                <Box
+                  onClick={() => fileInputRef.current?.click()}
+                  onDragOver={(e) => {
+                    e.preventDefault();
+                    setIsDragOver(true);
+                  }}
+                  onDragLeave={(e) => {
+                    e.preventDefault();
+                    setIsDragOver(false);
+                  }}
+                  onDrop={(e) => {
+                    e.preventDefault();
+                    setIsDragOver(false);
+                    pickMp3File(e.dataTransfer.files[0] ?? null);
+                  }}
+                  sx={{
+                    border: `2px dashed ${isDragOver ? accent.cyan : cssVars.borderSubtle}`,
+                    borderRadius: `${radii.md}px`,
+                    p: 2.5,
+                    textAlign: 'center',
+                    cursor: 'pointer',
+                    background: isDragOver ? `${accent.cyan}12` : cssVars.bgPrimary,
+                    transition: 'border-color 0.15s, background 0.15s',
+                  }}
+                >
+                  <Typography variant="body2" sx={{ fontWeight: 600, mb: 0.5 }}>
+                    {t('mp3Label')}
                   </Typography>
-                )}
+                  <Typography variant="caption" sx={{ color: cssVars.textMuted, display: 'block' }}>
+                    {t('mp3DropHint')}
+                  </Typography>
+                  <Typography variant="caption" sx={{ color: cssVars.textMuted, display: 'block', mt: 0.5 }}>
+                    {t('mp3Hint')}
+                  </Typography>
+                  {mp3File && (
+                    <Typography variant="caption" sx={{ display: 'block', mt: 1.5, color: accent.cyan }}>
+                      {mp3File.name}
+                      {uploadPath ? ` — ${t('mp3Ready')}` : ''}
+                    </Typography>
+                  )}
+                </Box>
+                <input
+                  ref={fileInputRef}
+                  type="file"
+                  hidden
+                  accept="audio/mpeg,.mp3"
+                  onChange={(e) => pickMp3File(e.target.files?.[0] ?? null)}
+                />
                 {uploadProgress !== null && (
                   <LinearProgress
                     variant={uploadProgress >= 100 ? 'determinate' : 'indeterminate'}
@@ -382,7 +530,9 @@ export function SuggestForm({ locale, categorySlugs }: Props) {
                   />
                 )}
                 {fieldErrors.uploadPath && (
-                  <FormHelperText error>{errorMessage(fieldErrors.uploadPath)}</FormHelperText>
+                  <FormHelperText error sx={{ mt: 1 }}>
+                    {errorMessage(fieldErrors.uploadPath)}
+                  </FormHelperText>
                 )}
               </Box>
             )}
