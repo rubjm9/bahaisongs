@@ -1,6 +1,14 @@
 import createNextIntlPlugin from 'next-intl/plugin';
+import withSerwistInit from '@serwist/next';
 
 const withNextIntl = createNextIntlPlugin('./src/shared/lib/i18n/request.ts');
+
+const withSerwist = withSerwistInit({
+  swSrc: 'app/sw.ts',
+  swDest: 'public/sw.js',
+  // Service worker only runs in production builds.
+  disable: process.env.NODE_ENV === 'development',
+});
 
 const PRODUCTION_ORIGIN = 'https://bahaisongs.org';
 
@@ -115,4 +123,4 @@ const nextConfig = {
   },
 };
 
-export default withNextIntl(nextConfig);
+export default withSerwist(withNextIntl(nextConfig));

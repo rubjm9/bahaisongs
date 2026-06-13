@@ -1,4 +1,20 @@
 {
+  "pwa": {
+    "install": {
+      "title": "Install BahaiSongs",
+      "description": "Add it to your home screen to open it like an app.",
+      "cta": "Install app",
+      "dismiss": "Close",
+      "iosCta": "How to install",
+      "iosStep1": "Tap the Share button",
+      "iosStep2": "Choose “Add to Home Screen”"
+    },
+    "offline": {
+      "title": "You're offline",
+      "description": "There's no internet connection. Pages you've already visited are still available.",
+      "retry": "Retry"
+    }
+  },
   "brand": {
     "name": "BahaiSongs.org",
     "tagline": "Music, prayers and chord sheets from the Bahá'í community, in one place."

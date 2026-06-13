@@ -2,6 +2,7 @@ import { notFound } from 'next/navigation';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages, setRequestLocale } from 'next-intl/server';
 import { Providers } from '@/app/providers';
+import { InstallPrompt } from '@/features/pwa/components/InstallPrompt';
 import { routing } from '@/shared/lib/i18n/routing';
 import { getServerThemeMode, getServerThemePreference } from '@/shared/theme/serverTheme';
 import type { Locale } from '@/shared/lib/i18n/config';
@@ -37,6 +38,7 @@ export default async function LocaleLayout({
     <NextIntlClientProvider locale={locale} messages={messages}>
       <Providers initialMode={initialMode} {...(themePreference ? { themePreference } : {})}>
         {children}
+        <InstallPrompt />
       </Providers>
     </NextIntlClientProvider>
   );

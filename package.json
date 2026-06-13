@@ -29,6 +29,7 @@
     "import:bahaiblog": "tsx scripts/normalize-bahaiblog-data.ts && tsx --env-file .env.local scripts/import-bahaiblog-youtube.ts",
     "import:bahaiblog:normalize": "tsx scripts/normalize-bahaiblog-data.ts",
     "validate:redirects": "tsx scripts/validate-redirects.ts",
+    "icons:generate": "tsx scripts/generate-pwa-icons.ts",
     "prepare": "husky || true"
   },
   "dependencies": {
@@ -62,6 +63,7 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.2.0",
+    "@serwist/next": "^9.0.0",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.1.0",
     "@testing-library/user-event": "^14.5.2",
@@ -79,6 +81,8 @@
     "jsdom": "^25.0.1",
     "lint-staged": "^15.2.11",
     "prettier": "^3.4.2",
+    "serwist": "^9.0.0",
+    "sharp": "^0.33.5",
     "tsx": "^4.22.3",
     "typescript": "^5.7.2",
     "typescript-eslint": "^8.18.1",

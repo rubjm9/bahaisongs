@@ -1,4 +1,20 @@
 {
+  "pwa": {
+    "install": {
+      "title": "Instala BahaiSongs",
+      "description": "Añádela a tu pantalla de inicio para abrirla como una app.",
+      "cta": "Instalar app",
+      "dismiss": "Cerrar",
+      "iosCta": "Cómo instalar",
+      "iosStep1": "Pulsa el botón Compartir",
+      "iosStep2": "Elige «Añadir a pantalla de inicio»"
+    },
+    "offline": {
+      "title": "Sin conexión",
+      "description": "No hay conexión a internet. Las páginas que ya hayas visitado siguen disponibles.",
+      "retry": "Reintentar"
+    }
+  },
   "brand": {
     "name": "BahaiSongs.org",
     "tagline": "Música, oraciones y acordes de la comunidad bahá'í, en un mismo lugar."
