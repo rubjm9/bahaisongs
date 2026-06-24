@@ -8,7 +8,6 @@ import type { AiBinding, CloudflareBindings, MappedLyrics } from './types';
 export type { MappedLyrics, TranscriptionResult } from './types';
 export { mapToLyrics } from './mapToLyrics';
 export { parseVtt } from './parseVtt';
-export { transcribeWithLocalCli } from './providers/local';
 
 const MAX_SINGLE_PASS_BYTES = 24 * 1024 * 1024;
 

@@ -8,9 +8,6 @@ export async function recordPlayAction(input: {
   slug?: string;
   source?: string;
 }): Promise<{ ok: boolean }> {
-  // #region agent log
-  fetch('http://127.0.0.1:7856/ingest/8cec6073-f88c-47fc-b763-1794242c957e',{method:'POST',headers:{'Content-Type':'application/json','X-Debug-Session-Id':'95fed2'},body:JSON.stringify({sessionId:'95fed2',location:'recordPlay.ts:entry',message:'recordPlayAction called',data:{supabaseEnabled,hasServiceRoleKey,slug:input.slug??null,hasTrackId:Boolean(input.trackId)},timestamp:Date.now(),hypothesisId:'B'})}).catch(()=>{});
-  // #endregion
   if (!supabaseEnabled) {
     return { ok: false };
   }
@@ -38,9 +35,6 @@ export async function recordPlayAction(input: {
   }
 
   if (!trackId) {
-    // #region agent log
-    fetch('http://127.0.0.1:7856/ingest/8cec6073-f88c-47fc-b763-1794242c957e',{method:'POST',headers:{'Content-Type':'application/json','X-Debug-Session-Id':'95fed2'},body:JSON.stringify({sessionId:'95fed2',location:'recordPlay.ts:no-track',message:'skipped: trackId not resolved',data:{slug:input.slug??null},timestamp:Date.now(),hypothesisId:'D'})}).catch(()=>{});
-    // #endregion
     return { ok: false };
   }
 
@@ -54,14 +48,8 @@ export async function recordPlayAction(input: {
 
   if (error) {
     console.error('[recordPlayAction]', error.message);
-    // #region agent log
-    fetch('http://127.0.0.1:7856/ingest/8cec6073-f88c-47fc-b763-1794242c957e',{method:'POST',headers:{'Content-Type':'application/json','X-Debug-Session-Id':'95fed2'},body:JSON.stringify({sessionId:'95fed2',location:'recordPlay.ts:insert-error',message:'play_events insert failed',data:{trackId,error:error.message,usedServiceRole:false},timestamp:Date.now(),hypothesisId:'D'})}).catch(()=>{});
-    // #endregion
     return { ok: false };
   }
 
-  // #region agent log
-  fetch('http://127.0.0.1:7856/ingest/8cec6073-f88c-47fc-b763-1794242c957e',{method:'POST',headers:{'Content-Type':'application/json','X-Debug-Session-Id':'95fed2'},body:JSON.stringify({sessionId:'95fed2',location:'recordPlay.ts:ok',message:'play_events insert ok',data:{trackId,userId:userId?'set':'null',usedServiceRole:false},timestamp:Date.now(),hypothesisId:'D'})}).catch(()=>{});
-  // #endregion
   return { ok: true };
 }

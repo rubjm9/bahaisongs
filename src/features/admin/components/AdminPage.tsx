@@ -2,7 +2,7 @@
 
 import { useEffect, type ReactNode } from 'react';
 import { Box, type SxProps, type Theme } from '@mui/material';
-import { useAdminTopBarContext } from '../context/adminTopBarContext';
+import { useAdminTopBarContext, type AdminTopBarConfig } from '../context/adminTopBarContext';
 
 interface Props {
   title?: string;
@@ -24,7 +24,11 @@ export function AdminPage({
   const { setConfig } = useAdminTopBarContext();
 
   useEffect(() => {
-    setConfig({ title, description, actions });
+    const config: AdminTopBarConfig = {};
+    if (title !== undefined) config.title = title;
+    if (description !== undefined) config.description = description;
+    if (actions !== undefined) config.actions = actions;
+    setConfig(config);
     return () => setConfig({});
   }, [title, description, actions, setConfig]);
 

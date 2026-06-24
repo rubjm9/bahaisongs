@@ -16,18 +16,12 @@ export function usePlayAnalytics() {
     const maybeRecord = () => {
       const status = usePlayerStore.getState().status;
       const track = selectCurrentTrack(useQueueStore.getState());
-      // #region agent log
-      fetch('http://127.0.0.1:7856/ingest/8cec6073-f88c-47fc-b763-1794242c957e',{method:'POST',headers:{'Content-Type':'application/json','X-Debug-Session-Id':'95fed2'},body:JSON.stringify({sessionId:'95fed2',location:'usePlayAnalytics.ts:maybeRecord',message:'maybeRecord invoked',data:{status,slug:track?.slug??null,recordedSlug:recordedSlugRef.current,hasTrackId:Boolean(track?.id)},timestamp:Date.now(),hypothesisId:'C'})}).catch(()=>{});
-      // #endregion
       if (status !== 'playing') return;
 
       if (!track?.slug) return;
       if (track.slug === recordedSlugRef.current) return;
 
       recordedSlugRef.current = track.slug;
-      // #region agent log
-      fetch('http://127.0.0.1:7856/ingest/8cec6073-f88c-47fc-b763-1794242c957e',{method:'POST',headers:{'Content-Type':'application/json','X-Debug-Session-Id':'95fed2'},body:JSON.stringify({sessionId:'95fed2',location:'usePlayAnalytics.ts:record',message:'recording play event',data:{slug:track.slug,hasTrackId:Boolean(track.id)},timestamp:Date.now(),hypothesisId:'C'})}).catch(()=>{});
-      // #endregion
       void recordPlayEvent({
         ...(track.id ? { trackId: track.id } : {}),
         slug: track.slug,

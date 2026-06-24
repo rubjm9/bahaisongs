@@ -62,8 +62,8 @@ export default async function TracksPage() {
       : (t.artists?.name ?? null);
 
     const hasChords = (t.lyrics ?? []).some((l) => l.has_chords);
-    const hasLyrics = (t.lyrics ?? []).some(
-      (l) => Boolean(l.body_plain?.trim() || l.body_chordpro?.trim()),
+    const hasLyrics = (t.lyrics ?? []).some((l) =>
+      [l.body_plain, l.body_chordpro].some((text) => Boolean(text?.trim())),
     );
 
     return {

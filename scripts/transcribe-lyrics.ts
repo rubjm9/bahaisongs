@@ -18,7 +18,8 @@
 
 import { parseArgs } from 'node:util';
 import { createClient } from '@supabase/supabase-js';
-import { loadAudioFromR2, mapToLyrics, transcribeWithLocalCli } from '../src/server/transcription';
+import { loadAudioFromR2, mapToLyrics } from '../src/server/transcription';
+import { transcribeWithLocalCli } from '../src/server/transcription/providers/local';
 
 function env(name: string): string {
   const v = process.env[name];
