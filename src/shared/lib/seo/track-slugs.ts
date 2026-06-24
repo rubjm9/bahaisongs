@@ -17,6 +17,7 @@ export const RESERVED_SEGMENTS = new Set([
   'artist',
   'playlist',
   'present',
+  'offline',
   'song',
   'en',
   'es',
