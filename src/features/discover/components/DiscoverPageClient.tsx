@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { useLocale, useTranslations } from 'next-intl';
 import { Box, Divider, Stack, Chip, Tooltip, Typography } from '@mui/material';
 import { motion } from 'framer-motion';
+import { ListMusic } from 'lucide-react';
 import { GradientText } from '@/shared/ui/GradientText';
 import { SearchBox } from '@/features/catalog/components/SearchBox';
 import { SearchResultItem } from '@/features/catalog/components/SearchResultItem';
@@ -38,6 +39,7 @@ export function DiscoverPageClient({
   allTracks,
 }: Props) {
   const t = useTranslations('discover');
+  const tPublicPlaylists = useTranslations('publicPlaylists');
   const tFilters = useTranslations('search.filters');
   const locale = useLocale() as Locale;
   const router = useRouter();
@@ -164,6 +166,48 @@ export function DiscoverPageClient({
           onClick={() => setWithAudio((v) => !v)}
         />
       </Stack>
+
+      {!hasActiveQuery ? (
+        <Link href={appPath(locale, 'public-playlists')} style={{ textDecoration: 'none' }}>
+          <Box
+            sx={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: 2,
+              p: 2,
+              borderRadius: `${radii.md}px`,
+              background: cssVars.bgGlass,
+              border: `1px solid ${cssVars.borderSubtle}`,
+              transition: 'border-color 160ms',
+              '&:hover': { borderColor: cssVars.borderStrong },
+            }}
+          >
+            <Box
+              sx={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                width: 40,
+                height: 40,
+                borderRadius: `${radii.sm}px`,
+                background: `${accent.cyan}14`,
+                color: accent.cyan,
+                flexShrink: 0,
+              }}
+            >
+              <ListMusic size={18} aria-hidden />
+            </Box>
+            <Box sx={{ flex: 1, minWidth: 0 }}>
+              <Typography sx={{ fontWeight: 600, fontSize: '0.9rem', color: cssVars.textPrimary }}>
+                {tPublicPlaylists('discoverCta')}
+              </Typography>
+              <Typography sx={{ fontSize: '0.8rem', color: cssVars.textMuted, mt: 0.25 }}>
+                {tPublicPlaylists('discoverCtaHint')}
+              </Typography>
+            </Box>
+          </Box>
+        </Link>
+      ) : null}
 
       {!hasActiveQuery && activeFeatured.length > 0 ? (
         <Box>

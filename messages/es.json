@@ -35,6 +35,7 @@
     "home": "Inicio",
     "discover": "Descubrir",
     "library": "Biblioteca",
+    "publicPlaylists": "Playlists públicas",
     "suggest": "Sugerir canción",
     "favorites": "Favoritos",
     "playlists": "Playlists",
@@ -114,6 +115,18 @@
     "allTracksHeading": "{count} canciones, ordenadas alfabéticamente",
     "resultsCount": "{count, plural, =0 {Sin resultados} =1 {1 resultado} other {# resultados}}",
     "loading": "Cargando catálogo…"
+  },
+  "publicPlaylists": {
+    "eyebrow": "Comunidad",
+    "title": "Playlists públicas",
+    "subtitle": "Colecciones compartidas por la comunidad y por BahaiSongs",
+    "curatedBadge": "Curada",
+    "byUser": "Por {name}",
+    "byUserAnonymous": "Por un usuario",
+    "trackCount": "{count, plural, =0 {Sin canciones} =1 {1 canción} other {# canciones}}",
+    "empty": "Aún no hay playlists públicas. Crea la tuya y compártela con la comunidad.",
+    "discoverCta": "Explorar playlists públicas",
+    "discoverCtaHint": "Colecciones de la comunidad y de BahaiSongs"
   },
   "library": {
     "eyebrow": "Personal",

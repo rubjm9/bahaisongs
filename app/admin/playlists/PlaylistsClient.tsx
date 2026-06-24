@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useTransition } from 'react';
+import { useMemo, useState, useTransition } from 'react';
 import Link from 'next/link';
 import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -15,6 +15,8 @@ import {
   IconButton,
   MenuItem,
   Stack,
+  Tab,
+  Tabs,
   TextField,
   Tooltip,
   Typography,
@@ -24,21 +26,31 @@ import { DataTable, type Column } from '@/features/admin/components/DataTable';
 import { ConfirmDialog } from '@/features/admin/components/ConfirmDialog';
 import { playlistSchema, type PlaylistFormValues } from '@/features/admin/lib/schemas';
 import { createCuratedPlaylist, updatePlaylist, deletePlaylist } from '@/features/admin/actions/playlists';
+import type { AdminPlaylistRow } from '@/server/data/playlists';
 import { cssVars, accent, radii } from '@/shared/theme/tokens';
 
-interface PlaylistRow { id: string; slug: string; title: string; description: string | null; visibility: string; is_curated: boolean; _track_count: number }
+type FilterTab = 'all' | 'curated' | 'user';
 
 const VISIBILITY_LABELS: Record<string, string> = { public: 'Pública', private: 'Privada', unlisted: 'No listada' };
 
+function formatDate(iso: string): string {
+  try {
+    return new Intl.DateTimeFormat('es', { day: '2-digit', month: '2-digit', year: 'numeric' }).format(new Date(iso));
+  } catch {
+    return iso;
+  }
+}
+
 interface Props {
-  initialPlaylists: PlaylistRow[];
+  initialPlaylists: AdminPlaylistRow[];
 }
 
 export function PlaylistsClient({ initialPlaylists }: Props) {
   const [playlists, setPlaylists] = useState(initialPlaylists);
+  const [filter, setFilter] = useState<FilterTab>('all');
   const [dialogOpen, setDialogOpen] = useState(false);
-  const [editing, setEditing] = useState<PlaylistRow | null>(null);
-  const [deleteTarget, setDeleteTarget] = useState<PlaylistRow | null>(null);
+  const [editing, setEditing] = useState<AdminPlaylistRow | null>(null);
+  const [deleteTarget, setDeleteTarget] = useState<AdminPlaylistRow | null>(null);
   const [isPending, startTransition] = useTransition();
   const [error, setError] = useState<string | null>(null);
 
@@ -47,6 +59,15 @@ export function PlaylistsClient({ initialPlaylists }: Props) {
     defaultValues: { slug: '', title: '', description: '', visibility: 'public' },
   });
 
+  const filteredPlaylists = useMemo(() => {
+    if (filter === 'curated') return playlists.filter((p) => p.is_curated);
+    if (filter === 'user') return playlists.filter((p) => !p.is_curated);
+    return playlists;
+  }, [playlists, filter]);
+
+  const curatedCount = playlists.filter((p) => p.is_curated).length;
+  const userCount = playlists.filter((p) => !p.is_curated).length;
+
   function openCreate() {
     setEditing(null);
     reset({ slug: '', title: '', description: '', visibility: 'public' });
@@ -54,7 +75,7 @@ export function PlaylistsClient({ initialPlaylists }: Props) {
     setError(null);
   }
 
-  function openEdit(p: PlaylistRow) {
+  function openEdit(p: AdminPlaylistRow) {
     setEditing(p);
     reset({ slug: p.slug, title: p.title, description: p.description ?? '', visibility: p.visibility as PlaylistFormValues['visibility'] });
     setDialogOpen(true);
@@ -68,7 +89,7 @@ export function PlaylistsClient({ initialPlaylists }: Props) {
         if (editing) {
           await updatePlaylist(editing.id, values);
           setPlaylists((prev) =>
-            prev.map((p): PlaylistRow =>
+            prev.map((p): AdminPlaylistRow =>
               p.id === editing.id
                 ? { ...p, slug: values.slug, title: values.title, description: values.description ?? null, visibility: values.visibility }
                 : p,
@@ -76,16 +97,19 @@ export function PlaylistsClient({ initialPlaylists }: Props) {
           );
         } else {
           const created = await createCuratedPlaylist(values);
-          const newPlaylist: PlaylistRow = {
+          const newPlaylist: AdminPlaylistRow = {
             id: created?.id ?? crypto.randomUUID(),
             slug: values.slug,
             title: values.title,
             description: values.description ?? null,
             visibility: values.visibility,
             is_curated: true,
+            owner_id: null,
+            owner_display_name: null,
+            updated_at: new Date().toISOString(),
             _track_count: 0,
           };
-          setPlaylists((prev) => [...prev, newPlaylist]);
+          setPlaylists((prev) => [newPlaylist, ...prev]);
         }
         setDialogOpen(false);
       } catch (e) {
@@ -103,7 +127,7 @@ export function PlaylistsClient({ initialPlaylists }: Props) {
     });
   }
 
-  const columns: Column<PlaylistRow>[] = [
+  const columns: Column<AdminPlaylistRow>[] = [
     {
       key: 'title',
       label: 'Título',
@@ -112,6 +136,34 @@ export function PlaylistsClient({ initialPlaylists }: Props) {
           <Typography variant="body2" sx={{ fontWeight: 500 }}>{row.title}</Typography>
           <Typography variant="caption" sx={{ color: cssVars.textMuted, fontSize: '0.75rem' }}>{row.slug}</Typography>
         </Box>
+      ),
+    },
+    {
+      key: 'origin',
+      label: 'Origen',
+      width: 100,
+      render: (row) => (
+        <Chip
+          label={row.is_curated ? 'Curada' : 'Usuario'}
+          size="small"
+          sx={{
+            fontSize: '0.7rem',
+            height: 22,
+            fontWeight: 600,
+            background: row.is_curated ? `${accent.cyan}18` : `${accent.electric}14`,
+            color: row.is_curated ? accent.cyan : accent.electric,
+          }}
+        />
+      ),
+    },
+    {
+      key: 'owner',
+      label: 'Propietario',
+      width: 140,
+      render: (row) => (
+        <Typography variant="body2" sx={{ fontSize: '0.8rem', color: cssVars.textMuted }}>
+          {row.is_curated ? '—' : (row.owner_display_name ?? 'Sin nombre')}
+        </Typography>
       ),
     },
     {
@@ -147,6 +199,16 @@ export function PlaylistsClient({ initialPlaylists }: Props) {
       ),
     },
     {
+      key: 'updated',
+      label: 'Actualizada',
+      width: 110,
+      render: (row) => (
+        <Typography variant="caption" sx={{ color: cssVars.textMuted, fontSize: '0.75rem' }}>
+          {formatDate(row.updated_at)}
+        </Typography>
+      ),
+    },
+    {
       key: 'actions',
       label: '',
       width: 100,
@@ -175,14 +237,31 @@ export function PlaylistsClient({ initialPlaylists }: Props) {
 
   return (
     <>
-      <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ mb: 3 }}>
-        <Typography variant="h6" sx={{ fontWeight: 600, color: cssVars.textPrimary }}>{playlists.length} playlists curadas</Typography>
-        <Button variant="contained" startIcon={<Plus size={16} />} onClick={openCreate} sx={{ borderRadius: `${radii.pill}px` }}>
+      <Stack direction={{ xs: 'column', sm: 'row' }} alignItems={{ sm: 'center' }} justifyContent="space-between" spacing={2} sx={{ mb: 2 }}>
+        <Box>
+          <Typography variant="h6" sx={{ fontWeight: 600, color: cssVars.textPrimary }}>
+            {playlists.length} playlists
+          </Typography>
+          <Typography variant="body2" sx={{ color: cssVars.textMuted, mt: 0.5 }}>
+            {curatedCount} curadas · {userCount} de usuarios
+          </Typography>
+        </Box>
+        <Button variant="contained" startIcon={<Plus size={16} />} onClick={openCreate} sx={{ borderRadius: `${radii.pill}px`, alignSelf: { xs: 'flex-start', sm: 'auto' } }}>
           Nueva playlist
         </Button>
       </Stack>
 
-      <DataTable columns={columns} rows={playlists} rowKey={(r) => r.id} emptyMessage="Sin playlists curadas todavía" />
+      <Tabs
+        value={filter}
+        onChange={(_, value: FilterTab) => setFilter(value)}
+        sx={{ mb: 2, minHeight: 36, '& .MuiTab-root': { minHeight: 36, textTransform: 'none', fontSize: '0.85rem' } }}
+      >
+        <Tab label={`Todas (${playlists.length})`} value="all" />
+        <Tab label={`Curadas (${curatedCount})`} value="curated" />
+        <Tab label={`De usuarios (${userCount})`} value="user" />
+      </Tabs>
+
+      <DataTable columns={columns} rows={filteredPlaylists} rowKey={(r) => r.id} emptyMessage="Sin playlists todavía" />
 
       <Dialog open={dialogOpen} onClose={() => setDialogOpen(false)} maxWidth="sm" fullWidth>
         <DialogTitle>{editing ? 'Editar playlist' : 'Nueva playlist'}</DialogTitle>

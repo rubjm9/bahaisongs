@@ -12,6 +12,7 @@ export const RESERVED_SEGMENTS = new Set([
   'library',
   'favorites',
   'playlists',
+  'public-playlists',
   'suggest',
   'category',
   'artist',
