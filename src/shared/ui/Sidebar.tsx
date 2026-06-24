@@ -71,7 +71,7 @@ export function Sidebar({ collapsed, onToggleCollapsed }: SidebarProps) {
         direction="row"
         alignItems="center"
         justifyContent={collapsed ? 'center' : 'space-between'}
-        sx={{ paddingX: collapsed ? 0 : 1, paddingY: 1, minHeight: 40 }}
+        sx={{ paddingX: collapsed ? 0 : 1, paddingY: 1.25, minHeight: 'auto', overflow: 'visible' }}
       >
         <Link
           href={appPath(locale)}
@@ -79,10 +79,9 @@ export function Sidebar({ collapsed, onToggleCollapsed }: SidebarProps) {
           style={{ textDecoration: 'none', flexShrink: 0 }}
         >
           <BrandMark
-            icon="monogram"
             label={tBrand('name')}
             showWordmark={!collapsed}
-            size={collapsed ? 28 : 32}
+            size={collapsed ? 28 : 168}
           />
         </Link>
         {!collapsed ? (

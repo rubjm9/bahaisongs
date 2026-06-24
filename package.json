@@ -32,6 +32,7 @@
     "import:bahaiblog:normalize": "tsx scripts/normalize-bahaiblog-data.ts",
     "validate:redirects": "tsx scripts/validate-redirects.ts",
     "icons:generate": "tsx scripts/generate-pwa-icons.ts",
+    "brand:logo": "tsx scripts/process-brand-logo.ts",
     "prepare": "husky || true"
   },
   "dependencies": {

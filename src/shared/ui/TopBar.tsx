@@ -42,7 +42,7 @@ export function TopBar() {
             style={{ textDecoration: 'none', display: 'flex', flexShrink: 0 }}
           >
             <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
-              <BrandMark icon="monogram" showWordmark={false} size={28} />
+              <BrandMark showWordmark={false} size={28} />
             </Box>
           </Link>
           <SearchPalette />
