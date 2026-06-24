@@ -1,6 +1,9 @@
 import { Box, Skeleton, Typography } from '@mui/material';
 import { cssVars, radii } from '@/shared/theme/tokens';
 import type { LucideIcon } from 'lucide-react';
+import { MiniBarChart } from './MiniBarChart';
+import { MiniLineChart } from './MiniLineChart';
+import type { ChartPoint } from './chart-types';
 
 interface Props {
   title: string;
@@ -9,6 +12,11 @@ interface Props {
   Icon?: LucideIcon;
   loading?: boolean;
   accent?: 'electric' | 'cyan' | 'indigo' | 'success' | 'warning';
+  chart?: {
+    data: ChartPoint[];
+    ariaLabel: string;
+    variant?: 'bar' | 'line';
+  };
 }
 
 const accentColorMap = {
@@ -19,14 +27,22 @@ const accentColorMap = {
   warning: 'var(--bs-status-warning, #F59E0B)',
 };
 
-export function StatCard({ title, value, subtitle, Icon, loading = false, accent: accentKey = 'electric' }: Props) {
+export function StatCard({
+  title,
+  value,
+  subtitle,
+  Icon,
+  loading = false,
+  accent: accentKey = 'electric',
+  chart,
+}: Props) {
   const accentColor = accentColorMap[accentKey];
 
   return (
     <Box
       sx={{
         height: '100%',
-        minHeight: 148,
+        minHeight: chart ? 220 : 148,
         pt: 3.5,
         pb: 3,
         px: 3,
@@ -113,6 +129,14 @@ export function StatCard({ title, value, subtitle, Icon, loading = false, accent
         >
           {subtitle}
         </Typography>
+      )}
+
+      {chart && !loading && (
+        chart.variant === 'line' ? (
+          <MiniLineChart data={chart.data} color={accentColor} ariaLabel={chart.ariaLabel} />
+        ) : (
+          <MiniBarChart data={chart.data} color={accentColor} ariaLabel={chart.ariaLabel} />
+        )
       )}
     </Box>
   );

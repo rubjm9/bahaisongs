@@ -1,9 +1,10 @@
 import { Suspense } from 'react';
 import { Box, Skeleton, Stack, Typography } from '@mui/material';
-import { Music2, Users, Lightbulb, Play, Mic2 } from 'lucide-react';
+import { Users, Lightbulb, Play } from 'lucide-react';
 import { AdminPage } from '@/features/admin/components/AdminPage';
+import { CatalogStatCard } from '@/features/admin/components/CatalogStatCard';
 import { StatCard } from '@/features/admin/components/StatCard';
-import { getAdminStats, getRecentSuggestions } from '@/server/data/admin-stats';
+import { getAdminStats, getCatalogHistoryByMonth, getNewUsersByMonth, getPlaysByWeek, getRecentSuggestions, getSuggestionsByMonth } from '@/server/data/admin-stats';
 import { cssVars, radii } from '@/shared/theme/tokens';
 
 export const metadata = { title: 'Inicio' };
@@ -28,7 +29,13 @@ function SectionHeading({ title, description }: { title: string; description?: s
 }
 
 async function StatsGrid() {
-  const stats = await getAdminStats();
+  const [stats, catalogHistory, usersByMonth, suggestionsByMonth, playsByWeek] = await Promise.all([
+    getAdminStats(),
+    getCatalogHistoryByMonth(6),
+    getNewUsersByMonth(6),
+    getSuggestionsByMonth(6),
+    getPlaysByWeek(8),
+  ]);
 
   return (
     <Box
@@ -38,26 +45,12 @@ async function StatsGrid() {
         gap: { xs: 2, md: 2.5 },
       }}
     >
-      <StatCard
-        title="Canciones"
-        value={stats.totalTracks}
-        subtitle={`${stats.publishedTracks} publicadas`}
-        Icon={Music2}
-        accent="electric"
-      />
-      <StatCard
-        title="Con audio"
-        value={stats.tracksWithAudio}
-        subtitle="fuentes activas"
-        Icon={Play}
-        accent="cyan"
-      />
-      <StatCard
-        title="Con acordes"
-        value={stats.tracksWithChords}
-        subtitle="letras ChordPro"
-        Icon={Mic2}
-        accent="indigo"
+      <CatalogStatCard
+        totalTracks={stats.totalTracks}
+        publishedTracks={stats.publishedTracks}
+        tracksWithAudio={stats.tracksWithAudio}
+        tracksWithChords={stats.tracksWithChords}
+        history={catalogHistory}
       />
       <StatCard
         title="Usuarios"
@@ -65,6 +58,10 @@ async function StatsGrid() {
         subtitle={`+${stats.newUsersLast7Days} esta semana`}
         Icon={Users}
         accent="success"
+        chart={{
+          data: usersByMonth,
+          ariaLabel: 'Usuarios nuevos por mes, últimos 6 meses',
+        }}
       />
       <StatCard
         title="Sugerencias"
@@ -72,6 +69,10 @@ async function StatsGrid() {
         subtitle="pendientes de revisar"
         Icon={Lightbulb}
         accent={stats.pendingSuggestions > 0 ? 'warning' : 'electric'}
+        chart={{
+          data: suggestionsByMonth,
+          ariaLabel: 'Sugerencias recibidas por mes, últimos 6 meses',
+        }}
       />
       <StatCard
         title="Reproducciones"
@@ -79,6 +80,11 @@ async function StatsGrid() {
         subtitle="últimos 7 días"
         Icon={Play}
         accent="cyan"
+        chart={{
+          data: playsByWeek,
+          ariaLabel: 'Reproducciones por semana, últimas 8 semanas',
+          variant: 'line',
+        }}
       />
     </Box>
   );
@@ -221,8 +227,13 @@ export default function AdminOverviewPage() {
                   gap: { xs: 2, md: 2.5 },
                 }}
               >
-                {Array.from({ length: 6 }).map((_, i) => (
-                  <Skeleton key={i} variant="rounded" height={148} sx={{ borderRadius: `${radii.lg}px` }} />
+                {Array.from({ length: 4 }).map((_, i) => (
+                  <Skeleton
+                    key={i}
+                    variant="rounded"
+                    height={i === 0 ? 220 : 148}
+                    sx={{ borderRadius: `${radii.lg}px`, gridColumn: i === 0 ? { md: '1 / -1' } : undefined }}
+                  />
                 ))}
               </Box>
             }
