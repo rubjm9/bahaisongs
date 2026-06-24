@@ -79,17 +79,24 @@ curl "https://TU_PROYECTO.supabase.co/functions/v1/sign-audio-url?track=oh-dios-
 # → { "url": "https://...", "expiresAt": "..." }
 ```
 
-## 6. Variables en Vercel (producción)
+## 6. Variables en Cloudflare Pages (producción)
 
-En el dashboard de Vercel → Settings → Environment Variables, añade las mismas vars R2 **solo en server** (no expongas `R2_SECRET_ACCESS_KEY` como `NEXT_PUBLIC_*`):
+En el dashboard de Cloudflare → **Workers & Pages** → tu proyecto → **Settings** → **Environment variables**, añade las mismas vars R2 **solo en server** (no expongas `R2_SECRET_ACCESS_KEY` como `NEXT_PUBLIC_*`):
 
 - `R2_ACCOUNT_ID`
 - `R2_ACCESS_KEY_ID`
 - `R2_SECRET_ACCESS_KEY`
 - `R2_BUCKET_AUDIO`
 - `R2_BUCKET_IMAGES`
+- `NEXT_PUBLIC_SUPABASE_URL`
+- `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+- `SUPABASE_SERVICE_ROLE_KEY` (necesaria para el panel admin: conteos de reproducciones y operaciones privilegiadas)
 
-Los secretos de la Edge Function se configuran en Supabase, no en Vercel.
+En **Bindings**, vincula también:
+- **Workers AI** → binding `AI`
+- **R2 bucket** `bahaisongs-audio` → binding `AUDIO_BUCKET`
+
+Los secretos de la Edge Function de firma se configuran en Supabase, no en Cloudflare Pages.
 
 ## 7. Verificar
 

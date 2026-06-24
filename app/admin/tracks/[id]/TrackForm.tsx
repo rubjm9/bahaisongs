@@ -25,7 +25,7 @@ import {
   Tooltip,
   Typography,
 } from '@mui/material';
-import { Save, ArrowLeft, Plus } from 'lucide-react';
+import { Save, ArrowLeft, Plus, Mic } from 'lucide-react';
 import Link from 'next/link';
 import {
   trackMetaSchema,
@@ -40,6 +40,7 @@ import { createCategory } from '@/features/admin/actions/categories';
 import { deriveHasChords } from '@/shared/lib/chord-detection';
 import { formatDuration, probeAudioDuration } from '@/shared/lib/audio-duration';
 import { cssVars, radii } from '@/shared/theme/tokens';
+import type { SyncedLyricLine } from '@/entities/lyrics';
 
 const ChordProEditorPanel = dynamic(
   () => import('@/features/admin/components/ChordProEditorPanel').then((m) => ({ default: m.ChordProEditorPanel })),
@@ -60,7 +61,7 @@ interface Artist { id: string; name: string; slug: string }
 interface Props {
   track: { id: string; slug: string; title: string; language: string; published_at: string | null; primary_artist_id: string | null; duration_seconds: number | null } | null;
   trackCategories: string[];
-  trackLyrics: { locale: string; body_plain: string | null; body_chordpro: string | null; has_chords: boolean } | null;
+  trackLyrics: { locale: string; body_plain: string | null; body_chordpro: string | null; has_chords: boolean; synced_json: unknown } | null;
   trackSources: { id: string; kind: string; source_ref: string; is_primary: boolean }[];
   categories: Category[];
   artists: Artist[];
@@ -96,6 +97,8 @@ export function TrackForm({ track, trackCategories, trackLyrics, trackSources, c
   const [isPending, startTransition] = useTransition();
   const [error, setError] = useState<string | null>(null);
   const [durationDetecting, setDurationDetecting] = useState(false);
+  const [transcribing, setTranscribing] = useState(false);
+  const [transcriptionNotice, setTranscriptionNotice] = useState<string | null>(null);
   const [categoryDialogKind, setCategoryDialogKind] = useState<CategoryFormValues['kind'] | null>(null);
   const [categoryError, setCategoryError] = useState<string | null>(null);
 
@@ -116,6 +119,7 @@ export function TrackForm({ track, trackCategories, trackLyrics, trackSources, c
     defaultValues: {
       body_plain: trackLyrics?.body_plain ?? '',
       body_chordpro: trackLyrics?.body_chordpro ?? '',
+      synced_json: (trackLyrics?.synced_json as SyncedLyricLine[] | null) ?? null,
     },
   });
 
@@ -141,6 +145,7 @@ export function TrackForm({ track, trackCategories, trackLyrics, trackSources, c
   );
 
   const durationSeconds = metaForm.watch('duration_seconds');
+  const hasMp3Source = trackSources.some((s) => s.kind === 'mp3_r2');
 
   const groupedCategories = categories.reduce<Record<string, Category[]>>((acc, cat) => {
     (acc[cat.kind] ??= []).push(cat);
@@ -182,6 +187,39 @@ export function TrackForm({ track, trackCategories, trackLyrics, trackSources, c
     });
   }
 
+  function onTranscribe() {
+    if (!track) return;
+    setTranscribing(true);
+    setTranscriptionNotice(null);
+    setError(null);
+    void fetch('/api/admin/transcribe', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ trackId: track.id }),
+    })
+      .then(async (res) => {
+        const data = (await res.json()) as {
+          plain?: string;
+          synced?: SyncedLyricLine[];
+          detail?: string;
+          error?: string;
+        };
+        if (!res.ok) {
+          throw new Error(data.detail ?? data.error ?? 'Error al transcribir');
+        }
+        lyricsForm.setValue('body_plain', data.plain ?? '', { shouldDirty: true });
+        lyricsForm.setValue('synced_json', data.synced ?? null, { shouldDirty: true });
+        setTranscriptionNotice(
+          'Letra transcrita automáticamente. Revisa el texto y las marcas de tiempo antes de guardar.',
+        );
+        setActiveTab(2);
+      })
+      .catch((e) => {
+        setError(e instanceof Error ? e.message : 'Error al transcribir');
+      })
+      .finally(() => setTranscribing(false));
+  }
+
   function onSave() {
     void metaForm.handleSubmit((metaValues) => {
       startTransition(async () => {
@@ -192,7 +230,9 @@ export function TrackForm({ track, trackCategories, trackLyrics, trackSources, c
             locale: metaValues.language,
             body_plain: lyricsValues.body_plain,
             body_chordpro: lyricsValues.body_chordpro,
+            synced_json: lyricsValues.synced_json,
             has_chords: deriveHasChords(lyricsValues.body_plain, lyricsValues.body_chordpro),
+            ...(lyricsValues.synced_json?.length ? { source: 'transcription' as const } : {}),
           };
 
           const metaPayload = {
@@ -428,14 +468,43 @@ export function TrackForm({ track, trackCategories, trackLyrics, trackSources, c
 
           {activeTab === 2 && (
             <Box>
-              <Box sx={{ mb: 2 }}>
-                <Typography variant="body2" sx={{ color: cssVars.textMuted, lineHeight: 1.6 }}>
-                  El idioma de la letra coincide con el idioma definido en metadatos.
-                  {hasChordsDetected
-                    ? ' Acordes detectados automáticamente.'
-                    : ' No se detectaron acordes en el texto ChordPro.'}
-                </Typography>
-              </Box>
+              <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1.5} sx={{ mb: 2 }} alignItems={{ sm: 'center' }}>
+                <Box sx={{ flex: 1 }}>
+                  <Typography variant="body2" sx={{ color: cssVars.textMuted, lineHeight: 1.6 }}>
+                    El idioma de la letra coincide con el idioma definido en metadatos.
+                    {hasChordsDetected
+                      ? ' Acordes detectados automáticamente.'
+                      : ' No se detectaron acordes en el texto ChordPro.'}
+                  </Typography>
+                </Box>
+                {track && hasMp3Source ? (
+                  <Button
+                    variant="outlined"
+                    size="small"
+                    startIcon={transcribing ? <CircularProgress size={14} /> : <Mic size={16} />}
+                    onClick={onTranscribe}
+                    disabled={transcribing || isPending}
+                    sx={{ borderRadius: `${radii.pill}px`, flexShrink: 0 }}
+                  >
+                    {transcribing ? 'Transcribiendo…' : 'Transcribir desde MP3'}
+                  </Button>
+                ) : null}
+              </Stack>
+              {transcriptionNotice ? (
+                <Box
+                  sx={{
+                    mb: 2,
+                    p: 1.5,
+                    borderRadius: `${radii.md}px`,
+                    background: 'rgba(56,189,248,0.08)',
+                    border: '1px solid rgba(56,189,248,0.25)',
+                    color: cssVars.textPrimary,
+                    fontSize: '0.875rem',
+                  }}
+                >
+                  {transcriptionNotice}
+                </Box>
+              ) : null}
               <ChordProEditorPanel
                 value={bodyChordpro ?? ''}
                 onChange={handleChordProChange}

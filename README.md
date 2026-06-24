@@ -26,6 +26,7 @@ Modern web platform for Bahá'í music, lyrics and chord sheets — inspired by 
 - **next-intl** for i18n (`es` default, `en`)
 - **Fuse.js** for the client-side search index
 - **Supabase** (Postgres + Auth + RLS + Edge Functions) — schema and ETL ready, connection happens in a later phase
+- **Cloudflare Pages** for production hosting (Next.js via Workers)
 - **Cloudflare R2** for audio / image storage — signing helpers ready
 - **Vitest** + Testing Library, **Playwright** for e2e (planned)
 - **ESLint** flat config (typescript-eslint strict) + **Prettier** + **husky** + **lint-staged**

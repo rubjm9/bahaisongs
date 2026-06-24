@@ -1,7 +1,7 @@
 import { Suspense } from 'react';
 import { Box, Skeleton, Stack, Typography } from '@mui/material';
 import { Music2, Users, Lightbulb, Play, Mic2 } from 'lucide-react';
-import { AdminTopBar } from '@/features/admin/components/AdminTopBar';
+import { AdminPage } from '@/features/admin/components/AdminPage';
 import { StatCard } from '@/features/admin/components/StatCard';
 import { getAdminStats, getRecentSuggestions } from '@/server/data/admin-stats';
 import { cssVars, radii } from '@/shared/theme/tokens';
@@ -197,22 +197,16 @@ async function RecentSuggestionsSection() {
 
 export default function AdminOverviewPage() {
   return (
-    <>
-      <AdminTopBar
-        title="Panel de administración"
-        description="Vista general del catálogo, usuarios y actividad reciente."
-      />
-
-      <Box
-        sx={{
-          px: { xs: 2.5, md: 4 },
-          py: { xs: 3, md: 5 },
-          pb: { xs: 5, md: 7 },
-          maxWidth: 1200,
-          mx: 'auto',
-          width: '100%',
-        }}
-      >
+    <AdminPage
+      title="Panel de administración"
+      description="Vista general del catálogo, usuarios y actividad reciente."
+      maxWidth={1200}
+      contentSx={{
+        px: { xs: 2.5, md: 4 },
+        py: { xs: 3, md: 5 },
+        pb: { xs: 5, md: 7 },
+      }}
+    >
         <Box sx={{ mb: { xs: 5, md: 6 } }}>
           <SectionHeading
             title="Resumen general"
@@ -246,7 +240,6 @@ export default function AdminOverviewPage() {
             <RecentSuggestionsSection />
           </Suspense>
         </Box>
-      </Box>
-    </>
+    </AdminPage>
   );
 }

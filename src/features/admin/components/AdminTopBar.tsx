@@ -21,6 +21,8 @@ export function AdminTopBar({ title, description, actions }: Props) {
         position: 'sticky',
         top: 0,
         zIndex: 10,
+        width: '100%',
+        flexShrink: 0,
         display: 'flex',
         alignItems: 'center',
         gap: 2,

@@ -1,4 +1,5 @@
 import type { CatalogTrack } from '../catalog';
+import type { SyncedLyricLine } from '@/entities/lyrics';
 
 /**
  * Raw Supabase row returned by the catalog join query.
@@ -13,7 +14,7 @@ export interface TrackDbRow {
   cover_path: string | null;
   artists: { name: string; slug: string } | { name: string; slug: string }[] | null;
   track_sources: { kind: string; source_ref: string; is_primary: boolean }[] | null;
-  lyrics: { body_plain: string | null; body_chordpro: string | null; has_chords: boolean; locale: string }[] | null;
+  lyrics: { body_plain: string | null; body_chordpro: string | null; has_chords: boolean; locale: string; synced_json: unknown }[] | null;
   track_categories: { categories: { slug: string } | { slug: string }[] | null }[] | null;
 }
 
@@ -47,6 +48,11 @@ export function mapTrackRowToCatalogTrack(row: TrackDbRow): CatalogTrack {
 
   const chordProBody = defaultLyrics?.body_chordpro?.trim();
   if (chordProBody) mapped.lyricsChordPro = chordProBody;
+
+  const synced = defaultLyrics?.synced_json;
+  if (Array.isArray(synced) && synced.length > 0) {
+    mapped.syncedLyrics = synced as SyncedLyricLine[];
+  }
 
   const audioUrl =
     primarySource?.kind === 'mp3_r2' ? primarySource.source_ref : undefined;

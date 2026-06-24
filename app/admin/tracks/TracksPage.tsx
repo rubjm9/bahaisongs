@@ -1,7 +1,6 @@
-import { Box } from '@mui/material';
 import { getSupabaseServerClient } from '@/shared/lib/supabase/server';
 import { getPlayCountsByTrackId } from '@/server/data/play-counts';
-import { AdminTopBar } from '@/features/admin/components/AdminTopBar';
+import { AdminPage } from '@/features/admin/components/AdminPage';
 import { TracksClient } from './TracksClient';
 
 interface TrackRow {
@@ -14,6 +13,7 @@ interface TrackRow {
   artists: { name: string } | null;
   _count_sources: number;
   _has_chords: boolean;
+  _has_lyrics: boolean;
   _play_count: number;
 }
 
@@ -27,7 +27,7 @@ export default async function TracksPage() {
       id, slug, title, language, published_at, primary_artist_id,
       artists:primary_artist_id (name),
       track_sources (id),
-      lyrics (has_chords)
+      lyrics (has_chords, body_plain, body_chordpro)
     `)
     .order('title' as never)
     .limit(200);
@@ -53,7 +53,7 @@ export default async function TracksPage() {
     primary_artist_id: string | null;
     artists: { name: string } | { name: string }[] | null;
     track_sources: { id: string }[] | null;
-    lyrics: { has_chords: boolean }[] | null;
+    lyrics: { has_chords: boolean; body_plain: string | null; body_chordpro: string | null }[] | null;
   }
 
   const mapped: TrackRow[] = ((tracks ?? []) as RawTrack[]).map((t) => {
@@ -62,6 +62,9 @@ export default async function TracksPage() {
       : (t.artists?.name ?? null);
 
     const hasChords = (t.lyrics ?? []).some((l) => l.has_chords);
+    const hasLyrics = (t.lyrics ?? []).some(
+      (l) => Boolean(l.body_plain?.trim() || l.body_chordpro?.trim()),
+    );
 
     return {
       id: t.id,
@@ -73,20 +76,18 @@ export default async function TracksPage() {
       artists: artistName ? { name: artistName } : null,
       _count_sources: (t.track_sources ?? []).length,
       _has_chords: hasChords,
+      _has_lyrics: hasLyrics,
       _play_count: playCounts.get(t.id) ?? 0,
     };
   });
 
   return (
-    <>
-      <AdminTopBar title="Canciones" />
-      <Box sx={{ px: { xs: 2, md: 3 }, py: 3, maxWidth: 1280, mx: 'auto' }}>
-        <TracksClient
-          initialTracks={mapped}
-          categories={categories ?? []}
-          artists={artists ?? []}
-        />
-      </Box>
-    </>
+    <AdminPage title="Canciones">
+      <TracksClient
+        initialTracks={mapped}
+        categories={categories ?? []}
+        artists={artists ?? []}
+      />
+    </AdminPage>
   );
 }

@@ -6,6 +6,7 @@ import {
   isTrackLanguage,
   type TrackLanguage,
 } from '@/features/catalog/lib/track-languages';
+import type { SyncedLyricLine } from '@/entities/lyrics';
 import { supabaseEnabled } from '@/shared/lib/supabase/env';
 import {
   getAllTracksSupabase,
@@ -36,6 +37,8 @@ export interface CatalogTrack {
   lyrics: string;
   /** ChordPro-formatted lyrics (inline [Am]text format). Preferred over `lyrics` when present. */
   lyricsChordPro?: string;
+  /** Timed lyric lines for karaoke / follow mode. */
+  syncedLyrics?: SyncedLyricLine[];
   legacyAudioUrl?: string;
   youtubeId?: string;
   publishedAt?: string;

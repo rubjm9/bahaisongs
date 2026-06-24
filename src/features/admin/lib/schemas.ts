@@ -44,6 +44,16 @@ export type TrackMetaFormValues = z.infer<typeof trackMetaSchema>;
 export const lyricsEditorSchema = z.object({
   body_plain: z.string().max(20000).nullish(),
   body_chordpro: z.string().max(20000).nullish(),
+  synced_json: z
+    .array(
+      z.object({
+        startTime: z.number(),
+        endTime: z.number(),
+        text: z.string(),
+        line: z.number().optional(),
+      }),
+    )
+    .nullish(),
 });
 export type LyricsEditorFormValues = z.infer<typeof lyricsEditorSchema>;
 
@@ -51,7 +61,9 @@ export const lyricsSchema = z.object({
   locale: z.string().min(2).max(5),
   body_plain: z.string().max(20000).nullish(),
   body_chordpro: z.string().max(20000).nullish(),
+  synced_json: lyricsEditorSchema.shape.synced_json,
   has_chords: z.boolean(),
+  source: z.enum(['wordpress', 'admin', 'suggestion', 'transcription']).optional(),
 });
 export type LyricsFormValues = z.infer<typeof lyricsSchema>;
 

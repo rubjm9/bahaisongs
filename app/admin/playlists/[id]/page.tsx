@@ -1,7 +1,7 @@
 import { notFound } from 'next/navigation';
-import { Box, Typography } from '@mui/material';
+import { Typography } from '@mui/material';
 import { getSupabaseServerClient } from '@/shared/lib/supabase/server';
-import { AdminTopBar } from '@/features/admin/components/AdminTopBar';
+import { AdminPage } from '@/features/admin/components/AdminPage';
 import { PlaylistTracksClient } from './PlaylistTracksClient';
 import type { Metadata } from 'next';
 
@@ -50,13 +50,11 @@ export default async function PlaylistTracksPage({ params }: { params: Params })
     .filter(Boolean) as TrackRef[];
 
   return (
-    <>
-      <AdminTopBar title={`Pistas: ${pl.title}`} />
-      <Box sx={{ px: { xs: 2, md: 3 }, py: 3, maxWidth: 900, mx: 'auto' }}>
-        <Typography variant="body2" sx={{ mb: 3, color: 'text.secondary' }}>
-          Arrastra para reordenar. Los cambios se guardan al pulsar &quot;Guardar orden&quot;.
-        </Typography>
-        <PlaylistTracksClient
+    <AdminPage title={`Pistas: ${pl.title}`} maxWidth={900}>
+      <Typography variant="body2" sx={{ mb: 3, color: 'text.secondary' }}>
+        Arrastra para reordenar. Los cambios se guardan al pulsar &quot;Guardar orden&quot;.
+      </Typography>
+      <PlaylistTracksClient
           playlistId={pl.id}
           currentTracks={currentTracks.map((t) => ({
             id: t.id,
@@ -71,7 +69,6 @@ export default async function PlaylistTracksPage({ params }: { params: Params })
             artistName: Array.isArray(t.artists) ? (t.artists[0]?.name ?? null) : (t.artists?.name ?? null),
           }))}
         />
-      </Box>
-    </>
+    </AdminPage>
   );
 }

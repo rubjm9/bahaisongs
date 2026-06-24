@@ -1,5 +1,6 @@
 'use client';
 
+import { useMemo, useState } from 'react';
 import {
   CircularProgress,
   Table,
@@ -8,15 +9,21 @@ import {
   TableContainer,
   TableHead,
   TableRow,
+  TableSortLabel,
   Typography,
 } from '@mui/material';
 import { cssVars, radii } from '@/shared/theme/tokens';
+
+export type SortDirection = 'asc' | 'desc';
 
 export interface Column<T> {
   key: string;
   label: string;
   width?: number | string;
   align?: 'left' | 'center' | 'right';
+  sortable?: boolean;
+  sortValue?: (row: T) => string | number | null | undefined;
+  header?: React.ReactNode;
   render: (row: T) => React.ReactNode;
 }
 
@@ -26,9 +33,53 @@ interface Props<T> {
   rowKey: (row: T) => string;
   loading?: boolean;
   emptyMessage?: string;
+  defaultSortKey?: string;
+  defaultSortDirection?: SortDirection;
 }
 
-export function DataTable<T>({ columns, rows, rowKey, loading = false, emptyMessage = 'Sin resultados' }: Props<T>) {
+function compareSortValues(
+  a: string | number | null | undefined,
+  b: string | number | null | undefined,
+  direction: SortDirection,
+): number {
+  const factor = direction === 'asc' ? 1 : -1;
+  if (a == null && b == null) return 0;
+  if (a == null) return 1;
+  if (b == null) return -1;
+  if (typeof a === 'number' && typeof b === 'number') return (a - b) * factor;
+  return String(a).localeCompare(String(b), 'es', { sensitivity: 'base' }) * factor;
+}
+
+export function DataTable<T>({
+  columns,
+  rows,
+  rowKey,
+  loading = false,
+  emptyMessage = 'Sin resultados',
+  defaultSortKey,
+  defaultSortDirection = 'asc',
+}: Props<T>) {
+  const firstSortableKey = columns.find((col) => col.sortable)?.key;
+  const [sortKey, setSortKey] = useState(defaultSortKey ?? firstSortableKey ?? '');
+  const [sortDirection, setSortDirection] = useState<SortDirection>(defaultSortDirection);
+
+  const sortedRows = useMemo(() => {
+    const column = columns.find((col) => col.key === sortKey && col.sortable);
+    if (!column?.sortValue) return rows;
+    return [...rows].sort((a, b) =>
+      compareSortValues(column.sortValue!(a), column.sortValue!(b), sortDirection),
+    );
+  }, [columns, rows, sortDirection, sortKey]);
+
+  function handleSort(columnKey: string) {
+    if (sortKey === columnKey) {
+      setSortDirection((prev) => (prev === 'asc' ? 'desc' : 'asc'));
+      return;
+    }
+    setSortKey(columnKey);
+    setSortDirection('asc');
+  }
+
   return (
     <TableContainer
       sx={{
@@ -46,6 +97,7 @@ export function DataTable<T>({ columns, rows, rowKey, loading = false, emptyMess
                 key={col.key}
                 align={col.align ?? 'left'}
                 width={col.width}
+                sortDirection={col.sortable && sortKey === col.key ? sortDirection : false}
                 sx={{
                   color: cssVars.textMuted,
                   fontSize: '0.72rem',
@@ -58,7 +110,36 @@ export function DataTable<T>({ columns, rows, rowKey, loading = false, emptyMess
                   whiteSpace: 'nowrap',
                 }}
               >
-                {col.label}
+                {col.header ?? (col.sortable ? (
+                  <TableSortLabel
+                    active={sortKey === col.key}
+                    direction={sortKey === col.key ? sortDirection : 'asc'}
+                    onClick={() => handleSort(col.key)}
+                    sx={{
+                      color: `${cssVars.textMuted} !important`,
+                      '&.Mui-active': { color: `${cssVars.textPrimary} !important` },
+                      ...(col.align === 'right'
+                        ? {
+                            flexDirection: 'row',
+                            justifyContent: 'flex-end',
+                            width: '100%',
+                          }
+                        : {}),
+                      '& .MuiTableSortLabel-icon': {
+                        color: `${cssVars.textMuted} !important`,
+                        opacity: sortKey === col.key ? 1 : 0.4,
+                        ...(col.align === 'right' ? { marginLeft: '4px', marginRight: 0 } : {}),
+                      },
+                      '&.Mui-active .MuiTableSortLabel-icon': {
+                        color: `${cssVars.textPrimary} !important`,
+                      },
+                    }}
+                  >
+                    {col.label}
+                  </TableSortLabel>
+                ) : (
+                  col.label
+                ))}
               </TableCell>
             ))}
           </TableRow>
@@ -70,7 +151,7 @@ export function DataTable<T>({ columns, rows, rowKey, loading = false, emptyMess
                 <CircularProgress size={28} />
               </TableCell>
             </TableRow>
-          ) : rows.length === 0 ? (
+          ) : sortedRows.length === 0 ? (
             <TableRow>
               <TableCell colSpan={columns.length} align="center" sx={{ py: 6 }}>
                 <Typography variant="body2" sx={{ color: cssVars.textMuted }}>
@@ -79,7 +160,7 @@ export function DataTable<T>({ columns, rows, rowKey, loading = false, emptyMess
               </TableCell>
             </TableRow>
           ) : (
-            rows.map((row) => (
+            sortedRows.map((row) => (
               <TableRow
                 key={rowKey(row)}
                 sx={{

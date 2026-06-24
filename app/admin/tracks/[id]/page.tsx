@@ -1,7 +1,6 @@
 import { notFound } from 'next/navigation';
-import { Box } from '@mui/material';
 import { getSupabaseServerClient } from '@/shared/lib/supabase/server';
-import { AdminTopBar } from '@/features/admin/components/AdminTopBar';
+import { AdminPage } from '@/features/admin/components/AdminPage';
 import { TrackForm } from './TrackForm';
 import type { Metadata } from 'next';
 
@@ -26,7 +25,7 @@ export default async function TrackDetailPage({ params }: { params: Params }) {
 
   let track = null;
   let trackCategories: string[] = [];
-  let trackLyrics: { locale: string; body_plain: string | null; body_chordpro: string | null; has_chords: boolean } | null = null;
+  let trackLyrics: { locale: string; body_plain: string | null; body_chordpro: string | null; has_chords: boolean; synced_json: unknown } | null = null;
   let trackSources: { id: string; kind: string; source_ref: string; is_primary: boolean }[] = [];
 
   if (!isNew) {
@@ -35,7 +34,7 @@ export default async function TrackDetailPage({ params }: { params: Params }) {
       .select(`
         id, slug, title, language, published_at, primary_artist_id, duration_seconds,
         track_categories (category_id),
-        lyrics (locale, body_plain, body_chordpro, has_chords),
+        lyrics (locale, body_plain, body_chordpro, has_chords, synced_json),
         track_sources (id, kind, source_ref, is_primary)
       `)
       .eq('id' as never, id)
@@ -52,7 +51,7 @@ export default async function TrackDetailPage({ params }: { params: Params }) {
       primary_artist_id: string | null;
       duration_seconds: number | null;
       track_categories: { category_id: string }[] | null;
-      lyrics: { locale: string; body_plain: string | null; body_chordpro: string | null; has_chords: boolean }[] | null;
+      lyrics: { locale: string; body_plain: string | null; body_chordpro: string | null; has_chords: boolean; synced_json: unknown }[] | null;
       track_sources: { id: string; kind: string; source_ref: string; is_primary: boolean }[] | null;
     }
 
@@ -64,18 +63,18 @@ export default async function TrackDetailPage({ params }: { params: Params }) {
   }
 
   return (
-    <>
-      <AdminTopBar title={isNew ? 'Nueva canción' : 'Editar canción'} />
-      <Box sx={{ px: { xs: 2.5, md: 4 }, py: 3, maxWidth: 1280, mx: 'auto', width: '100%' }}>
-        <TrackForm
-          track={track}
-          trackCategories={trackCategories}
-          trackLyrics={trackLyrics}
-          trackSources={trackSources}
-          categories={categories ?? []}
-          artists={artists ?? []}
-        />
-      </Box>
-    </>
+    <AdminPage
+      title={isNew ? 'Nueva canción' : 'Editar canción'}
+      contentSx={{ px: { xs: 2.5, md: 4 } }}
+    >
+      <TrackForm
+        track={track}
+        trackCategories={trackCategories}
+        trackLyrics={trackLyrics}
+        trackSources={trackSources}
+        categories={categories ?? []}
+        artists={artists ?? []}
+      />
+    </AdminPage>
   );
 }

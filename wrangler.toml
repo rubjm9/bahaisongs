@@ -4,3 +4,10 @@ name = "bahaisongs"
 pages_build_output_dir = ".vercel/output/static"
 compatibility_date = "2024-09-23"
 compatibility_flags = ["nodejs_compat"]
+
+[ai]
+binding = "AI"
+
+[[r2_buckets]]
+binding = "AUDIO_BUCKET"
+bucket_name = "bahaisongs-audio"

@@ -20,5 +20,5 @@ export interface Lyrics {
   /** When present, enables the synced "follow" mode in the lyrics view. */
   syncedJson?: SyncedLyricLine[];
   hasChords: boolean;
-  source?: 'wordpress' | 'admin' | 'suggestion';
+  source?: 'wordpress' | 'admin' | 'suggestion' | 'transcription';
 }

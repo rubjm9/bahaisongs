@@ -1,35 +1,58 @@
 'use client';
 
-import { useState, useRef, useEffect, useCallback } from 'react';
+import { useState, useRef, useEffect, useCallback, useMemo } from 'react';
 import Link from 'next/link';
 import { Box, Stack, Button, IconButton, Tooltip, Slider, Typography } from '@mui/material';
-import { Music2, ChevronUp, ChevronDown, Play, Pause, Maximize2, Plus, Minus } from 'lucide-react';
+import { Music2, ChevronUp, ChevronDown, Play, Pause, Maximize2, Plus, Minus, Radio } from 'lucide-react';
 import { parseLyrics, parseChordProLyrics, isChordProFormat } from '../lib/chordParser';
 import { getCapoAdjustedDisplay } from '../lib/transpose';
 import { ChordPair } from './ChordPair';
 import { accent, cssVars, radii } from '@/shared/theme/tokens';
 import type { Locale } from '@/shared/lib/i18n/config';
 import { appPath } from '@/shared/lib/seo/paths';
+import type { SyncedLyricLine } from '@/entities/lyrics';
+import { usePlayerStore } from '@/features/player/stores/playerStore';
+import { selectCurrentTrack, useQueueStore } from '@/features/player/stores/queueStore';
 
 interface Props {
   lyrics: string;
   lyricsChordPro?: string | undefined;
+  syncedLyrics?: SyncedLyricLine[] | undefined;
   hasChords: boolean;
   trackSlug: string;
   locale: string;
 }
 
-export function LyricsViewer({ lyrics, lyricsChordPro, hasChords, trackSlug, locale }: Props) {
+function findActiveLineIndex(lines: SyncedLyricLine[], time: number): number {
+  for (let i = lines.length - 1; i >= 0; i--) {
+    if (time >= lines[i]!.startTime) return i;
+  }
+  return 0;
+}
+
+export function LyricsViewer({ lyrics, lyricsChordPro, syncedLyrics, hasChords, trackSlug, locale }: Props) {
   const [showChords, setShowChords] = useState(false);
+  const [followPlayback, setFollowPlayback] = useState(Boolean(syncedLyrics?.length));
   const [transpose, setTranspose] = useState(0);
   const [capo, setCapo] = useState(0);
   const [fontSize, setFontSize] = useState(100);
   const [autoscroll, setAutoscroll] = useState(false);
   const [autoscrollSpeed, setAutoscrollSpeed] = useState(30);
 
+  const position = usePlayerStore((s) => s.position);
+  const currentTrack = useQueueStore(selectCurrentTrack);
+  const isCurrentTrack = currentTrack?.slug === trackSlug;
+
   const containerRef = useRef<HTMLDivElement>(null);
+  const lineRefs = useRef<(HTMLDivElement | null)[]>([]);
   const rafRef = useRef<number>(0);
   const lastTimestampRef = useRef<number>(0);
+
+  const canFollow = Boolean(syncedLyrics?.length);
+  const activeLineIndex = useMemo(() => {
+    if (!canFollow || !followPlayback || !isCurrentTrack || !syncedLyrics) return -1;
+    return findActiveLineIndex(syncedLyrics, position);
+  }, [canFollow, followPlayback, isCurrentTrack, syncedLyrics, position]);
 
   // Prefer ChordPro inline format when available; fall back to legacy dual-line format
   const stanzas = lyricsChordPro && isChordProFormat(lyricsChordPro)
@@ -84,9 +107,16 @@ export function LyricsViewer({ lyrics, lyricsChordPro, hasChords, trackSlug, loc
     };
   }, [autoscroll, startScroll]);
 
+  useEffect(() => {
+    if (activeLineIndex < 0) return;
+    const el = lineRefs.current[activeLineIndex];
+    if (!el) return;
+    el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }, [activeLineIndex]);
+
   const transposeLabel = transpose > 0 ? `+${transpose}` : `${transpose}`;
 
-  if (stanzas.length === 0) {
+  if (stanzas.length === 0 && !syncedLyrics?.length) {
     return (
       <Box
         sx={{
@@ -147,6 +177,27 @@ export function LyricsViewer({ lyrics, lyricsChordPro, hasChords, trackSlug, loc
             }}
           >
             Mostrar/ocultar acordes
+          </Button>
+        ) : null}
+
+        {canFollow ? (
+          <Button
+            size="small"
+            onClick={() => setFollowPlayback((v) => !v)}
+            aria-label="Seguir reproducción"
+            aria-pressed={followPlayback}
+            startIcon={<Radio size={16} />}
+            sx={{
+              ...toolbarBtnSx,
+              textTransform: 'none',
+              fontSize: '0.75rem',
+              fontWeight: 600,
+              px: 1,
+              color: followPlayback ? accent.glow : cssVars.textMuted,
+              background: followPlayback ? `${accent.glow}18` : 'transparent',
+            }}
+          >
+            Seguir reproducción
           </Button>
         ) : null}
 
@@ -386,30 +437,57 @@ export function LyricsViewer({ lyrics, lyricsChordPro, hasChords, trackSlug, loc
           scrollbarColor: `${cssVars.borderSubtle} transparent`,
         }}
       >
-        <Stack spacing={3}>
-          {stanzas.map((stanza, si) => (
-            <Box key={si}>
-              {stanza.blocks.map((block, bi) => {
-                // Apply capo adjustment: show the shapes the player would finger
-                const displayBlock =
-                  block.chords && capo !== 0
-                    ? {
-                        ...block,
-                        chords: getCapoAdjustedDisplay(block.chords, transpose, capo),
-                      }
-                    : block;
-                return (
-                  <ChordPair
-                    key={bi}
-                    block={displayBlock}
-                    showChords={showChords}
-                    transpose={capo !== 0 ? 0 : transpose}
-                  />
-                );
-              })}
-            </Box>
-          ))}
-        </Stack>
+        {canFollow && followPlayback ? (
+          <Stack spacing={1.5}>
+            {syncedLyrics!.map((line, index) => {
+              const active = index === activeLineIndex && isCurrentTrack;
+              return (
+                <Box
+                  key={`${line.startTime}-${index}`}
+                  ref={(el: HTMLDivElement | null) => {
+                    lineRefs.current[index] = el;
+                  }}
+                  sx={{
+                    px: 1.5,
+                    py: 1,
+                    borderRadius: `${radii.sm}px`,
+                    transition: 'background 0.2s ease, color 0.2s ease',
+                    color: active ? cssVars.textPrimary : cssVars.textMuted,
+                    background: active ? `${accent.glow}18` : 'transparent',
+                    borderLeft: active ? `3px solid ${accent.glow}` : '3px solid transparent',
+                    fontWeight: active ? 600 : 400,
+                  }}
+                >
+                  {line.text}
+                </Box>
+              );
+            })}
+          </Stack>
+        ) : (
+          <Stack spacing={3}>
+            {stanzas.map((stanza, si) => (
+              <Box key={si}>
+                {stanza.blocks.map((block, bi) => {
+                  const displayBlock =
+                    block.chords && capo !== 0
+                      ? {
+                          ...block,
+                          chords: getCapoAdjustedDisplay(block.chords, transpose, capo),
+                        }
+                      : block;
+                  return (
+                    <ChordPair
+                      key={bi}
+                      block={displayBlock}
+                      showChords={showChords}
+                      transpose={capo !== 0 ? 0 : transpose}
+                    />
+                  );
+                })}
+              </Box>
+            ))}
+          </Stack>
+        )}
       </Box>
     </Box>
   );

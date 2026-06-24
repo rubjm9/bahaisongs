@@ -25,6 +25,8 @@
     "etl:wordpress:dry": "tsx --env-file .env.local scripts/import-wordpress.ts --dry-run",
     "etl:audio": "tsx --env-file .env.local scripts/migrate-audio-r2.ts",
     "etl:audio:dry": "tsx --env-file .env.local scripts/migrate-audio-r2.ts --dry-run",
+    "etl:transcribe": "tsx --env-file .env.local scripts/transcribe-lyrics.ts",
+    "etl:transcribe:dry": "tsx --env-file .env.local scripts/transcribe-lyrics.ts --dry-run",
     "import:bahaiblog:dry": "tsx scripts/normalize-bahaiblog-data.ts && tsx --env-file .env.local scripts/import-bahaiblog-youtube.ts --dry-run",
     "import:bahaiblog": "tsx scripts/normalize-bahaiblog-data.ts && tsx --env-file .env.local scripts/import-bahaiblog-youtube.ts",
     "import:bahaiblog:normalize": "tsx scripts/normalize-bahaiblog-data.ts",

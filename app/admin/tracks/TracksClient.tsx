@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useTransition } from 'react';
+import { useMemo, useState, useTransition } from 'react';
 import Link from 'next/link';
 import {
   Box,
@@ -13,10 +13,15 @@ import {
   Tooltip,
   Typography,
 } from '@mui/material';
-import { Plus, Pencil, Trash2, Search, Volume2, Guitar } from 'lucide-react';
+import { Plus, Pencil, Trash2, Search, Volume2, Guitar, AlignLeft } from 'lucide-react';
 import { DataTable, type Column } from '@/features/admin/components/DataTable';
+import { TableHeaderFilter } from '@/features/admin/components/TableHeaderFilter';
 import { ConfirmDialog } from '@/features/admin/components/ConfirmDialog';
 import { deleteTrack } from '@/features/admin/actions/tracks';
+import {
+  TRACK_LANGUAGES,
+  trackLanguageLabels,
+} from '@/features/catalog/lib/track-languages';
 import { cssVars, accent, radii } from '@/shared/theme/tokens';
 
 interface TrackRow {
@@ -29,8 +34,23 @@ interface TrackRow {
   artists: { name: string } | null;
   _count_sources: number;
   _has_chords: boolean;
+  _has_lyrics: boolean;
   _play_count: number;
 }
+
+const LANGUAGE_FILTER_OPTIONS = [
+  { value: 'all', label: 'Todos' },
+  ...TRACK_LANGUAGES.map((code) => ({
+    value: code,
+    label: trackLanguageLabels[code],
+  })),
+];
+
+const CONTENT_FILTER_OPTIONS = [
+  { value: 'audio', label: 'Con audio' },
+  { value: 'chords', label: 'Con acordes' },
+  { value: 'lyrics', label: 'Con letra' },
+];
 
 interface Props {
   initialTracks: TrackRow[];
@@ -41,17 +61,43 @@ interface Props {
 export function TracksClient({ initialTracks }: Props) {
   const [tracks, setTracks] = useState(initialTracks);
   const [search, setSearch] = useState('');
+  const [languageFilter, setLanguageFilter] = useState('all');
+  const [contentFilters, setContentFilters] = useState<string[]>([]);
   const [deleteTarget, setDeleteTarget] = useState<TrackRow | null>(null);
   const [isPending, startTransition] = useTransition();
 
-  const filtered = search.trim()
-    ? tracks.filter(
+  const hasActiveFilters =
+    search.trim().length > 0 || languageFilter !== 'all' || contentFilters.length > 0;
+
+  const filtered = useMemo(() => {
+    let list = tracks;
+
+    const query = search.trim().toLowerCase();
+    if (query) {
+      list = list.filter(
         (t) =>
-          t.title.toLowerCase().includes(search.toLowerCase()) ||
-          t.slug.includes(search.toLowerCase()) ||
-          (t.artists?.name ?? '').toLowerCase().includes(search.toLowerCase()),
-      )
-    : tracks;
+          t.title.toLowerCase().includes(query) ||
+          t.slug.includes(query) ||
+          (t.artists?.name ?? '').toLowerCase().includes(query),
+      );
+    }
+
+    if (languageFilter !== 'all') {
+      list = list.filter((t) => t.language === languageFilter);
+    }
+
+    if (contentFilters.includes('audio')) {
+      list = list.filter((t) => t._count_sources > 0);
+    }
+    if (contentFilters.includes('chords')) {
+      list = list.filter((t) => t._has_chords);
+    }
+    if (contentFilters.includes('lyrics')) {
+      list = list.filter((t) => t._has_lyrics);
+    }
+
+    return list;
+  }, [tracks, search, languageFilter, contentFilters]);
 
   function onDelete() {
     if (!deleteTarget) return;
@@ -62,10 +108,13 @@ export function TracksClient({ initialTracks }: Props) {
     });
   }
 
-  const columns: Column<TrackRow>[] = [
+  const columns: Column<TrackRow>[] = useMemo(
+    () => [
     {
       key: 'title',
       label: 'Título',
+      sortable: true,
+      sortValue: (row) => row.title,
       render: (row) => (
         <Box>
           <Typography variant="body2" sx={{ fontWeight: 500, color: cssVars.textPrimary }}>
@@ -81,6 +130,8 @@ export function TracksClient({ initialTracks }: Props) {
       key: 'slug',
       label: 'Slug',
       width: 160,
+      sortable: true,
+      sortValue: (row) => row.slug,
       render: (row) => (
         <Typography variant="caption" sx={{ color: cssVars.textMuted, fontFamily: 'monospace', fontSize: '0.75rem' }}>
           {row.slug}
@@ -90,8 +141,16 @@ export function TracksClient({ initialTracks }: Props) {
     {
       key: 'lang',
       label: 'Idioma',
-      width: 70,
+      width: 90,
       align: 'center',
+      header: (
+        <TableHeaderFilter
+          label="Idioma"
+          value={languageFilter}
+          options={LANGUAGE_FILTER_OPTIONS}
+          onChange={setLanguageFilter}
+        />
+      ),
       render: (row) => (
         <Chip
           label={row.language.toUpperCase()}
@@ -103,8 +162,17 @@ export function TracksClient({ initialTracks }: Props) {
     {
       key: 'flags',
       label: 'Contenido',
-      width: 90,
+      width: 108,
       align: 'center',
+      header: (
+        <TableHeaderFilter
+          mode="multi"
+          label="Contenido"
+          values={contentFilters}
+          options={CONTENT_FILTER_OPTIONS}
+          onChange={setContentFilters}
+        />
+      ),
       render: (row) => (
         <Stack direction="row" spacing={0.5} justifyContent="center">
           <Tooltip title="Con audio">
@@ -117,6 +185,11 @@ export function TracksClient({ initialTracks }: Props) {
               <Guitar size={14} />
             </Box>
           </Tooltip>
+          <Tooltip title="Con letra">
+            <Box sx={{ color: row._has_lyrics ? accent.glow : cssVars.borderStrong, lineHeight: 0 }}>
+              <AlignLeft size={14} />
+            </Box>
+          </Tooltip>
         </Stack>
       ),
     },
@@ -125,6 +198,8 @@ export function TracksClient({ initialTracks }: Props) {
       label: 'Reproducciones',
       width: 110,
       align: 'right',
+      sortable: true,
+      sortValue: (row) => row._play_count,
       render: (row) => (
         <Typography
           variant="body2"
@@ -141,6 +216,8 @@ export function TracksClient({ initialTracks }: Props) {
       key: 'published',
       label: 'Publicada',
       width: 110,
+      sortable: true,
+      sortValue: (row) => row.published_at,
       render: (row) =>
         row.published_at ? (
           <Typography variant="caption" sx={{ color: cssVars.textMuted, fontSize: '0.75rem' }}>
@@ -190,7 +267,9 @@ export function TracksClient({ initialTracks }: Props) {
         </Stack>
       ),
     },
-  ];
+  ],
+    [languageFilter, contentFilters],
+  );
 
   return (
     <>
@@ -198,7 +277,7 @@ export function TracksClient({ initialTracks }: Props) {
         <Stack direction="row" alignItems="center" spacing={2}>
           <Typography variant="h6" sx={{ fontWeight: 600, color: cssVars.textPrimary }}>
             {filtered.length}
-            {search ? ` de ${tracks.length}` : ''} canciones
+            {hasActiveFilters ? ` de ${tracks.length}` : ''} canciones
           </Typography>
         </Stack>
         <Stack direction="row" spacing={1.5}>
@@ -207,7 +286,19 @@ export function TracksClient({ initialTracks }: Props) {
             placeholder="Buscar por título o artista…"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            sx={{ width: { xs: '100%', sm: 260 } }}
+            sx={{
+              width: { xs: '100%', sm: 260 },
+              '& .MuiOutlinedInput-root': {
+                backgroundColor: '#fff',
+                '& fieldset': { borderColor: cssVars.borderSubtle },
+                '&:hover fieldset': { borderColor: cssVars.borderStrong },
+                '&.Mui-focused fieldset': { borderColor: accent.electric },
+              },
+              '& .MuiOutlinedInput-input': {
+                color: '#0D1F3C',
+                '&::placeholder': { color: '#5A7399', opacity: 1 },
+              },
+            }}
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">
@@ -233,7 +324,9 @@ export function TracksClient({ initialTracks }: Props) {
         rows={filtered}
         rowKey={(r) => r.id}
         loading={false}
-        emptyMessage={search ? 'Sin resultados para esa búsqueda' : 'No hay canciones todavía'}
+        defaultSortKey="title"
+        defaultSortDirection="asc"
+        emptyMessage={hasActiveFilters ? 'Sin resultados con estos filtros' : 'No hay canciones todavía'}
       />
 
       <ConfirmDialog

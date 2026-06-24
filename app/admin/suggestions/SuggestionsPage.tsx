@@ -1,6 +1,5 @@
-import { Box } from '@mui/material';
 import { getSupabaseServerClient } from '@/shared/lib/supabase/server';
-import { AdminTopBar } from '@/features/admin/components/AdminTopBar';
+import { AdminPage } from '@/features/admin/components/AdminPage';
 import { SuggestionsClientDynamic } from './SuggestionsClientDynamic';
 
 interface SuggestionRow {
@@ -65,11 +64,8 @@ export default async function SuggestionsPage() {
   });
 
   return (
-    <>
-      <AdminTopBar title="Sugerencias" />
-      <Box sx={{ px: { xs: 2, md: 3 }, py: 3, maxWidth: 1280, mx: 'auto' }}>
-        <SuggestionsClientDynamic initialSuggestions={rows} />
-      </Box>
-    </>
+    <AdminPage title="Sugerencias">
+      <SuggestionsClientDynamic initialSuggestions={rows} />
+    </AdminPage>
   );
 }
