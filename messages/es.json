@@ -24,7 +24,8 @@
     "themeSystem": "Sistema",
     "themeLight": "Claro",
     "themeDark": "Oscuro",
-    "themeAria": "Cambiar tema de la interfaz"
+    "themeAria": "Cambiar tema de la interfaz",
+    "languageAria": "Cambiar idioma"
   },
   "share": {
     "hint": "Comparte esta canción con tu grupo",
@@ -72,7 +73,21 @@
   "player": {
     "idleTitle": "Sin reproducción",
     "idleRandomCta": "Escuchar una canción al azar",
-    "idleRandomLoading": "Buscando canción…"
+    "idleRandomLoading": "Buscando canción…",
+    "label": "Reproductor",
+    "position": "Posición",
+    "shuffle": "Aleatorio",
+    "previous": "Anterior",
+    "play": "Reproducir",
+    "pause": "Pausar",
+    "next": "Siguiente",
+    "repeat": "Repetir",
+    "mute": "Silenciar",
+    "unmute": "Activar sonido",
+    "volume": "Volumen",
+    "playTrack": "Reproducir {title}",
+    "pauseTrack": "Pausar {title}",
+    "audioUnavailable": "Audio no disponible para {title}"
   },
   "song": {
     "eyebrow": "Canción",
@@ -172,7 +187,8 @@
     "error": "Algo no fue bien.",
     "retry": "Reintentar",
     "previous": "Anterior",
-    "next": "Siguiente"
+    "next": "Siguiente",
+    "skipToContent": "Saltar al contenido"
   },
   "auth": {
     "signIn": "Entrar",
@@ -324,5 +340,30 @@
     "noLyrics": "Sin letra disponible todavía.",
     "exitPresentation": "Salir",
     "keyHints": "Espacio: scroll · +/- tono · ↑↓ tamaño · ESC salir"
+  },
+  "meta": {
+    "home": {
+      "title": "BahaiSongs – Letras, acordes y vídeos de canciones bahá'ís",
+      "description": "Descubre más de 140 canciones bahá'ís con letra, acordes y audio. El cancionero bahá'í digital en español."
+    },
+    "library": {
+      "title": "Catálogo de canciones bahá'ís – Letras y acordes | BahaiSongs",
+      "description": "Explora el catálogo completo de canciones bahá'ís en español: letra, acordes de guitarra y audio. Filtra por categoría, idioma y estilo musical."
+    },
+    "publicPlaylists": {
+      "title": "Playlists públicas – Canciones bahá'ís | BahaiSongs",
+      "description": "Explora playlists públicas creadas por la comunidad y por BahaiSongs: colecciones de canciones bahá'ís para cantar y tocar juntos."
+    },
+    "song": {
+      "description": "{title} – letra{chords} | Canción bahá'í. Escúchala y aprende a cantarla en BahaiSongs.",
+      "chordsSuffix": " y acordes"
+    },
+    "category": {
+      "title": "{label} – Canciones bahá'ís | BahaiSongs",
+      "descriptionFallback": "{label} — canciones bahá'ís con letra y acordes | BahaiSongs"
+    },
+    "artist": {
+      "title": "{name} – Canciones bahá'ís | BahaiSongs"
+    }
   }
 }

@@ -1,0 +1,369 @@
+{
+  "pwa": {
+    "install": {
+      "title": "نصب BahaiSongs",
+      "description": "آن را به صفحهٔ اصلی اضافه کنید تا مانند اپ باز شود.",
+      "cta": "نصب اپ",
+      "dismiss": "بستن",
+      "iosCta": "نحوهٔ نصب",
+      "iosStep1": "دکمهٔ اشتراک را بزنید",
+      "iosStep2": "«افزودن به صفحهٔ اصلی» را انتخاب کنید"
+    },
+    "offline": {
+      "title": "بدون اتصال",
+      "description": "اتصال اینترنت نیست. صفحاتی که قبلاً دیده‌اید هنوز در دسترس‌اند.",
+      "retry": "تلاش دوباره"
+    }
+  },
+  "brand": {
+    "name": "BahaiSongs.org",
+    "tagline": "موسیقی، دعا و آکورد جامعهٔ بهائی، در یک جا."
+  },
+  "settings": {
+    "theme": "پوسته",
+    "themeSystem": "سیستم",
+    "themeLight": "روشن",
+    "themeDark": "تیره",
+    "themeAria": "تغییر پوستهٔ رابط",
+    "languageAria": "تغییر زبان"
+  },
+  "share": {
+    "hint": "این سرود را با گروهتان به اشتراک بگذارید",
+    "ariaLabel": "اشتراک",
+    "copied": "پیوند کپی شد!"
+  },
+  "nav": {
+    "home": "خانه",
+    "discover": "کشف",
+    "library": "کتابخانه",
+    "publicPlaylists": "پلی‌لیست‌های عمومی",
+    "suggest": "پیشنهاد سرود",
+    "favorites": "علاقه‌مندی‌ها",
+    "playlists": "پلی‌لیست‌ها",
+    "yourPlaylists": "پلی‌لیست‌های شما",
+    "createPlaylist": "ایجاد پلی‌لیست",
+    "viewAllPlaylists": "مشاهدهٔ همه",
+    "collapseMenu": "جمع کردن منو",
+    "expandMenu": "باز کردن منو"
+  },
+  "home": {
+    "heroEyebrow": "موسیقی بهائی · متن · آکورد",
+    "heroTitle": "متن و آکورد برای خواندن سرودهای بهائی با هم",
+    "heroSubtitle": "سرود مورد نظر را بیابید و با گروهتان برای خواندن یا نواختن به اشتراک بگذارید، یا گوش دهید تا یاد بگیرید چگونه خوانده می‌شود. سرودی کم است؟ بفرستید تا فهرست را گسترش دهیم.",
+    "cta": "کاوش فهرست",
+    "ctaSuggest": "پیشنهاد سرود",
+    "heroStatLabel": "سرود موجود"
+  },
+  "sections": {
+    "catalogSize": "{count} سرود در فهرست",
+    "seeAll": "مشاهدهٔ همه",
+    "recentEyebrow": "تازه",
+    "recentTitle": "به‌تازگی افزوده",
+    "recentDescription": "آخرین افزوده‌ها به فهرست.",
+    "chordsEyebrow": "برای نواختن",
+    "chordsTitle": "با آکورد",
+    "chordsDescription": "سرود با آکورد — برای گیتار، یوکللی یا پیانو.",
+    "prayersEyebrow": "عبادت",
+    "prayersTitle": "دعاهای آهنگین",
+    "prayersDescription": "دعاهای بهائی با موسیقی.",
+    "calmEyebrow": "فضا",
+    "calmTitle": "آرام",
+    "calmDescription": "برای تأمل، مراقبه یا استراحت."
+  },
+  "player": {
+    "idleTitle": "چیزی پخش نمی‌شود",
+    "idleRandomCta": "پخش سرود تصادفی",
+    "idleRandomLoading": "در حال یافتن سرود…",
+    "label": "پخش‌کننده",
+    "position": "موقعیت",
+    "shuffle": "تصادفی",
+    "previous": "قبلی",
+    "play": "پخش",
+    "pause": "مکث",
+    "next": "بعدی",
+    "repeat": "تکرار",
+    "mute": "بی‌صدا",
+    "unmute": "باصدا",
+    "volume": "بلندی صدا",
+    "playTrack": "پخش {title}",
+    "pauseTrack": "مکث {title}",
+    "audioUnavailable": "صدا برای {title} در دسترس نیست"
+  },
+  "song": {
+    "eyebrow": "سرود",
+    "by": "از",
+    "hasAudio": "صدا",
+    "hasChords": "آکورد",
+    "noAudio": "فقط متن",
+    "noAudioHint": "این سرود هنوز صدا در فهرست ندارد.",
+    "playReady": "پخش این سرود",
+    "playReadyHint": "برای شنیدن بزنید. کنترل‌ها در پخش‌کنندهٔ پایین ظاهر می‌شوند.",
+    "lyricsTitle": "متن"
+  },
+  "artist": {
+    "eyebrow": "هنرمند",
+    "trackCount": "{count, plural, =0 {بدون سرود} =1 {۱ سرود} other {# سرود}}",
+    "allTracks": "همهٔ سرودها"
+  },
+  "category": {
+    "kind": {
+      "genre": "سبک",
+      "mood": "حال‌وهوا",
+      "theme": "موضوع",
+      "tag": "برچسب"
+    },
+    "trackCount": "{count, plural, =0 {بدون سرود} =1 {۱ سرود} other {# سرود}}"
+  },
+  "catalog": {
+    "tooltips": {
+      "language": "زبان متن: {language}",
+      "audio": "صدا در پخش‌کننده موجود است",
+      "chords": "شامل آکورد برای همراهی هنگام خواندن یا نواختن"
+    }
+  },
+  "discover": {
+    "title": "کشف موسیقی",
+    "subtitle": "جستجو و کاوش فهرست",
+    "placeholder": "جستجو با عنوان، هنرمند، متن یا دسته…",
+    "totalCatalog": "{count} سرود در فهرست",
+    "browseByCategory": "مرور بر اساس دسته",
+    "allTracksHeading": "{count} سرود، به ترتیب الفبا",
+    "resultsCount": "{count, plural, =0 {بدون نتیجه} =1 {۱ نتیجه} other {# نتیجه}}",
+    "loading": "در حال بارگذاری فهرست…"
+  },
+  "publicPlaylists": {
+    "eyebrow": "جامعه",
+    "title": "پلی‌لیست‌های عمومی",
+    "subtitle": "مجموعه‌های به‌اشتراک‌گذاشته توسط جامعه و BahaiSongs",
+    "curatedBadge": "گزیده",
+    "byUser": "از {name}",
+    "byUserAnonymous": "از یک کاربر",
+    "trackCount": "{count, plural, =0 {بدون سرود} =1 {۱ سرود} other {# سرود}}",
+    "empty": "هنوز پلی‌لیست عمومی نیست. مال خود را بسازید و با جامعه به اشتراک بگذارید.",
+    "discoverCta": "کاوش پلی‌لیست‌های عمومی",
+    "discoverCtaHint": "مجموعه‌های جامعه و BahaiSongs"
+  },
+  "library": {
+    "eyebrow": "شخصی",
+    "title": "کتابخانهٔ شما",
+    "subtitle": "علاقه‌مندی‌ها و پلی‌لیست‌هایی که ذخیره می‌کنید",
+    "signInTitle": "آنچه دوست دارید ذخیره کنید",
+    "signInHint": "وارد شوید تا علاقه‌مندی ذخیره و پلی‌لیست بسازید.",
+    "exploreCatalog": "کاوش فهرست ←",
+    "viewAll": "مشاهدهٔ همه",
+    "loading": "در حال بارگذاری…"
+  },
+  "search": {
+    "title": "جستجو در فهرست",
+    "placeholder": "جستجو با عنوان، هنرمند، متن یا دسته…",
+    "resultsCount": "{count, plural, =0 {بدون نتیجه} =1 {۱ نتیجه} other {# نتیجه}}",
+    "totalCatalog": "{count} سرود در فهرست",
+    "hintEyebrow": "شروع به نوشتن کنید",
+    "hintTitle": "جستجو با عنوان، متن یا آکورد",
+    "hintBody": "فیلتر فوری در کل فهرست. با ↑ ↓ جابه‌جا شوید و Enter را بزنید.",
+    "emptyEyebrow": "بدون تطابق",
+    "emptyTitle": "چیزی با «{query}» جور نیست",
+    "emptyBody": "حروف کمتر، کلمه‌ای از ترجیع‌بند یا املای دیگر را امتحان کنید.",
+    "seeAll": "همهٔ نتایج «{query}» ←",
+    "filters": {
+      "language": "زبان",
+      "all": "همه",
+      "es": "Español",
+      "en": "English",
+      "withChords": "با آکورد",
+      "withAudio": "با صدا",
+      "reset": "پاک کردن",
+      "tooltips": {
+        "all": "سرودها به همهٔ زبان‌های فهرست",
+        "language": "فقط سرودها به زبان {language}",
+        "withChords": "فقط سرودها با آکورد",
+        "withAudio": "فقط سرودها با فایل صوتی"
+      }
+    },
+    "loading": "در حال بارگذاری فهرست…"
+  },
+  "common": {
+    "loading": "در حال بارگذاری…",
+    "error": "مشکلی پیش آمد.",
+    "retry": "تلاش دوباره",
+    "previous": "قبلی",
+    "next": "بعدی",
+    "skipToContent": "پرش به محتوا"
+  },
+  "auth": {
+    "signIn": "ورود",
+    "signOut": "خروج",
+    "adminPanel": "پنل مدیریت",
+    "modalTitle": "ورود یا ایجاد حساب",
+    "modalSubtitle": "اولین بار؟ حسابتان را با ایمیل یا Google می‌سازیم. بدون رمز.",
+    "emailLabel": "ایمیل",
+    "sendAccessLink": "ارسال پیوند ورود",
+    "magicLink": "پیوند جادویی",
+    "magicLinkPlaceholder": "you@email.com",
+    "magicLinkSentTitle": "ایمیلتان را بررسی کنید",
+    "magicLinkSentBody": "پیوندی که فرستادیم را باز کنید تا وارد شوید. اگر حسابی نداشتید، با تأیید ساخته می‌شود.",
+    "magicLinkSent": "ایمیلتان را بررسی کنید!",
+    "orContinueWith": "یا ادامه با",
+    "continueWithGoogle": "ادامه با Google",
+    "googleSetupHint": "وقتی در پروژه فعال شود، می‌توانید با Google هم وارد شوید.",
+    "errorProviderDisabled": "Google هنوز در دسترس نیست. از پیوند ایمیل استفاده کنید.",
+    "myPlaylists": "پلی‌لیست‌های من",
+    "favorites": "علاقه‌مندی‌ها",
+    "profile": "نمایه",
+    "signInToLike": "برای ذخیرهٔ علاقه‌مندی وارد شوید",
+    "signInRequired": "برای ادامه وارد شوید"
+  },
+  "playlist": {
+    "create": "پلی‌لیست جدید",
+    "titleLabel": "عنوان",
+    "visibility": "نمایش",
+    "public": "عمومی",
+    "private": "خصوصی",
+    "unlisted": "فهرست‌نشده",
+    "save": "ذخیره",
+    "addTrack": "افزودن به پلی‌لیست",
+    "removeTrack": "حذف",
+    "emptyFavorites": "هنوز علاقه‌مندی ندارید",
+    "emptyPlaylists": "هنوز پلی‌لیست ندارید",
+    "newPlaylist": "پلی‌لیست جدید",
+    "myPlaylists": "پلی‌لیست‌های من",
+    "signIn": "ورود",
+    "signInToAddToPlaylist": "برای افزودن به پلی‌لیست وارد شوید",
+    "sharePlaylist": "اشتراک",
+    "linkCopied": "پیوند کپی شد!",
+    "trackCount": "{count, plural, =0 {بدون سرود} =1 {۱ سرود} other {# سرود}}",
+    "changeVisibilityToShare": "برای اشتراک عمومی‌اش کنید",
+    "makePublic": "عمومی کردن"
+  },
+  "admin": {
+    "nav": {
+      "overview": "Inicio",
+      "tracks": "Canciones",
+      "categories": "Categorías",
+      "playlists": "Playlists",
+      "artists": "Artistas",
+      "users": "Usuarios",
+      "suggestions": "Sugerencias",
+      "backToSite": "Volver al sitio"
+    },
+    "overview": {
+      "title": "Panel de administración",
+      "statsTitle": "Resumen general",
+      "recentSuggestions": "Sugerencias recientes"
+    },
+    "common": {
+      "save": "Guardar cambios",
+      "create": "Crear",
+      "cancel": "Cancelar",
+      "delete": "Eliminar",
+      "edit": "Editar",
+      "back": "Volver",
+      "confirm": "Confirmar",
+      "noResults": "Sin resultados",
+      "loading": "Cargando…"
+    }
+  },
+  "lyrics": {
+    "chords": "آکورد",
+    "transpose": "جابه‌جایی پرده",
+    "capo": "کاپو",
+    "fontSize": "اندازه",
+    "autoscroll": "پیمایش خودکار",
+    "present": "ارائه",
+    "noLyrics": "هنوز متنی موجود نیست.",
+    "exitPresentation": "خروج",
+    "keyHints": "فاصله: پیمایش · +/- پرده · ↑↓ اندازه · ESC خروج"
+  },
+  "suggest": {
+    "pageTitle": "پیشنهاد یک سرود",
+    "pageDescription": "سرود بهائی‌ای می‌شناسید که در فهرست نیست؟ صدا، متن و آکورد را بفرستید. پیش از انتشار بررسی می‌کنیم.",
+    "sectionSong": "جزئیات سرود",
+    "sectionAudio": "صدا",
+    "sectionLyrics": "متن",
+    "sectionContact": "تماس",
+    "sectionLegal": "تأیید",
+    "title": "عنوان",
+    "titlePlaceholder": "نام سرود",
+    "artistName": "هنرمند یا اجراکننده",
+    "artistPlaceholder": "اختیاری",
+    "language": "زبان",
+    "categories": "دسته‌ها",
+    "categoriesHint": "مواردی را که سرود را بهتر توصیف می‌کنند انتخاب کنید (اختیاری)",
+    "suggestCategory": "پیشنهاد دسته",
+    "suggestCategoryPlaceholder": "نام دستهٔ پیشنهادی",
+    "addLanguage": "افزودن زبان",
+    "customLanguageCode": "کد زبان",
+    "customLanguageCodePlaceholder": "مثلاً fr, de, it",
+    "customLanguageLabel": "نام زبان",
+    "customLanguageLabelPlaceholder": "مثلاً فرانسوی",
+    "backToLanguageList": "بازگشت به فهرست",
+    "sourceMp3": "بارگذاری MP3",
+    "sourceYoutube": "پیوند YouTube",
+    "mp3Label": "فایل صوتی",
+    "mp3Hint": "قالب MP3، حداکثر پیشنهادی ۲۰ مگابایت",
+    "mp3DropHint": "یک MP3 را اینجا بکشید یا برای انتخاب کلیک کنید",
+    "mp3Uploading": "در حال بارگذاری صدا…",
+    "mp3Ready": "صدا آمادهٔ ارسال است",
+    "youtubeUrl": "نشانی YouTube",
+    "youtubePlaceholder": "https://www.youtube.com/watch?v=…",
+    "lyricsPlain": "متن (ساده)",
+    "lyricsPlainPlaceholder": "اگر از ChordPro استفاده نمی‌کنید متن را بچسبانید",
+    "lyricsChordPro": "متن با آکورد (ChordPro)",
+    "lyricsChordProPlaceholder": "اختیاری — قالب ChordPro",
+    "hasChords": "متن شامل آکورد است",
+    "notes": "یادداشت برای بازبین",
+    "notesPlaceholder": "زمینه، منبع، گونه‌ها… (اختیاری)",
+    "submitterName": "نام شما",
+    "submitterEmail": "ایمیل شما",
+    "loggedInAs": "ارسال به‌نام {name}",
+    "signInOptional": "ورود",
+    "rightsLabel": "تأیید می‌کنم حق دارم این ضبط و متن را برای اهداف جامعه به اشتراک بگذارم",
+    "submit": "ارسال پیشنهاد",
+    "submitting": "در حال ارسال…",
+    "successTitle": "سپاس!",
+    "successBody": "پیشنهادتان را دریافت کردیم. تیم بررسی می‌کند و در صورت تأیید به فهرست می‌افزاید.",
+    "successAnother": "ارسال پیشنهاد دیگر",
+    "errors": {
+      "required": "فیلد الزامی",
+      "invalidEmail": "ایمیل نامعتبر",
+      "invalidCategory": "دسته نامعتبر",
+      "invalidLanguage": "کد زبان نامعتبر (مثلاً es, en, pt)",
+      "youtubeRequired": "پیوند YouTube را وارد کنید",
+      "invalidYoutube": "پیوند YouTube نامعتبر",
+      "uploadRequired": "یک فایل MP3 بارگذاری کنید",
+      "invalidUploadPath": "خطا در بارگذاری صدا",
+      "rightsRequired": "باید حق اشتراک محتوا را تأیید کنید",
+      "nameRequired": "نامتان را وارد کنید",
+      "emailRequired": "ایمیلتان را وارد کنید",
+      "serviceUnavailable": "سرویس در دسترس نیست. بعداً تلاش کنید.",
+      "validationFailed": "فیلدهای مشخص‌شده را بررسی کنید",
+      "insertFailed": "ذخیرهٔ پیشنهاد ممکن نشد. دوباره تلاش کنید.",
+      "uploadFailed": "بارگذاری صدا ممکن نشد"
+    }
+  },
+  "meta": {
+    "home": {
+      "title": "BahaiSongs – متن، آکورد و ویدیوی سرودهای بهائی",
+      "description": "بیش از ۱۴۰ سرود بهائی با متن، آکورد و صدا. کتاب سرود دیجیتال بهائی."
+    },
+    "library": {
+      "title": "فهرست سرودهای بهائی – متن و آکورد | BahaiSongs",
+      "description": "فهرست کامل سرودهای بهائی را ببینید: متن، آکورد گیتار و صدا. بر اساس دسته، زبان و سبک فیلتر کنید."
+    },
+    "publicPlaylists": {
+      "title": "پلی‌لیست‌های عمومی – سرودهای بهائی | BahaiSongs",
+      "description": "پلی‌لیست‌های عمومی جامعه و BahaiSongs را ببینید: مجموعه‌هایی از سرودهای بهائی برای خواندن و نواختن با هم."
+    },
+    "song": {
+      "description": "{title} – متن{chords} | سرود بهائی. گوش دهید و در BahaiSongs یاد بگیرید بخوانید.",
+      "chordsSuffix": " و آکورد"
+    },
+    "category": {
+      "title": "{label} – سرودهای بهائی | BahaiSongs",
+      "descriptionFallback": "{label} — سرودهای بهائی با متن و آکورد | BahaiSongs"
+    },
+    "artist": {
+      "title": "{name} – سرودهای بهائی | BahaiSongs"
+    }
+  }
+}

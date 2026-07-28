@@ -46,6 +46,7 @@
     "@hookform/resolvers": "^3.9.1",
     "@mui/material": "^6.1.10",
     "@mui/material-nextjs": "^6.1.10",
+    "@mui/stylis-plugin-rtl": "^9.1.1",
     "@parent-tobias/chordpro-renderer": "^2.1.5",
     "@supabase/ssr": "^0.5.2",
     "@supabase/supabase-js": "^2.46.2",
@@ -61,6 +62,7 @@
     "react-dom": "19.0.0",
     "react-hook-form": "^7.54.1",
     "react-player": "^2.16.0",
+    "stylis": "^4.4.0",
     "zod": "^3.24.1",
     "zustand": "^5.0.2"
   },
@@ -73,6 +75,7 @@
     "@types/node": "^22.10.2",
     "@types/react": "^19.0.1",
     "@types/react-dom": "^19.0.2",
+    "@types/stylis": "^4.2.7",
     "@types/xml2js": "^0.4.14",
     "@vitejs/plugin-react": "^4.3.4",
     "aws4fetch": "^1.0.20",

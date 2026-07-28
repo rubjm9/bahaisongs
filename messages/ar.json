@@ -1,0 +1,369 @@
+{
+  "pwa": {
+    "install": {
+      "title": "ثبّت BahaiSongs",
+      "description": "أضِفها إلى الشاشة الرئيسية لفتحها كتطبيق.",
+      "cta": "تثبيت التطبيق",
+      "dismiss": "إغلاق",
+      "iosCta": "طريقة التثبيت",
+      "iosStep1": "اضغط زر المشاركة",
+      "iosStep2": "اختر «إضافة إلى الشاشة الرئيسية»"
+    },
+    "offline": {
+      "title": "بدون اتصال",
+      "description": "لا يوجد اتصال بالإنترنت. الصفحات التي زرتها سابقًا ما زالت متاحة.",
+      "retry": "إعادة المحاولة"
+    }
+  },
+  "brand": {
+    "name": "BahaiSongs.org",
+    "tagline": "موسيقى وصلوات وأوتار من المجتمع البهائي، في مكان واحد."
+  },
+  "settings": {
+    "theme": "المظهر",
+    "themeSystem": "النظام",
+    "themeLight": "فاتح",
+    "themeDark": "داكن",
+    "themeAria": "تغيير مظهر الواجهة",
+    "languageAria": "تغيير اللغة"
+  },
+  "share": {
+    "hint": "شارك هذا النشيد مع مجموعتك",
+    "ariaLabel": "مشاركة",
+    "copied": "تم نسخ الرابط!"
+  },
+  "nav": {
+    "home": "الرئيسية",
+    "discover": "اكتشف",
+    "library": "المكتبة",
+    "publicPlaylists": "قوائم عامة",
+    "suggest": "اقترح نشيدًا",
+    "favorites": "المفضلة",
+    "playlists": "قوائم التشغيل",
+    "yourPlaylists": "قوائمك",
+    "createPlaylist": "إنشاء قائمة",
+    "viewAllPlaylists": "عرض الكل",
+    "collapseMenu": "طي القائمة",
+    "expandMenu": "توسيع القائمة"
+  },
+  "home": {
+    "heroEyebrow": "موسيقى بهائية · كلمات · أوتار",
+    "heroTitle": "كلمات وأوتار لغناء الأناشيد البهائية معًا",
+    "heroSubtitle": "اعثر على النشيد الذي تبحث عنه وشاركه مع مجموعتك للغناء أو العزف معًا، أو استمع لتتعلّم كيف يُغنّى. هل ينقصنا نشيد؟ أرسله لنوسّع الكتالوج.",
+    "cta": "استكشف الكتالوج",
+    "ctaSuggest": "اقترح نشيدًا",
+    "heroStatLabel": "نشيد متاح"
+  },
+  "sections": {
+    "catalogSize": "{count} نشيدًا في الكتالوج",
+    "seeAll": "عرض الكل",
+    "recentEyebrow": "جديد",
+    "recentTitle": "أُضيفت مؤخرًا",
+    "recentDescription": "أحدث الإضافات إلى الكتالوج.",
+    "chordsEyebrow": "للعزف",
+    "chordsTitle": "مع أوتار",
+    "chordsDescription": "أناشيد مع أوتار — للجيتار أو اليوكوليلي أو البيانو.",
+    "prayersEyebrow": "تعبّد",
+    "prayersTitle": "صلوات مغنّاة",
+    "prayersDescription": "صلوات بهائية موضوعة في موسيقى.",
+    "calmEyebrow": "أجواء",
+    "calmTitle": "هادئة",
+    "calmDescription": "للتأمل أو التأمل الهادئ أو الراحة."
+  },
+  "player": {
+    "idleTitle": "لا شيء يُشغَّل",
+    "idleRandomCta": "تشغيل نشيد عشوائي",
+    "idleRandomLoading": "جارٍ البحث عن نشيد…",
+    "label": "المشغّل",
+    "position": "الموضع",
+    "shuffle": "عشوائي",
+    "previous": "السابق",
+    "play": "تشغيل",
+    "pause": "إيقاف مؤقت",
+    "next": "التالي",
+    "repeat": "تكرار",
+    "mute": "كتم الصوت",
+    "unmute": "تشغيل الصوت",
+    "volume": "مستوى الصوت",
+    "playTrack": "تشغيل {title}",
+    "pauseTrack": "إيقاف مؤقت {title}",
+    "audioUnavailable": "لا يتوفر صوت لـ {title}"
+  },
+  "song": {
+    "eyebrow": "نشيد",
+    "by": "بواسطة",
+    "hasAudio": "صوت",
+    "hasChords": "أوتار",
+    "noAudio": "كلمات فقط",
+    "noAudioHint": "هذا النشيد ليس له صوت في الكتالوج بعد.",
+    "playReady": "تشغيل هذا النشيد",
+    "playReadyHint": "اضغط للاستماع. تظهر عناصر التحكم في المشغّل السفلي.",
+    "lyricsTitle": "الكلمات"
+  },
+  "artist": {
+    "eyebrow": "فنان",
+    "trackCount": "{count, plural, =0 {لا أناشيد} one {نشيد واحد} two {نشيدان} few {# أناشيد} many {# نشيدًا} other {# نشيد}}",
+    "allTracks": "كل الأناشيد"
+  },
+  "category": {
+    "kind": {
+      "genre": "نوع",
+      "mood": "مزاج",
+      "theme": "موضوع",
+      "tag": "وسم"
+    },
+    "trackCount": "{count, plural, =0 {لا أناشيد} one {نشيد واحد} two {نشيدان} few {# أناشيد} many {# نشيدًا} other {# نشيد}}"
+  },
+  "catalog": {
+    "tooltips": {
+      "language": "لغة الكلمات: {language}",
+      "audio": "صوت متاح في المشغّل",
+      "chords": "يتضمن أوتارًا للمرافقة عند الغناء أو العزف"
+    }
+  },
+  "discover": {
+    "title": "اكتشف الموسيقى",
+    "subtitle": "ابحث واستكشف الكتالوج",
+    "placeholder": "ابحث بالعنوان أو الفنان أو الكلمات أو الفئة…",
+    "totalCatalog": "{count} نشيدًا في الكتالوج",
+    "browseByCategory": "تصفح حسب الفئة",
+    "allTracksHeading": "{count} نشيدًا، مرتبة أبجديًا",
+    "resultsCount": "{count, plural, =0 {لا نتائج} one {نتيجة واحدة} two {نتيجتان} few {# نتائج} many {# نتيجة} other {# نتيجة}}",
+    "loading": "جارٍ تحميل الكتالوج…"
+  },
+  "publicPlaylists": {
+    "eyebrow": "المجتمع",
+    "title": "قوائم تشغيل عامة",
+    "subtitle": "مجموعات يشاركها المجتمع وBahaiSongs",
+    "curatedBadge": "مختارة",
+    "byUser": "بواسطة {name}",
+    "byUserAnonymous": "بواسطة مستخدم",
+    "trackCount": "{count, plural, =0 {لا أناشيد} one {نشيد واحد} two {نشيدان} few {# أناشيد} many {# نشيدًا} other {# نشيد}}",
+    "empty": "لا توجد قوائم عامة بعد. أنشئ قائمتك وشاركها مع المجتمع.",
+    "discoverCta": "استكشف القوائم العامة",
+    "discoverCtaHint": "مجموعات من المجتمع وBahaiSongs"
+  },
+  "library": {
+    "eyebrow": "شخصي",
+    "title": "مكتبتك",
+    "subtitle": "المفضلة والقوائم التي تحفظها",
+    "signInTitle": "احفظ ما تحب",
+    "signInHint": "سجّل الدخول لحفظ المفضلة وإنشاء قوائم.",
+    "exploreCatalog": "استكشف الكتالوج ←",
+    "viewAll": "عرض الكل",
+    "loading": "جارٍ التحميل…"
+  },
+  "search": {
+    "title": "البحث في الكتالوج",
+    "placeholder": "ابحث بالعنوان أو الفنان أو الكلمات أو الفئة…",
+    "resultsCount": "{count, plural, =0 {لا نتائج} one {نتيجة واحدة} two {نتيجتان} few {# نتائج} many {# نتيجة} other {# نتيجة}}",
+    "totalCatalog": "{count} نشيدًا في الكتالوج",
+    "hintEyebrow": "ابدأ بالكتابة",
+    "hintTitle": "ابحث بالعنوان أو الكلمات أو الأوتار",
+    "hintBody": "تصفية فورية عبر الكتالوج كله. استخدم ↑ ↓ للتنقل وEnter للفتح.",
+    "emptyEyebrow": "لا تطابق",
+    "emptyTitle": "لا شيء يطابق «{query}»",
+    "emptyBody": "جرّب حروفًا أقل أو كلمة من اللازمة أو تهجئة أخرى.",
+    "seeAll": "عرض كل نتائج «{query}» ←",
+    "filters": {
+      "language": "اللغة",
+      "all": "الكل",
+      "es": "Español",
+      "en": "English",
+      "withChords": "مع أوتار",
+      "withAudio": "مع صوت",
+      "reset": "مسح",
+      "tooltips": {
+        "all": "عرض الأناشيد بكل لغات الكتالوج",
+        "language": "أناشيد بلغة {language} فقط",
+        "withChords": "أناشيد مع أوتار فقط",
+        "withAudio": "أناشيد مع ملف صوتي فقط"
+      }
+    },
+    "loading": "جارٍ تحميل الكتالوج…"
+  },
+  "common": {
+    "loading": "جارٍ التحميل…",
+    "error": "حدث خطأ ما.",
+    "retry": "إعادة المحاولة",
+    "previous": "السابق",
+    "next": "التالي",
+    "skipToContent": "تخطّي إلى المحتوى"
+  },
+  "auth": {
+    "signIn": "دخول",
+    "signOut": "خروج",
+    "adminPanel": "لوحة الإدارة",
+    "modalTitle": "دخول أو إنشاء حساب",
+    "modalSubtitle": "أول مرة؟ ننشئ حسابك ببريدك أو Google. بلا كلمة مرور.",
+    "emailLabel": "البريد",
+    "sendAccessLink": "إرسال رابط الدخول",
+    "magicLink": "رابط سحري",
+    "magicLinkPlaceholder": "you@email.com",
+    "magicLinkSentTitle": "تحقق من بريدك",
+    "magicLinkSentBody": "افتح الرابط الذي أرسلناه للدخول. إن لم يكن لديك حساب، سيُنشأ عند التأكيد.",
+    "magicLinkSent": "تحقق من بريدك!",
+    "orContinueWith": "أو تابع مع",
+    "continueWithGoogle": "المتابعة مع Google",
+    "googleSetupHint": "ستتمكن أيضًا من الدخول عبر Google عند تفعيله في المشروع.",
+    "errorProviderDisabled": "Google غير متاح بعد. استخدم رابط البريد.",
+    "myPlaylists": "قوائمي",
+    "favorites": "المفضلة",
+    "profile": "الملف",
+    "signInToLike": "سجّل الدخول لحفظ المفضلة",
+    "signInRequired": "سجّل الدخول للمتابعة"
+  },
+  "playlist": {
+    "create": "قائمة جديدة",
+    "titleLabel": "العنوان",
+    "visibility": "الظهور",
+    "public": "عامة",
+    "private": "خاصة",
+    "unlisted": "غير مدرجة",
+    "save": "حفظ",
+    "addTrack": "إضافة إلى قائمة",
+    "removeTrack": "إزالة",
+    "emptyFavorites": "ليس لديك مفضلة بعد",
+    "emptyPlaylists": "ليس لديك قوائم بعد",
+    "newPlaylist": "قائمة جديدة",
+    "myPlaylists": "قوائمي",
+    "signIn": "دخول",
+    "signInToAddToPlaylist": "سجّل الدخول للإضافة إلى القوائم",
+    "sharePlaylist": "مشاركة",
+    "linkCopied": "تم نسخ الرابط!",
+    "trackCount": "{count, plural, =0 {لا أناشيد} one {نشيد واحد} two {نشيدان} few {# أناشيد} many {# نشيدًا} other {# نشيد}}",
+    "changeVisibilityToShare": "اجعلها عامة للمشاركة",
+    "makePublic": "جعلها عامة"
+  },
+  "admin": {
+    "nav": {
+      "overview": "Inicio",
+      "tracks": "Canciones",
+      "categories": "Categorías",
+      "playlists": "Playlists",
+      "artists": "Artistas",
+      "users": "Usuarios",
+      "suggestions": "Sugerencias",
+      "backToSite": "Volver al sitio"
+    },
+    "overview": {
+      "title": "Panel de administración",
+      "statsTitle": "Resumen general",
+      "recentSuggestions": "Sugerencias recientes"
+    },
+    "common": {
+      "save": "Guardar cambios",
+      "create": "Crear",
+      "cancel": "Cancelar",
+      "delete": "Eliminar",
+      "edit": "Editar",
+      "back": "Volver",
+      "confirm": "Confirmar",
+      "noResults": "Sin resultados",
+      "loading": "Cargando…"
+    }
+  },
+  "lyrics": {
+    "chords": "أوتار",
+    "transpose": "نقل الطبقة",
+    "capo": "كابو",
+    "fontSize": "الحجم",
+    "autoscroll": "تمرير تلقائي",
+    "present": "عرض",
+    "noLyrics": "لا كلمات متاحة بعد.",
+    "exitPresentation": "خروج",
+    "keyHints": "مسافة: تمرير · +/- طبقة · ↑↓ حجم · ESC خروج"
+  },
+  "suggest": {
+    "pageTitle": "اقترح نشيدًا",
+    "pageDescription": "تعرف نشيدًا بهائيًا ليس في الكتالوج؟ أرسل لنا الصوت والكلمات والأوتار. سنراجعه قبل النشر.",
+    "sectionSong": "بيانات النشيد",
+    "sectionAudio": "الصوت",
+    "sectionLyrics": "الكلمات",
+    "sectionContact": "التواصل",
+    "sectionLegal": "تأكيد",
+    "title": "العنوان",
+    "titlePlaceholder": "اسم النشيد",
+    "artistName": "الفنان أو المؤدي",
+    "artistPlaceholder": "اختياري",
+    "language": "اللغة",
+    "categories": "الفئات",
+    "categoriesHint": "اختر ما يصف النشيد أفضل (اختياري)",
+    "suggestCategory": "اقترح فئة",
+    "suggestCategoryPlaceholder": "اسم الفئة المقترحة",
+    "addLanguage": "إضافة لغة",
+    "customLanguageCode": "رمز اللغة",
+    "customLanguageCodePlaceholder": "مثل fr, de, it",
+    "customLanguageLabel": "اسم اللغة",
+    "customLanguageLabelPlaceholder": "مثل الفرنسية",
+    "backToLanguageList": "العودة إلى القائمة",
+    "sourceMp3": "رفع MP3",
+    "sourceYoutube": "رابط YouTube",
+    "mp3Label": "ملف صوتي",
+    "mp3Hint": "صيغة MP3، الحد الأقصى الموصى به 20 ميغابايت",
+    "mp3DropHint": "اسحب ملف MP3 هنا أو انقر للاختيار",
+    "mp3Uploading": "جارٍ رفع الصوت…",
+    "mp3Ready": "الصوت جاهز للإرسال",
+    "youtubeUrl": "رابط YouTube",
+    "youtubePlaceholder": "https://www.youtube.com/watch?v=…",
+    "lyricsPlain": "كلمات (نص عادي)",
+    "lyricsPlainPlaceholder": "الصق الكلمات إن لم تستخدم ChordPro",
+    "lyricsChordPro": "كلمات مع أوتار (ChordPro)",
+    "lyricsChordProPlaceholder": "اختياري — صيغة ChordPro",
+    "hasChords": "الكلمات تتضمن أوتارًا",
+    "notes": "ملاحظات للمراجع",
+    "notesPlaceholder": "سياق، مصدر، تنويعات… (اختياري)",
+    "submitterName": "اسمك",
+    "submitterEmail": "بريدك",
+    "loggedInAs": "الإرسال باسم {name}",
+    "signInOptional": "تسجيل الدخول",
+    "rightsLabel": "أؤكد أن لي الحق في مشاركة هذا التسجيل وهذه الكلمات لأغراض مجتمعية",
+    "submit": "إرسال الاقتراح",
+    "submitting": "جارٍ الإرسال…",
+    "successTitle": "شكرًا!",
+    "successBody": "استلمنا اقتراحك. سيراجعه الفريق ويضيفه إلى الكتالوج إن أمكن.",
+    "successAnother": "إرسال اقتراح آخر",
+    "errors": {
+      "required": "حقل مطلوب",
+      "invalidEmail": "بريد غير صالح",
+      "invalidCategory": "فئة غير صالحة",
+      "invalidLanguage": "رمز لغة غير صالح (مثل es, en, pt)",
+      "youtubeRequired": "أدخل رابط YouTube",
+      "invalidYoutube": "رابط YouTube غير صالح",
+      "uploadRequired": "ارفع ملف MP3",
+      "invalidUploadPath": "خطأ في رفع الصوت",
+      "rightsRequired": "يجب تأكيد حقك في مشاركة المحتوى",
+      "nameRequired": "أدخل اسمك",
+      "emailRequired": "أدخل بريدك",
+      "serviceUnavailable": "الخدمة غير متاحة. حاول لاحقًا.",
+      "validationFailed": "راجع الحقول المحددة",
+      "insertFailed": "تعذّر حفظ الاقتراح. حاول مجددًا.",
+      "uploadFailed": "تعذّر رفع الصوت"
+    }
+  },
+  "meta": {
+    "home": {
+      "title": "BahaiSongs – كلمات وأوتار وفيديوهات لأناشيد بهائية",
+      "description": "اكتشف أكثر من 140 نشيدًا بهائيًا مع الكلمات والأوتار والصوت. كتاب الأناشيد البهائية الرقمي."
+    },
+    "library": {
+      "title": "كتالوج الأناشيد البهائية – كلمات وأوتار | BahaiSongs",
+      "description": "تصفح الكتالوج الكامل للأناشيد البهائية: كلمات وأوتار جيتار وصوت. صفِّ حسب الفئة واللغة والأسلوب."
+    },
+    "publicPlaylists": {
+      "title": "قوائم تشغيل عامة – أناشيد بهائية | BahaiSongs",
+      "description": "استكشف قوائم التشغيل العامة التي أنشأها المجتمع وBahaiSongs: مجموعات من الأناشيد البهائية للغناء والعزف معًا."
+    },
+    "song": {
+      "description": "{title} – كلمات{chords} | نشيد بهائي. استمع وتعلّم غناءه على BahaiSongs.",
+      "chordsSuffix": " وأوتار"
+    },
+    "category": {
+      "title": "{label} – أناشيد بهائية | BahaiSongs",
+      "descriptionFallback": "{label} — أناشيد بهائية مع كلمات وأوتار | BahaiSongs"
+    },
+    "artist": {
+      "title": "{name} – أناشيد بهائية | BahaiSongs"
+    }
+  }
+}

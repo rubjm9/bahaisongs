@@ -69,7 +69,7 @@ const nextConfig = {
         permanent: true,
       },
       {
-        source: '/:locale(es|en)/song/:slug',
+        source: '/:locale(es|en|fr|de|pt|ar|ru|fa)/song/:slug',
         destination: '/:slug',
         permanent: true,
       },
@@ -115,7 +115,7 @@ const nextConfig = {
         permanent: true,
       },
       {
-        source: '/:locale(es|en)/song/:slug/',
+        source: '/:locale(es|en|fr|de|pt|ar|ru|fa)/song/:slug/',
         destination: '/:slug',
         permanent: true,
       },

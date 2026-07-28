@@ -6,6 +6,7 @@ import { getPublicPlaylists } from '@/server/data/playlists';
 import { PublicPlaylistsPageClient } from '@/features/public-playlists/components/PublicPlaylistsPageClient';
 import type { Locale } from '@/shared/lib/i18n/config';
 import { appPath } from '@/shared/lib/seo/paths';
+import { languagesAlternates } from '@/shared/lib/seo/hreflang';
 import { SITE_URL } from '@/shared/lib/seo/site';
 import { accent, cssVars } from '@/shared/theme/tokens';
 
@@ -13,21 +14,16 @@ type Params = Promise<{ locale: string }>;
 
 export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
   const { locale } = await params;
-  const isEs = locale !== 'en';
-  const canonical = `${SITE_URL}${appPath(locale as Locale, 'public-playlists')}`;
+  const loc = locale as Locale;
+  setRequestLocale(loc);
+  const t = await getTranslations({ locale: loc, namespace: 'meta.publicPlaylists' });
+  const canonical = `${SITE_URL}${appPath(loc, 'public-playlists')}`;
   return {
-    title: isEs
-      ? 'Playlists públicas – Canciones bahá\'ís | BahaiSongs'
-      : 'Public playlists – Bahá\'í songs | BahaiSongs',
-    description: isEs
-      ? 'Explora playlists públicas creadas por la comunidad y por BahaiSongs: colecciones de canciones bahá\'ís para cantar y tocar juntos.'
-      : 'Browse public playlists created by the community and BahaiSongs: collections of Bahá\'í songs to sing and play together.',
+    title: t('title'),
+    description: t('description'),
     alternates: {
       canonical,
-      languages: {
-        es: `${SITE_URL}${appPath('es', 'public-playlists')}`,
-        en: `${SITE_URL}${appPath('en', 'public-playlists')}`,
-      },
+      languages: languagesAlternates('public-playlists'),
     },
   };
 }

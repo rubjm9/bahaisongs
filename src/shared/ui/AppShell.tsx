@@ -2,6 +2,7 @@
 
 import { Box } from '@mui/material';
 import { type ReactNode } from 'react';
+import { useTranslations } from 'next-intl';
 import { Sidebar } from './Sidebar';
 import { TopBar } from './TopBar';
 import { AtmosphereBackground } from './AtmosphereBackground';
@@ -33,6 +34,7 @@ interface Props {
 export function AppShell({ children }: Props) {
   const { collapsed, toggleCollapsed } = useSidebarCollapsed();
   const sidebarWidth = collapsed ? SIDEBAR_WIDTH_COLLAPSED : SIDEBAR_WIDTH_EXPANDED;
+  const tCommon = useTranslations('common');
 
   return (
     <>
@@ -64,7 +66,7 @@ export function AppShell({ children }: Props) {
           '&:focus': { left: 8 },
         }}
       >
-        Saltar al contenido
+        {tCommon('skipToContent')}
       </Box>
 
       <AtmosphereBackground intensity="low" fixed />

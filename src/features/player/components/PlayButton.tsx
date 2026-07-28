@@ -3,6 +3,7 @@
 import { useRef, type MouseEvent } from 'react';
 import { IconButton } from '@mui/material';
 import { Play, Pause, Loader2 } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 import { useQueueStore, selectCurrentTrack } from '../stores/queueStore';
 import { usePlayerStore } from '../stores/playerStore';
 import { hasPlayableSource } from '../lib/sourceResolver';
@@ -33,6 +34,7 @@ export function PlayButton({
   ariaLabel,
 }: Props) {
   const lastClickRef = useRef(0);
+  const tPlayer = useTranslations('player');
 
   const currentSlug = useQueueStore((s) => selectCurrentTrack(s)?.slug ?? null);
   const status = usePlayerStore((s) => s.status);
@@ -95,10 +97,10 @@ export function PlayButton({
   const label =
     ariaLabel ??
     (!playable
-      ? `Audio no disponible para ${track.title}`
+      ? tPlayer('audioUnavailable', { title: track.title })
       : isPlaying
-        ? `Pausar ${track.title}`
-        : `Reproducir ${track.title}`);
+        ? tPlayer('pauseTrack', { title: track.title })
+        : tPlayer('playTrack', { title: track.title }));
 
   return (
     <IconButton

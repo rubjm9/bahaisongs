@@ -5,7 +5,7 @@ import { Providers } from '@/app/providers';
 import { InstallPrompt } from '@/features/pwa/components/InstallPrompt';
 import { routing } from '@/shared/lib/i18n/routing';
 import { getServerThemeMode, getServerThemePreference } from '@/shared/theme/serverTheme';
-import type { Locale } from '@/shared/lib/i18n/config';
+import { localeDirection, type Locale } from '@/shared/lib/i18n/config';
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -33,10 +33,15 @@ export default async function LocaleLayout({
     getServerThemeMode(),
     getServerThemePreference(),
   ]);
+  const direction = localeDirection(locale);
 
   return (
     <NextIntlClientProvider locale={locale} messages={messages}>
-      <Providers initialMode={initialMode} {...(themePreference ? { themePreference } : {})}>
+      <Providers
+        initialMode={initialMode}
+        direction={direction}
+        {...(themePreference ? { themePreference } : {})}
+      >
         {children}
         <InstallPrompt />
       </Providers>

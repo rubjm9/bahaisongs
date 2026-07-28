@@ -29,6 +29,20 @@
     text-rendering: optimizeLegibility;
   }
 
+  html[dir='rtl'] body {
+    font-family:
+      var(--bs-font-arabic),
+      var(--bs-font-sans),
+      'Noto Sans Arabic',
+      system-ui,
+      sans-serif;
+  }
+
+  /* Mirror directional media controls in RTL layouts */
+  html[dir='rtl'] .bs-flip-rtl {
+    transform: scaleX(-1);
+  }
+
   a {
     color: inherit;
     text-decoration: none;

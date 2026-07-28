@@ -24,7 +24,8 @@
     "themeSystem": "System",
     "themeLight": "Light",
     "themeDark": "Dark",
-    "themeAria": "Change interface theme"
+    "themeAria": "Change interface theme",
+    "languageAria": "Change language"
   },
   "share": {
     "hint": "Share this song with your group",
@@ -72,7 +73,21 @@
   "player": {
     "idleTitle": "Nothing playing",
     "idleRandomCta": "Play a random song",
-    "idleRandomLoading": "Finding a song…"
+    "idleRandomLoading": "Finding a song…",
+    "label": "Player",
+    "position": "Position",
+    "shuffle": "Shuffle",
+    "previous": "Previous",
+    "play": "Play",
+    "pause": "Pause",
+    "next": "Next",
+    "repeat": "Repeat",
+    "mute": "Mute",
+    "unmute": "Unmute",
+    "volume": "Volume",
+    "playTrack": "Play {title}",
+    "pauseTrack": "Pause {title}",
+    "audioUnavailable": "Audio unavailable for {title}"
   },
   "song": {
     "eyebrow": "Song",
@@ -172,7 +187,8 @@
     "error": "Something went wrong.",
     "retry": "Try again",
     "previous": "Previous",
-    "next": "Next"
+    "next": "Next",
+    "skipToContent": "Skip to content"
   },
   "auth": {
     "signIn": "Sign in",
@@ -324,5 +340,30 @@
     "noLyrics": "No lyrics available yet.",
     "exitPresentation": "Exit",
     "keyHints": "Space: scroll · +/- transpose · ↑↓ size · ESC exit"
+  },
+  "meta": {
+    "home": {
+      "title": "BahaiSongs – Bahá'í Songs, Lyrics & Chords",
+      "description": "Discover 140+ Bahá'í songs with lyrics, guitar chords and integrated audio. The digital Bahá'í songbook."
+    },
+    "library": {
+      "title": "Bahá'í Songs Catalog – Lyrics and Chords | BahaiSongs",
+      "description": "Browse the full catalog of Bahá'í songs: lyrics, guitar chords and audio. Filter by category, language and musical style."
+    },
+    "publicPlaylists": {
+      "title": "Public playlists – Bahá'í songs | BahaiSongs",
+      "description": "Browse public playlists created by the community and BahaiSongs: collections of Bahá'í songs to sing and play together."
+    },
+    "song": {
+      "description": "{title} – lyrics{chords} | Bahá'í song. Listen and learn to sing it on BahaiSongs.",
+      "chordsSuffix": " and chords"
+    },
+    "category": {
+      "title": "{label} – Bahá'í Songs | BahaiSongs",
+      "descriptionFallback": "{label} — Bahá'í songs with lyrics and chords | BahaiSongs"
+    },
+    "artist": {
+      "title": "{name} – Bahá'í Songs | BahaiSongs"
+    }
   }
 }

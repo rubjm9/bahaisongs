@@ -1,0 +1,369 @@
+{
+  "pwa": {
+    "install": {
+      "title": "Installer BahaiSongs",
+      "description": "Ajoutez-la à votre écran d'accueil pour l'ouvrir comme une application.",
+      "cta": "Installer l'app",
+      "dismiss": "Fermer",
+      "iosCta": "Comment installer",
+      "iosStep1": "Appuyez sur le bouton Partager",
+      "iosStep2": "Choisissez « Sur l'écran d'accueil »"
+    },
+    "offline": {
+      "title": "Hors ligne",
+      "description": "Pas de connexion internet. Les pages déjà visitées restent disponibles.",
+      "retry": "Réessayer"
+    }
+  },
+  "brand": {
+    "name": "BahaiSongs.org",
+    "tagline": "Musique, prières et accords de la communauté bahá'íe, au même endroit."
+  },
+  "settings": {
+    "theme": "Thème",
+    "themeSystem": "Système",
+    "themeLight": "Clair",
+    "themeDark": "Sombre",
+    "themeAria": "Changer le thème de l'interface",
+    "languageAria": "Changer de langue"
+  },
+  "share": {
+    "hint": "Partagez cette chanson avec votre groupe",
+    "ariaLabel": "Partager",
+    "copied": "Lien copié !"
+  },
+  "nav": {
+    "home": "Accueil",
+    "discover": "Découvrir",
+    "library": "Bibliothèque",
+    "publicPlaylists": "Playlists publiques",
+    "suggest": "Suggérer une chanson",
+    "favorites": "Favoris",
+    "playlists": "Playlists",
+    "yourPlaylists": "Vos playlists",
+    "createPlaylist": "Créer une playlist",
+    "viewAllPlaylists": "Voir tout",
+    "collapseMenu": "Réduire le menu",
+    "expandMenu": "Développer le menu"
+  },
+  "home": {
+    "heroEyebrow": "Musique bahá'íe · Paroles · Accords",
+    "heroTitle": "Paroles et accords pour chanter ensemble des chants bahá'ís",
+    "heroSubtitle": "Trouvez la chanson que vous cherchez et partagez-la avec votre groupe pour chanter ou jouer ensemble, ou écoutez-la pour savoir comment elle va. Une chanson manque ? Envoyez-la-nous pour enrichir le catalogue.",
+    "cta": "Explorer le catalogue",
+    "ctaSuggest": "Suggérer une chanson",
+    "heroStatLabel": "chansons disponibles"
+  },
+  "sections": {
+    "catalogSize": "{count} chansons dans le catalogue",
+    "seeAll": "Voir tout",
+    "recentEyebrow": "Nouveautés",
+    "recentTitle": "Récemment ajoutées",
+    "recentDescription": "Les dernières additions au catalogue.",
+    "chordsEyebrow": "Pour jouer",
+    "chordsTitle": "Avec accords",
+    "chordsDescription": "Chansons avec accords — pour guitare, ukulélé ou piano.",
+    "prayersEyebrow": "Dévotion",
+    "prayersTitle": "Prières chantées",
+    "prayersDescription": "Prières bahá'íes mises en musique.",
+    "calmEyebrow": "Atmosphère",
+    "calmTitle": "Calmes",
+    "calmDescription": "Pour réfléchir, méditer ou se reposer."
+  },
+  "player": {
+    "idleTitle": "Rien en lecture",
+    "idleRandomCta": "Écouter une chanson au hasard",
+    "idleRandomLoading": "Recherche d'une chanson…",
+    "label": "Lecteur",
+    "position": "Position",
+    "shuffle": "Aléatoire",
+    "previous": "Précédent",
+    "play": "Lecture",
+    "pause": "Pause",
+    "next": "Suivant",
+    "repeat": "Répéter",
+    "mute": "Couper le son",
+    "unmute": "Activer le son",
+    "volume": "Volume",
+    "playTrack": "Lire {title}",
+    "pauseTrack": "Mettre en pause {title}",
+    "audioUnavailable": "Audio indisponible pour {title}"
+  },
+  "song": {
+    "eyebrow": "Chanson",
+    "by": "par",
+    "hasAudio": "Audio",
+    "hasChords": "Accords",
+    "noAudio": "Paroles uniquement",
+    "noAudioHint": "Cette chanson n'a pas encore d'audio dans le catalogue.",
+    "playReady": "Lire cette chanson",
+    "playReadyHint": "Appuyez pour écouter. Les commandes apparaissent dans le lecteur en bas.",
+    "lyricsTitle": "Paroles"
+  },
+  "artist": {
+    "eyebrow": "Artiste",
+    "trackCount": "{count, plural, =0 {Aucune chanson} =1 {1 chanson} other {# chansons}}",
+    "allTracks": "Toutes les chansons"
+  },
+  "category": {
+    "kind": {
+      "genre": "Genre",
+      "mood": "Atmosphère",
+      "theme": "Thème",
+      "tag": "Étiquette"
+    },
+    "trackCount": "{count, plural, =0 {Aucune chanson} =1 {1 chanson} other {# chansons}}"
+  },
+  "catalog": {
+    "tooltips": {
+      "language": "Langue des paroles : {language}",
+      "audio": "Audio disponible dans le lecteur",
+      "chords": "Inclut des accords pour accompagner le chant ou le jeu"
+    }
+  },
+  "discover": {
+    "title": "Découvrir la musique",
+    "subtitle": "Recherchez et explorez le catalogue",
+    "placeholder": "Recherchez par titre, artiste, paroles ou catégorie…",
+    "totalCatalog": "{count} chansons dans le catalogue",
+    "browseByCategory": "Parcourir par catégorie",
+    "allTracksHeading": "{count} chansons, triées par ordre alphabétique",
+    "resultsCount": "{count, plural, =0 {Aucun résultat} =1 {1 résultat} other {# résultats}}",
+    "loading": "Chargement du catalogue…"
+  },
+  "publicPlaylists": {
+    "eyebrow": "Communauté",
+    "title": "Playlists publiques",
+    "subtitle": "Collections partagées par la communauté et BahaiSongs",
+    "curatedBadge": "Sélection",
+    "byUser": "Par {name}",
+    "byUserAnonymous": "Par un utilisateur",
+    "trackCount": "{count, plural, =0 {Aucune chanson} =1 {1 chanson} other {# chansons}}",
+    "empty": "Pas encore de playlists publiques. Créez la vôtre et partagez-la avec la communauté.",
+    "discoverCta": "Explorer les playlists publiques",
+    "discoverCtaHint": "Collections de la communauté et de BahaiSongs"
+  },
+  "library": {
+    "eyebrow": "Personnel",
+    "title": "Votre bibliothèque",
+    "subtitle": "Favoris et playlists que vous enregistrez",
+    "signInTitle": "Enregistrez ce que vous aimez",
+    "signInHint": "Connectez-vous pour enregistrer des favoris et créer des playlists.",
+    "exploreCatalog": "Explorer le catalogue →",
+    "viewAll": "Voir tout",
+    "loading": "Chargement…"
+  },
+  "search": {
+    "title": "Rechercher dans le catalogue",
+    "placeholder": "Recherchez par titre, artiste, paroles ou catégorie…",
+    "resultsCount": "{count, plural, =0 {Aucun résultat} =1 {1 résultat} other {# résultats}}",
+    "totalCatalog": "{count} chansons dans le catalogue",
+    "hintEyebrow": "Commencez à écrire",
+    "hintTitle": "Recherchez par titre, paroles ou accords",
+    "hintBody": "Filtrage instantané sur tout le catalogue. Utilisez ↑ ↓ pour naviguer et Entrée pour ouvrir.",
+    "emptyEyebrow": "Aucune correspondance",
+    "emptyTitle": "Rien ne correspond à « {query} »",
+    "emptyBody": "Essayez moins de lettres, un mot du refrain ou une autre orthographe.",
+    "seeAll": "Voir tous les résultats pour « {query} » →",
+    "filters": {
+      "language": "Langue",
+      "all": "Toutes",
+      "es": "Español",
+      "en": "English",
+      "withChords": "Avec accords",
+      "withAudio": "Avec audio",
+      "reset": "Effacer",
+      "tooltips": {
+        "all": "Afficher les chansons dans toutes les langues du catalogue",
+        "language": "Uniquement les chansons en {language}",
+        "withChords": "Uniquement les chansons avec accords",
+        "withAudio": "Uniquement les chansons avec fichier audio"
+      }
+    },
+    "loading": "Chargement du catalogue…"
+  },
+  "common": {
+    "loading": "Chargement…",
+    "error": "Une erreur s'est produite.",
+    "retry": "Réessayer",
+    "previous": "Précédent",
+    "next": "Suivant",
+    "skipToContent": "Aller au contenu"
+  },
+  "auth": {
+    "signIn": "Connexion",
+    "signOut": "Déconnexion",
+    "adminPanel": "Panneau d'administration",
+    "modalTitle": "Se connecter ou créer un compte",
+    "modalSubtitle": "Première visite ? Nous créons votre compte avec votre e-mail ou Google. Pas de mot de passe.",
+    "emailLabel": "E-mail",
+    "sendAccessLink": "Envoyer le lien d'accès",
+    "magicLink": "Lien magique",
+    "magicLinkPlaceholder": "vous@email.com",
+    "magicLinkSentTitle": "Vérifiez votre boîte mail",
+    "magicLinkSentBody": "Ouvrez le lien que nous avons envoyé pour vous connecter. Si vous n'aviez pas de compte, il sera créé à la confirmation.",
+    "magicLinkSent": "Vérifiez votre boîte mail !",
+    "orContinueWith": "Ou continuez avec",
+    "continueWithGoogle": "Continuer avec Google",
+    "googleSetupHint": "Vous pourrez aussi vous connecter avec Google une fois activé pour le projet.",
+    "errorProviderDisabled": "Google n'est pas encore disponible. Utilisez le lien par e-mail.",
+    "myPlaylists": "Mes playlists",
+    "favorites": "Favoris",
+    "profile": "Profil",
+    "signInToLike": "Connectez-vous pour enregistrer des favoris",
+    "signInRequired": "Connectez-vous pour continuer"
+  },
+  "playlist": {
+    "create": "Nouvelle playlist",
+    "titleLabel": "Titre",
+    "visibility": "Visibilité",
+    "public": "Publique",
+    "private": "Privée",
+    "unlisted": "Non listée",
+    "save": "Enregistrer",
+    "addTrack": "Ajouter à la playlist",
+    "removeTrack": "Retirer",
+    "emptyFavorites": "Vous n'avez pas encore de favoris",
+    "emptyPlaylists": "Vous n'avez pas encore de playlists",
+    "newPlaylist": "Nouvelle playlist",
+    "myPlaylists": "Mes playlists",
+    "signIn": "Connexion",
+    "signInToAddToPlaylist": "Connectez-vous pour ajouter aux playlists",
+    "sharePlaylist": "Partager",
+    "linkCopied": "Lien copié !",
+    "trackCount": "{count, plural, =0 {Aucune chanson} =1 {1 chanson} other {# chansons}}",
+    "changeVisibilityToShare": "Rendez-la publique pour partager",
+    "makePublic": "Rendre publique"
+  },
+  "admin": {
+    "nav": {
+      "overview": "Inicio",
+      "tracks": "Canciones",
+      "categories": "Categorías",
+      "playlists": "Playlists",
+      "artists": "Artistas",
+      "users": "Usuarios",
+      "suggestions": "Sugerencias",
+      "backToSite": "Volver al sitio"
+    },
+    "overview": {
+      "title": "Panel de administración",
+      "statsTitle": "Resumen general",
+      "recentSuggestions": "Sugerencias recientes"
+    },
+    "common": {
+      "save": "Guardar cambios",
+      "create": "Crear",
+      "cancel": "Cancelar",
+      "delete": "Eliminar",
+      "edit": "Editar",
+      "back": "Volver",
+      "confirm": "Confirmar",
+      "noResults": "Sin resultados",
+      "loading": "Cargando…"
+    }
+  },
+  "lyrics": {
+    "chords": "Accords",
+    "transpose": "Transposer",
+    "capo": "Capo",
+    "fontSize": "Taille",
+    "autoscroll": "Défilement auto",
+    "present": "Présenter",
+    "noLyrics": "Pas encore de paroles disponibles.",
+    "exitPresentation": "Quitter",
+    "keyHints": "Espace : défilement · +/- ton · ↑↓ taille · ESC quitter"
+  },
+  "suggest": {
+    "pageTitle": "Suggérer une chanson",
+    "pageDescription": "Vous connaissez un chant bahá'í absent du catalogue ? Envoyez-nous l'audio, les paroles et les accords. Nous le vérifierons avant publication.",
+    "sectionSong": "Détails de la chanson",
+    "sectionAudio": "Audio",
+    "sectionLyrics": "Paroles",
+    "sectionContact": "Contact",
+    "sectionLegal": "Confirmation",
+    "title": "Titre",
+    "titlePlaceholder": "Nom de la chanson",
+    "artistName": "Artiste ou interprète",
+    "artistPlaceholder": "Facultatif",
+    "language": "Langue",
+    "categories": "Catégories",
+    "categoriesHint": "Choisissez celles qui décrivent le mieux la chanson (facultatif)",
+    "suggestCategory": "Suggérer une catégorie",
+    "suggestCategoryPlaceholder": "Nom de la catégorie proposée",
+    "addLanguage": "Ajouter une langue",
+    "customLanguageCode": "Code de langue",
+    "customLanguageCodePlaceholder": "ex. fr, de, it",
+    "customLanguageLabel": "Nom de la langue",
+    "customLanguageLabelPlaceholder": "ex. Français",
+    "backToLanguageList": "Retour à la liste",
+    "sourceMp3": "Téléverser un MP3",
+    "sourceYoutube": "Lien YouTube",
+    "mp3Label": "Fichier audio",
+    "mp3Hint": "Format MP3, maximum recommandé 20 Mo",
+    "mp3DropHint": "Glissez un MP3 ici ou cliquez pour sélectionner",
+    "mp3Uploading": "Téléversement de l'audio…",
+    "mp3Ready": "Audio prêt à envoyer",
+    "youtubeUrl": "URL YouTube",
+    "youtubePlaceholder": "https://www.youtube.com/watch?v=…",
+    "lyricsPlain": "Paroles (texte brut)",
+    "lyricsPlainPlaceholder": "Collez les paroles si vous n'utilisez pas ChordPro",
+    "lyricsChordPro": "Paroles avec accords (ChordPro)",
+    "lyricsChordProPlaceholder": "Facultatif — format ChordPro",
+    "hasChords": "Les paroles incluent des accords",
+    "notes": "Notes pour le relecteur",
+    "notesPlaceholder": "Contexte, source, variantes… (facultatif)",
+    "submitterName": "Votre nom",
+    "submitterEmail": "Votre e-mail",
+    "loggedInAs": "Envoi en tant que {name}",
+    "signInOptional": "Se connecter",
+    "rightsLabel": "Je confirme avoir le droit de partager cet enregistrement et ces paroles à des fins communautaires",
+    "submit": "Envoyer la suggestion",
+    "submitting": "Envoi…",
+    "successTitle": "Merci !",
+    "successBody": "Nous avons reçu votre suggestion. L'équipe la examinera et, le cas échéant, l'ajoutera au catalogue.",
+    "successAnother": "Envoyer une autre suggestion",
+    "errors": {
+      "required": "Champ obligatoire",
+      "invalidEmail": "E-mail non valide",
+      "invalidCategory": "Catégorie non valide",
+      "invalidLanguage": "Code de langue non valide (utilisez ex. es, en, pt)",
+      "youtubeRequired": "Indiquez un lien YouTube",
+      "invalidYoutube": "Lien YouTube non valide",
+      "uploadRequired": "Téléversez un fichier MP3",
+      "invalidUploadPath": "Erreur lors du téléversement de l'audio",
+      "rightsRequired": "Vous devez confirmer avoir le droit de partager le contenu",
+      "nameRequired": "Indiquez votre nom",
+      "emailRequired": "Indiquez votre e-mail",
+      "serviceUnavailable": "Le service est indisponible. Réessayez plus tard.",
+      "validationFailed": "Vérifiez les champs signalés",
+      "insertFailed": "Impossible d'enregistrer la suggestion. Réessayez.",
+      "uploadFailed": "Impossible de téléverser l'audio"
+    }
+  },
+  "meta": {
+    "home": {
+      "title": "BahaiSongs – Paroles, accords et vidéos de chants bahá'ís",
+      "description": "Découvrez plus de 140 chants bahá'ís avec paroles, accords et audio. Le livre de chants bahá'í numérique."
+    },
+    "library": {
+      "title": "Catalogue de chants bahá'ís – Paroles et accords | BahaiSongs",
+      "description": "Parcourez le catalogue complet de chants bahá'ís : paroles, accords de guitare et audio. Filtrez par catégorie, langue et style."
+    },
+    "publicPlaylists": {
+      "title": "Playlists publiques – Chants bahá'ís | BahaiSongs",
+      "description": "Explorez les playlists publiques créées par la communauté et BahaiSongs : recueils de chants bahá'ís pour chanter et jouer ensemble."
+    },
+    "song": {
+      "description": "{title} – paroles{chords} | Chant bahá'í. Écoutez-le et apprenez à le chanter sur BahaiSongs.",
+      "chordsSuffix": " et accords"
+    },
+    "category": {
+      "title": "{label} – Chants bahá'ís | BahaiSongs",
+      "descriptionFallback": "{label} — chants bahá'ís avec paroles et accords | BahaiSongs"
+    },
+    "artist": {
+      "title": "{name} – Chants bahá'ís | BahaiSongs"
+    }
+  }
+}

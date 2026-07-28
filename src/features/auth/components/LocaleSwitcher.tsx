@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, type MouseEvent } from 'react';
-import { useLocale } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import { IconButton, Menu, MenuItem, ListItemText } from '@mui/material';
 import { Languages } from 'lucide-react';
 import { localeLabels, locales, type Locale } from '@/shared/lib/i18n/config';
@@ -10,6 +10,7 @@ import { cssVars } from '@/shared/theme/tokens';
 
 export function LocaleSwitcher() {
   const current = useLocale() as Locale;
+  const t = useTranslations('settings');
   const router = useRouter();
   const pathname = usePathname();
   const [anchor, setAnchor] = useState<HTMLElement | null>(null);
@@ -28,7 +29,7 @@ export function LocaleSwitcher() {
       <IconButton
         onClick={handleOpen}
         size="small"
-        aria-label="Change language"
+        aria-label={t('languageAria')}
         sx={{
           color: cssVars.textPrimary,
           border: `1px solid ${cssVars.borderSubtle}`,

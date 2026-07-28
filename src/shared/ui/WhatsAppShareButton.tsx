@@ -30,6 +30,7 @@ function ShareSpeechBubble({ children }: { children: ReactNode }) {
     >
       <Typography
         component="p"
+        dir="auto"
         sx={{
           m: 0,
           px: 1.5,
@@ -88,9 +89,12 @@ export function WhatsAppShareButton() {
     <Box
       role="group"
       aria-label={t('ariaLabel')}
+      // Keep bubble→icon order LTR so the tail always points at the icon;
+      // insetInlineEnd places the group on the trailing edge in both dirs.
+      dir="ltr"
       sx={{
         position: 'fixed',
-        right: { xs: 12, md: 20 },
+        insetInlineEnd: { xs: 12, md: 20 },
         bottom: { xs: MOBILE_WHATSAPP_BOTTOM, md: 132 },
         zIndex: 7,
         display: 'flex',

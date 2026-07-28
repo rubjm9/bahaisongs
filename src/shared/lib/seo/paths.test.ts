@@ -19,6 +19,8 @@ describe('seo paths', () => {
   it('appPath prefixes non-default locale', () => {
     expect(appPath('en')).toBe('/en');
     expect(appPath('en', 'library')).toBe('/en/library');
+    expect(appPath('fr', 'discover')).toBe('/fr/discover');
+    expect(appPath('ar', 'library')).toBe('/ar/library');
   });
 
   it('isAppPathActive matches as-needed URLs', () => {

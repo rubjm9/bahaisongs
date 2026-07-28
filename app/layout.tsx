@@ -3,9 +3,11 @@ import Script from 'next/script';
 import { Suspense } from 'react';
 import { GoogleAnalyticsPageViews } from '@/shared/lib/analytics/GoogleAnalytics';
 import { GoogleAnalyticsScripts } from '@/shared/lib/analytics/GoogleAnalyticsScripts';
-import { inter, outfit } from '@/shared/theme/fonts';
+import { inter, outfit, notoSansArabic } from '@/shared/theme/fonts';
 import { THEME_COOKIE_NAME, THEME_STORAGE_KEY } from '@/shared/theme/themeStorage';
 import { SITE_URL } from '@/shared/lib/seo/site';
+import { getRootHtmlLocale } from '@/shared/lib/i18n/rootLocale';
+import { localeDirection } from '@/shared/lib/i18n/config';
 import './globals.css';
 
 export const runtime = 'edge';
@@ -55,11 +57,15 @@ export const viewport: Viewport = {
   initialScale: 1,
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const locale = await getRootHtmlLocale();
+  const dir = localeDirection(locale);
+
   return (
     <html
-      lang="es"
-      className={`${inter.variable} ${outfit.variable}`}
+      lang={locale}
+      dir={dir}
+      className={`${inter.variable} ${outfit.variable} ${notoSansArabic.variable}`}
       suppressHydrationWarning
     >
       <head>

@@ -5,6 +5,7 @@ import { GradientText } from '@/shared/ui/GradientText';
 import { getAllTracks } from '@/server/data/catalog';
 import type { Locale } from '@/shared/lib/i18n/config';
 import { appPath } from '@/shared/lib/seo/paths';
+import { languagesAlternates } from '@/shared/lib/seo/hreflang';
 import { SITE_URL } from '@/shared/lib/seo/site';
 import { accent, cssVars } from '@/shared/theme/tokens';
 import { LibraryHubClient } from '@/features/library/components/LibraryHubClient';
@@ -13,21 +14,16 @@ type Params = Promise<{ locale: string }>;
 
 export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
   const { locale } = await params;
-  const isEs = locale !== 'en';
-  const canonical = `${SITE_URL}${appPath(locale as Locale, 'library')}`;
+  const loc = locale as Locale;
+  setRequestLocale(loc);
+  const t = await getTranslations({ locale: loc, namespace: 'meta.library' });
+  const canonical = `${SITE_URL}${appPath(loc, 'library')}`;
   return {
-    title: isEs
-      ? "Catálogo de canciones bahá'ís – Letras y acordes | BahaiSongs"
-      : "Bahá'í Songs Catalog – Lyrics and Chords | BahaiSongs",
-    description: isEs
-      ? "Explora el catálogo completo de canciones bahá'ís en español: letra, acordes de guitarra y audio. Filtra por categoría, idioma y estilo musical."
-      : "Browse the full catalog of Bahá'í songs: lyrics, guitar chords and audio. Filter by category, language and musical style.",
+    title: t('title'),
+    description: t('description'),
     alternates: {
       canonical,
-      languages: {
-        es: `${SITE_URL}${appPath('es', 'library')}`,
-        en: `${SITE_URL}${appPath('en', 'library')}`,
-      },
+      languages: languagesAlternates('library'),
     },
   };
 }

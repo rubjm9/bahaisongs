@@ -10,12 +10,16 @@ import {
   type ThemeMode,
 } from './tokens';
 
-export function createBsTheme(mode: ThemeMode) {
+export function createBsTheme(mode: ThemeMode, direction: 'ltr' | 'rtl' = 'ltr') {
   const semantic = getSemanticPalette(mode);
   const shadows = getShadows(mode);
+  const isRtl = direction === 'rtl';
+  const bodyFont = isRtl ? typography.fontFamily.rtl : typography.fontFamily.body;
+  const displayFont = isRtl ? typography.fontFamily.rtl : typography.fontFamily.display;
 
   return createTheme({
     cssVariables: true,
+    direction,
     palette: {
       mode,
       primary: { main: accent.electric, light: accent.glow },
@@ -29,21 +33,21 @@ export function createBsTheme(mode: ThemeMode) {
     },
     shape: { borderRadius: radii.md },
     typography: {
-      fontFamily: typography.fontFamily.body,
+      fontFamily: bodyFont,
       h1: {
-        fontFamily: typography.fontFamily.display,
+        fontFamily: displayFont,
         fontWeight: typography.weight.bold,
-        letterSpacing: '-0.02em',
+        letterSpacing: isRtl ? '0' : '-0.02em',
       },
       h2: {
-        fontFamily: typography.fontFamily.display,
+        fontFamily: displayFont,
         fontWeight: typography.weight.bold,
-        letterSpacing: '-0.015em',
+        letterSpacing: isRtl ? '0' : '-0.015em',
       },
       h3: {
-        fontFamily: typography.fontFamily.display,
+        fontFamily: displayFont,
         fontWeight: typography.weight.semibold,
-        letterSpacing: '-0.01em',
+        letterSpacing: isRtl ? '0' : '-0.01em',
       },
       button: { textTransform: 'none', fontWeight: typography.weight.medium },
     },

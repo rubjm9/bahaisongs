@@ -38,14 +38,16 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   const track = await getTrackBySlug(slug);
   if (!track) return { title: 'BahaiSongs' };
 
+  const loc = locale as Locale;
+  setRequestLocale(loc);
+  const t = await getTranslations({ locale: loc, namespace: 'meta.song' });
+
   // Duplicate versions point canonical to the primary slug
   const primary = primarySlug(slug);
   const canonical = trackCanonicalUrl(primary);
 
-  const isEs = locale !== 'en';
-  const description = isEs
-    ? `${track.title} – letra${track.hasChords ? ' y acordes' : ''} | Canción bahá'í en español. Escúchala y aprende a cantarla en BahaiSongs.`
-    : `${track.title} – lyrics${track.hasChords ? ' and chords' : ''} | Bahá'í song. Listen and learn to sing it on BahaiSongs.`;
+  const chords = track.hasChords ? t('chordsSuffix') : '';
+  const description = t('description', { title: track.title, chords });
 
   return {
     title: track.title,
@@ -325,9 +327,9 @@ function NeighbourLink({
           mb: 0.5,
         }}
       >
-        {direction === 'prev' ? <ArrowLeft size={12} /> : null}
+        {direction === 'prev' ? <ArrowLeft size={12} className="bs-flip-rtl" /> : null}
         <span>{label}</span>
-        {direction === 'next' ? <ArrowRight size={12} /> : null}
+        {direction === 'next' ? <ArrowRight size={12} className="bs-flip-rtl" /> : null}
       </Stack>
       <Box
         sx={{

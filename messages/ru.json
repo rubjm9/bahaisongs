@@ -1,0 +1,369 @@
+{
+  "pwa": {
+    "install": {
+      "title": "Установить BahaiSongs",
+      "description": "Добавьте на главный экран, чтобы открывать как приложение.",
+      "cta": "Установить приложение",
+      "dismiss": "Закрыть",
+      "iosCta": "Как установить",
+      "iosStep1": "Нажмите кнопку «Поделиться»",
+      "iosStep2": "Выберите «На экран „Домой“»"
+    },
+    "offline": {
+      "title": "Нет сети",
+      "description": "Нет подключения к интернету. Уже посещённые страницы доступны.",
+      "retry": "Повторить"
+    }
+  },
+  "brand": {
+    "name": "BahaiSongs.org",
+    "tagline": "Музыка, молитвы и аккорды общины бахаи — в одном месте."
+  },
+  "settings": {
+    "theme": "Тема",
+    "themeSystem": "Системная",
+    "themeLight": "Светлая",
+    "themeDark": "Тёмная",
+    "themeAria": "Сменить тему интерфейса",
+    "languageAria": "Сменить язык"
+  },
+  "share": {
+    "hint": "Поделитесь этой песней с вашей группой",
+    "ariaLabel": "Поделиться",
+    "copied": "Ссылка скопирована!"
+  },
+  "nav": {
+    "home": "Главная",
+    "discover": "Обзор",
+    "library": "Библиотека",
+    "publicPlaylists": "Публичные плейлисты",
+    "suggest": "Предложить песню",
+    "favorites": "Избранное",
+    "playlists": "Плейлисты",
+    "yourPlaylists": "Ваши плейлисты",
+    "createPlaylist": "Создать плейлист",
+    "viewAllPlaylists": "Смотреть все",
+    "collapseMenu": "Свернуть меню",
+    "expandMenu": "Развернуть меню"
+  },
+  "home": {
+    "heroEyebrow": "Музыка бахаи · Тексты · Аккорды",
+    "heroTitle": "Тексты и аккорды, чтобы вместе петь бахаийские песни",
+    "heroSubtitle": "Найдите нужную песню и поделитесь ею с группой, чтобы петь или играть вместе, или послушайте, как она звучит. Нет нужной песни? Пришлите её, чтобы мы расширили каталог.",
+    "cta": "Смотреть каталог",
+    "ctaSuggest": "Предложить песню",
+    "heroStatLabel": "песен доступно"
+  },
+  "sections": {
+    "catalogSize": "{count} песен в каталоге",
+    "seeAll": "Смотреть все",
+    "recentEyebrow": "Новое",
+    "recentTitle": "Недавно добавленные",
+    "recentDescription": "Последние поступления в каталог.",
+    "chordsEyebrow": "Для игры",
+    "chordsTitle": "С аккордами",
+    "chordsDescription": "Песни с аккордами — для гитары, укулеле или фортепиано.",
+    "prayersEyebrow": "Благоговение",
+    "prayersTitle": "Молитвы в песне",
+    "prayersDescription": "Бахаийские молитвы, положенные на музыку.",
+    "calmEyebrow": "Атмосфера",
+    "calmTitle": "Спокойные",
+    "calmDescription": "Для размышления, медитации или отдыха."
+  },
+  "player": {
+    "idleTitle": "Ничего не играет",
+    "idleRandomCta": "Случайная песня",
+    "idleRandomLoading": "Ищем песню…",
+    "label": "Плеер",
+    "position": "Позиция",
+    "shuffle": "Случайный порядок",
+    "previous": "Предыдущий",
+    "play": "Играть",
+    "pause": "Пауза",
+    "next": "Следующий",
+    "repeat": "Повтор",
+    "mute": "Без звука",
+    "unmute": "Включить звук",
+    "volume": "Громкость",
+    "playTrack": "Играть {title}",
+    "pauseTrack": "Пауза {title}",
+    "audioUnavailable": "Нет аудио для {title}"
+  },
+  "song": {
+    "eyebrow": "Песня",
+    "by": "исполнитель",
+    "hasAudio": "Аудио",
+    "hasChords": "Аккорды",
+    "noAudio": "Только текст",
+    "noAudioHint": "У этой песни пока нет аудио в каталоге.",
+    "playReady": "Воспроизвести эту песню",
+    "playReadyHint": "Нажмите, чтобы слушать. Управление появится в нижнем плеере.",
+    "lyricsTitle": "Текст"
+  },
+  "artist": {
+    "eyebrow": "Исполнитель",
+    "trackCount": "{count, plural, =0 {Нет песен} one {1 песня} few {# песни} many {# песен} other {# песен}}",
+    "allTracks": "Все песни"
+  },
+  "category": {
+    "kind": {
+      "genre": "Жанр",
+      "mood": "Настроение",
+      "theme": "Тема",
+      "tag": "Метка"
+    },
+    "trackCount": "{count, plural, =0 {Нет песен} one {1 песня} few {# песни} many {# песен} other {# песен}}"
+  },
+  "catalog": {
+    "tooltips": {
+      "language": "Язык текста: {language}",
+      "audio": "Аудио доступно в плеере",
+      "chords": "Есть аккорды для пения или игры"
+    }
+  },
+  "discover": {
+    "title": "Открыть музыку",
+    "subtitle": "Ищите и изучайте каталог",
+    "placeholder": "Поиск по названию, исполнителю, тексту или категории…",
+    "totalCatalog": "{count} песен в каталоге",
+    "browseByCategory": "По категориям",
+    "allTracksHeading": "{count} песен, по алфавиту",
+    "resultsCount": "{count, plural, =0 {Нет результатов} one {1 результат} few {# результата} many {# результатов} other {# результатов}}",
+    "loading": "Загрузка каталога…"
+  },
+  "publicPlaylists": {
+    "eyebrow": "Сообщество",
+    "title": "Публичные плейлисты",
+    "subtitle": "Подборки сообщества и BahaiSongs",
+    "curatedBadge": "Курируемый",
+    "byUser": "От {name}",
+    "byUserAnonymous": "От пользователя",
+    "trackCount": "{count, plural, =0 {Нет песен} one {1 песня} few {# песни} many {# песен} other {# песен}}",
+    "empty": "Публичных плейлистов пока нет. Создайте свой и поделитесь с сообществом.",
+    "discoverCta": "Смотреть публичные плейлисты",
+    "discoverCtaHint": "Подборки сообщества и BahaiSongs"
+  },
+  "library": {
+    "eyebrow": "Личное",
+    "title": "Ваша библиотека",
+    "subtitle": "Избранное и сохранённые плейлисты",
+    "signInTitle": "Сохраняйте любимое",
+    "signInHint": "Войдите, чтобы сохранять избранное и создавать плейлисты.",
+    "exploreCatalog": "Смотреть каталог →",
+    "viewAll": "Смотреть все",
+    "loading": "Загрузка…"
+  },
+  "search": {
+    "title": "Поиск в каталоге",
+    "placeholder": "Поиск по названию, исполнителю, тексту или категории…",
+    "resultsCount": "{count, plural, =0 {Нет результатов} one {1 результат} few {# результата} many {# результатов} other {# результатов}}",
+    "totalCatalog": "{count} песен в каталоге",
+    "hintEyebrow": "Начните вводить",
+    "hintTitle": "Ищите по названию, тексту или аккордам",
+    "hintBody": "Мгновенная фильтрация по всему каталогу. ↑ ↓ — навигация, Enter — открыть.",
+    "emptyEyebrow": "Нет совпадений",
+    "emptyTitle": "Ничего не найдено по «{query}»",
+    "emptyBody": "Попробуйте меньше букв, слово из припева или другое написание.",
+    "seeAll": "Все результаты по «{query}» →",
+    "filters": {
+      "language": "Язык",
+      "all": "Все",
+      "es": "Español",
+      "en": "English",
+      "withChords": "С аккордами",
+      "withAudio": "С аудио",
+      "reset": "Сбросить",
+      "tooltips": {
+        "all": "Песни на всех языках каталога",
+        "language": "Только песни на языке {language}",
+        "withChords": "Только песни с аккордами",
+        "withAudio": "Только песни с аудиофайлом"
+      }
+    },
+    "loading": "Загрузка каталога…"
+  },
+  "common": {
+    "loading": "Загрузка…",
+    "error": "Что-то пошло не так.",
+    "retry": "Повторить",
+    "previous": "Назад",
+    "next": "Далее",
+    "skipToContent": "Перейти к содержимому"
+  },
+  "auth": {
+    "signIn": "Войти",
+    "signOut": "Выйти",
+    "adminPanel": "Панель администратора",
+    "modalTitle": "Войти или создать аккаунт",
+    "modalSubtitle": "Впервые здесь? Мы создадим аккаунт по email или Google. Пароль не нужен.",
+    "emailLabel": "Email",
+    "sendAccessLink": "Отправить ссылку для входа",
+    "magicLink": "Волшебная ссылка",
+    "magicLinkPlaceholder": "vy@email.com",
+    "magicLinkSentTitle": "Проверьте почту",
+    "magicLinkSentBody": "Откройте отправленную ссылку, чтобы войти. Если аккаунта не было, он создастся при подтверждении.",
+    "magicLinkSent": "Проверьте почту!",
+    "orContinueWith": "Или продолжите с",
+    "continueWithGoogle": "Продолжить с Google",
+    "googleSetupHint": "Вход через Google станет доступен, когда его включат в проекте.",
+    "errorProviderDisabled": "Google пока недоступен. Используйте ссылку по email.",
+    "myPlaylists": "Мои плейлисты",
+    "favorites": "Избранное",
+    "profile": "Профиль",
+    "signInToLike": "Войдите, чтобы сохранять избранное",
+    "signInRequired": "Войдите, чтобы продолжить"
+  },
+  "playlist": {
+    "create": "Новый плейлист",
+    "titleLabel": "Название",
+    "visibility": "Видимость",
+    "public": "Публичный",
+    "private": "Частный",
+    "unlisted": "По ссылке",
+    "save": "Сохранить",
+    "addTrack": "Добавить в плейлист",
+    "removeTrack": "Удалить",
+    "emptyFavorites": "У вас пока нет избранного",
+    "emptyPlaylists": "У вас пока нет плейлистов",
+    "newPlaylist": "Новый плейлист",
+    "myPlaylists": "Мои плейлисты",
+    "signIn": "Войти",
+    "signInToAddToPlaylist": "Войдите, чтобы добавлять в плейлисты",
+    "sharePlaylist": "Поделиться",
+    "linkCopied": "Ссылка скопирована!",
+    "trackCount": "{count, plural, =0 {Нет песен} one {1 песня} few {# песни} many {# песен} other {# песен}}",
+    "changeVisibilityToShare": "Сделайте публичным, чтобы поделиться",
+    "makePublic": "Сделать публичным"
+  },
+  "admin": {
+    "nav": {
+      "overview": "Inicio",
+      "tracks": "Canciones",
+      "categories": "Categorías",
+      "playlists": "Playlists",
+      "artists": "Artistas",
+      "users": "Usuarios",
+      "suggestions": "Sugerencias",
+      "backToSite": "Volver al sitio"
+    },
+    "overview": {
+      "title": "Panel de administración",
+      "statsTitle": "Resumen general",
+      "recentSuggestions": "Sugerencias recientes"
+    },
+    "common": {
+      "save": "Guardar cambios",
+      "create": "Crear",
+      "cancel": "Cancelar",
+      "delete": "Eliminar",
+      "edit": "Editar",
+      "back": "Volver",
+      "confirm": "Confirmar",
+      "noResults": "Sin resultados",
+      "loading": "Cargando…"
+    }
+  },
+  "lyrics": {
+    "chords": "Аккорды",
+    "transpose": "Транспонировать",
+    "capo": "Каподастр",
+    "fontSize": "Размер",
+    "autoscroll": "Автопрокрутка",
+    "present": "Презентация",
+    "noLyrics": "Текст пока недоступен.",
+    "exitPresentation": "Выйти",
+    "keyHints": "Пробел: прокрутка · +/- тон · ↑↓ размер · ESC выход"
+  },
+  "suggest": {
+    "pageTitle": "Предложить песню",
+    "pageDescription": "Знаете бахаийскую песню, которой нет в каталоге? Пришлите аудио, текст и аккорды. Мы проверим перед публикацией.",
+    "sectionSong": "Данные песни",
+    "sectionAudio": "Аудио",
+    "sectionLyrics": "Текст",
+    "sectionContact": "Контакт",
+    "sectionLegal": "Подтверждение",
+    "title": "Название",
+    "titlePlaceholder": "Название песни",
+    "artistName": "Исполнитель",
+    "artistPlaceholder": "Необязательно",
+    "language": "Язык",
+    "categories": "Категории",
+    "categoriesHint": "Выберите подходящие (необязательно)",
+    "suggestCategory": "Предложить категорию",
+    "suggestCategoryPlaceholder": "Название предложенной категории",
+    "addLanguage": "Добавить язык",
+    "customLanguageCode": "Код языка",
+    "customLanguageCodePlaceholder": "напр. fr, de, it",
+    "customLanguageLabel": "Название языка",
+    "customLanguageLabelPlaceholder": "напр. Французский",
+    "backToLanguageList": "К списку",
+    "sourceMp3": "Загрузить MP3",
+    "sourceYoutube": "Ссылка YouTube",
+    "mp3Label": "Аудиофайл",
+    "mp3Hint": "Формат MP3, рекомендуется до 20 МБ",
+    "mp3DropHint": "Перетащите MP3 сюда или нажмите для выбора",
+    "mp3Uploading": "Загрузка аудио…",
+    "mp3Ready": "Аудио готово к отправке",
+    "youtubeUrl": "URL YouTube",
+    "youtubePlaceholder": "https://www.youtube.com/watch?v=…",
+    "lyricsPlain": "Текст (простой)",
+    "lyricsPlainPlaceholder": "Вставьте текст, если не используете ChordPro",
+    "lyricsChordPro": "Текст с аккордами (ChordPro)",
+    "lyricsChordProPlaceholder": "Необязательно — формат ChordPro",
+    "hasChords": "Текст включает аккорды",
+    "notes": "Заметки для проверяющего",
+    "notesPlaceholder": "Контекст, источник, варианты… (необязательно)",
+    "submitterName": "Ваше имя",
+    "submitterEmail": "Ваш email",
+    "loggedInAs": "Отправка от имени {name}",
+    "signInOptional": "Войти",
+    "rightsLabel": "Подтверждаю, что имею право делиться этой записью и текстом для общинных целей",
+    "submit": "Отправить предложение",
+    "submitting": "Отправка…",
+    "successTitle": "Спасибо!",
+    "successBody": "Мы получили ваше предложение. Команда проверит его и при необходимости добавит в каталог.",
+    "successAnother": "Отправить ещё одно",
+    "errors": {
+      "required": "Обязательное поле",
+      "invalidEmail": "Неверный email",
+      "invalidCategory": "Неверная категория",
+      "invalidLanguage": "Неверный код языка (напр. es, en, pt)",
+      "youtubeRequired": "Укажите ссылку YouTube",
+      "invalidYoutube": "Неверная ссылка YouTube",
+      "uploadRequired": "Загрузите файл MP3",
+      "invalidUploadPath": "Ошибка загрузки аудио",
+      "rightsRequired": "Нужно подтвердить право делиться контентом",
+      "nameRequired": "Укажите имя",
+      "emailRequired": "Укажите email",
+      "serviceUnavailable": "Сервис недоступен. Попробуйте позже.",
+      "validationFailed": "Проверьте отмеченные поля",
+      "insertFailed": "Не удалось сохранить предложение. Попробуйте снова.",
+      "uploadFailed": "Не удалось загрузить аудио"
+    }
+  },
+  "meta": {
+    "home": {
+      "title": "BahaiSongs – Тексты, аккорды и видео бахаийских песен",
+      "description": "Откройте более 140 бахаийских песен с текстом, аккордами и аудио. Цифровой песенник бахаи."
+    },
+    "library": {
+      "title": "Каталог бахаийских песен – Тексты и аккорды | BahaiSongs",
+      "description": "Просмотрите полный каталог бахаийских песен: тексты, гитарные аккорды и аудио. Фильтруйте по категории, языку и стилю."
+    },
+    "publicPlaylists": {
+      "title": "Публичные плейлисты – Бахаийские песни | BahaiSongs",
+      "description": "Смотрите публичные плейлисты сообщества и BahaiSongs: подборки бахаийских песен для совместного пения и игры."
+    },
+    "song": {
+      "description": "{title} – текст{chords} | Бахаийская песня. Слушайте и учитесь петь на BahaiSongs.",
+      "chordsSuffix": " и аккорды"
+    },
+    "category": {
+      "title": "{label} – Бахаийские песни | BahaiSongs",
+      "descriptionFallback": "{label} — бахаийские песни с текстом и аккордами | BahaiSongs"
+    },
+    "artist": {
+      "title": "{name} – Бахаийские песни | BahaiSongs"
+    }
+  }
+}

@@ -96,7 +96,7 @@ export function PlayerBar() {
       <YoutubeFloatingPlayer />
       <Box
         component="footer"
-        aria-label="Reproductor"
+        aria-label={tPlayer('label')}
         sx={{
           position: 'fixed',
           left: { xs: 8, md: 'calc(var(--bs-sidebar-width, 240px) + 16px)' },
@@ -134,7 +134,7 @@ export function PlayerBar() {
       >
         {/* Timeline */}
         <Slider
-          aria-label="Posición"
+          aria-label={tPlayer('position')}
           value={Math.min(position, duration || position)}
           min={0}
           max={duration > 0 ? duration : 1}
@@ -312,7 +312,7 @@ export function PlayerBar() {
             }}
           >
             <PlayerControl
-              aria-label="Aleatorio"
+              aria-label={tPlayer('shuffle')}
               active={shuffleOn}
               onClick={onShuffleToggle}
               disabled={!hasTrack}
@@ -320,14 +320,14 @@ export function PlayerBar() {
               <Shuffle size={16} />
             </PlayerControl>
             <PlayerControl
-              aria-label="Anterior"
+              aria-label={tPlayer('previous')}
               onClick={() => actions.prev()}
               disabled={!hasTrack}
             >
-              <SkipBack size={18} />
+              <SkipBack size={18} className="bs-flip-rtl" />
             </PlayerControl>
             <PlayerControl
-              aria-label={isPlaying ? 'Pausar' : 'Reproducir'}
+              aria-label={isPlaying ? tPlayer('pause') : tPlayer('play')}
               onClick={() => actions.togglePlayPause()}
               disabled={!hasTrack || !playable}
               sx={{
@@ -351,14 +351,14 @@ export function PlayerBar() {
               )}
             </PlayerControl>
             <PlayerControl
-              aria-label="Siguiente"
+              aria-label={tPlayer('next')}
               onClick={() => actions.next()}
               disabled={!hasTrack}
             >
-              <SkipForward size={18} />
+              <SkipForward size={18} className="bs-flip-rtl" />
             </PlayerControl>
             <PlayerControl
-              aria-label="Repetir"
+              aria-label={tPlayer('repeat')}
               active={repeat !== 'off'}
               onClick={() => usePlayerStore.getState().cycleRepeat()}
               disabled={!hasTrack}
@@ -383,7 +383,7 @@ export function PlayerBar() {
           >
             <IconButton
               size="small"
-              aria-label={muted ? 'Activar sonido' : 'Silenciar'}
+              aria-label={muted ? tPlayer('unmute') : tPlayer('mute')}
               onClick={() => usePlayerStore.getState().toggleMuted()}
               sx={{ color: cssVars.textMuted, '&:hover': { color: cssVars.textPrimary } }}
             >
@@ -400,7 +400,7 @@ export function PlayerBar() {
                 }
               }}
               size="small"
-              aria-label="Volumen"
+              aria-label={tPlayer('volume')}
               sx={{
                 color: accent.cyan,
                 '& .MuiSlider-rail': { opacity: 0.3 },
@@ -420,15 +420,15 @@ export function PlayerBar() {
             }}
           >
             <PlayerControl
-              aria-label="Anterior"
+              aria-label={tPlayer('previous')}
               onClick={() => actions.prev()}
               disabled={!hasTrack}
               sx={{ width: 32, height: 32 }}
             >
-              <SkipBack size={15} />
+              <SkipBack size={15} className="bs-flip-rtl" />
             </PlayerControl>
             <PlayerControl
-              aria-label={isPlaying ? 'Pausar' : 'Reproducir'}
+              aria-label={isPlaying ? tPlayer('pause') : tPlayer('play')}
               onClick={() => actions.togglePlayPause()}
               disabled={!hasTrack || !playable}
               sx={{
@@ -448,12 +448,12 @@ export function PlayerBar() {
               )}
             </PlayerControl>
             <PlayerControl
-              aria-label="Siguiente"
+              aria-label={tPlayer('next')}
               onClick={() => actions.next()}
               disabled={!hasTrack}
               sx={{ width: 32, height: 32 }}
             >
-              <SkipForward size={15} />
+              <SkipForward size={15} className="bs-flip-rtl" />
             </PlayerControl>
           </Stack>
         </Box>

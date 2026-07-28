@@ -8,18 +8,28 @@ import { TrackList } from '@/features/catalog/components/TrackList';
 import { getTracksByArtist } from '@/server/data/catalog';
 import type { Locale } from '@/shared/lib/i18n/config';
 import { appPath } from '@/shared/lib/seo/paths';
+import { languagesAlternates } from '@/shared/lib/seo/hreflang';
 import { SITE_URL } from '@/shared/lib/seo/site';
 import { ArtistJsonLd, BreadcrumbJsonLd } from '@/shared/lib/seo/JsonLd';
 import { accent, cssVars } from '@/shared/theme/tokens';
 
 // Phase 3 ships a single canonical artist; future phases will join this against
 // the `artists` table in Postgres for real bios and avatars.
-const ARTIST_PROFILES: Record<string, { name: string; bio: { es: string; en: string } }> = {
+const ARTIST_PROFILES: Record<
+  string,
+  { name: string; bio: Record<Locale, string> }
+> = {
   'comunidad-bahai': {
     name: "Comunidad Bahá'í",
     bio: {
       es: "Música, oraciones y composiciones surgidas dentro de la comunidad bahá'í — un repertorio comunitario que abarca canciones para reuniones, oraciones cantadas, textos sagrados y piezas para clases de niños y jóvenes.",
       en: "Music, prayers and compositions from within the Bahá'í community — a communal repertoire spanning gathering songs, sung prayers, sacred texts and pieces for children's and youth classes.",
+      fr: "Musique, prières et compositions issues de la communauté bahá'íe — un répertoire communautaire qui englobe chants de réunion, prières chantées, textes sacrés et pièces pour les classes d'enfants et de jeunes.",
+      de: "Musik, Gebete und Kompositionen aus der Bahá'í-Gemeinde — ein gemeinschaftliches Repertoire aus Versammlungsliedern, gesungenen Gebeten, heiligen Texten und Stücken für Kinder- und Jugendklassen.",
+      pt: "Música, orações e composições surgidas dentro da comunidade bahá'í — um repertório comunitário que abrange canções para reuniões, orações cantadas, textos sagrados e peças para classes de crianças e jovens.",
+      ru: "Музыка, молитвы и сочинения из общины бахаи — общий репертуар: песни для собраний, молитвы в песне, священные тексты и произведения для классов детей и молодёжи.",
+      ar: "موسيقى وصلوات وتأليفات من داخل المجتمع البهائي — ذخيرة مجتمعية تشمل أناشيد للاجتماعات وصلوات مغنّاة ونصوصًا مقدسة وقطعًا لصفوف الأطفال والشباب.",
+      fa: "موسیقی، دعا و آثاری از درون جامعهٔ بهائی — مجموعه‌ای جمعی شامل سرودهای گردهمایی، دعاهای آهنگین، متون مقدس و قطعات برای کلاس‌های کودکان و جوانان.",
     },
   },
 };
@@ -35,14 +45,16 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   const profile = ARTIST_PROFILES[slug];
   if (!profile) return { title: 'BahaiSongs' };
   const loc = locale as Locale;
-  const isEs = locale !== 'en';
+  setRequestLocale(loc);
+  const tMeta = await getTranslations({ locale: loc, namespace: 'meta.artist' });
   const canonical = `${SITE_URL}${appPath(loc, `artist/${slug}`)}`;
   return {
-    title: isEs
-      ? `${profile.name} – Canciones bahá'ís | BahaiSongs`
-      : `${profile.name} – Bahá'í Songs | BahaiSongs`,
-    description: profile.bio[locale === 'en' ? 'en' : 'es'],
-    alternates: { canonical },
+    title: tMeta('title', { name: profile.name }),
+    description: profile.bio[loc] ?? profile.bio.es,
+    alternates: {
+      canonical,
+      languages: languagesAlternates(`artist/${slug}`),
+    },
   };
 }
 
@@ -55,7 +67,7 @@ export default async function ArtistPage({ params }: { params: Params }) {
   const t = await getTranslations('artist');
   const loc = locale as Locale;
   const artistUrl = `${SITE_URL}${appPath(loc, `artist/${slug}`)}`;
-  const bio = profile.bio[loc === 'en' ? 'en' : 'es'];
+  const bio = profile.bio[loc] ?? profile.bio.es;
 
   return (
     <Stack spacing={5} sx={{ maxWidth: 1100, mx: 'auto' }}>

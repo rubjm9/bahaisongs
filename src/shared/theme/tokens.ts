@@ -194,6 +194,8 @@ export const typography = {
     display: "var(--bs-font-display), 'Outfit', system-ui, sans-serif",
     heading: "var(--bs-font-display), 'Outfit', system-ui, sans-serif",
     lyrics: "var(--bs-font-sans), 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif",
+    /** Prefer Noto Sans Arabic when the CSS variable is set (RTL locales). */
+    rtl: "var(--bs-font-arabic), var(--bs-font-sans), 'Noto Sans Arabic', system-ui, sans-serif",
   },
   weight: { light: 300, regular: 400, medium: 500, semibold: 600, bold: 700 },
 } as const;

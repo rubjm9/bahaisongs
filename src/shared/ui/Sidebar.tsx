@@ -97,7 +97,7 @@ export function Sidebar({ collapsed, onToggleCollapsed }: SidebarProps) {
                 '&:hover': { color: cssVars.textPrimary, background: cssVars.hoverSubtle },
               }}
             >
-              <PanelLeftClose size={18} aria-hidden />
+              <PanelLeftClose size={18} aria-hidden className="bs-flip-rtl" />
             </IconButton>
           </Tooltip>
         ) : null}
@@ -116,7 +116,7 @@ export function Sidebar({ collapsed, onToggleCollapsed }: SidebarProps) {
               '&:hover': { color: cssVars.textPrimary, background: cssVars.hoverSubtle },
             }}
           >
-            <PanelLeftOpen size={18} aria-hidden />
+            <PanelLeftOpen size={18} aria-hidden className="bs-flip-rtl" />
           </IconButton>
         </Tooltip>
       ) : null}

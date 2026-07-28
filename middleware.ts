@@ -50,9 +50,13 @@ function maybeRedirectSearchToDiscover(request: NextRequest): NextResponse | nul
     return NextResponse.redirect(url, 308);
   }
 
-  if (segments.length === 2 && segments[0] === 'en' && segments[1] === 'search') {
+  if (
+    segments.length === 2 &&
+    (locales as readonly string[]).includes(segments[0]!) &&
+    segments[1] === 'search'
+  ) {
     const url = request.nextUrl.clone();
-    url.pathname = '/en/discover';
+    url.pathname = `/${segments[0]}/discover`;
     return NextResponse.redirect(url, 308);
   }
 

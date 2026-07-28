@@ -13,14 +13,20 @@ import { createBsTheme } from './theme';
 import { THEME_STORAGE_KEY, type ThemePreference } from './themeStorage';
 import type { ThemeMode } from './tokens';
 
-function MuiThemeBridge({ children }: { children: ReactNode }) {
+function MuiThemeBridge({
+  children,
+  direction,
+}: {
+  children: ReactNode;
+  direction: 'ltr' | 'rtl';
+}) {
   const { resolvedTheme } = useTheme();
   const mounted = useThemeMounted();
   const ssrMode = useSsrThemeMode();
 
   const mode = resolveThemeModeForPaint(mounted, resolvedTheme, ssrMode);
 
-  const muiTheme = useMemo(() => createBsTheme(mode), [mode]);
+  const muiTheme = useMemo(() => createBsTheme(mode, direction), [mode, direction]);
 
   return (
     <MuiThemeProvider theme={muiTheme}>
@@ -34,10 +40,12 @@ export function BsThemeProvider({
   children,
   initialMode,
   themePreference,
+  direction = 'ltr',
 }: {
   children: ReactNode;
   initialMode: ThemeMode;
   themePreference?: ThemePreference;
+  direction?: 'ltr' | 'rtl';
 }) {
   return (
     <BsThemeModeProvider initialMode={initialMode}>
@@ -50,7 +58,7 @@ export function BsThemeProvider({
         disableTransitionOnChange
       >
         <ThemeCookieSync />
-        <MuiThemeBridge>{children}</MuiThemeBridge>
+        <MuiThemeBridge direction={direction}>{children}</MuiThemeBridge>
       </NextThemesProvider>
     </BsThemeModeProvider>
   );

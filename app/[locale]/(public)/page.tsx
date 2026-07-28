@@ -6,24 +6,23 @@ import { TrackSection } from '@/features/catalog/components/TrackSection';
 import { getAllTracks, getRecentTracks, getTracksByCategory } from '@/server/data/catalog';
 import type { Locale } from '@/shared/lib/i18n/config';
 import { appPath } from '@/shared/lib/seo/paths';
+import { languagesAlternates } from '@/shared/lib/seo/hreflang';
 import { SITE_URL } from '@/shared/lib/seo/site';
 
 type Params = Promise<{ locale: string }>;
 
 export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
   const { locale } = await params;
-  const isEs = locale !== 'en';
-  const canonical = isEs ? SITE_URL : `${SITE_URL}/en`;
+  const loc = locale as Locale;
+  setRequestLocale(loc);
+  const t = await getTranslations({ locale: loc, namespace: 'meta.home' });
+  const canonical = `${SITE_URL}${appPath(loc)}`;
   return {
-    title: isEs
-      ? "BahaiSongs – Letras, acordes y vídeos de canciones bahá'ís"
-      : "BahaiSongs – Bahá'í Songs, Lyrics & Chords",
-    description: isEs
-      ? "Descubre más de 140 canciones bahá'ís con letra, acordes y audio. El cancionero bahá'í digital en español."
-      : "Discover 140+ Bahá'í songs with lyrics, guitar chords and integrated audio. The digital Bahá'í songbook.",
+    title: { absolute: t('title') },
+    description: t('description'),
     alternates: {
       canonical,
-      languages: { es: SITE_URL, en: `${SITE_URL}/en` },
+      languages: languagesAlternates(),
     },
   };
 }
