@@ -6,8 +6,7 @@ import { GoogleAnalyticsScripts } from '@/shared/lib/analytics/GoogleAnalyticsSc
 import { inter, outfit, notoSansArabic, notoSansSc, notoSansDevanagari } from '@/shared/theme/fonts';
 import { THEME_COOKIE_NAME, THEME_STORAGE_KEY } from '@/shared/theme/themeStorage';
 import { SITE_URL } from '@/shared/lib/seo/site';
-import { getRootHtmlLocale } from '@/shared/lib/i18n/rootLocale';
-import { localeDirection } from '@/shared/lib/i18n/config';
+import { defaultLocale, localeDirection, locales } from '@/shared/lib/i18n/config';
 import './globals.css';
 
 /** Required by @cloudflare/next-on-pages (Cloudflare Pages). */
@@ -58,9 +57,14 @@ export const viewport: Viewport = {
   initialScale: 1,
 };
 
-export default async function RootLayout({ children }: { children: React.ReactNode }) {
-  const locale = await getRootHtmlLocale();
+/**
+ * Sync root shell: async cookies() here made `/_not-found` a Node function and
+ * broke @cloudflare/next-on-pages. Locale is refined client-side from NEXT_LOCALE.
+ */
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  const locale = defaultLocale;
   const dir = localeDirection(locale);
+  const localeList = JSON.stringify(locales);
 
   return (
     <html
@@ -77,6 +81,9 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
         />
+        <Script id="bs-locale-html-bootstrap" strategy="beforeInteractive">
+          {`(function(){try{var locales=${localeList};var m=document.cookie.match(/(?:^|; )NEXT_LOCALE=([^;]*)/);var v=m?decodeURIComponent(m[1]):'';if(locales.indexOf(v)!==-1){var rtl=['ar','fa'];document.documentElement.lang=v;document.documentElement.dir=rtl.indexOf(v)!==-1?'rtl':'ltr';}}catch(e){}})();`}
+        </Script>
         <Script id="bs-theme-cookie-bootstrap" strategy="beforeInteractive">
           {`(function(){try{var k=${JSON.stringify(THEME_STORAGE_KEY)};var c=${JSON.stringify(THEME_COOKIE_NAME)};var p=localStorage.getItem(k);if(p==='light'||p==='dark'||p==='system'){document.cookie=c+'='+encodeURIComponent(p)+';path=/;max-age=31536000;SameSite=Lax';}}catch(e){}})();`}
         </Script>

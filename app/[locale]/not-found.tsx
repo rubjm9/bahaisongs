@@ -1,3 +1,5 @@
+export const runtime = 'edge';
+
 import { Box, Typography } from '@mui/material';
 
 export default function NotFound() {
