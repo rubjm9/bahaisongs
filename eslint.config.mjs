@@ -26,6 +26,9 @@ export default tseslint.config(
       'docs/**',
       // Deno code — not part of the Next.js TS project
       'supabase/functions/**',
+      // Vitest files — type-checked lint conflicts with Testing Library under
+      // next build ESLint; covered by `npm test` instead.
+      '**/*.{test,spec}.{ts,tsx}',
     ],
   },
   // Type-checked rules ONLY apply to source TS/TSX
