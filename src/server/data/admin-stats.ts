@@ -431,8 +431,10 @@ export async function getCatalogGaps(): Promise<CatalogGaps> {
   for (const l of lyrics) {
     const existing = lyricsByTrack.get(l.track_id) ?? { hasChords: false, hasLyrics: false };
     existing.hasChords = existing.hasChords || l.has_chords;
+    const bodyPlain = l.body_plain?.trim();
+    const bodyChordpro = l.body_chordpro?.trim();
     existing.hasLyrics =
-      existing.hasLyrics || Boolean(l.body_plain?.trim() || l.body_chordpro?.trim());
+      existing.hasLyrics || Boolean(bodyPlain) || Boolean(bodyChordpro);
     lyricsByTrack.set(l.track_id, existing);
   }
 
