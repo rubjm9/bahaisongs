@@ -91,18 +91,18 @@ export function TrackSection({
 
       <Box
         sx={{
-          display: { xs: 'flex', md: 'grid' },
-          gridTemplateColumns: { md: 'repeat(auto-fill, minmax(180px, 1fr))' },
+          display: 'grid',
+          gridTemplateRows: 'repeat(2, auto)',
+          gridAutoFlow: 'column',
+          gridAutoColumns: 'minmax(240px, 280px)',
           gap: 2,
-          overflowX: { xs: 'auto', md: 'visible' },
-          scrollSnapType: { xs: 'x mandatory', md: 'none' },
+          overflowX: 'auto',
+          scrollSnapType: 'x mandatory',
           scrollbarWidth: 'none',
           '&::-webkit-scrollbar': { display: 'none' },
-          pb: { xs: 1, md: 0 },
+          pb: 1,
           '& > *': {
-            scrollSnapAlign: { xs: 'start' },
-            flexShrink: { xs: 0 },
-            width: { xs: 220, md: 'auto' },
+            scrollSnapAlign: 'start',
           },
         }}
       >

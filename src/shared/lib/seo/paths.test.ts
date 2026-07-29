@@ -21,6 +21,8 @@ describe('seo paths', () => {
     expect(appPath('en', 'library')).toBe('/en/library');
     expect(appPath('fr', 'discover')).toBe('/fr/discover');
     expect(appPath('ar', 'library')).toBe('/ar/library');
+    expect(appPath('zh', 'library')).toBe('/zh/library');
+    expect(appPath('hu', 'suggest')).toBe('/hu/suggest');
   });
 
   it('isAppPathActive matches as-needed URLs', () => {

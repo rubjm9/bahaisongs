@@ -33,7 +33,10 @@ enable_anonymous_sign_ins = false
 
 [auth.email]
 enable_signup = true
-enable_confirmations = false  # local-dev convenience; turn on for prod
+# Local-dev convenience: signUpWithPassword returns a session immediately.
+# In Supabase Cloud (prod), turn Confirm email ON so new accounts must verify
+# before signInWithPassword; the app shows a confirm-email step when there is no session.
+enable_confirmations = false
 
 [storage]
 enabled = false  # We use Cloudflare R2, not Supabase Storage.

@@ -2,10 +2,30 @@ import { Suspense } from 'react';
 import { Box, Skeleton, Stack, Typography } from '@mui/material';
 import { Users, Lightbulb, Play } from 'lucide-react';
 import { AdminPage } from '@/features/admin/components/AdminPage';
+import { AdminPanelCard } from '@/features/admin/components/AdminPanelCard';
+import { CatalogGapsPanel } from '@/features/admin/components/CatalogGapsPanel';
 import { CatalogStatCard } from '@/features/admin/components/CatalogStatCard';
+import { PlaySourcePanel } from '@/features/admin/components/PlaySourcePanel';
+import { PlaylistsLikesPanel } from '@/features/admin/components/PlaylistsLikesPanel';
 import { StatCard } from '@/features/admin/components/StatCard';
-import { getAdminStats, getCatalogHistoryByMonth, getNewUsersByMonth, getPlaysByWeek, getRecentSuggestions, getSuggestionsByMonth } from '@/server/data/admin-stats';
-import { cssVars, radii } from '@/shared/theme/tokens';
+import { SuggestionFunnelPanel } from '@/features/admin/components/SuggestionFunnelPanel';
+import { TopTracksList } from '@/features/admin/components/TopTracksList';
+import {
+  getAdminStats,
+  getAnonymousPlayShare,
+  getCatalogGaps,
+  getCatalogHistoryByMonth,
+  getNewUsersByMonth,
+  getPlaySourceBreakdown,
+  getPlaylistLikeStats,
+  getPlaysByWeek,
+  getRecentSuggestions,
+  getSuggestionsByMonth,
+  getSuggestionsFunnel,
+  getTopLikedTracks,
+  getTopPlayedTracks,
+} from '@/server/data/admin-stats';
+import { accent, cssVars, radii } from '@/shared/theme/tokens';
 
 export const metadata = { title: 'Inicio' };
 export const dynamic = 'force-dynamic';
@@ -86,6 +106,89 @@ async function StatsGrid() {
           variant: 'line',
         }}
       />
+    </Box>
+  );
+}
+
+const activityGridSx = {
+  display: 'grid',
+  gridTemplateColumns: { xs: '1fr', md: 'repeat(2, 1fr)' },
+  gap: { xs: 2, md: 2.5 },
+} as const;
+
+async function ActivitySection() {
+  const [topPlayed, topLiked, playSources, playShare, suggestionFunnel, playlistStats] =
+    await Promise.all([
+      getTopPlayedTracks(10, 30),
+      getTopLikedTracks(10),
+      getPlaySourceBreakdown(30),
+      getAnonymousPlayShare(30),
+      getSuggestionsFunnel(6),
+      getPlaylistLikeStats(6),
+    ]);
+
+  return (
+    <Box sx={activityGridSx}>
+      <AdminPanelCard
+        title="Top reproducidas"
+        description="Últimos 30 días"
+        accentColor={accent.cyan}
+      >
+        <TopTracksList tracks={topPlayed} emptyMessage="Sin reproducciones en el periodo." />
+      </AdminPanelCard>
+      <AdminPanelCard
+        title="Top favoritas"
+        description="Todos los tiempos"
+        accentColor={accent.glow}
+      >
+        <TopTracksList tracks={topLiked} emptyMessage="Sin favoritos todavía." />
+      </AdminPanelCard>
+      <AdminPanelCard
+        title="Origen de reproducciones"
+        description="Últimos 30 días"
+        accentColor={accent.cyan}
+      >
+        <PlaySourcePanel
+          sources={playSources}
+          anonymous={playShare.anonymous}
+          authenticated={playShare.authenticated}
+        />
+      </AdminPanelCard>
+      <AdminPanelCard
+        title="Embudo de sugerencias"
+        description="Por estado"
+        accentColor="#F59E0B"
+      >
+        <SuggestionFunnelPanel
+          byMonth={suggestionFunnel.byMonth}
+          totals={suggestionFunnel.totals}
+        />
+      </AdminPanelCard>
+      <Box sx={{ gridColumn: { md: '1 / -1' } }}>
+        <AdminPanelCard
+          title="Playlists y favoritos"
+          description="Crecimiento de playlists por mes"
+          accentColor={accent.indigo}
+        >
+          <PlaylistsLikesPanel stats={playlistStats} />
+        </AdminPanelCard>
+      </Box>
+    </Box>
+  );
+}
+
+async function CatalogGapsSection() {
+  const gaps = await getCatalogGaps();
+
+  return (
+    <Box sx={activityGridSx}>
+      <AdminPanelCard
+        title="Huecos de contenido"
+        description="Canciones que necesitan atención"
+        accentColor={accent.electric}
+      >
+        <CatalogGapsPanel gaps={gaps} />
+      </AdminPanelCard>
     </Box>
   );
 }
@@ -239,6 +342,34 @@ export default function AdminOverviewPage() {
             }
           >
             <StatsGrid />
+          </Suspense>
+        </Box>
+
+        <Box sx={{ mb: { xs: 5, md: 6 } }}>
+          <SectionHeading
+            title="Actividad"
+            description="Engagement, sugerencias y playlists."
+          />
+          <Suspense
+            fallback={
+              <Box sx={activityGridSx}>
+                {Array.from({ length: 4 }).map((_, i) => (
+                  <Skeleton key={i} variant="rounded" height={220} sx={{ borderRadius: `${radii.lg}px` }} />
+                ))}
+              </Box>
+            }
+          >
+            <ActivitySection />
+          </Suspense>
+        </Box>
+
+        <Box sx={{ mb: { xs: 5, md: 6 } }}>
+          <SectionHeading
+            title="Catálogo"
+            description="Contenido pendiente de completar."
+          />
+          <Suspense fallback={<Skeleton variant="rounded" height={200} sx={{ borderRadius: `${radii.lg}px` }} />}>
+            <CatalogGapsSection />
           </Suspense>
         </Box>
 

@@ -1,7 +1,8 @@
 import 'server-only';
 import { unstable_cache } from 'next/cache';
-import { getSupabaseAnonClient } from '@/shared/lib/supabase/server';
-import { type CatalogTrack } from './catalog';
+import { getSupabaseAnonClient, getSupabaseServiceClient } from '@/shared/lib/supabase/server';
+import { hasServiceRoleKey } from '@/shared/lib/supabase/env';
+import { type CatalogTrack, type TrendingTrack } from './catalog';
 import { mapTrackRowToCatalogTrack, type TrackDbRow } from './mappers/track';
 
 const CATALOG_JOIN = `
@@ -89,13 +90,60 @@ export const getTracksByCategorySupabase = unstable_cache(
 /**
  * Most recently published tracks.
  */
-export const getRecentTracksSupabase = unstable_cache(
-  async () => {
-    const all = await fetchAllTracksFromSupabase();
-    return [...all]
-      .sort((a, b) => (b.publishedAt ?? '').localeCompare(a.publishedAt ?? ''))
-      .slice(0, 12);
-  },
-  ['catalog-recent'],
-  { tags: ['catalog'], revalidate: 300 },
-);
+export function getRecentTracksSupabase(limit = 12) {
+  return unstable_cache(
+    async () => {
+      const all = await fetchAllTracksFromSupabase();
+      return [...all]
+        .sort((a, b) => (b.publishedAt ?? '').localeCompare(a.publishedAt ?? ''))
+        .slice(0, limit);
+    },
+    [`catalog-recent-${limit}`],
+    { tags: ['catalog'], revalidate: 300 },
+  )();
+}
+
+/**
+ * Most-played published tracks with audio in the last `days` days.
+ * Uses the service role to read play_events (not publicly readable under RLS).
+ */
+export function getTrendingTracksSupabase(limit = 16, days = 30) {
+  return unstable_cache(
+    async () => {
+      if (!hasServiceRoleKey) return [] as TrendingTrack[];
+
+      const statsClient = getSupabaseServiceClient();
+      const since = new Date(Date.now() - days * 24 * 60 * 60 * 1000).toISOString();
+
+      const { data: events } = await statsClient
+        .from('play_events')
+        .select('track_id')
+        .gte('played_at' as never, since);
+
+      if (!events?.length) return [] as TrendingTrack[];
+
+      const counts = new Map<string, number>();
+      for (const row of events as { track_id: string }[]) {
+        counts.set(row.track_id, (counts.get(row.track_id) ?? 0) + 1);
+      }
+
+      const ranked = [...counts.entries()].sort((a, b) => b[1] - a[1]);
+
+      const catalog = await fetchAllTracksFromSupabase();
+      const byId = new Map(
+        catalog.filter((t): t is CatalogTrack & { id: string } => !!t.id).map((t) => [t.id, t]),
+      );
+
+      const result: TrendingTrack[] = [];
+      for (const [id, playCount] of ranked) {
+        const track = byId.get(id);
+        if (!track?.hasAudio) continue;
+        result.push({ ...track, playCount });
+        if (result.length >= limit) break;
+      }
+      return result;
+    },
+    [`trending-${limit}-${days}`],
+    { tags: ['trending'], revalidate: 900 },
+  )();
+}

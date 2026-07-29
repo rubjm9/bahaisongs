@@ -1,0 +1,396 @@
+{
+  "pwa": {
+    "install": {
+      "title": "安装 BahaiSongs",
+      "description": "将其添加到主屏幕，像应用一样打开。",
+      "cta": "安装应用",
+      "dismiss": "关闭",
+      "iosCta": "如何安装",
+      "iosStep1": "点击“分享”按钮",
+      "iosStep2": "选择“添加到主屏幕”"
+    },
+    "offline": {
+      "title": "您已离线",
+      "description": "没有网络连接。已访问过的页面仍然可用。",
+      "retry": "重试"
+    }
+  },
+  "brand": {
+    "name": "BahaiSongs.org",
+    "tagline": "巴哈伊社区的音乐、祈祷和和弦谱，汇集于此。"
+  },
+  "settings": {
+    "theme": "主题",
+    "themeSystem": "跟随系统",
+    "themeLight": "浅色",
+    "themeDark": "深色",
+    "themeAria": "更改界面主题",
+    "languageAria": "更改语言"
+  },
+  "share": {
+    "hint": "将这首歌分享给你的小组",
+    "ariaLabel": "分享",
+    "copied": "链接已复制！"
+  },
+  "nav": {
+    "home": "首页",
+    "discover": "发现",
+    "library": "音乐库",
+    "publicPlaylists": "公开歌单",
+    "suggest": "推荐歌曲",
+    "favorites": "收藏",
+    "playlists": "歌单",
+    "yourPlaylists": "我的歌单",
+    "createPlaylist": "创建歌单",
+    "viewAllPlaylists": "查看全部",
+    "collapseMenu": "收起菜单",
+    "expandMenu": "展开菜单"
+  },
+  "home": {
+    "heroEyebrow": "巴哈伊音乐 · 歌词 · 和弦",
+    "heroTitle": "巴哈伊歌曲的歌词与和弦，一起歌唱",
+    "heroSubtitle": "找到你想要的歌曲，分享给小组一起唱或演奏，也可以聆听学唱。没找到某首歌？发送给我们以扩充曲库。",
+    "cta": "浏览曲库",
+    "ctaSuggest": "推荐歌曲",
+    "heroStatLabel": "首歌曲可用"
+  },
+  "sections": {
+    "catalogSize": "曲库中有 {count} 首歌曲",
+    "seeAll": "查看全部",
+    "recentEyebrow": "新增",
+    "recentTitle": "最近添加",
+    "recentDescription": "曲库的最新补充。",
+    "chordsEyebrow": "弹唱",
+    "chordsTitle": "带和弦",
+    "chordsDescription": "附带和弦谱的歌曲——适合吉他、尤克里里或钢琴。",
+    "prayersEyebrow": "灵修",
+    "prayersTitle": "祈祷歌曲",
+    "prayersDescription": "以音乐呈现的巴哈伊祈祷文。",
+    "trendingEyebrow": "本月",
+    "trendingTitle": "本月热门",
+    "trendingDescription": "过去 30 天播放次数最多的歌曲。",
+    "calmEyebrow": "氛围",
+    "calmTitle": "宁静",
+    "calmDescription": "适合冥想、沉思或休息。"
+  },
+  "player": {
+    "idleTitle": "未在播放",
+    "idleRandomCta": "随机播放一首",
+    "idleRandomLoading": "正在寻找歌曲…",
+    "label": "播放器",
+    "position": "播放位置",
+    "shuffle": "随机",
+    "previous": "上一首",
+    "play": "播放",
+    "pause": "暂停",
+    "next": "下一首",
+    "repeat": "循环",
+    "mute": "静音",
+    "unmute": "取消静音",
+    "volume": "音量",
+    "playTrack": "播放 {title}",
+    "pauseTrack": "暂停 {title}",
+    "audioUnavailable": "{title} 暂无音频"
+  },
+  "song": {
+    "eyebrow": "歌曲",
+    "by": "演唱：",
+    "hasAudio": "音频",
+    "hasChords": "和弦",
+    "noAudio": "仅歌词",
+    "noAudioHint": "此歌曲在曲库中暂无音频。",
+    "playReady": "播放此歌曲",
+    "playReadyHint": "点击收听。控制面板出现在底部播放器中。",
+    "lyricsTitle": "歌词"
+  },
+  "artist": {
+    "eyebrow": "艺术家",
+    "trackCount": "{count, plural, =0 {暂无歌曲} =1 {1 首歌曲} other {# 首歌曲}}",
+    "allTracks": "全部歌曲"
+  },
+  "category": {
+    "kind": {
+      "genre": "流派",
+      "mood": "氛围",
+      "theme": "主题",
+      "tag": "标签"
+    },
+    "trackCount": "{count, plural, =0 {暂无歌曲} =1 {1 首歌曲} other {# 首歌曲}}"
+  },
+  "catalog": {
+    "tooltips": {
+      "language": "歌词语言：{language}",
+      "audio": "可在播放器中收听",
+      "chords": "包含和弦谱供弹唱"
+    }
+  },
+  "discover": {
+    "title": "发现音乐",
+    "subtitle": "搜索和浏览曲库",
+    "placeholder": "按标题、艺术家、歌词或分类搜索…",
+    "totalCatalog": "曲库中有 {count} 首歌曲",
+    "browseByCategory": "按分类浏览",
+    "allTracksHeading": "{count} 首歌曲，按字母排序",
+    "resultsCount": "{count, plural, =0 {无结果} =1 {1 条结果} other {# 条结果}}",
+    "loading": "正在加载曲库…",
+    "trendingColTrack": "歌曲",
+    "trendingColPlays": "播放次数",
+    "trendingPlays": "{count} 次播放"
+  },
+  "publicPlaylists": {
+    "eyebrow": "社区",
+    "title": "公开歌单",
+    "subtitle": "来自社区和 BahaiSongs 的共享合集",
+    "curatedBadge": "精选",
+    "byUser": "来自 {name}",
+    "byUserAnonymous": "来自某位用户",
+    "trackCount": "{count, plural, =0 {暂无歌曲} =1 {1 首歌曲} other {# 首歌曲}}",
+    "empty": "暂无公开歌单。创建一个并分享给社区吧。",
+    "discoverCta": "浏览公开歌单",
+    "discoverCtaHint": "来自社区和 BahaiSongs 的合集"
+  },
+  "library": {
+    "eyebrow": "个人",
+    "title": "我的音乐库",
+    "subtitle": "收藏和保存的歌单",
+    "signInTitle": "保存你喜欢的",
+    "signInHint": "登录以保存收藏并创建歌单。",
+    "exploreCatalog": "浏览曲库 →",
+    "viewAll": "查看全部",
+    "loading": "加载中…"
+  },
+  "search": {
+    "title": "搜索曲库",
+    "placeholder": "按标题、艺术家、歌词或分类搜索…",
+    "resultsCount": "{count, plural, =0 {无结果} =1 {1 条结果} other {# 条结果}}",
+    "totalCatalog": "曲库中有 {count} 首歌曲",
+    "hintEyebrow": "开始输入",
+    "hintTitle": "按标题、歌词或和弦搜索",
+    "hintBody": "即时过滤整个曲库。使用 ↑ ↓ 导航，按 Enter 打开。",
+    "emptyEyebrow": "无匹配",
+    "emptyTitle": "没有匹配“{query}”的结果",
+    "emptyBody": "尝试更少的字符、副歌中的词或不同的拼写。",
+    "seeAll": "查看“{query}”的所有结果 →",
+    "filters": {
+      "language": "语言",
+      "all": "全部",
+      "es": "Español",
+      "en": "English",
+      "withChords": "带和弦",
+      "withAudio": "有音频",
+      "reset": "清除",
+      "tooltips": {
+        "all": "显示所有语言的歌曲",
+        "language": "仅显示 {language} 语言的歌曲",
+        "withChords": "仅显示包含和弦谱的歌曲",
+        "withAudio": "仅显示有音频文件的歌曲"
+      }
+    },
+    "loading": "正在加载曲库…"
+  },
+  "common": {
+    "loading": "加载中…",
+    "error": "出了点问题。",
+    "retry": "重试",
+    "previous": "上一页",
+    "next": "下一页",
+    "skipToContent": "跳至内容"
+  },
+  "auth": {
+    "signIn": "登录",
+    "signOut": "退出",
+    "adminPanel": "Admin panel",
+    "modalTitle": "登录或创建账户",
+    "modalSubtitle": "使用账户保存收藏并创建歌单。",
+    "signInTab": "登录",
+    "signUpTab": "创建账户",
+    "emailLabel": "邮箱",
+    "emailPlaceholder": "you@email.com",
+    "passwordLabel": "密码",
+    "confirmPasswordLabel": "确认密码",
+    "createAccount": "创建账户",
+    "signInWithoutPassword": "免密登录",
+    "usePasswordInstead": "使用密码",
+    "sendAccessLink": "发送访问链接",
+    "resendAccessLink": "重新发送链接",
+    "magicLink": "魔法链接",
+    "magicLinkTitle": "免密登录",
+    "magicLinkSubtitle": "我们将通过邮件发送登录链接。",
+    "magicLinkPlaceholder": "you@email.com",
+    "magicLinkSentTitle": "请查看收件箱",
+    "magicLinkSentBody": "打开我们发送到 {email} 的链接以登录。如果你没有账户，确认后将自动创建。",
+    "magicLinkSent": "请查看收件箱！",
+    "confirmEmailTitle": "确认邮箱",
+    "confirmEmailBody": "我们已发送链接到 {email}。请打开以激活账户。",
+    "backToSignIn": "返回登录",
+    "orContinueWith": "或使用以下方式继续",
+    "continueWithGoogle": "使用 Google 继续",
+    "errorProviderDisabled": "Google 暂不可用。请使用邮箱密码或邮件链接登录。",
+    "errorInvalidCredentials": "邮箱或密码错误。",
+    "errorEmailTaken": "此邮箱已有账户。请尝试登录。",
+    "errorWeakPassword": "密码至少需要 6 个字符。",
+    "errorEmailNotConfirmed": "登录前请先确认邮箱。",
+    "errorSignupDisabled": "注册目前不可用。",
+    "errorPasswordMismatch": "两次密码不一致。",
+    "myPlaylists": "我的歌单",
+    "favorites": "收藏",
+    "likeTrack": "添加到收藏",
+    "unlikeTrack": "取消收藏",
+    "profile": "个人资料",
+    "signInToLike": "登录以同步收藏",
+    "signInRequired": "请登录以继续"
+  },
+  "playlist": {
+    "create": "新建歌单",
+    "titleLabel": "标题",
+    "visibility": "可见性",
+    "public": "公开",
+    "private": "私密",
+    "unlisted": "不公开",
+    "save": "保存",
+    "addTrack": "添加到歌单",
+    "removeTrack": "移除",
+    "emptyFavorites": "暂无收藏",
+    "emptyPlaylists": "暂无歌单",
+    "newPlaylist": "新建歌单",
+    "myPlaylists": "我的歌单",
+    "signIn": "登录",
+    "signInToAddToPlaylist": "登录以添加到歌单",
+    "sharePlaylist": "分享",
+    "linkCopied": "链接已复制！",
+    "trackCount": "{count, plural, =0 {暂无歌曲} =1 {1 首歌曲} other {# 首歌曲}}",
+    "changeVisibilityToShare": "设为公开以分享",
+    "makePublic": "设为公开"
+  },
+  "admin": {
+    "nav": {
+      "overview": "Overview",
+      "tracks": "Songs",
+      "categories": "Categories",
+      "playlists": "Playlists",
+      "artists": "Artists",
+      "users": "Users",
+      "suggestions": "Suggestions",
+      "backToSite": "Back to site"
+    },
+    "overview": {
+      "title": "Admin dashboard",
+      "statsTitle": "Overview",
+      "recentSuggestions": "Recent suggestions"
+    },
+    "common": {
+      "save": "Save changes",
+      "create": "Create",
+      "cancel": "Cancel",
+      "delete": "Delete",
+      "edit": "Edit",
+      "back": "Back",
+      "confirm": "Confirm",
+      "noResults": "No results",
+      "loading": "Loading…"
+    }
+  },
+  "suggest": {
+    "pageTitle": "推荐歌曲",
+    "pageDescription": "知道一首不在曲库中的巴哈伊歌曲？将音频、歌词和和弦发送给我们。发布前我们会进行审核。",
+    "sectionSong": "歌曲详情",
+    "sectionAudio": "音频",
+    "sectionLyrics": "歌词",
+    "sectionContact": "联系方式",
+    "sectionLegal": "确认",
+    "title": "标题",
+    "titlePlaceholder": "歌曲名称",
+    "artistName": "艺术家或演唱者",
+    "artistPlaceholder": "可选",
+    "language": "语言",
+    "categories": "分类",
+    "categoriesHint": "选择合适的标签（可选）",
+    "suggestCategory": "建议分类",
+    "suggestCategoryPlaceholder": "建议的分类名称",
+    "addLanguage": "添加语言",
+    "customLanguageCode": "语言代码",
+    "customLanguageCodePlaceholder": "如 fr、de、it",
+    "customLanguageLabel": "语言名称",
+    "customLanguageLabelPlaceholder": "如 法语",
+    "backToLanguageList": "返回列表",
+    "sourceMp3": "上传 MP3",
+    "sourceYoutube": "YouTube 链接",
+    "mp3Label": "音频文件",
+    "mp3Hint": "MP3 格式，建议不超过 20 MB",
+    "mp3DropHint": "拖放 MP3 文件到此处或点击选择",
+    "mp3Uploading": "正在上传音频…",
+    "mp3Ready": "音频已准备好提交",
+    "youtubeUrl": "YouTube URL",
+    "youtubePlaceholder": "https://www.youtube.com/watch?v=…",
+    "lyricsPlain": "歌词（纯文本）",
+    "lyricsPlainPlaceholder": "如果不使用 ChordPro 格式，请粘贴歌词",
+    "lyricsChordPro": "带和弦的歌词（ChordPro）",
+    "lyricsChordProPlaceholder": "可选 — ChordPro 格式",
+    "hasChords": "歌词包含和弦",
+    "notes": "给审核者的备注",
+    "notesPlaceholder": "背景、来源、变体…（可选）",
+    "submitterName": "你的姓名",
+    "submitterEmail": "你的邮箱",
+    "loggedInAs": "以 {name} 身份提交",
+    "signInOptional": "登录",
+    "rightsLabel": "我确认有权分享此录音和歌词供社区使用",
+    "submit": "提交推荐",
+    "submitting": "正在提交…",
+    "successTitle": "谢谢！",
+    "successBody": "我们已收到你的推荐。团队将进行审核，如通过将添加到曲库。",
+    "successAnother": "提交另一个推荐",
+    "errors": {
+      "required": "必填字段",
+      "invalidEmail": "邮箱格式无效",
+      "invalidCategory": "分类无效",
+      "invalidLanguage": "语言代码无效（请使用如 es、en、pt）",
+      "youtubeRequired": "请输入 YouTube 链接",
+      "invalidYoutube": "YouTube 链接无效",
+      "uploadRequired": "请上传 MP3 文件",
+      "invalidUploadPath": "音频上传错误",
+      "rightsRequired": "你必须确认有权分享此内容",
+      "nameRequired": "请输入你的姓名",
+      "emailRequired": "请输入你的邮箱",
+      "serviceUnavailable": "服务暂不可用，请稍后再试。",
+      "validationFailed": "请检查标记的字段",
+      "insertFailed": "无法保存你的推荐，请重试。",
+      "uploadFailed": "无法上传音频"
+    }
+  },
+  "lyrics": {
+    "chords": "和弦",
+    "transpose": "变调",
+    "capo": "变调夹",
+    "fontSize": "字号",
+    "autoscroll": "自动滚动",
+    "present": "演示",
+    "noLyrics": "暂无歌词。",
+    "exitPresentation": "退出",
+    "keyHints": "空格：滚动 · +/- 变调 · ↑↓ 字号 · ESC 退出"
+  },
+  "meta": {
+    "home": {
+      "title": "BahaiSongs – 巴哈伊歌曲、歌词与和弦",
+      "description": "探索 140+ 首巴哈伊歌曲，含歌词、吉他和弦和内置音频。数字巴哈伊歌本。"
+    },
+    "library": {
+      "title": "巴哈伊歌曲目录 – 歌词与和弦 | BahaiSongs",
+      "description": "浏览完整的巴哈伊歌曲目录：歌词、吉他和弦和音频。按分类、语言和风格筛选。"
+    },
+    "publicPlaylists": {
+      "title": "公开歌单 – 巴哈伊歌曲 | BahaiSongs",
+      "description": "浏览社区和 BahaiSongs 创建的公开歌单：巴哈伊歌曲合集，一起歌唱和演奏。"
+    },
+    "song": {
+      "description": "{title} – 歌词{chords} | 巴哈伊歌曲。在 BahaiSongs 上聆听并学唱。",
+      "chordsSuffix": "与和弦"
+    },
+    "category": {
+      "title": "{label} – 巴哈伊歌曲 | BahaiSongs",
+      "descriptionFallback": "{label} — 巴哈伊歌曲，含歌词与和弦 | BahaiSongs"
+    },
+    "artist": {
+      "title": "{name} – 巴哈伊歌曲 | BahaiSongs"
+    }
+  }
+}

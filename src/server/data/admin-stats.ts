@@ -1,6 +1,13 @@
 import 'server-only';
 import { getSupabaseServerClient, getSupabaseServiceClient } from '@/shared/lib/supabase/server';
-import type { ChartPoint, ChartSeries } from '@/features/admin/components/chart-types';
+import type {
+  CatalogGaps,
+  ChartPoint,
+  ChartSeries,
+  PlaylistLikeStats,
+  RankedTrack,
+  StackedChartMonth,
+} from '@/features/admin/components/chart-types';
 
 export interface AdminStats {
   totalTracks: number;
@@ -288,4 +295,329 @@ export async function getRecentSuggestions(limit = 5): Promise<RecentSuggestion[
     .limit(limit);
 
   return data ?? [];
+}
+
+export interface SuggestionFunnelTotals {
+  pending: number;
+  approved: number;
+  rejected: number;
+  withdrawn: number;
+  avgReviewHours: number | null;
+}
+
+const SUGGESTION_STATUS_COLORS: Record<string, string> = {
+  pending: '#F59E0B',
+  approved: '#34D399',
+  rejected: '#F87171',
+  withdrawn: '#94A3B8',
+};
+
+const SUGGESTION_STATUS_LABELS: Record<string, string> = {
+  pending: 'Pendiente',
+  approved: 'Aprobada',
+  rejected: 'Rechazada',
+  withdrawn: 'Retirada',
+};
+
+/** Top tracks by play count in the last `days` days. */
+export async function getTopPlayedTracks(limit = 10, days = 30): Promise<RankedTrack[]> {
+  return getTopTracksFromEvents(limit, days);
+}
+
+/** Top tracks by like count (all time). */
+export async function getTopLikedTracks(limit = 10): Promise<RankedTrack[]> {
+  const supabase = await getSupabaseServerClient();
+
+  const { data: likes } = await supabase.from('likes').select('track_id');
+  if (!likes?.length) return [];
+
+  const counts = new Map<string, number>();
+  for (const row of likes as { track_id: string }[]) {
+    counts.set(row.track_id, (counts.get(row.track_id) ?? 0) + 1);
+  }
+
+  const topIds = [...counts.entries()]
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, limit)
+    .map(([id]) => id);
+
+  if (topIds.length === 0) return [];
+
+  const { data: tracks } = await supabase
+    .from('tracks')
+    .select('id, slug, title')
+    .in('id' as never, topIds);
+
+  const trackMap = new Map(
+    ((tracks ?? []) as { id: string; slug: string; title: string }[]).map((t) => [t.id, t]),
+  );
+
+  return topIds
+    .map((id) => {
+      const track = trackMap.get(id);
+      if (!track) return null;
+      return { id, slug: track.slug, title: track.title, count: counts.get(id) ?? 0 };
+    })
+    .filter((t): t is RankedTrack => t !== null);
+}
+
+async function getTopTracksFromEvents(limit: number, days: number): Promise<RankedTrack[]> {
+  const statsClient = getSupabaseServiceClient();
+  const supabase = await getSupabaseServerClient();
+  const since = new Date(Date.now() - days * 24 * 60 * 60 * 1000).toISOString();
+
+  const { data: events } = await statsClient
+    .from('play_events')
+    .select('track_id')
+    .gte('played_at' as never, since);
+
+  if (!events?.length) return [];
+
+  const counts = new Map<string, number>();
+  for (const row of events as { track_id: string }[]) {
+    counts.set(row.track_id, (counts.get(row.track_id) ?? 0) + 1);
+  }
+
+  const topIds = [...counts.entries()]
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, limit)
+    .map(([id]) => id);
+
+  const { data: tracks } = await supabase
+    .from('tracks')
+    .select('id, slug, title')
+    .in('id' as never, topIds);
+
+  const trackMap = new Map(
+    ((tracks ?? []) as { id: string; slug: string; title: string }[]).map((t) => [t.id, t]),
+  );
+
+  return topIds
+    .map((id) => {
+      const track = trackMap.get(id);
+      if (!track) return null;
+      return { id, slug: track.slug, title: track.title, count: counts.get(id) ?? 0 };
+    })
+    .filter((t): t is RankedTrack => t !== null);
+}
+
+/** Tracks missing audio, lyrics, chords, or still in draft. */
+export async function getCatalogGaps(): Promise<CatalogGaps> {
+  const supabase = await getSupabaseServerClient();
+
+  const [tracksRes, sourcesRes, lyricsRes] = await Promise.all([
+    supabase.from('tracks').select('id, published_at'),
+    supabase.from('track_sources').select('track_id, kind'),
+    supabase.from('lyrics').select('track_id, has_chords, body_plain, body_chordpro'),
+  ]);
+
+  const tracks = (tracksRes.data ?? []) as { id: string; published_at: string | null }[];
+  const sources = (sourcesRes.data ?? []) as { track_id: string; kind: string }[];
+  const lyrics = (lyricsRes.data ?? []) as {
+    track_id: string;
+    has_chords: boolean;
+    body_plain: string | null;
+    body_chordpro: string | null;
+  }[];
+
+  const sourcesByTrack = new Map<string, string[]>();
+  for (const s of sources) {
+    const kinds = sourcesByTrack.get(s.track_id) ?? [];
+    kinds.push(s.kind);
+    sourcesByTrack.set(s.track_id, kinds);
+  }
+
+  const lyricsByTrack = new Map<string, { hasChords: boolean; hasLyrics: boolean }>();
+  for (const l of lyrics) {
+    const existing = lyricsByTrack.get(l.track_id) ?? { hasChords: false, hasLyrics: false };
+    existing.hasChords = existing.hasChords || l.has_chords;
+    existing.hasLyrics =
+      existing.hasLyrics || Boolean(l.body_plain?.trim() || l.body_chordpro?.trim());
+    lyricsByTrack.set(l.track_id, existing);
+  }
+
+  let drafts = 0;
+  let withoutAudio = 0;
+  let withoutLyrics = 0;
+  let withoutChords = 0;
+  let youtubeOnly = 0;
+  let mp3Only = 0;
+
+  for (const track of tracks) {
+    if (!track.published_at) drafts++;
+    const kinds = sourcesByTrack.get(track.id) ?? [];
+    if (kinds.length === 0) withoutAudio++;
+    const hasYoutube = kinds.includes('youtube');
+    const hasMp3 = kinds.includes('mp3_r2');
+    if (hasYoutube && !hasMp3) youtubeOnly++;
+    if (hasMp3 && !hasYoutube) mp3Only++;
+
+    const lyricInfo = lyricsByTrack.get(track.id);
+    if (!lyricInfo?.hasLyrics) withoutLyrics++;
+    if (!lyricInfo?.hasChords) withoutChords++;
+  }
+
+  return {
+    drafts,
+    withoutAudio,
+    withoutLyrics,
+    withoutChords,
+    youtubeOnly,
+    mp3Only,
+  };
+}
+
+/** Suggestions stacked by status per month, plus aggregate totals. */
+export async function getSuggestionsFunnel(
+  monthCount = 6,
+): Promise<{ byMonth: StackedChartMonth[]; totals: SuggestionFunnelTotals }> {
+  const supabase = await getSupabaseServerClient();
+  const now = new Date();
+  const months: { start: Date; end: Date; label: string }[] = [];
+
+  for (let i = monthCount - 1; i >= 0; i--) {
+    const start = startOfMonth(new Date(now.getFullYear(), now.getMonth() - i, 1));
+    const end = startOfMonth(new Date(start.getFullYear(), start.getMonth() + 1, 1));
+    months.push({ start, end, label: monthLabel(start) });
+  }
+
+  const { data } = await supabase.from('suggestions').select('status, created_at, reviewed_at');
+
+  const rows = (data ?? []) as {
+    status: string;
+    created_at: string;
+    reviewed_at: string | null;
+  }[];
+
+  const statuses = ['pending', 'approved', 'rejected', 'withdrawn'] as const;
+  const byMonth: StackedChartMonth[] = months.map(({ start, end, label }) => {
+    const inMonth = rows.filter((r) => {
+      const t = new Date(r.created_at).getTime();
+      return t >= start.getTime() && t < end.getTime();
+    });
+    return {
+      label,
+      segments: statuses.map((status) => ({
+        key: status,
+        label: SUGGESTION_STATUS_LABELS[status] ?? status,
+        value: inMonth.filter((r) => r.status === status).length,
+        color: SUGGESTION_STATUS_COLORS[status] ?? '#94A3B8',
+      })),
+    };
+  });
+
+  const totals: SuggestionFunnelTotals = {
+    pending: rows.filter((r) => r.status === 'pending').length,
+    approved: rows.filter((r) => r.status === 'approved').length,
+    rejected: rows.filter((r) => r.status === 'rejected').length,
+    withdrawn: rows.filter((r) => r.status === 'withdrawn').length,
+    avgReviewHours: null,
+  };
+
+  const reviewed = rows.filter((r) => r.reviewed_at);
+  if (reviewed.length > 0) {
+    const totalHours = reviewed.reduce((sum, r) => {
+      const created = new Date(r.created_at).getTime();
+      const reviewedAt = new Date(r.reviewed_at!).getTime();
+      return sum + (reviewedAt - created) / (1000 * 60 * 60);
+    }, 0);
+    totals.avgReviewHours = Math.round(totalHours / reviewed.length);
+  }
+
+  return { byMonth, totals };
+}
+
+/** Playlist and like counts with monthly playlist growth. */
+export async function getPlaylistLikeStats(monthCount = 6): Promise<PlaylistLikeStats> {
+  const supabase = await getSupabaseServerClient();
+  const now = new Date();
+  const thirtyDaysAgo = new Date(now.getTime() - 30 * 24 * 60 * 60 * 1000).toISOString();
+
+  const [playlistsRes, likesAll, likes30d] = await Promise.all([
+    supabase.from('playlists').select('visibility, created_at'),
+    supabase.from('likes').select('*', { count: 'exact', head: true }),
+    supabase
+      .from('likes')
+      .select('*', { count: 'exact', head: true })
+      .gte('liked_at' as never, thirtyDaysAgo),
+  ]);
+
+  const playlists = (playlistsRes.data ?? []) as {
+    visibility: string;
+    created_at: string;
+  }[];
+
+  const months: { start: Date; end: Date; label: string }[] = [];
+  for (let i = monthCount - 1; i >= 0; i--) {
+    const start = startOfMonth(new Date(now.getFullYear(), now.getMonth() - i, 1));
+    const end = startOfMonth(new Date(start.getFullYear(), start.getMonth() + 1, 1));
+    months.push({ start, end, label: monthLabel(start) });
+  }
+
+  const playlistsByMonth: ChartPoint[] = months.map(({ start, end, label }) => ({
+    label,
+    value: playlists.filter((p) => {
+      const t = new Date(p.created_at).getTime();
+      return t >= start.getTime() && t < end.getTime();
+    }).length,
+  }));
+
+  return {
+    totalPlaylists: playlists.length,
+    publicPlaylists: playlists.filter((p) => p.visibility === 'public').length,
+    unlistedPlaylists: playlists.filter((p) => p.visibility === 'unlisted').length,
+    privatePlaylists: playlists.filter((p) => p.visibility === 'private').length,
+    totalLikes: likesAll.count ?? 0,
+    likesLast30Days: likes30d.count ?? 0,
+    playlistsByMonth,
+  };
+}
+
+function normalizePlaySource(source: string | null): string {
+  if (!source) return 'Desconocido';
+  if (source === 'player') return 'Reproductor';
+  if (source === 'home') return 'Inicio';
+  if (source === 'search') return 'Búsqueda';
+  if (source.startsWith('playlist:')) return 'Playlist';
+  return source;
+}
+
+/** Play events grouped by source label in the last `days` days. */
+export async function getPlaySourceBreakdown(days = 30): Promise<ChartPoint[]> {
+  const statsClient = getSupabaseServiceClient();
+  const since = new Date(Date.now() - days * 24 * 60 * 60 * 1000).toISOString();
+
+  const { data } = await statsClient
+    .from('play_events')
+    .select('source')
+    .gte('played_at' as never, since);
+
+  const counts = new Map<string, number>();
+  for (const row of (data ?? []) as { source: string | null }[]) {
+    const label = normalizePlaySource(row.source);
+    counts.set(label, (counts.get(label) ?? 0) + 1);
+  }
+
+  return [...counts.entries()]
+    .sort((a, b) => b[1] - a[1])
+    .map(([label, value]) => ({ label, value }));
+}
+
+/** Anonymous vs authenticated play share in the last `days` days. */
+export async function getAnonymousPlayShare(days = 30): Promise<{ anonymous: number; authenticated: number }> {
+  const statsClient = getSupabaseServiceClient();
+  const since = new Date(Date.now() - days * 24 * 60 * 60 * 1000).toISOString();
+
+  const { data } = await statsClient
+    .from('play_events')
+    .select('user_id')
+    .gte('played_at' as never, since);
+
+  let anonymous = 0;
+  let authenticated = 0;
+  for (const row of (data ?? []) as { user_id: string | null }[]) {
+    if (row.user_id) authenticated++;
+    else anonymous++;
+  }
+  return { anonymous, authenticated };
 }

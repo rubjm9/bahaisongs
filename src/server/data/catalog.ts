@@ -14,6 +14,7 @@ import {
   getTracksByArtistSupabase,
   getTracksByCategorySupabase,
   getRecentTracksSupabase,
+  getTrendingTracksSupabase,
 } from './catalog-supabase';
 import { getSupabaseAnonClient } from '@/shared/lib/supabase/server';
 
@@ -42,6 +43,11 @@ export interface CatalogTrack {
   legacyAudioUrl?: string;
   youtubeId?: string;
   publishedAt?: string;
+}
+
+/** Catalog track ranked by plays in a trending window. */
+export interface TrendingTrack extends CatalogTrack {
+  playCount: number;
 }
 
 const jsonCatalog = catalogJson as CatalogTrack[];
@@ -81,10 +87,19 @@ export async function getTracksByCategory(categorySlug: string): Promise<Catalog
 
 /** Most recently published tracks first, capped at `limit`. */
 export async function getRecentTracks(limit = 12): Promise<CatalogTrack[]> {
-  if (supabaseEnabled) return getRecentTracksSupabase();
+  if (supabaseEnabled) return getRecentTracksSupabase(limit);
   return [...jsonCatalog]
     .sort((a, b) => (b.publishedAt ?? '').localeCompare(a.publishedAt ?? ''))
     .slice(0, limit);
+}
+
+/**
+ * Most-played tracks with audio in the last `days` days, with play counts.
+ * Returns [] when Supabase / plays are unavailable (section stays hidden).
+ */
+export async function getTrendingTracks(limit = 16, days = 30): Promise<TrendingTrack[]> {
+  if (!supabaseEnabled) return [];
+  return getTrendingTracksSupabase(limit, days);
 }
 
 /** Tracks for a specific language code. */

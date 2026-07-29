@@ -6,6 +6,7 @@ import {
   getAllTracks,
   getActiveCategorySlugs,
   getCatalogLanguages,
+  getTrendingTracks,
 } from '@/server/data/catalog';
 
 type Params = Promise<{ locale: string }>;
@@ -14,10 +15,11 @@ export default async function DiscoverPage({ params }: { params: Params }) {
   const { locale } = await params;
   setRequestLocale(locale);
 
-  const [catalogLanguages, activeCategorySlugs, allTracks] = await Promise.all([
+  const [catalogLanguages, activeCategorySlugs, allTracks, trending] = await Promise.all([
     getCatalogLanguages(),
     getActiveCategorySlugs(),
     getAllTracks(),
+    getTrendingTracks(10, 30),
   ]);
 
   const activeSet = new Set(activeCategorySlugs);
@@ -29,6 +31,7 @@ export default async function DiscoverPage({ params }: { params: Params }) {
         catalogLanguages={catalogLanguages}
         featuredCategorySlugs={featuredCategorySlugs}
         allTracks={allTracks}
+        trending={trending}
       />
     </Suspense>
   );

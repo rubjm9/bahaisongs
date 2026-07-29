@@ -1,0 +1,396 @@
+{
+  "pwa": {
+    "install": {
+      "title": "BahaiSongs इंस्टॉल करें",
+      "description": "इसे होम स्क्रीन पर जोड़ें ताकि ऐप की तरह खोल सकें।",
+      "cta": "ऐप इंस्टॉल करें",
+      "dismiss": "बंद करें",
+      "iosCta": "कैसे इंस्टॉल करें",
+      "iosStep1": "शेयर बटन पर टैप करें",
+      "iosStep2": "\"होम स्क्रीन पर जोड़ें\" चुनें"
+    },
+    "offline": {
+      "title": "आप ऑफ़लाइन हैं",
+      "description": "इंटरनेट कनेक्शन नहीं है। पहले देखे गए पेज अभी भी उपलब्ध हैं।",
+      "retry": "पुनः प्रयास"
+    }
+  },
+  "brand": {
+    "name": "BahaiSongs.org",
+    "tagline": "बहाई समुदाय का संगीत, प्रार्थनाएँ और कॉर्ड शीट, एक ही जगह।"
+  },
+  "settings": {
+    "theme": "थीम",
+    "themeSystem": "सिस्टम",
+    "themeLight": "लाइट",
+    "themeDark": "डार्क",
+    "themeAria": "इंटरफ़ेस थीम बदलें",
+    "languageAria": "भाषा बदलें"
+  },
+  "share": {
+    "hint": "यह गाना अपने ग्रुप के साथ शेयर करें",
+    "ariaLabel": "शेयर",
+    "copied": "लिंक कॉपी हो गया!"
+  },
+  "nav": {
+    "home": "होम",
+    "discover": "खोजें",
+    "library": "लाइब्रेरी",
+    "publicPlaylists": "सार्वजनिक प्लेलिस्ट",
+    "suggest": "गाना सुझाएँ",
+    "favorites": "पसंदीदा",
+    "playlists": "प्लेलिस्ट",
+    "yourPlaylists": "आपकी प्लेलिस्ट",
+    "createPlaylist": "प्लेलिस्ट बनाएँ",
+    "viewAllPlaylists": "सभी देखें",
+    "collapseMenu": "मेनू छोटा करें",
+    "expandMenu": "मेनू बड़ा करें"
+  },
+  "home": {
+    "heroEyebrow": "बहाई संगीत · गीत · कॉर्ड",
+    "heroTitle": "बहाई गीतों के बोल और कॉर्ड, साथ मिलकर गाएँ",
+    "heroSubtitle": "अपना गाना खोजें और अपने ग्रुप के साथ शेयर करें — साथ गाने या बजाने के लिए, या सुनकर सीखें। कोई गाना नहीं मिला? हमें भेजें ताकि हम कैटलॉग बढ़ा सकें।",
+    "cta": "कैटलॉग देखें",
+    "ctaSuggest": "गाना सुझाएँ",
+    "heroStatLabel": "गाने उपलब्ध"
+  },
+  "sections": {
+    "catalogSize": "कैटलॉग में {count} गाने",
+    "seeAll": "सभी देखें",
+    "recentEyebrow": "नया",
+    "recentTitle": "हाल ही में जोड़े गए",
+    "recentDescription": "कैटलॉग में नवीनतम जोड़।",
+    "chordsEyebrow": "साथ बजाएँ",
+    "chordsTitle": "कॉर्ड के साथ",
+    "chordsDescription": "कॉर्ड चार्ट वाले गाने — गिटार, यूकुलेले या पियानो के लिए।",
+    "prayersEyebrow": "प्रार्थना",
+    "prayersTitle": "गाई हुई प्रार्थनाएँ",
+    "prayersDescription": "संगीत में ढली बहाई प्रार्थनाएँ।",
+    "trendingEyebrow": "इस महीने",
+    "trendingTitle": "इस महीने ट्रेंडिंग",
+    "trendingDescription": "पिछले 30 दिनों में सबसे ज़्यादा बजाए गए गाने।",
+    "calmEyebrow": "माहौल",
+    "calmTitle": "शांत",
+    "calmDescription": "चिंतन, ध्यान या विश्राम के लिए।"
+  },
+  "player": {
+    "idleTitle": "कुछ नहीं चल रहा",
+    "idleRandomCta": "कोई भी गाना बजाएँ",
+    "idleRandomLoading": "गाना ढूँढ रहे हैं…",
+    "label": "प्लेयर",
+    "position": "स्थिति",
+    "shuffle": "शफ़ल",
+    "previous": "पिछला",
+    "play": "चलाएँ",
+    "pause": "रोकें",
+    "next": "अगला",
+    "repeat": "दोहराएँ",
+    "mute": "म्यूट",
+    "unmute": "अनम्यूट",
+    "volume": "आवाज़",
+    "playTrack": "{title} चलाएँ",
+    "pauseTrack": "{title} रोकें",
+    "audioUnavailable": "{title} के लिए ऑडियो उपलब्ध नहीं"
+  },
+  "song": {
+    "eyebrow": "गाना",
+    "by": "द्वारा",
+    "hasAudio": "ऑडियो",
+    "hasChords": "कॉर्ड",
+    "noAudio": "केवल बोल",
+    "noAudioHint": "इस गाने का कैटलॉग में अभी ऑडियो उपलब्ध नहीं है।",
+    "playReady": "यह गाना चलाएँ",
+    "playReadyHint": "सुनने के लिए टैप करें। नीचे प्लेयर में नियंत्रण दिखेंगे।",
+    "lyricsTitle": "बोल"
+  },
+  "artist": {
+    "eyebrow": "कलाकार",
+    "trackCount": "{count, plural, =0 {कोई गाना नहीं} one {1 गाना} other {# गाने}}",
+    "allTracks": "सभी गाने"
+  },
+  "category": {
+    "kind": {
+      "genre": "शैली",
+      "mood": "मूड",
+      "theme": "विषय",
+      "tag": "टैग"
+    },
+    "trackCount": "{count, plural, =0 {कोई गाना नहीं} one {1 गाना} other {# गाने}}"
+  },
+  "catalog": {
+    "tooltips": {
+      "language": "बोल की भाषा: {language}",
+      "audio": "प्लेयर में ऑडियो उपलब्ध",
+      "chords": "साथ बजाने के लिए कॉर्ड शामिल"
+    }
+  },
+  "discover": {
+    "title": "संगीत खोजें",
+    "subtitle": "कैटलॉग में खोजें और ब्राउज़ करें",
+    "placeholder": "शीर्षक, कलाकार, बोल या श्रेणी से खोजें…",
+    "totalCatalog": "कैटलॉग में {count} गाने",
+    "browseByCategory": "श्रेणी के अनुसार ब्राउज़ करें",
+    "allTracksHeading": "{count} गाने, वर्णानुक्रम में",
+    "resultsCount": "{count, plural, =0 {कोई परिणाम नहीं} one {1 परिणाम} other {# परिणाम}}",
+    "loading": "कैटलॉग लोड हो रहा है…",
+    "trendingColTrack": "गाना",
+    "trendingColPlays": "प्ले",
+    "trendingPlays": "{count, plural, =1 {1 प्ले} other {# प्ले}}"
+  },
+  "publicPlaylists": {
+    "eyebrow": "समुदाय",
+    "title": "सार्वजनिक प्लेलिस्ट",
+    "subtitle": "समुदाय और BahaiSongs द्वारा शेयर किए गए संग्रह",
+    "curatedBadge": "क्यूरेटेड",
+    "byUser": "{name} द्वारा",
+    "byUserAnonymous": "एक उपयोगकर्ता द्वारा",
+    "trackCount": "{count, plural, =0 {कोई गाना नहीं} one {1 गाना} other {# गाने}}",
+    "empty": "अभी कोई सार्वजनिक प्लेलिस्ट नहीं है। अपनी बनाएँ और समुदाय के साथ शेयर करें।",
+    "discoverCta": "सार्वजनिक प्लेलिस्ट ब्राउज़ करें",
+    "discoverCtaHint": "समुदाय और BahaiSongs के संग्रह"
+  },
+  "library": {
+    "eyebrow": "व्यक्तिगत",
+    "title": "आपकी लाइब्रेरी",
+    "subtitle": "पसंदीदा और सहेजी गई प्लेलिस्ट",
+    "signInTitle": "जो पसंद है उसे सहेजें",
+    "signInHint": "पसंदीदा सहेजने और प्लेलिस्ट बनाने के लिए साइन इन करें।",
+    "exploreCatalog": "कैटलॉग देखें →",
+    "viewAll": "सभी देखें",
+    "loading": "लोड हो रहा है…"
+  },
+  "search": {
+    "title": "कैटलॉग में खोजें",
+    "placeholder": "शीर्षक, कलाकार, बोल या श्रेणी से खोजें…",
+    "resultsCount": "{count, plural, =0 {कोई परिणाम नहीं} one {1 परिणाम} other {# परिणाम}}",
+    "totalCatalog": "कैटलॉग में {count} गाने",
+    "hintEyebrow": "टाइप करना शुरू करें",
+    "hintTitle": "शीर्षक, बोल या कॉर्ड से खोजें",
+    "hintBody": "पूरे कैटलॉग में तुरंत फ़िल्टर। ↑ ↓ से नेविगेट करें और Enter से खोलें।",
+    "emptyEyebrow": "कोई मिलान नहीं",
+    "emptyTitle": "“{query}” से कुछ नहीं मिला",
+    "emptyBody": "कम अक्षर, कोरस का कोई शब्द या अलग वर्तनी आज़माएँ।",
+    "seeAll": "“{query}” के सभी परिणाम देखें →",
+    "filters": {
+      "language": "भाषा",
+      "all": "सभी",
+      "es": "Español",
+      "en": "English",
+      "withChords": "कॉर्ड के साथ",
+      "withAudio": "ऑडियो के साथ",
+      "reset": "साफ़ करें",
+      "tooltips": {
+        "all": "सभी कैटलॉग भाषाओं में गाने दिखाएँ",
+        "language": "केवल {language} भाषा के गाने",
+        "withChords": "केवल कॉर्ड चार्ट वाले गाने",
+        "withAudio": "केवल ऑडियो फ़ाइल वाले गाने"
+      }
+    },
+    "loading": "कैटलॉग लोड हो रहा है…"
+  },
+  "common": {
+    "loading": "लोड हो रहा है…",
+    "error": "कुछ गलत हो गया।",
+    "retry": "पुनः प्रयास",
+    "previous": "पिछला",
+    "next": "अगला",
+    "skipToContent": "सामग्री पर जाएँ"
+  },
+  "auth": {
+    "signIn": "साइन इन",
+    "signOut": "साइन आउट",
+    "adminPanel": "Admin panel",
+    "modalTitle": "साइन इन करें या खाता बनाएँ",
+    "modalSubtitle": "अपने खाते से पसंदीदा सहेजें और प्लेलिस्ट बनाएँ।",
+    "signInTab": "साइन इन",
+    "signUpTab": "खाता बनाएँ",
+    "emailLabel": "ईमेल",
+    "emailPlaceholder": "you@email.com",
+    "passwordLabel": "पासवर्ड",
+    "confirmPasswordLabel": "पासवर्ड पुष्टि",
+    "createAccount": "खाता बनाएँ",
+    "signInWithoutPassword": "बिना पासवर्ड साइन इन करें",
+    "usePasswordInstead": "पासवर्ड इस्तेमाल करें",
+    "sendAccessLink": "एक्सेस लिंक भेजें",
+    "resendAccessLink": "लिंक दोबारा भेजें",
+    "magicLink": "मैजिक लिंक",
+    "magicLinkTitle": "बिना पासवर्ड साइन इन करें",
+    "magicLinkSubtitle": "हम आपको साइन इन के लिए ईमेल लिंक भेजेंगे।",
+    "magicLinkPlaceholder": "you@email.com",
+    "magicLinkSentTitle": "अपना इनबॉक्स देखें",
+    "magicLinkSentBody": "{email} पर भेजा गया लिंक खोलें। अगर खाता नहीं था, तो पुष्टि पर बन जाएगा।",
+    "magicLinkSent": "अपना इनबॉक्स देखें!",
+    "confirmEmailTitle": "ईमेल पुष्टि करें",
+    "confirmEmailBody": "हमने {email} पर लिंक भेजा है। खाता सक्रिय करने के लिए उसे खोलें।",
+    "backToSignIn": "साइन इन पर वापस जाएँ",
+    "orContinueWith": "या इसके साथ जारी रखें",
+    "continueWithGoogle": "Google से जारी रखें",
+    "errorProviderDisabled": "Google अभी उपलब्ध नहीं है। ईमेल और पासवर्ड या ईमेल लिंक का उपयोग करें।",
+    "errorInvalidCredentials": "ग़लत ईमेल या पासवर्ड।",
+    "errorEmailTaken": "इस ईमेल से पहले से खाता मौजूद है। साइन इन करने का प्रयास करें।",
+    "errorWeakPassword": "पासवर्ड कम से कम 6 अक्षरों का होना चाहिए।",
+    "errorEmailNotConfirmed": "साइन इन से पहले अपना ईमेल पुष्टि करें।",
+    "errorSignupDisabled": "पंजीकरण अभी उपलब्ध नहीं है।",
+    "errorPasswordMismatch": "पासवर्ड मेल नहीं खाते।",
+    "myPlaylists": "मेरी प्लेलिस्ट",
+    "favorites": "पसंदीदा",
+    "likeTrack": "पसंदीदा में जोड़ें",
+    "unlikeTrack": "पसंदीदा से हटाएँ",
+    "profile": "प्रोफ़ाइल",
+    "signInToLike": "पसंदीदा सिंक करने के लिए साइन इन करें",
+    "signInRequired": "जारी रखने के लिए साइन इन करें"
+  },
+  "playlist": {
+    "create": "नई प्लेलिस्ट",
+    "titleLabel": "शीर्षक",
+    "visibility": "दृश्यता",
+    "public": "सार्वजनिक",
+    "private": "निजी",
+    "unlisted": "असूचीबद्ध",
+    "save": "सहेजें",
+    "addTrack": "प्लेलिस्ट में जोड़ें",
+    "removeTrack": "हटाएँ",
+    "emptyFavorites": "अभी कोई पसंदीदा नहीं",
+    "emptyPlaylists": "अभी कोई प्लेलिस्ट नहीं",
+    "newPlaylist": "नई प्लेलिस्ट",
+    "myPlaylists": "मेरी प्लेलिस्ट",
+    "signIn": "साइन इन",
+    "signInToAddToPlaylist": "प्लेलिस्ट में जोड़ने के लिए साइन इन करें",
+    "sharePlaylist": "शेयर",
+    "linkCopied": "लिंक कॉपी हो गया!",
+    "trackCount": "{count, plural, =0 {कोई गाना नहीं} one {1 गाना} other {# गाने}}",
+    "changeVisibilityToShare": "शेयर करने के लिए सार्वजनिक करें",
+    "makePublic": "सार्वजनिक करें"
+  },
+  "admin": {
+    "nav": {
+      "overview": "Overview",
+      "tracks": "Songs",
+      "categories": "Categories",
+      "playlists": "Playlists",
+      "artists": "Artists",
+      "users": "Users",
+      "suggestions": "Suggestions",
+      "backToSite": "Back to site"
+    },
+    "overview": {
+      "title": "Admin dashboard",
+      "statsTitle": "Overview",
+      "recentSuggestions": "Recent suggestions"
+    },
+    "common": {
+      "save": "Save changes",
+      "create": "Create",
+      "cancel": "Cancel",
+      "delete": "Delete",
+      "edit": "Edit",
+      "back": "Back",
+      "confirm": "Confirm",
+      "noResults": "No results",
+      "loading": "Loading…"
+    }
+  },
+  "suggest": {
+    "pageTitle": "गाना सुझाएँ",
+    "pageDescription": "कोई बहाई गाना जानते हैं जो कैटलॉग में नहीं है? हमें ऑडियो, बोल और कॉर्ड भेजें। प्रकाशन से पहले हम इसकी समीक्षा करेंगे।",
+    "sectionSong": "गाने का विवरण",
+    "sectionAudio": "ऑडियो",
+    "sectionLyrics": "बोल",
+    "sectionContact": "संपर्क",
+    "sectionLegal": "पुष्टि",
+    "title": "शीर्षक",
+    "titlePlaceholder": "गाने का नाम",
+    "artistName": "कलाकार या गायक",
+    "artistPlaceholder": "वैकल्पिक",
+    "language": "भाषा",
+    "categories": "श्रेणियाँ",
+    "categoriesHint": "उपयुक्त लेबल चुनें (वैकल्पिक)",
+    "suggestCategory": "श्रेणी सुझाएँ",
+    "suggestCategoryPlaceholder": "प्रस्तावित श्रेणी का नाम",
+    "addLanguage": "भाषा जोड़ें",
+    "customLanguageCode": "भाषा कोड",
+    "customLanguageCodePlaceholder": "जैसे fr, de, it",
+    "customLanguageLabel": "भाषा का नाम",
+    "customLanguageLabelPlaceholder": "जैसे फ़्रेंच",
+    "backToLanguageList": "सूची पर वापस जाएँ",
+    "sourceMp3": "MP3 अपलोड करें",
+    "sourceYoutube": "YouTube लिंक",
+    "mp3Label": "ऑडियो फ़ाइल",
+    "mp3Hint": "MP3 फ़ॉर्मेट, अधिकतम 20 MB अनुशंसित",
+    "mp3DropHint": "MP3 यहाँ ड्रैग करें या चुनने के लिए क्लिक करें",
+    "mp3Uploading": "ऑडियो अपलोड हो रहा है…",
+    "mp3Ready": "ऑडियो सबमिट के लिए तैयार",
+    "youtubeUrl": "YouTube URL",
+    "youtubePlaceholder": "https://www.youtube.com/watch?v=…",
+    "lyricsPlain": "बोल (सादा पाठ)",
+    "lyricsPlainPlaceholder": "अगर ChordPro इस्तेमाल नहीं करते तो बोल यहाँ पेस्ट करें",
+    "lyricsChordPro": "कॉर्ड सहित बोल (ChordPro)",
+    "lyricsChordProPlaceholder": "वैकल्पिक — ChordPro फ़ॉर्मेट",
+    "hasChords": "बोल में कॉर्ड शामिल हैं",
+    "notes": "समीक्षकों के लिए नोट",
+    "notesPlaceholder": "संदर्भ, स्रोत, संस्करण… (वैकल्पिक)",
+    "submitterName": "आपका नाम",
+    "submitterEmail": "आपका ईमेल",
+    "loggedInAs": "{name} के रूप में सबमिट कर रहे हैं",
+    "signInOptional": "साइन इन",
+    "rightsLabel": "मैं पुष्टि करता/करती हूँ कि मुझे यह रिकॉर्डिंग और बोल सामुदायिक उपयोग के लिए शेयर करने का अधिकार है",
+    "submit": "सुझाव सबमिट करें",
+    "submitting": "सबमिट हो रहा है…",
+    "successTitle": "धन्यवाद!",
+    "successBody": "हमें आपका सुझाव मिल गया। टीम इसकी समीक्षा करेगी और स्वीकृत होने पर कैटलॉग में जोड़ देगी।",
+    "successAnother": "एक और सुझाव सबमिट करें",
+    "errors": {
+      "required": "अनिवार्य फ़ील्ड",
+      "invalidEmail": "अमान्य ईमेल",
+      "invalidCategory": "अमान्य श्रेणी",
+      "invalidLanguage": "अमान्य भाषा कोड (जैसे es, en, pt इस्तेमाल करें)",
+      "youtubeRequired": "YouTube लिंक दर्ज करें",
+      "invalidYoutube": "अमान्य YouTube लिंक",
+      "uploadRequired": "एक MP3 फ़ाइल अपलोड करें",
+      "invalidUploadPath": "ऑडियो अपलोड त्रुटि",
+      "rightsRequired": "आपको पुष्टि करनी होगी कि आपको यह सामग्री शेयर करने का अधिकार है",
+      "nameRequired": "अपना नाम दर्ज करें",
+      "emailRequired": "अपना ईमेल दर्ज करें",
+      "serviceUnavailable": "सेवा अनुपलब्ध है। कृपया बाद में पुनः प्रयास करें।",
+      "validationFailed": "कृपया चिह्नित फ़ील्ड जाँचें",
+      "insertFailed": "सुझाव सहेजा नहीं जा सका। कृपया पुनः प्रयास करें।",
+      "uploadFailed": "ऑडियो अपलोड नहीं हो सका"
+    }
+  },
+  "lyrics": {
+    "chords": "कॉर्ड",
+    "transpose": "ट्रांसपोज़",
+    "capo": "कैपो",
+    "fontSize": "आकार",
+    "autoscroll": "ऑटो स्क्रॉल",
+    "present": "प्रस्तुति",
+    "noLyrics": "अभी बोल उपलब्ध नहीं हैं।",
+    "exitPresentation": "बाहर निकलें",
+    "keyHints": "स्पेस: स्क्रॉल · +/- ट्रांसपोज़ · ↑↓ आकार · ESC बाहर"
+  },
+  "meta": {
+    "home": {
+      "title": "BahaiSongs – बहाई गीत, बोल और कॉर्ड",
+      "description": "140+ बहाई गाने खोजें — बोल, गिटार कॉर्ड और एकीकृत ऑडियो के साथ। डिजिटल बहाई गीत पुस्तिका।"
+    },
+    "library": {
+      "title": "बहाई गीत कैटलॉग – बोल और कॉर्ड | BahaiSongs",
+      "description": "बहाई गानों का पूरा कैटलॉग ब्राउज़ करें: बोल, गिटार कॉर्ड और ऑडियो। श्रेणी, भाषा और शैली से फ़िल्टर करें।"
+    },
+    "publicPlaylists": {
+      "title": "सार्वजनिक प्लेलिस्ट – बहाई गीत | BahaiSongs",
+      "description": "समुदाय और BahaiSongs द्वारा बनाई गई सार्वजनिक प्लेलिस्ट ब्राउज़ करें: साथ गाने और बजाने के लिए बहाई गीत संग्रह।"
+    },
+    "song": {
+      "description": "{title} – बोल{chords} | बहाई गीत। BahaiSongs पर सुनें और गाना सीखें।",
+      "chordsSuffix": " और कॉर्ड"
+    },
+    "category": {
+      "title": "{label} – बहाई गीत | BahaiSongs",
+      "descriptionFallback": "{label} — बहाई गीत, बोल और कॉर्ड के साथ | BahaiSongs"
+    },
+    "artist": {
+      "title": "{name} – बहाई गीत | BahaiSongs"
+    }
+  }
+}

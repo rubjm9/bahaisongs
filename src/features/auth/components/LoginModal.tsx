@@ -13,6 +13,9 @@ import {
   Typography,
   IconButton,
   CircularProgress,
+  Tabs,
+  Tab,
+  Link as MuiLink,
 } from '@mui/material';
 import { X, Mail } from 'lucide-react';
 import { useTranslations } from 'next-intl';
@@ -25,6 +28,11 @@ interface Props {
   open: boolean;
   onClose: () => void;
 }
+
+type AuthMode = 'signin' | 'signup';
+type View = 'password' | 'magic' | 'magic_sent' | 'signup_confirm';
+
+const MIN_PASSWORD_LENGTH = 6;
 
 function GoogleIcon() {
   return (
@@ -39,7 +47,7 @@ function GoogleIcon() {
       />
       <path
         fill="#FBBC05"
-        d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"
+        d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85 2.22.81-.62z"
       />
       <path
         fill="#EA4335"
@@ -51,38 +59,136 @@ function GoogleIcon() {
 
 export function LoginModal({ open, onClose }: Props) {
   const t = useTranslations('auth');
+  const [mode, setMode] = useState<AuthMode>('signin');
+  const [view, setView] = useState<View>('password');
   const [email, setEmail] = useState('');
-  const [sent, setSent] = useState(false);
-  const { signInWithGoogle, signInWithMagicLink, loading, error, clearError } = useSignIn();
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [localError, setLocalError] = useState<string | null>(null);
+  const {
+    signInWithGoogle,
+    signInWithMagicLink,
+    signInWithPassword,
+    signUpWithPassword,
+    loading,
+    error,
+    clearError,
+  } = useSignIn();
   const { user } = useUser();
 
   useEffect(() => {
     if (user && open) onClose();
   }, [user, open, onClose]);
 
-  async function handleMagicLink() {
-    if (!email) return;
-    const ok = await signInWithMagicLink(email);
-    if (ok) setSent(true);
+  function resetFormState() {
+    setView('password');
+    setMode('signin');
+    setEmail('');
+    setPassword('');
+    setConfirmPassword('');
+    setLocalError(null);
+    clearError();
   }
 
   function handleClose() {
-    setSent(false);
-    setEmail('');
-    clearError();
+    resetFormState();
     onClose();
   }
 
+  function clearErrors() {
+    setLocalError(null);
+    clearError();
+  }
+
+  function switchMode(next: AuthMode) {
+    setMode(next);
+    setView('password');
+    setPassword('');
+    setConfirmPassword('');
+    clearErrors();
+  }
+
+  function switchToMagic() {
+    setView('magic');
+    setPassword('');
+    setConfirmPassword('');
+    clearErrors();
+  }
+
+  function switchToPassword() {
+    setView('password');
+    clearErrors();
+  }
+
+  async function handlePasswordSubmit() {
+    clearErrors();
+    const trimmed = email.trim();
+    if (!trimmed || !password) return;
+
+    if (password.length < MIN_PASSWORD_LENGTH) {
+      setLocalError('weak_password');
+      return;
+    }
+
+    if (mode === 'signup') {
+      if (password !== confirmPassword) {
+        setLocalError('password_mismatch');
+        return;
+      }
+      const outcome = await signUpWithPassword(trimmed, password);
+      if (outcome === 'confirm') setView('signup_confirm');
+      return;
+    }
+
+    await signInWithPassword(trimmed, password);
+  }
+
+  async function handleMagicLink() {
+    clearErrors();
+    const trimmed = email.trim();
+    if (!trimmed) return;
+    const ok = await signInWithMagicLink(trimmed);
+    if (ok) setView('magic_sent');
+  }
+
+  function resolveErrorMessage(code: string | null): string | null {
+    if (!code) return null;
+    switch (code) {
+      case 'provider_disabled':
+        return t('errorProviderDisabled');
+      case 'invalid_credentials':
+        return t('errorInvalidCredentials');
+      case 'email_taken':
+        return t('errorEmailTaken');
+      case 'weak_password':
+        return t('errorWeakPassword');
+      case 'email_not_confirmed':
+        return t('errorEmailNotConfirmed');
+      case 'signup_disabled':
+        return t('errorSignupDisabled');
+      case 'password_mismatch':
+        return t('errorPasswordMismatch');
+      default:
+        return code;
+    }
+  }
+
   function renderError() {
-    if (!error) return null;
-    const message =
-      error === 'provider_disabled' ? t('errorProviderDisabled') : error;
+    const message = resolveErrorMessage(localError ?? error);
+    if (!message) return null;
     return (
       <Typography sx={{ color: 'var(--bs-status-error)', fontSize: '0.8rem' }}>
         {message}
       </Typography>
     );
   }
+
+  const title =
+    view === 'magic' || view === 'magic_sent'
+      ? t('magicLinkTitle')
+      : mode === 'signup'
+        ? t('signUpTab')
+        : t('signInTab');
 
   return (
     <Dialog
@@ -108,11 +214,13 @@ export function LoginModal({ open, onClose }: Props) {
       >
         <Box>
           <Typography sx={{ fontWeight: 700, fontSize: '1.1rem', color: cssVars.textPrimary }}>
-            {t('modalTitle')}
+            {title}
           </Typography>
-          <Typography sx={{ mt: 0.75, fontSize: '0.875rem', color: cssVars.textMuted, lineHeight: 1.5 }}>
-            {t('modalSubtitle')}
-          </Typography>
+          {view !== 'magic_sent' && view !== 'signup_confirm' ? (
+            <Typography sx={{ mt: 0.75, fontSize: '0.875rem', color: cssVars.textMuted, lineHeight: 1.5 }}>
+              {view === 'magic' ? t('magicLinkSubtitle') : t('modalSubtitle')}
+            </Typography>
+          ) : null}
         </Box>
         <IconButton size="small" onClick={handleClose} aria-label="close" sx={{ mt: -0.5 }}>
           <X size={18} />
@@ -120,50 +228,215 @@ export function LoginModal({ open, onClose }: Props) {
       </DialogTitle>
 
       <DialogContent>
-        {sent ? (
-          <Stack spacing={1} sx={{ textAlign: 'center', py: 3 }}>
+        {view === 'magic_sent' ? (
+          <Stack spacing={2} sx={{ textAlign: 'center', py: 3 }}>
             <Typography sx={{ color: cssVars.textPrimary, fontSize: '1rem', fontWeight: 600 }}>
               {t('magicLinkSentTitle')}
             </Typography>
             <Typography sx={{ color: cssVars.textMuted, fontSize: '0.875rem', lineHeight: 1.5 }}>
-              {t('magicLinkSentBody')}
+              {t('magicLinkSentBody', { email })}
             </Typography>
-          </Stack>
-        ) : (
-          <Stack spacing={2} sx={{ pt: 2 }}>
-            <TextField
-              label={t('emailLabel')}
-              placeholder={t('magicLinkPlaceholder')}
-              type="email"
-              autoComplete="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              onKeyDown={(e) => e.key === 'Enter' && handleMagicLink()}
-              fullWidth
-              size="small"
-              disabled={loading}
-              InputProps={{
-                startAdornment: <Mail size={16} style={{ marginRight: 8, opacity: 0.6 }} />,
-              }}
-            />
-
             <Button
-              variant="contained"
-              onClick={handleMagicLink}
-              disabled={loading || !email}
+              variant="outlined"
+              onClick={() => void handleMagicLink()}
+              disabled={loading}
               fullWidth
               sx={{
-                background: cssVars.accentElectric,
-                color: cssVars.textInverse,
-                fontWeight: 600,
+                borderColor: cssVars.borderSubtle,
+                color: cssVars.textPrimary,
                 borderRadius: `${radii.md}px`,
-                '&:hover': { background: cssVars.accentCyan },
               }}
             >
-              {loading ? <CircularProgress size={18} /> : t('sendAccessLink')}
+              {loading ? <CircularProgress size={18} /> : t('resendAccessLink')}
             </Button>
-
+            <MuiLink
+              component="button"
+              type="button"
+              onClick={switchToPassword}
+              underline="hover"
+              sx={{ fontSize: '0.875rem', color: cssVars.accentElectric, cursor: 'pointer' }}
+            >
+              {t('usePasswordInstead')}
+            </MuiLink>
             {renderError()}
+          </Stack>
+        ) : view === 'signup_confirm' ? (
+          <Stack spacing={1.5} sx={{ textAlign: 'center', py: 3 }}>
+            <Typography sx={{ color: cssVars.textPrimary, fontSize: '1rem', fontWeight: 600 }}>
+              {t('confirmEmailTitle')}
+            </Typography>
+            <Typography sx={{ color: cssVars.textMuted, fontSize: '0.875rem', lineHeight: 1.5 }}>
+              {t('confirmEmailBody', { email })}
+            </Typography>
+            <MuiLink
+              component="button"
+              type="button"
+              onClick={switchToPassword}
+              underline="hover"
+              sx={{ fontSize: '0.875rem', color: cssVars.accentElectric, cursor: 'pointer', pt: 1 }}
+            >
+              {t('backToSignIn')}
+            </MuiLink>
+          </Stack>
+        ) : (
+          <Stack spacing={2} sx={{ pt: 1.5 }}>
+            {view === 'password' ? (
+              <>
+                <Tabs
+                  value={mode}
+                  onChange={(_, value: AuthMode) => switchMode(value)}
+                  variant="fullWidth"
+                  sx={{
+                    minHeight: 36,
+                    '& .MuiTab-root': {
+                      minHeight: 36,
+                      textTransform: 'none',
+                      fontSize: '0.875rem',
+                      color: cssVars.textMuted,
+                    },
+                    '& .Mui-selected': { color: cssVars.textPrimary },
+                    '& .MuiTabs-indicator': { background: cssVars.accentElectric },
+                  }}
+                >
+                  <Tab value="signin" label={t('signInTab')} />
+                  <Tab value="signup" label={t('signUpTab')} />
+                </Tabs>
+
+                <TextField
+                  label={t('emailLabel')}
+                  placeholder={t('emailPlaceholder')}
+                  type="email"
+                  autoComplete="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  onKeyDown={(e) => e.key === 'Enter' && void handlePasswordSubmit()}
+                  fullWidth
+                  size="small"
+                  disabled={loading}
+                  InputProps={{
+                    startAdornment: <Mail size={16} style={{ marginRight: 8, opacity: 0.6 }} />,
+                  }}
+                />
+
+                <TextField
+                  label={t('passwordLabel')}
+                  type="password"
+                  autoComplete={mode === 'signup' ? 'new-password' : 'current-password'}
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  onKeyDown={(e) => e.key === 'Enter' && void handlePasswordSubmit()}
+                  fullWidth
+                  size="small"
+                  disabled={loading}
+                />
+
+                {mode === 'signup' ? (
+                  <TextField
+                    label={t('confirmPasswordLabel')}
+                    type="password"
+                    autoComplete="new-password"
+                    value={confirmPassword}
+                    onChange={(e) => setConfirmPassword(e.target.value)}
+                    onKeyDown={(e) => e.key === 'Enter' && void handlePasswordSubmit()}
+                    fullWidth
+                    size="small"
+                    disabled={loading}
+                  />
+                ) : null}
+
+                <Button
+                  variant="contained"
+                  onClick={() => void handlePasswordSubmit()}
+                  disabled={loading || !email.trim() || !password || (mode === 'signup' && !confirmPassword)}
+                  fullWidth
+                  sx={{
+                    background: cssVars.accentElectric,
+                    color: cssVars.textInverse,
+                    fontWeight: 600,
+                    borderRadius: `${radii.md}px`,
+                    '&:hover': { background: cssVars.accentCyan },
+                  }}
+                >
+                  {loading ? (
+                    <CircularProgress size={18} />
+                  ) : mode === 'signup' ? (
+                    t('createAccount')
+                  ) : (
+                    t('signIn')
+                  )}
+                </Button>
+
+                {renderError()}
+
+                <MuiLink
+                  component="button"
+                  type="button"
+                  onClick={switchToMagic}
+                  underline="hover"
+                  sx={{
+                    fontSize: '0.875rem',
+                    color: cssVars.textMuted,
+                    cursor: 'pointer',
+                    textAlign: 'center',
+                    alignSelf: 'center',
+                  }}
+                >
+                  {t('signInWithoutPassword')}
+                </MuiLink>
+              </>
+            ) : (
+              <>
+                <TextField
+                  label={t('emailLabel')}
+                  placeholder={t('emailPlaceholder')}
+                  type="email"
+                  autoComplete="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  onKeyDown={(e) => e.key === 'Enter' && void handleMagicLink()}
+                  fullWidth
+                  size="small"
+                  disabled={loading}
+                  InputProps={{
+                    startAdornment: <Mail size={16} style={{ marginRight: 8, opacity: 0.6 }} />,
+                  }}
+                />
+
+                <Button
+                  variant="contained"
+                  onClick={() => void handleMagicLink()}
+                  disabled={loading || !email.trim()}
+                  fullWidth
+                  sx={{
+                    background: cssVars.accentElectric,
+                    color: cssVars.textInverse,
+                    fontWeight: 600,
+                    borderRadius: `${radii.md}px`,
+                    '&:hover': { background: cssVars.accentCyan },
+                  }}
+                >
+                  {loading ? <CircularProgress size={18} /> : t('sendAccessLink')}
+                </Button>
+
+                {renderError()}
+
+                <MuiLink
+                  component="button"
+                  type="button"
+                  onClick={switchToPassword}
+                  underline="hover"
+                  sx={{
+                    fontSize: '0.875rem',
+                    color: cssVars.textMuted,
+                    cursor: 'pointer',
+                    textAlign: 'center',
+                    alignSelf: 'center',
+                  }}
+                >
+                  {t('usePasswordInstead')}
+                </MuiLink>
+              </>
+            )}
 
             {authGoogleEnabled ? (
               <>
@@ -189,11 +462,7 @@ export function LoginModal({ open, onClose }: Props) {
                   {t('continueWithGoogle')}
                 </Button>
               </>
-            ) : (
-              <Typography sx={{ fontSize: '0.8rem', color: cssVars.textMuted, textAlign: 'center', pt: 0.5 }}>
-                {t('googleSetupHint')}
-              </Typography>
-            )}
+            ) : null}
           </Stack>
         )}
       </DialogContent>

@@ -23,25 +23,25 @@ function AdminShellLayout({
   const { config } = useAdminTopBarContext();
 
   return (
-    <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100dvh', background: cssVars.bgPrimary }}>
-      <AdminTopBar
-        {...(config.title !== undefined ? { title: config.title } : {})}
-        {...(config.description !== undefined ? { description: config.description } : {})}
-        {...(config.actions !== undefined ? { actions: config.actions } : {})}
+    <Box sx={{ display: 'flex', height: '100dvh', overflow: 'hidden', background: cssVars.bgPrimary }}>
+      <AdminSidebar pendingSuggestions={pendingSuggestions} />
+
+      <AdminMobileDrawer
+        open={drawerOpen}
+        onClose={onCloseDrawer}
+        pendingSuggestions={pendingSuggestions}
       />
 
-      <Box sx={{ display: 'flex', flex: 1, minHeight: 0 }}>
-        <AdminSidebar pendingSuggestions={pendingSuggestions} />
-
-        <AdminMobileDrawer
-          open={drawerOpen}
-          onClose={onCloseDrawer}
-          pendingSuggestions={pendingSuggestions}
+      <Box sx={{ display: 'flex', flexDirection: 'column', flex: 1, minWidth: 0, minHeight: 0 }}>
+        <AdminTopBar
+          {...(config.title !== undefined ? { title: config.title } : {})}
+          {...(config.description !== undefined ? { description: config.description } : {})}
+          {...(config.actions !== undefined ? { actions: config.actions } : {})}
         />
 
         <Box
           component="main"
-          sx={{ flex: 1, display: 'flex', flexDirection: 'column', minWidth: 0, width: '100%' }}
+          sx={{ flex: 1, display: 'flex', flexDirection: 'column', minWidth: 0, width: '100%', overflowY: 'auto' }}
         >
           {children}
         </Box>

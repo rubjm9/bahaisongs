@@ -196,6 +196,9 @@ export const typography = {
     lyrics: "var(--bs-font-sans), 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif",
     /** Prefer Noto Sans Arabic when the CSS variable is set (RTL locales). */
     rtl: "var(--bs-font-arabic), var(--bs-font-sans), 'Noto Sans Arabic', system-ui, sans-serif",
+    cjk: "var(--bs-font-cjk), var(--bs-font-sans), 'Noto Sans SC', system-ui, sans-serif",
+    devanagari:
+      "var(--bs-font-devanagari), var(--bs-font-sans), 'Noto Sans Devanagari', system-ui, sans-serif",
   },
   weight: { light: 300, regular: 400, medium: 500, semibold: 600, bold: 700 },
 } as const;

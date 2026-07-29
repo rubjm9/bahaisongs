@@ -2,7 +2,7 @@
 
 import { useState, type MouseEvent } from 'react';
 import { useLocale, useTranslations } from 'next-intl';
-import { IconButton, Menu, MenuItem, ListItemText } from '@mui/material';
+import { Box, IconButton, Menu, MenuItem, Typography } from '@mui/material';
 import { Languages } from 'lucide-react';
 import { localeLabels, locales, type Locale } from '@/shared/lib/i18n/config';
 import { usePathname, useRouter } from '@/shared/lib/i18n/routing';
@@ -45,27 +45,59 @@ export function LocaleSwitcher() {
         anchorEl={anchor}
         open={Boolean(anchor)}
         onClose={handleClose}
+        anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
+        transformOrigin={{ horizontal: 'right', vertical: 'top' }}
         slotProps={{
           paper: {
             sx: {
               mt: 1,
-              background: cssVars.bgGlass,
-              backdropFilter: 'blur(16px)',
+              background: cssVars.bgElevated,
               border: `1px solid ${cssVars.borderSubtle}`,
+              direction: 'ltr',
+              minWidth: 168,
             },
           },
         }}
       >
         {locales.map((l) => (
-          <MenuItem key={l} selected={l === current} onClick={() => switchTo(l)}>
-            <ListItemText
-              primary={localeLabels[l]}
-              secondary={l.toUpperCase()}
-              slotProps={{
-                primary: { sx: { color: cssVars.textPrimary, fontWeight: 500 } },
-                secondary: { sx: { color: cssVars.textMuted, fontSize: '0.7rem' } },
+          <MenuItem
+            key={l}
+            selected={l === current}
+            onClick={() => switchTo(l)}
+            dense
+            sx={{
+              py: 0.75,
+              gap: 1.25,
+              minHeight: 36,
+              justifyContent: 'space-between',
+            }}
+          >
+            <Typography
+              component="span"
+              sx={{
+                color: cssVars.textPrimary,
+                fontWeight: 500,
+                fontSize: '0.875rem',
+                lineHeight: 1.25,
+                textAlign: 'start',
+                unicodeBidi: 'plaintext',
               }}
-            />
+            >
+              {localeLabels[l]}
+            </Typography>
+            <Box
+              component="span"
+              sx={{
+                color: cssVars.textMuted,
+                fontSize: '0.6875rem',
+                fontWeight: 600,
+                letterSpacing: '0.04em',
+                textTransform: 'uppercase',
+                flexShrink: 0,
+              }}
+            >
+              {l}
+            </Box>
           </MenuItem>
         ))}
       </Menu>

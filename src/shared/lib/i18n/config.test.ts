@@ -9,8 +9,22 @@ import {
 import { languagesAlternates } from '@/shared/lib/seo/hreflang';
 
 describe('i18n config', () => {
-  it('includes eight locales with Spanish as default', () => {
-    expect(locales).toEqual(['es', 'en', 'fr', 'de', 'pt', 'ru', 'ar', 'fa']);
+  it('includes thirteen locales with Spanish as default', () => {
+    expect(locales).toEqual([
+      'es',
+      'en',
+      'fr',
+      'de',
+      'it',
+      'pt',
+      'hu',
+      'ru',
+      'zh',
+      'hi',
+      'sw',
+      'ar',
+      'fa',
+    ]);
     expect(defaultLocale).toBe('es');
   });
 
@@ -35,6 +49,9 @@ describe('languagesAlternates', () => {
     expect(map.es).toBe('https://bahaisongs.org/library');
     expect(map.en).toBe('https://bahaisongs.org/en/library');
     expect(map.fr).toBe('https://bahaisongs.org/fr/library');
+    expect(map.it).toBe('https://bahaisongs.org/it/library');
+    expect(map.zh).toBe('https://bahaisongs.org/zh/library');
+    expect(map.hi).toBe('https://bahaisongs.org/hi/library');
     expect(map.ar).toBe('https://bahaisongs.org/ar/library');
     expect(Object.keys(map)).toHaveLength(locales.length);
   });

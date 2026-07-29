@@ -3,7 +3,12 @@ import { setRequestLocale, getTranslations } from 'next-intl/server';
 import type { Metadata } from 'next';
 import { HeroAtmosphere } from '@/features/home/components/HeroAtmosphere';
 import { TrackSection } from '@/features/catalog/components/TrackSection';
-import { getAllTracks, getRecentTracks, getTracksByCategory } from '@/server/data/catalog';
+import {
+  getAllTracks,
+  getRecentTracks,
+  getTracksByCategory,
+  getTrendingTracks,
+} from '@/server/data/catalog';
 import type { Locale } from '@/shared/lib/i18n/config';
 import { appPath } from '@/shared/lib/seo/paths';
 import { languagesAlternates } from '@/shared/lib/seo/hreflang';
@@ -33,12 +38,13 @@ export default async function HomePage({ params }: { params: Params }) {
   const t = await getTranslations('home');
   const tSections = await getTranslations('sections');
 
-  const [allTracks, recent, withChords, prayers, calm] = await Promise.all([
+  const [allTracks, trending, recent, withChords, prayers, calm] = await Promise.all([
     getAllTracks(),
-    getRecentTracks(8),
-    getTracksByCategory('con-acordes').then((t) => t.slice(0, 8)),
-    getTracksByCategory('oracion').then((t) => t.slice(0, 8)),
-    getTracksByCategory('tranquila').then((t) => t.slice(0, 8)),
+    getTrendingTracks(16, 30),
+    getRecentTracks(16),
+    getTracksByCategory('con-acordes').then((t) => t.slice(0, 16)),
+    getTracksByCategory('oracion').then((t) => t.slice(0, 16)),
+    getTracksByCategory('tranquila').then((t) => t.slice(0, 16)),
   ]);
 
   return (
@@ -53,6 +59,14 @@ export default async function HomePage({ params }: { params: Params }) {
         ctaSuggestHref={appPath(locale as Locale, 'suggest')}
         heroStatCount={allTracks.length}
         heroStatLabel={t('heroStatLabel')}
+      />
+
+      <TrackSection
+        eyebrow={tSections('trendingEyebrow')}
+        title={tSections('trendingTitle')}
+        description={tSections('trendingDescription')}
+        tracks={trending}
+        locale={locale as Locale}
       />
 
       <TrackSection

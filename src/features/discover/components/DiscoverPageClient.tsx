@@ -20,10 +20,15 @@ import {
   type TrackLanguage,
 } from '@/features/catalog/lib/track-languages';
 import { FEATURED_CATEGORIES } from '@/features/discover/lib/featured-categories';
+import { TrendingTracksTable } from '@/features/discover/components/TrendingTracksTable';
 import { accent, cssVars, radii } from '@/shared/theme/tokens';
 import type { Locale } from '@/shared/lib/i18n/config';
 import { appPath } from '@/shared/lib/seo/paths';
-import type { CatalogLanguageOption, CatalogTrack } from '@/server/data/catalog';
+import type {
+  CatalogLanguageOption,
+  CatalogTrack,
+  TrendingTrack,
+} from '@/server/data/catalog';
 
 const PAGE_LIMIT = 60;
 
@@ -31,12 +36,14 @@ interface Props {
   catalogLanguages: CatalogLanguageOption[];
   featuredCategorySlugs: string[];
   allTracks: readonly CatalogTrack[];
+  trending: readonly TrendingTrack[];
 }
 
 export function DiscoverPageClient({
   catalogLanguages,
   featuredCategorySlugs,
   allTracks,
+  trending,
 }: Props) {
   const t = useTranslations('discover');
   const tPublicPlaylists = useTranslations('publicPlaylists');
@@ -121,6 +128,8 @@ export function DiscoverPageClient({
           {t('totalCatalog', { count: catalogCount })}
         </Typography>
       </Box>
+
+      {!hasActiveQuery && trending.length > 0 ? <TrendingTracksTable tracks={trending} /> : null}
 
       <SearchBox value={query} onChange={setQuery} placeholder={t('placeholder')} autoFocus />
 

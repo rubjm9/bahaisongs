@@ -3,7 +3,7 @@ import Script from 'next/script';
 import { Suspense } from 'react';
 import { GoogleAnalyticsPageViews } from '@/shared/lib/analytics/GoogleAnalytics';
 import { GoogleAnalyticsScripts } from '@/shared/lib/analytics/GoogleAnalyticsScripts';
-import { inter, outfit, notoSansArabic } from '@/shared/theme/fonts';
+import { inter, outfit, notoSansArabic, notoSansSc, notoSansDevanagari } from '@/shared/theme/fonts';
 import { THEME_COOKIE_NAME, THEME_STORAGE_KEY } from '@/shared/theme/themeStorage';
 import { SITE_URL } from '@/shared/lib/seo/site';
 import { getRootHtmlLocale } from '@/shared/lib/i18n/rootLocale';
@@ -65,7 +65,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
     <html
       lang={locale}
       dir={dir}
-      className={`${inter.variable} ${outfit.variable} ${notoSansArabic.variable}`}
+      className={`${inter.variable} ${outfit.variable} ${notoSansArabic.variable} ${notoSansSc.variable} ${notoSansDevanagari.variable}`}
       suppressHydrationWarning
     >
       <head>

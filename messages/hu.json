@@ -1,0 +1,396 @@
+{
+  "pwa": {
+    "install": {
+      "title": "BahaiSongs telepítése",
+      "description": "Add hozzá a kezdőképernyőhöz, hogy alkalmazásként nyisd meg.",
+      "cta": "Alkalmazás telepítése",
+      "dismiss": "Bezárás",
+      "iosCta": "Hogyan telepítsd",
+      "iosStep1": "Koppints a Megosztás gombra",
+      "iosStep2": "Válaszd a „Hozzáadás a kezdőképernyőhöz” lehetőséget"
+    },
+    "offline": {
+      "title": "Nincs internetkapcsolat",
+      "description": "Nincs internetkapcsolat. A korábban meglátogatott oldalak továbbra is elérhetők.",
+      "retry": "Újra"
+    }
+  },
+  "brand": {
+    "name": "BahaiSongs.org",
+    "tagline": "Zene, imák és akkordlapok a bahá'í közösségből, egy helyen."
+  },
+  "settings": {
+    "theme": "Téma",
+    "themeSystem": "Rendszer",
+    "themeLight": "Világos",
+    "themeDark": "Sötét",
+    "themeAria": "Felület témájának módosítása",
+    "languageAria": "Nyelv módosítása"
+  },
+  "share": {
+    "hint": "Oszd meg ezt a dalt a csoportoddal",
+    "ariaLabel": "Megosztás",
+    "copied": "Link másolva!"
+  },
+  "nav": {
+    "home": "Főoldal",
+    "discover": "Felfedezés",
+    "library": "Könyvtár",
+    "publicPlaylists": "Nyilvános lejátszási listák",
+    "suggest": "Dal ajánlása",
+    "favorites": "Kedvencek",
+    "playlists": "Lejátszási listák",
+    "yourPlaylists": "Lejátszási listáid",
+    "createPlaylist": "Lista létrehozása",
+    "viewAllPlaylists": "Összes megtekintése",
+    "collapseMenu": "Menü összecsukása",
+    "expandMenu": "Menü kinyitása"
+  },
+  "home": {
+    "heroEyebrow": "Bahá'í zene · Dalszövegek · Akkordok",
+    "heroTitle": "Dalszövegek és akkordok bahá'í dalok együtt énekléséhez",
+    "heroSubtitle": "Keresd meg a dalt és oszd meg a csoportoddal, hogy együtt énekeljetek vagy játsszatok, vagy hallgasd meg, hogy megtanuld. Hiányzik egy dal? Küldd el nekünk, hogy bővíthessük a katalógust.",
+    "cta": "Katalógus felfedezése",
+    "ctaSuggest": "Dal ajánlása",
+    "heroStatLabel": "dal elérhető"
+  },
+  "sections": {
+    "catalogSize": "{count} dal a katalógusban",
+    "seeAll": "Összes megtekintése",
+    "recentEyebrow": "Új",
+    "recentTitle": "Nemrég hozzáadva",
+    "recentDescription": "A katalógus legújabb kiegészítései.",
+    "chordsEyebrow": "Játssz vele",
+    "chordsTitle": "Akkordokkal",
+    "chordsDescription": "Dalok akkordtáblákkal — gitárhoz, ukuleléhez vagy zongorához.",
+    "prayersEyebrow": "Áhítat",
+    "prayersTitle": "Énekelt imák",
+    "prayersDescription": "Zenébe öntött bahá'í imák.",
+    "trendingEyebrow": "Ebben a hónapban",
+    "trendingTitle": "Havi trendek",
+    "trendingDescription": "Az elmúlt 30 nap legtöbbször lejátszott dalai.",
+    "calmEyebrow": "Hangulat",
+    "calmTitle": "Nyugodt",
+    "calmDescription": "Elmélkedéshez, meditációhoz vagy pihenéshez."
+  },
+  "player": {
+    "idleTitle": "Nincs lejátszás",
+    "idleRandomCta": "Véletlenszerű dal lejátszása",
+    "idleRandomLoading": "Dal keresése…",
+    "label": "Lejátszó",
+    "position": "Pozíció",
+    "shuffle": "Keverés",
+    "previous": "Előző",
+    "play": "Lejátszás",
+    "pause": "Szünet",
+    "next": "Következő",
+    "repeat": "Ismétlés",
+    "mute": "Némítás",
+    "unmute": "Némítás feloldása",
+    "volume": "Hangerő",
+    "playTrack": "{title} lejátszása",
+    "pauseTrack": "{title} szüneteltetése",
+    "audioUnavailable": "A hang nem érhető el: {title}"
+  },
+  "song": {
+    "eyebrow": "Dal",
+    "by": "előadó:",
+    "hasAudio": "Hang",
+    "hasChords": "Akkordok",
+    "noAudio": "Csak szöveg",
+    "noAudioHint": "Ehhez a dalhoz még nincs hang a katalógusban.",
+    "playReady": "Dal lejátszása",
+    "playReadyHint": "Koppints a meghallgatáshoz. A vezérlők alul jelennek meg.",
+    "lyricsTitle": "Dalszöveg"
+  },
+  "artist": {
+    "eyebrow": "Előadó",
+    "trackCount": "{count, plural, =0 {Nincs dal} =1 {1 dal} other {# dal}}",
+    "allTracks": "Összes dal"
+  },
+  "category": {
+    "kind": {
+      "genre": "Műfaj",
+      "mood": "Hangulat",
+      "theme": "Téma",
+      "tag": "Címke"
+    },
+    "trackCount": "{count, plural, =0 {Nincs dal} =1 {1 dal} other {# dal}}"
+  },
+  "catalog": {
+    "tooltips": {
+      "language": "Dalszöveg nyelve: {language}",
+      "audio": "Hang elérhető a lejátszóban",
+      "chords": "Akkordokat tartalmaz a kíséréshez"
+    }
+  },
+  "discover": {
+    "title": "Zene felfedezése",
+    "subtitle": "Keresés és böngészés a katalógusban",
+    "placeholder": "Keresés cím, előadó, szöveg vagy kategória alapján…",
+    "totalCatalog": "{count} dal a katalógusban",
+    "browseByCategory": "Böngészés kategória szerint",
+    "allTracksHeading": "{count} dal, ábécé sorrendben",
+    "resultsCount": "{count, plural, =0 {Nincs találat} =1 {1 találat} other {# találat}}",
+    "loading": "Katalógus betöltése…",
+    "trendingColTrack": "Dal",
+    "trendingColPlays": "Lejátszások",
+    "trendingPlays": "{count, plural, =1 {1 lejátszás} other {# lejátszás}}"
+  },
+  "publicPlaylists": {
+    "eyebrow": "Közösség",
+    "title": "Nyilvános lejátszási listák",
+    "subtitle": "A közösség és a BahaiSongs által megosztott gyűjtemények",
+    "curatedBadge": "Válogatott",
+    "byUser": "{name} listája",
+    "byUserAnonymous": "Egy felhasználó listája",
+    "trackCount": "{count, plural, =0 {Nincs dal} =1 {1 dal} other {# dal}}",
+    "empty": "Még nincsenek nyilvános listák. Hozz létre egyet és oszd meg a közösséggel.",
+    "discoverCta": "Nyilvános listák böngészése",
+    "discoverCtaHint": "Gyűjtemények a közösségtől és a BahaiSongs-tól"
+  },
+  "library": {
+    "eyebrow": "Személyes",
+    "title": "Könyvtárad",
+    "subtitle": "Kedvenceid és mentett lejátszási listáid",
+    "signInTitle": "Mentsd el, amit szeretsz",
+    "signInHint": "Jelentkezz be kedvencek mentéséhez és listák létrehozásához.",
+    "exploreCatalog": "Katalógus felfedezése →",
+    "viewAll": "Összes megtekintése",
+    "loading": "Betöltés…"
+  },
+  "search": {
+    "title": "Keresés a katalógusban",
+    "placeholder": "Keresés cím, előadó, szöveg vagy kategória alapján…",
+    "resultsCount": "{count, plural, =0 {Nincs találat} =1 {1 találat} other {# találat}}",
+    "totalCatalog": "{count} dal a katalógusban",
+    "hintEyebrow": "Kezdj el gépelni",
+    "hintTitle": "Keresés cím, szöveg vagy akkordok alapján",
+    "hintBody": "Azonnali szűrés az egész katalógusban. Használd a ↑ ↓ billentyűket a navigáláshoz és az Entert a megnyitáshoz.",
+    "emptyEyebrow": "Nincs találat",
+    "emptyTitle": "Nincs találat erre: „{query}”",
+    "emptyBody": "Próbálj kevesebb betűt, egy szót a refrénből vagy másik írásmódot.",
+    "seeAll": "Összes találat megjelenítése: „{query}” →",
+    "filters": {
+      "language": "Nyelv",
+      "all": "Mind",
+      "es": "Español",
+      "en": "English",
+      "withChords": "Akkordokkal",
+      "withAudio": "Hanggal",
+      "reset": "Törlés",
+      "tooltips": {
+        "all": "Dalok megjelenítése minden katalógusnyelven",
+        "language": "Csak {language} nyelvű dalok",
+        "withChords": "Csak akkordtáblát tartalmazó dalok",
+        "withAudio": "Csak hangfájllal rendelkező dalok"
+      }
+    },
+    "loading": "Katalógus betöltése…"
+  },
+  "common": {
+    "loading": "Betöltés…",
+    "error": "Valami hiba történt.",
+    "retry": "Újrapróbálás",
+    "previous": "Előző",
+    "next": "Következő",
+    "skipToContent": "Ugrás a tartalomra"
+  },
+  "auth": {
+    "signIn": "Bejelentkezés",
+    "signOut": "Kijelentkezés",
+    "adminPanel": "Admin panel",
+    "modalTitle": "Bejelentkezés vagy fiók létrehozása",
+    "modalSubtitle": "Mentsd kedvenceidet és hozz létre lejátszási listákat a fiókoddal.",
+    "signInTab": "Bejelentkezés",
+    "signUpTab": "Fiók létrehozása",
+    "emailLabel": "E-mail",
+    "emailPlaceholder": "te@email.com",
+    "passwordLabel": "Jelszó",
+    "confirmPasswordLabel": "Jelszó megerősítése",
+    "createAccount": "Fiók létrehozása",
+    "signInWithoutPassword": "Bejelentkezés jelszó nélkül",
+    "usePasswordInstead": "Jelszó használata",
+    "sendAccessLink": "Hozzáférési link küldése",
+    "resendAccessLink": "Link újraküldése",
+    "magicLink": "Mágikus link",
+    "magicLinkTitle": "Bejelentkezés jelszó nélkül",
+    "magicLinkSubtitle": "E-mailben küldünk egy linket a bejelentkezéshez.",
+    "magicLinkPlaceholder": "te@email.com",
+    "magicLinkSentTitle": "Nézd meg a postaládádat",
+    "magicLinkSentBody": "Nyisd meg a(z) {email} címre küldött linket a bejelentkezéshez. Ha nem volt fiókod, a megerősítéskor létrehozunk egyet.",
+    "magicLinkSent": "Nézd meg a postaládádat!",
+    "confirmEmailTitle": "E-mail megerősítése",
+    "confirmEmailBody": "Linket küldtünk a(z) {email} címre. Nyisd meg a fiókod aktiválásához.",
+    "backToSignIn": "Vissza a bejelentkezéshez",
+    "orContinueWith": "Vagy folytasd ezzel",
+    "continueWithGoogle": "Folytatás Google fiókkal",
+    "errorProviderDisabled": "A Google még nem érhető el. Használj e-mailt és jelszót vagy az e-mail linket.",
+    "errorInvalidCredentials": "Hibás e-mail vagy jelszó.",
+    "errorEmailTaken": "Ezzel az e-mail címmel már létezik fiók. Próbálj bejelentkezni.",
+    "errorWeakPassword": "A jelszónak legalább 6 karakter hosszúnak kell lennie.",
+    "errorEmailNotConfirmed": "A bejelentkezés előtt erősítsd meg az e-mail címedet.",
+    "errorSignupDisabled": "A regisztráció jelenleg nem érhető el.",
+    "errorPasswordMismatch": "A jelszavak nem egyeznek.",
+    "myPlaylists": "Lejátszási listáim",
+    "favorites": "Kedvencek",
+    "likeTrack": "Hozzáadás a kedvencekhez",
+    "unlikeTrack": "Eltávolítás a kedvencekből",
+    "profile": "Profil",
+    "signInToLike": "Jelentkezz be a kedvencek szinkronizálásához",
+    "signInRequired": "Jelentkezz be a folytatáshoz"
+  },
+  "playlist": {
+    "create": "Új lista",
+    "titleLabel": "Cím",
+    "visibility": "Láthatóság",
+    "public": "Nyilvános",
+    "private": "Privát",
+    "unlisted": "Nem listázott",
+    "save": "Mentés",
+    "addTrack": "Hozzáadás listához",
+    "removeTrack": "Eltávolítás",
+    "emptyFavorites": "Még nincsenek kedvenceid",
+    "emptyPlaylists": "Még nincsenek lejátszási listáid",
+    "newPlaylist": "Új lista",
+    "myPlaylists": "Lejátszási listáim",
+    "signIn": "Bejelentkezés",
+    "signInToAddToPlaylist": "Jelentkezz be a listákhoz adáshoz",
+    "sharePlaylist": "Megosztás",
+    "linkCopied": "Link másolva!",
+    "trackCount": "{count, plural, =0 {Nincs dal} =1 {1 dal} other {# dal}}",
+    "changeVisibilityToShare": "Tedd nyilvánossá a megosztáshoz",
+    "makePublic": "Nyilvánossá tétel"
+  },
+  "admin": {
+    "nav": {
+      "overview": "Overview",
+      "tracks": "Songs",
+      "categories": "Categories",
+      "playlists": "Playlists",
+      "artists": "Artists",
+      "users": "Users",
+      "suggestions": "Suggestions",
+      "backToSite": "Back to site"
+    },
+    "overview": {
+      "title": "Admin dashboard",
+      "statsTitle": "Overview",
+      "recentSuggestions": "Recent suggestions"
+    },
+    "common": {
+      "save": "Save changes",
+      "create": "Create",
+      "cancel": "Cancel",
+      "delete": "Delete",
+      "edit": "Edit",
+      "back": "Back",
+      "confirm": "Confirm",
+      "noResults": "No results",
+      "loading": "Loading…"
+    }
+  },
+  "suggest": {
+    "pageTitle": "Dal ajánlása",
+    "pageDescription": "Ismersz egy bahá'í dalt, ami nincs a katalógusban? Küldd el nekünk a hanganyagot, szöveget és akkordokat. Közzététel előtt ellenőrizzük.",
+    "sectionSong": "Dal részletei",
+    "sectionAudio": "Hang",
+    "sectionLyrics": "Dalszöveg",
+    "sectionContact": "Kapcsolat",
+    "sectionLegal": "Megerősítés",
+    "title": "Cím",
+    "titlePlaceholder": "Dal neve",
+    "artistName": "Előadó vagy szerző",
+    "artistPlaceholder": "Opcionális",
+    "language": "Nyelv",
+    "categories": "Kategóriák",
+    "categoriesHint": "Válassz illő címkéket (opcionális)",
+    "suggestCategory": "Kategória ajánlása",
+    "suggestCategoryPlaceholder": "Javasolt kategória neve",
+    "addLanguage": "Nyelv hozzáadása",
+    "customLanguageCode": "Nyelvkód",
+    "customLanguageCodePlaceholder": "pl. fr, de, it",
+    "customLanguageLabel": "Nyelv neve",
+    "customLanguageLabelPlaceholder": "pl. francia",
+    "backToLanguageList": "Vissza a listához",
+    "sourceMp3": "MP3 feltöltése",
+    "sourceYoutube": "YouTube link",
+    "mp3Label": "Hangfájl",
+    "mp3Hint": "MP3 formátum, ajánlott max. 20 MB",
+    "mp3DropHint": "Húzz ide egy MP3-at vagy kattints a kiválasztáshoz",
+    "mp3Uploading": "Hang feltöltése…",
+    "mp3Ready": "Hang kész a beküldésre",
+    "youtubeUrl": "YouTube URL",
+    "youtubePlaceholder": "https://www.youtube.com/watch?v=…",
+    "lyricsPlain": "Dalszöveg (egyszerű szöveg)",
+    "lyricsPlainPlaceholder": "Illeszd be a szöveget, ha nem használsz ChordPro formátumot",
+    "lyricsChordPro": "Dalszöveg akkordokkal (ChordPro)",
+    "lyricsChordProPlaceholder": "Opcionális — ChordPro formátum",
+    "hasChords": "A szöveg akkordokat tartalmaz",
+    "notes": "Megjegyzések az ellenőrzőknek",
+    "notesPlaceholder": "Háttér, forrás, változatok… (opcionális)",
+    "submitterName": "Neved",
+    "submitterEmail": "E-mail címed",
+    "loggedInAs": "Beküldés mint {name}",
+    "signInOptional": "Bejelentkezés",
+    "rightsLabel": "Megerősítem, hogy jogom van megosztani ezt a felvételt és szöveget közösségi használatra",
+    "submit": "Ajánlás beküldése",
+    "submitting": "Beküldés…",
+    "successTitle": "Köszönjük!",
+    "successBody": "Megkaptuk az ajánlásodat. A csapat átnézi, és ha elfogadják, hozzáadják a katalógushoz.",
+    "successAnother": "Másik ajánlás beküldése",
+    "errors": {
+      "required": "Kötelező mező",
+      "invalidEmail": "Érvénytelen e-mail",
+      "invalidCategory": "Érvénytelen kategória",
+      "invalidLanguage": "Érvénytelen nyelvkód (használj pl. es, en, pt)",
+      "youtubeRequired": "Adj meg egy YouTube linket",
+      "invalidYoutube": "Érvénytelen YouTube link",
+      "uploadRequired": "Tölts fel egy MP3 fájlt",
+      "invalidUploadPath": "Hang feltöltési hiba",
+      "rightsRequired": "Meg kell erősítened, hogy jogod van megosztani ezt a tartalmat",
+      "nameRequired": "Add meg a nevedet",
+      "emailRequired": "Add meg az e-mail címedet",
+      "serviceUnavailable": "A szolgáltatás nem érhető el. Próbáld újra később.",
+      "validationFailed": "Ellenőrizd a kiemelt mezőket",
+      "insertFailed": "Nem sikerült menteni az ajánlást. Próbáld újra.",
+      "uploadFailed": "Nem sikerült feltölteni a hanganyagot"
+    }
+  },
+  "lyrics": {
+    "chords": "Akkordok",
+    "transpose": "Transzponálás",
+    "capo": "Kapó",
+    "fontSize": "Méret",
+    "autoscroll": "Automatikus görgetés",
+    "present": "Vetítés",
+    "noLyrics": "Még nincs elérhető dalszöveg.",
+    "exitPresentation": "Kilépés",
+    "keyHints": "Szóköz: görgetés · +/- transzponálás · ↑↓ méret · ESC kilépés"
+  },
+  "meta": {
+    "home": {
+      "title": "BahaiSongs – Bahá'í dalok, szövegek és akkordok",
+      "description": "Fedezz fel 140+ bahá'í dalt szövegekkel, gitárakkordokkal és integrált hanggal. A digitális bahá'í daloskönyv."
+    },
+    "library": {
+      "title": "Bahá'í dalok katalógusa – Szövegek és akkordok | BahaiSongs",
+      "description": "Böngészd a teljes bahá'í dal katalógust: szövegek, gitárakkordok és hang. Szűrj kategória, nyelv és stílus szerint."
+    },
+    "publicPlaylists": {
+      "title": "Nyilvános lejátszási listák – Bahá'í dalok | BahaiSongs",
+      "description": "Böngészd a közösség és a BahaiSongs nyilvános lejátszási listáit: bahá'í dalgyűjtemények közös énekléshez."
+    },
+    "song": {
+      "description": "{title} – dalszöveg{chords} | Bahá'í dal. Hallgasd meg és tanuld meg énekelni a BahaiSongs oldalon.",
+      "chordsSuffix": " és akkordok"
+    },
+    "category": {
+      "title": "{label} – Bahá'í dalok | BahaiSongs",
+      "descriptionFallback": "{label} — Bahá'í dalok szövegekkel és akkordokkal | BahaiSongs"
+    },
+    "artist": {
+      "title": "{name} – Bahá'í dalok | BahaiSongs"
+    }
+  }
+}

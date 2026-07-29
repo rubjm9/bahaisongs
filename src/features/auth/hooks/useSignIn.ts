@@ -4,9 +4,13 @@ import { useState } from 'react';
 import { authGoogleEnabled } from '@/shared/lib/supabase/auth-config';
 import { supabaseEnabled } from '@/shared/lib/supabase/env';
 
+export type SignUpOutcome = 'session' | 'confirm' | false;
+
 interface UseSignInResult {
   signInWithGoogle: () => Promise<boolean>;
   signInWithMagicLink: (email: string) => Promise<boolean>;
+  signInWithPassword: (email: string, password: string) => Promise<boolean>;
+  signUpWithPassword: (email: string, password: string) => Promise<SignUpOutcome>;
   signOut: () => Promise<void>;
   loading: boolean;
   error: string | null;
@@ -82,6 +86,58 @@ export function useSignIn(): UseSignInResult {
     }
   }
 
+  async function signInWithPassword(email: string, password: string): Promise<boolean> {
+    if (!supabaseEnabled) return false;
+    setLoading(true);
+    setError(null);
+    try {
+      const { createClient } = await import('@/shared/lib/supabase/client');
+      const supabase = createClient();
+      const { error: err } = await supabase.auth.signInWithPassword({ email, password });
+      if (err) {
+        setError(normalizeAuthError(err.message));
+        return false;
+      }
+      return true;
+    } catch (e) {
+      setError(normalizeAuthError(e instanceof Error ? e.message : 'unknown'));
+      return false;
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  async function signUpWithPassword(email: string, password: string): Promise<SignUpOutcome> {
+    if (!supabaseEnabled) return false;
+    setLoading(true);
+    setError(null);
+    try {
+      const { createClient } = await import('@/shared/lib/supabase/client');
+      const supabase = createClient();
+      const { data, error: err } = await supabase.auth.signUp({
+        email,
+        password,
+        options: { emailRedirectTo: buildAuthCallbackUrl() },
+      });
+      if (err) {
+        setError(normalizeAuthError(err.message));
+        return false;
+      }
+      // Supabase may return a user with empty identities when the email is already registered.
+      if (data.user && (data.user.identities?.length ?? 0) === 0) {
+        setError('email_taken');
+        return false;
+      }
+      if (data.session) return 'session';
+      return 'confirm';
+    } catch (e) {
+      setError(normalizeAuthError(e instanceof Error ? e.message : 'unknown'));
+      return false;
+    } finally {
+      setLoading(false);
+    }
+  }
+
   async function signOut() {
     if (!supabaseEnabled) return;
     setLoading(true);
@@ -98,13 +154,44 @@ export function useSignIn(): UseSignInResult {
     }
   }
 
-  return { signInWithGoogle, signInWithMagicLink, signOut, loading, error, clearError };
+  return {
+    signInWithGoogle,
+    signInWithMagicLink,
+    signInWithPassword,
+    signUpWithPassword,
+    signOut,
+    loading,
+    error,
+    clearError,
+  };
 }
 
 function normalizeAuthError(message: string): string {
   const lower = message.toLowerCase();
   if (lower.includes('provider is not enabled') || lower.includes('unsupported provider')) {
     return 'provider_disabled';
+  }
+  if (
+    lower.includes('invalid login credentials') ||
+    lower.includes('invalid credentials')
+  ) {
+    return 'invalid_credentials';
+  }
+  if (
+    lower.includes('user already registered') ||
+    lower.includes('already been registered') ||
+    lower.includes('email address already')
+  ) {
+    return 'email_taken';
+  }
+  if (lower.includes('password') && (lower.includes('least') || lower.includes('weak') || lower.includes('short'))) {
+    return 'weak_password';
+  }
+  if (lower.includes('email not confirmed') || lower.includes('not confirmed')) {
+    return 'email_not_confirmed';
+  }
+  if (lower.includes('signup is disabled') || lower.includes('signups not allowed')) {
+    return 'signup_disabled';
   }
   return message;
 }

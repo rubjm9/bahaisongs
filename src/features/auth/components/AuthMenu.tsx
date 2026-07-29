@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Box, Skeleton } from '@mui/material';
 import { LogIn } from 'lucide-react';
 import { useTranslations } from 'next-intl';
@@ -12,10 +12,22 @@ import { useLoginPrompt } from '../hooks/useLoginPrompt';
 import { UserAvatar } from './UserAvatar';
 import { LoginModal } from './LoginModal';
 
+function hasSafeNextParam(): boolean {
+  if (typeof window === 'undefined') return false;
+  const next = new URLSearchParams(window.location.search).get('next');
+  return Boolean(next?.startsWith('/') && !next.startsWith('//'));
+}
+
 export function AuthMenu() {
   const t = useTranslations('auth');
   const [loginOpen, setLoginOpen] = useState(false);
-  const { isOpen: promptOpen, close: closePrompt } = useLoginPrompt();
+  const { isOpen: promptOpen, open: openPrompt, close: closePrompt } = useLoginPrompt();
+  const { user, loading } = useUser();
+
+  useEffect(() => {
+    if (!supabaseEnabled || loading || user) return;
+    if (hasSafeNextParam()) openPrompt();
+  }, [loading, user, openPrompt]);
 
   const isOpen = loginOpen || promptOpen;
   const handleClose = () => {

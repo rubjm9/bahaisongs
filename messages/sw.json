@@ -1,0 +1,396 @@
+{
+  "pwa": {
+    "install": {
+      "title": "Sakinisha BahaiSongs",
+      "description": "Iongeze kwenye skrini ya nyumbani ili kuifungua kama programu.",
+      "cta": "Sakinisha programu",
+      "dismiss": "Funga",
+      "iosCta": "Jinsi ya kusakinisha",
+      "iosStep1": "Gusa kitufe cha Kushiriki",
+      "iosStep2": "Chagua \"Ongeza kwenye skrini ya nyumbani\""
+    },
+    "offline": {
+      "title": "Huna mtandao",
+      "description": "Hakuna muunganisho wa mtandao. Kurasa ulizozitembelea bado zinapatikana.",
+      "retry": "Jaribu tena"
+    }
+  },
+  "brand": {
+    "name": "BahaiSongs.org",
+    "tagline": "Muziki, sala na majedwali ya kodi kutoka jamii ya Bahá'í, mahali pamoja."
+  },
+  "settings": {
+    "theme": "Mandhari",
+    "themeSystem": "Mfumo",
+    "themeLight": "Angavu",
+    "themeDark": "Giza",
+    "themeAria": "Badilisha mandhari ya kiolesura",
+    "languageAria": "Badilisha lugha"
+  },
+  "share": {
+    "hint": "Shiriki wimbo huu na kikundi chako",
+    "ariaLabel": "Shiriki",
+    "copied": "Kiungo kimenakiliwa!"
+  },
+  "nav": {
+    "home": "Nyumbani",
+    "discover": "Gundua",
+    "library": "Maktaba",
+    "publicPlaylists": "Orodha za umma",
+    "suggest": "Pendekeza wimbo",
+    "favorites": "Vipendwa",
+    "playlists": "Orodha",
+    "yourPlaylists": "Orodha zako",
+    "createPlaylist": "Unda orodha",
+    "viewAllPlaylists": "Tazama zote",
+    "collapseMenu": "Kunja menyu",
+    "expandMenu": "Panua menyu"
+  },
+  "home": {
+    "heroEyebrow": "Muziki wa Bahá'í · Maneno · Kodi",
+    "heroTitle": "Maneno na kodi za kuimba nyimbo za Bahá'í pamoja",
+    "heroSubtitle": "Tafuta wimbo unaoutaka na ushiriki na kikundi chako ili kuimba au kucheza pamoja, au sikiliza ili ujifunze. Haukuona wimbo? Tutumie ili tupanue katalogi.",
+    "cta": "Tazama katalogi",
+    "ctaSuggest": "Pendekeza wimbo",
+    "heroStatLabel": "nyimbo zinapatikana"
+  },
+  "sections": {
+    "catalogSize": "Nyimbo {count} katika katalogi",
+    "seeAll": "Tazama zote",
+    "recentEyebrow": "Mpya",
+    "recentTitle": "Zilizoongezwa hivi karibuni",
+    "recentDescription": "Nyongeza za hivi karibuni katika katalogi.",
+    "chordsEyebrow": "Cheza pamoja",
+    "chordsTitle": "Zenye kodi",
+    "chordsDescription": "Nyimbo zenye majedwali ya kodi — kwa gitaa, ukulele au piano.",
+    "prayersEyebrow": "Ibada",
+    "prayersTitle": "Sala zilizoimbwa",
+    "prayersDescription": "Sala za Bahá'í zilizowekwa kwenye muziki.",
+    "trendingEyebrow": "Mwezi huu",
+    "trendingTitle": "Zinazovuma mwezi huu",
+    "trendingDescription": "Nyimbo zilizochezwa zaidi katika siku 30 zilizopita.",
+    "calmEyebrow": "Mazingira",
+    "calmTitle": "Tulivu",
+    "calmDescription": "Kwa kutafakari, kutaamali au kupumzika."
+  },
+  "player": {
+    "idleTitle": "Hakuna kinachocheza",
+    "idleRandomCta": "Cheza wimbo wa nasibu",
+    "idleRandomLoading": "Inatafuta wimbo…",
+    "label": "Kichezaji",
+    "position": "Nafasi",
+    "shuffle": "Changanya",
+    "previous": "Uliopita",
+    "play": "Cheza",
+    "pause": "Simamisha",
+    "next": "Unaofuata",
+    "repeat": "Rudia",
+    "mute": "Nyamazisha",
+    "unmute": "Rudisha sauti",
+    "volume": "Sauti",
+    "playTrack": "Cheza {title}",
+    "pauseTrack": "Simamisha {title}",
+    "audioUnavailable": "Sauti haipatikani kwa {title}"
+  },
+  "song": {
+    "eyebrow": "Wimbo",
+    "by": "na",
+    "hasAudio": "Sauti",
+    "hasChords": "Kodi",
+    "noAudio": "Maneno tu",
+    "noAudioHint": "Wimbo huu bado hauna sauti katika katalogi.",
+    "playReady": "Cheza wimbo huu",
+    "playReadyHint": "Gusa ili kusikiliza. Vidhibiti vinaonekana kwenye kichezaji chini.",
+    "lyricsTitle": "Maneno"
+  },
+  "artist": {
+    "eyebrow": "Msanii",
+    "trackCount": "{count, plural, =0 {Hakuna nyimbo} =1 {Wimbo 1} other {Nyimbo #}}",
+    "allTracks": "Nyimbo zote"
+  },
+  "category": {
+    "kind": {
+      "genre": "Aina",
+      "mood": "Hali",
+      "theme": "Mada",
+      "tag": "Lebo"
+    },
+    "trackCount": "{count, plural, =0 {Hakuna nyimbo} =1 {Wimbo 1} other {Nyimbo #}}"
+  },
+  "catalog": {
+    "tooltips": {
+      "language": "Lugha ya maneno: {language}",
+      "audio": "Sauti inapatikana kucheza kwenye kichezaji",
+      "chords": "Inajumuisha kodi za kuimba au kucheza pamoja"
+    }
+  },
+  "discover": {
+    "title": "Gundua muziki",
+    "subtitle": "Tafuta na uvinjari katalogi",
+    "placeholder": "Tafuta kwa kichwa, msanii, maneno au kategoria…",
+    "totalCatalog": "Nyimbo {count} katika katalogi",
+    "browseByCategory": "Vinjari kwa kategoria",
+    "allTracksHeading": "Nyimbo {count}, kwa mpangilio wa alfabeti",
+    "resultsCount": "{count, plural, =0 {Hakuna matokeo} =1 {Tokeo 1} other {Matokeo #}}",
+    "loading": "Inapakia katalogi…",
+    "trendingColTrack": "Wimbo",
+    "trendingColPlays": "Michezo",
+    "trendingPlays": "{count, plural, =1 {mchezo 1} other {michezo #}}"
+  },
+  "publicPlaylists": {
+    "eyebrow": "Jamii",
+    "title": "Orodha za umma",
+    "subtitle": "Makusanyo yaliyoshirikiwa na jamii na BahaiSongs",
+    "curatedBadge": "Iliyochaguliwa",
+    "byUser": "Na {name}",
+    "byUserAnonymous": "Na mtumiaji",
+    "trackCount": "{count, plural, =0 {Hakuna nyimbo} =1 {Wimbo 1} other {Nyimbo #}}",
+    "empty": "Bado hakuna orodha za umma. Unda yako na uishiriki na jamii.",
+    "discoverCta": "Vinjari orodha za umma",
+    "discoverCtaHint": "Makusanyo kutoka jamii na BahaiSongs"
+  },
+  "library": {
+    "eyebrow": "Binafsi",
+    "title": "Maktaba yako",
+    "subtitle": "Vipendwa na orodha ulizohifadhi",
+    "signInTitle": "Hifadhi unachopenda",
+    "signInHint": "Ingia ili kuhifadhi vipendwa na kuunda orodha.",
+    "exploreCatalog": "Tazama katalogi →",
+    "viewAll": "Tazama zote",
+    "loading": "Inapakia…"
+  },
+  "search": {
+    "title": "Tafuta katika katalogi",
+    "placeholder": "Tafuta kwa kichwa, msanii, maneno au kategoria…",
+    "resultsCount": "{count, plural, =0 {Hakuna matokeo} =1 {Tokeo 1} other {Matokeo #}}",
+    "totalCatalog": "Nyimbo {count} katika katalogi",
+    "hintEyebrow": "Anza kuandika",
+    "hintTitle": "Tafuta kwa kichwa, maneno au kodi",
+    "hintBody": "Uchujaji wa papo hapo katika katalogi nzima. Tumia ↑ ↓ kutembea na Enter kufungua.",
+    "emptyEyebrow": "Hakuna mechi",
+    "emptyTitle": "Hakuna kinachofanana na \"{query}\"",
+    "emptyBody": "Jaribu herufi chache, neno kutoka kwenye kiitikio au tahajia tofauti.",
+    "seeAll": "Tazama matokeo yote ya \"{query}\" →",
+    "filters": {
+      "language": "Lugha",
+      "all": "Zote",
+      "es": "Español",
+      "en": "English",
+      "withChords": "Zenye kodi",
+      "withAudio": "Zenye sauti",
+      "reset": "Futa",
+      "tooltips": {
+        "all": "Onyesha nyimbo katika kila lugha ya katalogi",
+        "language": "Nyimbo za {language} tu",
+        "withChords": "Nyimbo zenye majedwali ya kodi tu",
+        "withAudio": "Nyimbo zenye faili ya sauti tu"
+      }
+    },
+    "loading": "Inapakia katalogi…"
+  },
+  "common": {
+    "loading": "Inapakia…",
+    "error": "Kitu kimekwenda vibaya.",
+    "retry": "Jaribu tena",
+    "previous": "Iliyopita",
+    "next": "Inayofuata",
+    "skipToContent": "Ruka kwenda maudhui"
+  },
+  "auth": {
+    "signIn": "Ingia",
+    "signOut": "Toka",
+    "adminPanel": "Admin panel",
+    "modalTitle": "Ingia au unda akaunti",
+    "modalSubtitle": "Hifadhi vipendwa na unda orodha kwa akaunti yako.",
+    "signInTab": "Ingia",
+    "signUpTab": "Unda akaunti",
+    "emailLabel": "Barua pepe",
+    "emailPlaceholder": "wewe@email.com",
+    "passwordLabel": "Nenosiri",
+    "confirmPasswordLabel": "Thibitisha nenosiri",
+    "createAccount": "Unda akaunti",
+    "signInWithoutPassword": "Ingia bila nenosiri",
+    "usePasswordInstead": "Tumia nenosiri",
+    "sendAccessLink": "Tuma kiungo cha kufikia",
+    "resendAccessLink": "Tuma kiungo tena",
+    "magicLink": "Kiungo cha uchawi",
+    "magicLinkTitle": "Ingia bila nenosiri",
+    "magicLinkSubtitle": "Tutakutumia kiungo kwa barua pepe ili uingie.",
+    "magicLinkPlaceholder": "wewe@email.com",
+    "magicLinkSentTitle": "Angalia kisanduku chako",
+    "magicLinkSentBody": "Fungua kiungo tulichotuma kwa {email} ili kuingia. Ikiwa hukuwa na akaunti, itaundwa utakapothibitisha.",
+    "magicLinkSent": "Angalia kisanduku chako!",
+    "confirmEmailTitle": "Thibitisha barua pepe yako",
+    "confirmEmailBody": "Tumetuma kiungo kwa {email}. Kifungue ili kuamilisha akaunti yako.",
+    "backToSignIn": "Rudi kuingia",
+    "orContinueWith": "Au endelea na",
+    "continueWithGoogle": "Endelea na Google",
+    "errorProviderDisabled": "Google bado haipatikani. Tumia barua pepe na nenosiri au kiungo cha barua pepe.",
+    "errorInvalidCredentials": "Barua pepe au nenosiri si sahihi.",
+    "errorEmailTaken": "Akaunti yenye barua pepe hii tayari ipo. Jaribu kuingia.",
+    "errorWeakPassword": "Nenosiri lazima liwe na angalau herufi 6.",
+    "errorEmailNotConfirmed": "Thibitisha barua pepe yako kabla ya kuingia.",
+    "errorSignupDisabled": "Usajili haupatikani kwa sasa.",
+    "errorPasswordMismatch": "Nenosiri hazifanani.",
+    "myPlaylists": "Orodha zangu",
+    "favorites": "Vipendwa",
+    "likeTrack": "Ongeza kwenye vipendwa",
+    "unlikeTrack": "Ondoa kwenye vipendwa",
+    "profile": "Wasifu",
+    "signInToLike": "Ingia ili kusawazisha vipendwa",
+    "signInRequired": "Ingia ili kuendelea"
+  },
+  "playlist": {
+    "create": "Orodha mpya",
+    "titleLabel": "Kichwa",
+    "visibility": "Uonekano",
+    "public": "Ya umma",
+    "private": "Binafsi",
+    "unlisted": "Isiyoorodheshwa",
+    "save": "Hifadhi",
+    "addTrack": "Ongeza kwenye orodha",
+    "removeTrack": "Ondoa",
+    "emptyFavorites": "Bado huna vipendwa",
+    "emptyPlaylists": "Bado huna orodha",
+    "newPlaylist": "Orodha mpya",
+    "myPlaylists": "Orodha zangu",
+    "signIn": "Ingia",
+    "signInToAddToPlaylist": "Ingia ili kuongeza kwenye orodha",
+    "sharePlaylist": "Shiriki",
+    "linkCopied": "Kiungo kimenakiliwa!",
+    "trackCount": "{count, plural, =0 {Hakuna nyimbo} =1 {Wimbo 1} other {Nyimbo #}}",
+    "changeVisibilityToShare": "Ifanye ya umma ili kushiriki",
+    "makePublic": "Fanya ya umma"
+  },
+  "admin": {
+    "nav": {
+      "overview": "Overview",
+      "tracks": "Songs",
+      "categories": "Categories",
+      "playlists": "Playlists",
+      "artists": "Artists",
+      "users": "Users",
+      "suggestions": "Suggestions",
+      "backToSite": "Back to site"
+    },
+    "overview": {
+      "title": "Admin dashboard",
+      "statsTitle": "Overview",
+      "recentSuggestions": "Recent suggestions"
+    },
+    "common": {
+      "save": "Save changes",
+      "create": "Create",
+      "cancel": "Cancel",
+      "delete": "Delete",
+      "edit": "Edit",
+      "back": "Back",
+      "confirm": "Confirm",
+      "noResults": "No results",
+      "loading": "Loading…"
+    }
+  },
+  "suggest": {
+    "pageTitle": "Pendekeza wimbo",
+    "pageDescription": "Unajua wimbo wa Bahá'í ambao haupo katika katalogi? Tutumie sauti, maneno na kodi. Tutaukagua kabla ya kuchapisha.",
+    "sectionSong": "Maelezo ya wimbo",
+    "sectionAudio": "Sauti",
+    "sectionLyrics": "Maneno",
+    "sectionContact": "Mawasiliano",
+    "sectionLegal": "Uthibitisho",
+    "title": "Kichwa",
+    "titlePlaceholder": "Jina la wimbo",
+    "artistName": "Msanii au mwimbaji",
+    "artistPlaceholder": "Si lazima",
+    "language": "Lugha",
+    "categories": "Kategoria",
+    "categoriesHint": "Chagua lebo zinazofaa (si lazima)",
+    "suggestCategory": "Pendekeza kategoria",
+    "suggestCategoryPlaceholder": "Jina la kategoria inayopendekezwa",
+    "addLanguage": "Ongeza lugha",
+    "customLanguageCode": "Kodi ya lugha",
+    "customLanguageCodePlaceholder": "k.m. fr, de, it",
+    "customLanguageLabel": "Jina la lugha",
+    "customLanguageLabelPlaceholder": "k.m. Kifaransa",
+    "backToLanguageList": "Rudi kwenye orodha",
+    "sourceMp3": "Pakia MP3",
+    "sourceYoutube": "Kiungo cha YouTube",
+    "mp3Label": "Faili ya sauti",
+    "mp3Hint": "Muundo wa MP3, upeo unaoshauriwa 20 MB",
+    "mp3DropHint": "Buruta MP3 hapa au bofya kuchagua",
+    "mp3Uploading": "Inapakia sauti…",
+    "mp3Ready": "Sauti iko tayari kutumwa",
+    "youtubeUrl": "URL ya YouTube",
+    "youtubePlaceholder": "https://www.youtube.com/watch?v=…",
+    "lyricsPlain": "Maneno (maandishi rahisi)",
+    "lyricsPlainPlaceholder": "Bandika maneno ikiwa hutumii ChordPro",
+    "lyricsChordPro": "Maneno yenye kodi (ChordPro)",
+    "lyricsChordProPlaceholder": "Si lazima — muundo wa ChordPro",
+    "hasChords": "Maneno yanajumuisha kodi",
+    "notes": "Maelezo kwa wakaguzi",
+    "notesPlaceholder": "Muktadha, chanzo, lahaja… (si lazima)",
+    "submitterName": "Jina lako",
+    "submitterEmail": "Barua pepe yako",
+    "loggedInAs": "Unatuma kama {name}",
+    "signInOptional": "Ingia",
+    "rightsLabel": "Nathibitisha kuwa nina haki ya kushiriki rekodi hii na maneno kwa matumizi ya jamii",
+    "submit": "Tuma pendekezo",
+    "submitting": "Inatuma…",
+    "successTitle": "Asante!",
+    "successBody": "Tumepokea pendekezo lako. Timu italiangalia na kuliongeza kwenye katalogi likipitishwa.",
+    "successAnother": "Tuma pendekezo jingine",
+    "errors": {
+      "required": "Sehemu inayohitajika",
+      "invalidEmail": "Barua pepe batili",
+      "invalidCategory": "Kategoria batili",
+      "invalidLanguage": "Kodi ya lugha batili (tumia k.m. es, en, pt)",
+      "youtubeRequired": "Weka kiungo cha YouTube",
+      "invalidYoutube": "Kiungo cha YouTube batili",
+      "uploadRequired": "Pakia faili ya MP3",
+      "invalidUploadPath": "Hitilafu ya kupakia sauti",
+      "rightsRequired": "Lazima uthibitishe kuwa una haki ya kushiriki maudhui haya",
+      "nameRequired": "Weka jina lako",
+      "emailRequired": "Weka barua pepe yako",
+      "serviceUnavailable": "Huduma haipatikani. Tafadhali jaribu tena baadaye.",
+      "validationFailed": "Tafadhali angalia sehemu zilizoangaziwa",
+      "insertFailed": "Imeshindwa kuhifadhi pendekezo lako. Tafadhali jaribu tena.",
+      "uploadFailed": "Imeshindwa kupakia sauti"
+    }
+  },
+  "lyrics": {
+    "chords": "Kodi",
+    "transpose": "Badilisha sauti",
+    "capo": "Kapo",
+    "fontSize": "Ukubwa",
+    "autoscroll": "Sogeza kiotomatiki",
+    "present": "Wasilisha",
+    "noLyrics": "Bado hakuna maneno yaliyopatikana.",
+    "exitPresentation": "Toka",
+    "keyHints": "Nafasi: sogeza · +/- badilisha sauti · ↑↓ ukubwa · ESC toka"
+  },
+  "meta": {
+    "home": {
+      "title": "BahaiSongs – Nyimbo za Bahá'í, maneno na kodi",
+      "description": "Gundua nyimbo 140+ za Bahá'í zenye maneno, kodi za gitaa na sauti iliyounganishwa. Kitabu cha nyimbo za Bahá'í cha kidijitali."
+    },
+    "library": {
+      "title": "Katalogi ya nyimbo za Bahá'í – Maneno na kodi | BahaiSongs",
+      "description": "Vinjari katalogi kamili ya nyimbo za Bahá'í: maneno, kodi za gitaa na sauti. Chuja kwa kategoria, lugha na mtindo."
+    },
+    "publicPlaylists": {
+      "title": "Orodha za umma – Nyimbo za Bahá'í | BahaiSongs",
+      "description": "Vinjari orodha za umma zilizotengenezwa na jamii na BahaiSongs: makusanyo ya nyimbo za Bahá'í za kuimba na kucheza pamoja."
+    },
+    "song": {
+      "description": "{title} – maneno{chords} | Wimbo wa Bahá'í. Sikiliza na ujifunze kuuimba kwenye BahaiSongs.",
+      "chordsSuffix": " na kodi"
+    },
+    "category": {
+      "title": "{label} – Nyimbo za Bahá'í | BahaiSongs",
+      "descriptionFallback": "{label} — Nyimbo za Bahá'í zenye maneno na kodi | BahaiSongs"
+    },
+    "artist": {
+      "title": "{name} – Nyimbo za Bahá'í | BahaiSongs"
+    }
+  }
+}

@@ -32,7 +32,7 @@ function expectedTarget(path: string): string | 'track' | 'ok' {
   if (path === '/' || path === '') return 'ok';
   if (LEGACY_REDIRECTS[path]) return LEGACY_REDIRECTS[path];
   if (/^\/page\/\d+$/.test(path)) return '/discover';
-  if (/^\/(es|en|fr|de|pt|ar|ru|fa)\/song\/[^/]+$/.test(path) || /^\/song\/[^/]+$/.test(path)) {
+  if (/^\/(es|en|fr|de|it|pt|hu|ar|ru|zh|hi|sw|fa)\/song\/[^/]+$/.test(path) || /^\/song\/[^/]+$/.test(path)) {
     const slug = path.split('/').pop()!;
     return `/${slug}`;
   }
@@ -41,7 +41,7 @@ function expectedTarget(path: string): string | 'track' | 'ok' {
   if (path.startsWith('/category/')) return 'ok';
   if (
     ['/library', '/discover', '/search', '/suggest', '/favorites', '/playlists'].includes(path) ||
-    /^\/(es|en|fr|de|pt|ar|ru|fa)(\/.*)?$/.test(path)
+    /^\/(es|en|fr|de|it|pt|hu|ar|ru|zh|hi|sw|fa)(\/.*)?$/.test(path)
   ) {
     return 'ok';
   }
@@ -89,7 +89,7 @@ function main() {
       if (target === 'unknown') {
         failures.push({ url, path, reason: 'no redirect or track rule' });
       } else if (target !== 'ok' && target !== 'track') {
-        const slug = path.match(/^\/(es|en|fr|de|pt|ar|ru|fa)\/song\/(.+)$/)?.[2];
+        const slug = path.match(/^\/(es|en|fr|de|it|pt|hu|ar|ru|zh|hi|sw|fa)\/song\/(.+)$/)?.[2];
         if (slug && !TRACK_SLUGS.has(slug)) {
           failures.push({ url, path, reason: `transition redirect slug missing: ${slug}` });
         }

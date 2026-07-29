@@ -5,7 +5,6 @@ import { Heart } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { accent, cssVars } from '@/shared/theme/tokens';
 import { useLikes } from '../hooks/useLikes';
-import { useUser } from '@/features/auth/hooks/useUser';
 
 interface Props {
   trackId: string;
@@ -14,18 +13,12 @@ interface Props {
 
 export function LikeButton({ trackId, trackSlug }: Props) {
   const t = useTranslations('auth');
-  const { user } = useUser();
   const id = trackId.length > 0 ? trackId : (trackSlug ?? '');
   const { likedIds, toggle } = useLikes();
   const isLiked = likedIds.has(id);
 
-  const notSignedIn = !user;
-
   return (
-    <Tooltip
-      title={notSignedIn ? t('signInToLike') : isLiked ? t('favorites') : t('signInToLike')}
-      arrow
-    >
+    <Tooltip title={isLiked ? t('unlikeTrack') : t('likeTrack')} arrow>
       <span>
         <IconButton
           aria-label={isLiked ? 'Unlike' : 'Like'}
