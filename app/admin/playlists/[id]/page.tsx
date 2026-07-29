@@ -2,7 +2,7 @@ import { notFound } from 'next/navigation';
 import { Typography } from '@mui/material';
 import { getSupabaseServerClient } from '@/shared/lib/supabase/server';
 import { AdminPage } from '@/features/admin/components/AdminPage';
-import { PlaylistTracksClient } from './PlaylistTracksClient';
+import { PlaylistTracksClientLazy } from './PlaylistTracksClientLazy';
 import type { Metadata } from 'next';
 
 export const dynamic = 'force-dynamic';
@@ -54,7 +54,7 @@ export default async function PlaylistTracksPage({ params }: { params: Params })
       <Typography variant="body2" sx={{ mb: 3, color: 'text.secondary' }}>
         Arrastra para reordenar. Los cambios se guardan al pulsar &quot;Guardar orden&quot;.
       </Typography>
-      <PlaylistTracksClient
+      <PlaylistTracksClientLazy
           playlistId={pl.id}
           currentTracks={currentTracks.map((t) => ({
             id: t.id,

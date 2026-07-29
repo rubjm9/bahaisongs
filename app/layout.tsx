@@ -10,6 +10,9 @@ import { getRootHtmlLocale } from '@/shared/lib/i18n/rootLocale';
 import { localeDirection } from '@/shared/lib/i18n/config';
 import './globals.css';
 
+/** Required by @cloudflare/next-on-pages (Cloudflare Pages). */
+export const runtime = 'edge';
+
 const websiteSchema = {
   '@context': 'https://schema.org',
   '@type': 'WebSite',
