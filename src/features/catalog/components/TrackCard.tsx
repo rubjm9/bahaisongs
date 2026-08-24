@@ -6,6 +6,7 @@ import { Music, BookOpen } from 'lucide-react';
 import { TrackPlaceholder } from './TrackPlaceholder';
 import { PlayButton } from '@/features/player/components/PlayButton';
 import { TrackAddToPlaylistSlot } from '@/features/playlists/components/TrackAddToPlaylistSlot';
+import { TrackLikeSlot } from '@/features/favorites/components/TrackLikeSlot';
 import { useIsCurrentTrack } from '@/features/player/hooks/useIsCurrentTrack';
 import { accent, cssVars, radii } from '@/shared/theme/tokens';
 import type { Locale } from '@/shared/lib/i18n/config';
@@ -56,11 +57,35 @@ export function TrackCard({ track, locale: _locale, queue, queueIndex }: Props) 
             },
           }}
         >
-          <TrackPlaceholder
-            title={track.title}
-            size={68}
-            sx={{ flexShrink: 0, borderRadius: `${radii.md}px` }}
-          />
+          <Box sx={{ position: 'relative', flexShrink: 0, width: 68, height: 68 }}>
+            <TrackPlaceholder
+              title={track.title}
+              size={68}
+              sx={{ borderRadius: `${radii.md}px` }}
+            />
+            <Box
+              className="bs-track-card-play"
+              sx={{
+                position: 'absolute',
+                inset: 0,
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                borderRadius: `${radii.md}px`,
+                background: 'rgba(0,0,0,0.42)',
+                opacity: { xs: 1, md: 0 },
+                transition: 'opacity 180ms',
+                zIndex: 2,
+              }}
+            >
+              <PlayButton
+                track={track}
+                {...(queue ? { queue } : {})}
+                {...(typeof queueIndex === 'number' ? { queueIndex } : {})}
+                size={30}
+              />
+            </Box>
+          </Box>
 
           <Box sx={{ minWidth: 0, flex: 1 }}>
             <Box
@@ -94,6 +119,7 @@ export function TrackCard({ track, locale: _locale, queue, queueIndex }: Props) 
               spacing={0.5}
               sx={{ alignItems: 'center', flexWrap: 'wrap', mt: 0.5 }}
             >
+              <TrackLikeSlot trackSlug={track.slug} size={16} />
               <Chip
                 size="small"
                 label={track.language.toUpperCase()}
@@ -128,40 +154,12 @@ export function TrackCard({ track, locale: _locale, queue, queueIndex }: Props) 
               <TrackAddToPlaylistSlot
                 trackSlug={track.slug}
                 className="bs-card-add-playlist"
-                sx={{ opacity: 0, transition: 'opacity 160ms', ml: 'auto' }}
+                sx={{ opacity: { xs: 1, md: 0 }, transition: 'opacity 160ms', ml: 'auto' }}
               />
             </Stack>
           </Box>
         </Stack>
       </Link>
-
-      {/* Play overlay on artwork — always visible on mobile, hover on desktop */}
-      <Box
-        className="bs-track-card-play"
-        sx={{
-          position: 'absolute',
-          left: 12,
-          top: '50%',
-          transform: 'translateY(-50%)',
-          width: 68,
-          height: 68,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          borderRadius: `${radii.md}px`,
-          background: 'rgba(0,0,0,0.42)',
-          opacity: { xs: 1, md: 0 },
-          transition: 'opacity 180ms',
-          zIndex: 2,
-        }}
-      >
-        <PlayButton
-          track={track}
-          {...(queue ? { queue } : {})}
-          {...(typeof queueIndex === 'number' ? { queueIndex } : {})}
-          size={30}
-        />
-      </Box>
     </Box>
   );
 }

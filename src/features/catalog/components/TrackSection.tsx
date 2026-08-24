@@ -100,7 +100,13 @@ export function TrackSection({
           scrollSnapType: 'x mandatory',
           scrollbarWidth: 'none',
           '&::-webkit-scrollbar': { display: 'none' },
-          pb: 1,
+          // Room for card hover lift + box-shadow; overflow-x otherwise clips them.
+          mx: -2,
+          px: 2,
+          mt: -1,
+          pt: 1,
+          mb: -2.5,
+          pb: 3,
           '& > *': {
             scrollSnapAlign: 'start',
           },

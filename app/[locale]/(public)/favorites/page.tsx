@@ -13,6 +13,7 @@ export default async function FavoritesPage({ params }: { params: Params }) {
   const t = await getTranslations('auth');
 
   const allTracks = (await getAllTracks()).map((tr) => ({
+    ...(tr.id ? { id: tr.id } : {}),
     slug: tr.slug,
     title: tr.title,
     artist: tr.artist,

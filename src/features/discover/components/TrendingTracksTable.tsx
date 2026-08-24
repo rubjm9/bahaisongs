@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useLocale, useTranslations } from 'next-intl';
 import { Box, Stack, Typography } from '@mui/material';
 import { PlayButton } from '@/features/player/components/PlayButton';
+import { TrackLikeSlot } from '@/features/favorites/components/TrackLikeSlot';
 import { toPlayableList } from '@/features/player/lib/playable';
 import { accent, cssVars, radii } from '@/shared/theme/tokens';
 import type { Locale } from '@/shared/lib/i18n/config';
@@ -113,6 +114,7 @@ export function TrendingTracksTable({ tracks }: Props) {
           >
             {t('trendingColPlays')}
           </Typography>
+          <Box sx={{ width: 32, flexShrink: 0 }} aria-hidden />
           <Box sx={{ width: 36, flexShrink: 0 }} aria-hidden />
         </Stack>
 
@@ -206,6 +208,8 @@ export function TrendingTracksTable({ tracks }: Props) {
                   >
                     {track.playCount.toLocaleString(locale)}
                   </Typography>
+
+                  <TrackLikeSlot trackSlug={track.slug} size={18} />
 
                   <Box
                     className="bs-trending-play"

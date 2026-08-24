@@ -3,6 +3,7 @@
 import { FavoritesPage } from './FavoritesPage';
 
 interface Track {
+  id?: string;
   slug: string;
   title: string;
   artist?: string;
