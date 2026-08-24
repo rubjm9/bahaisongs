@@ -26,6 +26,7 @@ export function Providers({
 
   return (
     <AppRouterCacheProvider
+      key={direction}
       options={{
         key: isRtl ? 'muirtl' : 'mui',
         enableCssLayer: true,
