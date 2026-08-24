@@ -10,10 +10,11 @@ import { defaultLocale, localeDirection, locales } from '@/shared/lib/i18n/confi
 import './globals.css';
 
 /**
- * Do not set `runtime = 'edge'` here. It is inherited by every page, and Vercel
- * Hobby rejects admin Edge Functions over 1 MB (admin/playlists/[id]). Keep
- * `edge` only on small routes (OG, auth callbacks, selected APIs, not-found).
+ * Required by @cloudflare/next-on-pages. Public and admin pages inherit this.
+ * Vercel Hobby may reject oversized admin Edge Functions; bahaisongs.org is
+ * served from Cloudflare Pages, which cannot deploy Node.js App Router routes.
  */
+export const runtime = 'edge';
 
 const websiteSchema = {
   '@context': 'https://schema.org',
