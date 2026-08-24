@@ -11,6 +11,9 @@ export const metadata = {
   title: { default: 'Admin · BahaiSongs', template: '%s · Admin BahaiSongs' },
 };
 
+/** Explicit Node runtime so admin pages stay off the 1 MB Edge Function limit. */
+export const runtime = 'nodejs';
+
 export default async function AdminLayout({ children }: { children: ReactNode }) {
   setRequestLocale(defaultLocale);
 

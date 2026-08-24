@@ -7,6 +7,27 @@ import type { Metadata } from 'next';
 
 export const dynamic = 'force-dynamic';
 
+// #region agent log
+fetch('http://127.0.0.1:7381/ingest/ab6e65c4-05ba-489d-bedd-4a80e494ddaa', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json', 'X-Debug-Session-Id': 'e33944' },
+  body: JSON.stringify({
+    sessionId: 'e33944',
+    runId: 'post-fix',
+    hypothesisId: 'D',
+    location: 'app/admin/playlists/[id]/page.tsx:module',
+    message: 'playlist-detail-page-module-evaluated',
+    data: {
+      hasOwnRuntimeExport: false,
+      inheritsRootEdge: false,
+      adminLayoutRuntime: 'nodejs',
+      usesLazyClient: true,
+    },
+    timestamp: Date.now(),
+  }),
+}).catch(() => {});
+// #endregion
+
 type Params = Promise<{ id: string }>;
 
 export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
