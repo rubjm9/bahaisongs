@@ -6,6 +6,7 @@ import { Music, Mic2 } from 'lucide-react';
 import Link from 'next/link';
 import { HighlightedText } from './HighlightedText';
 import { TrackPlaceholder } from './TrackPlaceholder';
+import { TrackLikeSlot } from '@/features/favorites/components/TrackLikeSlot';
 import type { SearchResult } from '@/features/catalog/lib/search-engine';
 import { accent, cssVars, radii } from '@/shared/theme/tokens';
 import { trackPath } from '@/shared/lib/seo/paths';
@@ -93,6 +94,7 @@ export function SearchResultItem({ result, locale: _locale, active = false, item
         </Box>
 
         <Stack direction="row" spacing={0.75} sx={{ alignItems: 'center', flexShrink: 0 }}>
+          <TrackLikeSlot trackSlug={entry.slug} size={18} />
           <Tooltip title={languageTooltip} arrow placement="top">
             {entry.hasAudio ? (
               <Chip

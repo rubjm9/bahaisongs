@@ -3,6 +3,7 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { supabaseEnabled } from '@/shared/lib/supabase/env';
 import { useUser } from '@/features/auth/hooks/useUser';
+import { resolveTrackUuid } from '@/features/playlists/lib/playlist-tracks';
 
 const LS_KEY = 'bs_likes';
 
@@ -22,6 +23,23 @@ function writeLocalLikes(ids: Set<string>): void {
   localStorage.setItem(LS_KEY, JSON.stringify([...ids]));
 }
 
+function slugFromLikeJoin(tracks: unknown): string | null {
+  if (!tracks) return null;
+  if (Array.isArray(tracks)) {
+    const first = tracks[0] as { slug?: string } | undefined;
+    return typeof first?.slug === 'string' ? first.slug : null;
+  }
+  const slug = (tracks as { slug?: string }).slug;
+  return typeof slug === 'string' ? slug : null;
+}
+
+function toggleInSet(ids: Set<string>, trackId: string): Set<string> {
+  const next = new Set(ids);
+  if (next.has(trackId)) next.delete(trackId);
+  else next.add(trackId);
+  return next;
+}
+
 export function useLikes() {
   const { user, loading: userLoading } = useUser();
   const qc = useQueryClient();
@@ -36,12 +54,29 @@ export function useLikes() {
       }
       const { createClient } = await import('@/shared/lib/supabase/client');
       const supabase = createClient();
+
+      const local = readLocalLikes();
+      for (const slugOrId of local) {
+        const trackUuid = await resolveTrackUuid(supabase, slugOrId);
+        if (!trackUuid) continue;
+        const { error } = await supabase
+          .from('likes')
+          .insert({ user_id: user.id, track_id: trackUuid } as never);
+        if (error && error.code !== '23505') {
+          throw new Error(error.message);
+        }
+      }
+      if (local.size > 0) writeLocalLikes(new Set());
+
       const { data, error } = await supabase
         .from('likes')
-        .select('track_id')
+        .select('track_id, tracks(slug)')
         .eq('user_id' as never, user.id);
-      if (error) return new Set();
-      return new Set((data as unknown as { track_id: string }[]).map((r) => r.track_id));
+      if (error) throw new Error(error.message);
+      const slugs = (data as unknown as { tracks: unknown }[])
+        .map((r) => slugFromLikeJoin(r.tracks))
+        .filter((slug): slug is string => slug !== null);
+      return new Set(slugs);
     },
     enabled: !userLoading,
     staleTime: 30_000,
@@ -53,38 +88,38 @@ export function useLikes() {
       const isLiked = current.has(trackId);
 
       if (!supabaseEnabled || !user) {
-        const next = new Set(current);
-        if (isLiked) next.delete(trackId);
-        else next.add(trackId);
+        const next = toggleInSet(current, trackId);
         writeLocalLikes(next);
         return next;
       }
 
       const { createClient } = await import('@/shared/lib/supabase/client');
       const supabase = createClient();
+      const trackUuid = await resolveTrackUuid(supabase, trackId);
+      if (!trackUuid) {
+        throw new Error('Track not found');
+      }
 
       if (isLiked) {
-        await supabase
+        const { error } = await supabase
           .from('likes')
           .delete()
           .eq('user_id' as never, user.id)
-          .eq('track_id' as never, trackId);
+          .eq('track_id' as never, trackUuid);
+        if (error) throw new Error(error.message);
       } else {
-        await supabase.from('likes').insert({ user_id: user.id, track_id: trackId } as never);
+        const { error } = await supabase
+          .from('likes')
+          .insert({ user_id: user.id, track_id: trackUuid } as never);
+        if (error && error.code !== '23505') throw new Error(error.message);
       }
 
-      const next = new Set(current);
-      if (isLiked) next.delete(trackId);
-      else next.add(trackId);
-      return next;
+      return toggleInSet(current, trackId);
     },
     onMutate: async (trackId: string) => {
       await qc.cancelQueries({ queryKey });
       const prev = qc.getQueryData<Set<string>>(queryKey);
-      const next = new Set(prev ?? new Set<string>());
-      if (next.has(trackId)) next.delete(trackId);
-      else next.add(trackId);
-      qc.setQueryData(queryKey, next);
+      qc.setQueryData(queryKey, toggleInSet(prev ?? new Set<string>(), trackId));
       return prev ? { prev } : {};
     },
     onError: (_err: Error, _id: string, ctx?: { prev?: Set<string> }) => {

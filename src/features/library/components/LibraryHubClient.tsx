@@ -15,6 +15,7 @@ import type { Locale } from '@/shared/lib/i18n/config';
 import { appPath } from '@/shared/lib/seo/paths';
 
 interface TrackSummary {
+  id?: string;
   slug: string;
   title: string;
   artist: string;

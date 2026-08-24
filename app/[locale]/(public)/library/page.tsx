@@ -34,6 +34,7 @@ export default async function LibraryPage({ params }: { params: Params }) {
   const t = await getTranslations('library');
 
   const allTracks = (await getAllTracks()).map((tr) => ({
+    ...(tr.id ? { id: tr.id } : {}),
     slug: tr.slug,
     title: tr.title,
     artist: tr.artist,

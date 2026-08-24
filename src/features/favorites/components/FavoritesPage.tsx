@@ -7,10 +7,11 @@ import { useTranslations } from 'next-intl';
 import { useLocale } from 'next-intl';
 import { accent, cssVars } from '@/shared/theme/tokens';
 import type { Locale } from '@/shared/lib/i18n/config';
-import { appPath } from '@/shared/lib/seo/paths';
+import { appPath, trackPath } from '@/shared/lib/seo/paths';
 import { useLikes } from '../hooks/useLikes';
 
 interface LikedTrack {
+  id?: string;
   slug: string;
   title: string;
   artist?: string;
@@ -46,7 +47,12 @@ export function FavoritesPage({ allTracks = [] }: Props) {
     );
   }
 
-  const likedTracks = allTracks.length > 0 ? allTracks.filter((tr) => likedIds.has(tr.slug)) : [];
+  const likedTracks =
+    allTracks.length > 0
+      ? allTracks.filter(
+          (tr) => likedIds.has(tr.slug) || (tr.id !== undefined && likedIds.has(tr.id)),
+        )
+      : [];
 
   if (likedIds.size === 0 || likedTracks.length === 0) {
     return (
@@ -115,6 +121,8 @@ export function FavoritesPage({ allTracks = [] }: Props) {
       {likedTracks.map((track) => (
         <Box
           key={track.slug}
+          component={Link}
+          href={trackPath(track.slug)}
           sx={{
             display: 'flex',
             alignItems: 'center',
@@ -123,6 +131,7 @@ export function FavoritesPage({ allTracks = [] }: Props) {
             py: 1.5,
             borderRadius: '8px',
             color: cssVars.textPrimary,
+            textDecoration: 'none',
             '&:hover': { background: cssVars.hoverSubtle },
           }}
         >
