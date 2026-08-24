@@ -28,7 +28,7 @@ fetch('http://127.0.0.1:7381/ingest/ab6e65c4-05ba-489d-bedd-4a80e494ddaa', {
     data: { runtime: 'nodejs-default', hasEdgeExport: false, propagatesToAdmin: false },
     timestamp: Date.now(),
   }),
-}).catch(() => {});
+}).catch(() => undefined);
 // #endregion
 
 const websiteSchema = {

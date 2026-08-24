@@ -25,7 +25,7 @@ fetch('http://127.0.0.1:7381/ingest/ab6e65c4-05ba-489d-bedd-4a80e494ddaa', {
     },
     timestamp: Date.now(),
   }),
-}).catch(() => {});
+}).catch(() => undefined);
 // #endregion
 
 type Params = Promise<{ id: string }>;
