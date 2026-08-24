@@ -9,8 +9,11 @@ import { SITE_URL } from '@/shared/lib/seo/site';
 import { defaultLocale, localeDirection, locales } from '@/shared/lib/i18n/config';
 import './globals.css';
 
-/** Required by @cloudflare/next-on-pages (Cloudflare Pages). */
-export const runtime = 'edge';
+/**
+ * Do not set `runtime = 'edge'` here. It is inherited by every page, and Vercel
+ * Hobby rejects admin Edge Functions over 1 MB (admin/playlists/[id]). Keep
+ * `edge` only on small routes (OG, auth callbacks, selected APIs, not-found).
+ */
 
 const websiteSchema = {
   '@context': 'https://schema.org',
