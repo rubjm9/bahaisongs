@@ -24,6 +24,7 @@ import { useUser } from '@/features/auth/hooks/useUser';
 import { useLoginPrompt } from '@/features/auth/hooks/useLoginPrompt';
 import { supabaseEnabled } from '@/shared/lib/supabase/env';
 import { addTrackToPlaylist } from '../lib/playlist-tracks';
+import { track } from '@/shared/lib/analytics/track';
 
 interface Props {
   /** Track slug from the catalogue (resolved to tracks.id before insert). */
@@ -52,7 +53,10 @@ export function AddToPlaylistButton({ trackSlug }: Props) {
     const result = await addTrackToPlaylist(supabase, playlistId, trackSlug);
 
     setAdding(null);
-    if (result.ok) setAnchorEl(null);
+    if (result.ok) {
+      track('add_to_playlist', { track_slug: trackSlug, playlist_id: playlistId });
+      setAnchorEl(null);
+    }
   }
 
   function openCreatePlaylistModal() {

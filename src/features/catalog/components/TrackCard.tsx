@@ -11,6 +11,7 @@ import { useIsCurrentTrack } from '@/features/player/hooks/useIsCurrentTrack';
 import { accent, cssVars, radii } from '@/shared/theme/tokens';
 import type { Locale } from '@/shared/lib/i18n/config';
 import { trackPath } from '@/shared/lib/seo/paths';
+import { track as trackEvent } from '@/shared/lib/analytics/track';
 import type { PlayableTrack } from '@/features/player/lib/types';
 
 interface Props {
@@ -21,9 +22,11 @@ interface Props {
   locale: Locale;
   queue?: readonly PlayableTrack[];
   queueIndex?: number;
+  /** Analytics source for play actions. */
+  playSource?: string;
 }
 
-export function TrackCard({ track, locale: _locale, queue, queueIndex }: Props) {
+export function TrackCard({ track, locale: _locale, queue, queueIndex, playSource = 'discover' }: Props) {
   const href = trackPath(track.slug);
   const { isCurrent } = useIsCurrentTrack(track.slug);
   return (
@@ -34,7 +37,13 @@ export function TrackCard({ track, locale: _locale, queue, queueIndex }: Props) 
         '&:hover .bs-card-add-playlist': { opacity: 1 },
       }}
     >
-      <Link href={href} style={{ textDecoration: 'none', display: 'block' }}>
+      <Link
+        href={href}
+        style={{ textDecoration: 'none', display: 'block' }}
+        onClick={() =>
+          trackEvent('select_content', { content_type: 'track', item_id: track.slug })
+        }
+      >
         <Stack
           direction="row"
           spacing={1.5}
@@ -82,6 +91,7 @@ export function TrackCard({ track, locale: _locale, queue, queueIndex }: Props) 
                 track={track}
                 {...(queue ? { queue } : {})}
                 {...(typeof queueIndex === 'number' ? { queueIndex } : {})}
+                source={playSource}
                 size={30}
               />
             </Box>

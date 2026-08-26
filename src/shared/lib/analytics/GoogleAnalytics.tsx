@@ -2,6 +2,7 @@
 
 import { usePathname, useSearchParams } from 'next/navigation';
 import { useEffect, useRef } from 'react';
+import { isAnalyticsConsented } from './consent';
 import { isGoogleAnalyticsEnabled, pageview } from './gtag';
 
 /** Sends GA4 page_view on client navigations (initial view is handled by layout scripts). */
@@ -11,7 +12,7 @@ export function GoogleAnalyticsPageViews() {
   const isFirstView = useRef(true);
 
   useEffect(() => {
-    if (!isGoogleAnalyticsEnabled()) return;
+    if (!isGoogleAnalyticsEnabled() || !isAnalyticsConsented()) return;
     if (isFirstView.current) {
       isFirstView.current = false;
       return;

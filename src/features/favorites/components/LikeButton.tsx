@@ -5,6 +5,7 @@ import { IconButton, Tooltip } from '@mui/material';
 import { Heart } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { accent, cssVars } from '@/shared/theme/tokens';
+import { track } from '@/shared/lib/analytics/track';
 import { useLikes } from '../hooks/useLikes';
 
 interface Props {
@@ -30,7 +31,19 @@ export function LikeButton({ trackId, trackSlug, size = 20 }: Props) {
           onClick={(e) => {
             e.preventDefault();
             e.stopPropagation();
+            const willLike = !isLiked;
             toggle(id);
+            if (trackSlug) {
+              track('add_to_wishlist', {
+                track_slug: trackSlug,
+                action: willLike ? 'add' : 'remove',
+              });
+            } else if (id) {
+              track('add_to_wishlist', {
+                track_slug: id,
+                action: willLike ? 'add' : 'remove',
+              });
+            }
           }}
           sx={{
             color: isLiked ? accent.cyan : cssVars.textMuted,

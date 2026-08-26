@@ -7,6 +7,7 @@ import { Languages } from 'lucide-react';
 import { localeLabels, locales, type Locale } from '@/shared/lib/i18n/config';
 import { usePathname, useRouter } from '@/shared/lib/i18n/routing';
 import { cssVars } from '@/shared/theme/tokens';
+import { track } from '@/shared/lib/analytics/track';
 
 export function LocaleSwitcher() {
   const current = useLocale() as Locale;
@@ -21,6 +22,7 @@ export function LocaleSwitcher() {
   const switchTo = (next: Locale) => {
     handleClose();
     if (next === current) return;
+    track('locale_change', { from: current, to: next });
     router.replace(pathname, { locale: next });
   };
 

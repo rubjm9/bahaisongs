@@ -2,7 +2,9 @@ import type { Metadata, Viewport } from 'next';
 import Script from 'next/script';
 import { Suspense } from 'react';
 import { GoogleAnalyticsPageViews } from '@/shared/lib/analytics/GoogleAnalytics';
-import { GoogleAnalyticsScripts } from '@/shared/lib/analytics/GoogleAnalyticsScripts';
+import { GoogleAnalyticsConsentScript } from '@/shared/lib/analytics/GoogleAnalyticsScripts';
+import { GoogleAnalyticsLoader } from '@/shared/lib/analytics/GoogleAnalyticsLoader';
+import { CookieConsent } from '@/shared/ui/CookieConsent';
 import { inter, outfit, notoSansArabic, notoSansSc, notoSansDevanagari } from '@/shared/theme/fonts';
 import { THEME_COOKIE_NAME, THEME_STORAGE_KEY } from '@/shared/theme/themeStorage';
 import { SITE_URL } from '@/shared/lib/seo/site';
@@ -78,7 +80,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       suppressHydrationWarning
     >
       <head>
-        <GoogleAnalyticsScripts />
+        <GoogleAnalyticsConsentScript />
       </head>
       <body className={inter.className}>
         <script
@@ -92,6 +94,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           {`(function(){try{var k=${JSON.stringify(THEME_STORAGE_KEY)};var c=${JSON.stringify(THEME_COOKIE_NAME)};var p=localStorage.getItem(k);if(p==='light'||p==='dark'||p==='system'){document.cookie=c+'='+encodeURIComponent(p)+';path=/;max-age=31536000;SameSite=Lax';}}catch(e){}})();`}
         </Script>
         {children}
+        <GoogleAnalyticsLoader />
+        <CookieConsent />
         <Suspense fallback={null}>
           <GoogleAnalyticsPageViews />
         </Suspense>

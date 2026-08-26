@@ -8,6 +8,7 @@ import { parseLyrics, parseChordProLyrics, isChordProFormat } from '../lib/chord
 import { getCapoAdjustedDisplay } from '../lib/transpose';
 import { ChordPair } from './ChordPair';
 import { accent, cssVars, radii } from '@/shared/theme/tokens';
+import { track } from '@/shared/lib/analytics/track';
 
 interface Props {
   lyrics: string;
@@ -16,6 +17,7 @@ interface Props {
   trackTitle: string;
   artistName: string;
   locale: string;
+  songSlug: string;
 }
 
 export function PresentationViewer({
@@ -25,6 +27,7 @@ export function PresentationViewer({
   trackTitle,
   artistName,
   locale: _locale,
+  songSlug,
 }: Props) {
   const router = useRouter();
 
@@ -59,6 +62,10 @@ export function PresentationViewer({
       if (hudTimerRef.current) clearTimeout(hudTimerRef.current);
     };
   }, [resetHudTimer]);
+
+  useEffect(() => {
+    track('view_item', { item_id: songSlug });
+  }, [songSlug]);
 
   // Autoscroll
   const startScroll = useCallback(() => {

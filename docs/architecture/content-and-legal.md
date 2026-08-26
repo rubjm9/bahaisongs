@@ -36,6 +36,50 @@ This document covers what we may store, redistribute and embed, and the takedown
 2. Authenticated users' `play_events` are visible only to themselves and to admins (RLS). Phase 8 builds discovery views that **aggregate across users**; raw individual events are never displayed to other users.
 3. Phase 9 ships the privacy notice, the cookie banner and the data-export endpoint (`/account/export`).
 
+### Google Analytics 4 (GA4)
+
+BahaiSongs uses GA4 for traffic and interaction analytics with **tacit consent**: scripts load by default (`analytics_storage: 'granted'`). A notice banner (`CookieConsent`) informs users that continuing to browse implies acceptance; Accept or close only dismisses the notice.
+
+**Automatic collection**
+
+| Signal | Mechanism |
+| ------ | --------- |
+| Page views | SPA navigations via `GoogleAnalyticsPageViews` |
+| User dimensions | `locale`, `authenticated` via `setUserProperties` |
+
+**Custom events** (via `src/shared/lib/analytics/track.ts`)
+
+| Event | When it fires | Key parameters |
+| ----- | ------------- | -------------- |
+| `play` | Audio starts | `track_slug`, `source` (`discover`, `search`, `playlist:{slug}`, `player`) |
+| `search` | User searches (discover / palette) | `search_term` |
+| `login` | Successful sign-in (OAuth or email) | `method` |
+| `add_to_wishlist` | Like / unlike | `track_slug`, `action` (`add` / `remove`) |
+| `add_to_playlist` | Track added to playlist | `track_slug`, `playlist_id` |
+| `share` | WhatsApp share click | `method`, `content_type` |
+| `generate_lead` | Suggestion form submitted | — |
+| `view_item` | Presentation mode opened | `item_id` (song slug) |
+| `select_content` | Track or search result clicked | `content_type`, `item_id` |
+| `locale_change` | Language switched | `from`, `to` |
+| `theme_change` | Theme switched | `theme` |
+
+**Product analytics (Supabase)** — `play_events` remains the source of truth for admin dashboards and trending. Rows include contextual `source` and `completion` (0–1, updated on pause or track change).
+
+### GA4 console setup (manual)
+
+After deploying events to production:
+
+1. **Register custom dimensions** (Admin → Custom definitions): `track_slug`, `source`, `locale`, `search_term`, `authenticated`.
+2. **Exploration reports**:
+   - Funnel: session → `search` → `play` → `add_to_wishlist`
+   - Top tracks by `play` event count
+   - Traffic sources vs. engagement time
+3. **Link Search Console** (Admin → Product links) for SEO queries and landing pages.
+4. **DebugView**: use the GA Debugger extension or `debug_mode` to verify events in real time before promoting.
+5. **Retention & engagement**: GA4 calculates these automatically once custom events are flowing.
+
+Optional: enable **Cloudflare Web Analytics** in the Pages dashboard for cookieless pageview baseline (no code changes).
+
 ## Storage retention
 
 | Data                               | Retention                                                                                |

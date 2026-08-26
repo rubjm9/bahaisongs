@@ -11,6 +11,7 @@ import {
   themePreferenceCookie,
   type ThemePreference,
 } from '@/shared/theme/themeStorage';
+import { track } from '@/shared/lib/analytics/track';
 
 const options: { value: ThemePreference; icon: typeof Monitor }[] = [
   { value: 'system', icon: Monitor },
@@ -36,6 +37,7 @@ export function ThemeSwitcher() {
 
   const select = (value: ThemePreference) => {
     setTheme(value);
+    track('theme_change', { theme: value });
     if (isThemePreference(value)) {
       document.cookie = themePreferenceCookie(value);
     }

@@ -66,6 +66,17 @@ export function createBsTheme(mode: ThemeMode, direction: 'ltr' | 'rtl' = 'ltr')
           root: { backgroundImage: 'none' },
         },
       },
+      // El reset global `*::before { box-sizing: border-box }` despega la
+      // flecha del cuerpo del tooltip; content-box restaura el solape de MUI.
+      MuiTooltip: {
+        styleOverrides: {
+          arrow: {
+            '&::before': {
+              boxSizing: 'content-box',
+            },
+          },
+        },
+      },
     },
   });
 }

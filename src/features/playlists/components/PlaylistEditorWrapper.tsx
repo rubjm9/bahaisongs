@@ -4,9 +4,10 @@ import { PlaylistEditor } from './PlaylistEditor';
 
 interface Props {
   playlistId: string;
+  playlistSlug: string;
   isOwner: boolean;
 }
 
-export function PlaylistEditorWrapper({ playlistId, isOwner }: Props) {
-  return <PlaylistEditor playlistId={playlistId} isOwner={isOwner} />;
+export function PlaylistEditorWrapper({ playlistId, playlistSlug, isOwner }: Props) {
+  return <PlaylistEditor playlistId={playlistId} playlistSlug={playlistSlug} isOwner={isOwner} />;
 }

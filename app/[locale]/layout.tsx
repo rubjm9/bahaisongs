@@ -3,6 +3,7 @@ import { NextIntlClientProvider } from 'next-intl';
 import { getMessages, setRequestLocale } from 'next-intl/server';
 import { Providers } from '@/app/providers';
 import { InstallPrompt } from '@/features/pwa/components/InstallPrompt';
+import { AnalyticsSync } from '@/shared/lib/analytics/AnalyticsSync';
 import { HtmlLocaleSync } from '@/shared/lib/i18n/HtmlLocaleSync';
 import { routing } from '@/shared/lib/i18n/routing';
 import { getServerThemeMode, getServerThemePreference } from '@/shared/theme/serverTheme';
@@ -45,6 +46,7 @@ export default async function LocaleLayout({
         {...(themePreference ? { themePreference } : {})}
       >
         {children}
+        <AnalyticsSync />
         <InstallPrompt />
       </Providers>
     </NextIntlClientProvider>

@@ -25,6 +25,7 @@ export default async function PresentationPage({ params }: { params: Params }) {
       trackTitle={track.title}
       artistName={track.artist}
       locale={locale}
+      songSlug={songSlug}
     />
   );
 }

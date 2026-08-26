@@ -11,13 +11,15 @@ interface QueueState {
   originalQueue: PlayableTrack[];
   /** Index of the currently-playing track in `queue`, or -1 when idle. */
   index: number;
+  /** Context for analytics — set when playback is initiated. */
+  playSource: string | null;
 }
 
 interface QueueActions {
   /** Replace the queue with `[track]` and start playback at index 0. */
-  playNow: (track: PlayableTrack) => void;
+  playNow: (track: PlayableTrack, source?: string) => void;
   /** Replace the queue with `tracks` starting at `startIndex`. */
-  playList: (tracks: readonly PlayableTrack[], startIndex: number) => void;
+  playList: (tracks: readonly PlayableTrack[], startIndex: number, source?: string) => void;
   /** Insert `track` immediately after the current one. */
   addNext: (track: PlayableTrack) => void;
   /** Append `track` to the end of the queue. */
@@ -39,7 +41,7 @@ interface QueueActions {
   applyShuffle: (shuffle: boolean) => void;
 }
 
-const initial: QueueState = { queue: [], originalQueue: [], index: -1 };
+const initial: QueueState = { queue: [], originalQueue: [], index: -1, playSource: null };
 
 /** Fisher-Yates that keeps the current track at index 0. */
 function shuffleAround<T>(items: readonly T[], pivotIdx: number): T[] {
@@ -57,17 +59,23 @@ export const useQueueStore = create<QueueState & QueueActions>()(
   subscribeWithSelector((set, get) => ({
     ...initial,
 
-    playNow: (track) =>
+    playNow: (track, source) =>
       set({
         queue: [track],
         originalQueue: [track],
         index: 0,
+        playSource: source ?? 'player',
       }),
 
-    playList: (tracks, startIndex) => {
+    playList: (tracks, startIndex, source) => {
       const arr = [...tracks];
       const safeIdx = arr.length === 0 ? -1 : Math.max(0, Math.min(startIndex, arr.length - 1));
-      set({ queue: arr, originalQueue: arr, index: safeIdx });
+      set({
+        queue: arr,
+        originalQueue: arr,
+        index: safeIdx,
+        playSource: source ?? 'player',
+      });
     },
 
     addNext: (track) =>
@@ -156,4 +164,9 @@ export const useQueueStore = create<QueueState & QueueActions>()(
 /** Convenience selector: the currently active track or `null`. */
 export function selectCurrentTrack(s: QueueState): PlayableTrack | null {
   return s.index >= 0 && s.index < s.queue.length ? (s.queue[s.index] ?? null) : null;
+}
+
+/** Convenience selector: analytics source for the active playback session. */
+export function selectPlaySource(s: QueueState): string {
+  return s.playSource ?? 'player';
 }

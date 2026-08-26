@@ -1,6 +1,6 @@
 import { supabaseEnabled } from '@/shared/lib/supabase/env';
 import { getSupabaseBrowserClient } from '@/shared/lib/supabase/client';
-import { recordPlayAction } from '../actions/recordPlay';
+import { recordPlayAction, updatePlayCompletionAction } from '../actions/recordPlay';
 
 export interface RecordPlayEventInput {
   trackId?: string;
@@ -14,28 +14,47 @@ export interface RecordPlayEventInput {
  * Append a row to `play_events`. Uses the browser Supabase client (RLS allows
  * anon/authenticated inserts) so production works without a service role key.
  * Falls back to the server action if the client insert fails.
+ * Returns the inserted event id when available (for completion updates).
  */
-export async function recordPlayEvent(input: RecordPlayEventInput): Promise<void> {
-  if (!supabaseEnabled || !input.slug) return;
+export async function recordPlayEvent(input: RecordPlayEventInput): Promise<string | null> {
+  if (!supabaseEnabled || !input.slug) return null;
 
   try {
-    const ok = await recordPlayViaBrowser(input);
-    if (ok) return;
+    const eventId = await recordPlayViaBrowser(input);
+    if (eventId) return eventId;
 
-    const { ok: serverOk } = await recordPlayAction({
+    const { ok, eventId: serverEventId } = await recordPlayAction({
       slug: input.slug,
       ...(input.trackId ? { trackId: input.trackId } : {}),
       ...(input.source ? { source: input.source } : {}),
     });
-    if (!serverOk) {
+    if (!ok) {
       console.warn('[play_events] no se pudo registrar la reproducción');
     }
+    return serverEventId ?? null;
   } catch (err) {
     console.warn('[play_events] record error:', err);
+    return null;
   }
 }
 
-async function recordPlayViaBrowser(input: RecordPlayEventInput): Promise<boolean> {
+export async function updatePlayCompletion(input: {
+  eventId: string;
+  completion: number;
+}): Promise<void> {
+  if (!supabaseEnabled || !input.eventId) return;
+
+  try {
+    const { ok } = await updatePlayCompletionAction(input);
+    if (!ok) {
+      console.warn('[play_events] no se pudo actualizar completion');
+    }
+  } catch (err) {
+    console.warn('[play_events] completion update error:', err);
+  }
+}
+
+async function recordPlayViaBrowser(input: RecordPlayEventInput): Promise<string | null> {
   const supabase = getSupabaseBrowserClient();
 
   let trackId = input.trackId;
@@ -47,22 +66,26 @@ async function recordPlayViaBrowser(input: RecordPlayEventInput): Promise<boolea
       .maybeSingle();
     trackId = (data as { id: string } | null)?.id;
   }
-  if (!trackId) return false;
+  if (!trackId) return null;
 
   const {
     data: { user },
   } = await supabase.auth.getUser();
 
-  const { error } = await supabase.from('play_events').insert({
-    track_id: trackId,
-    user_id: user?.id ?? null,
-    source: input.source ?? 'player',
-    completion: input.completion ?? null,
-  } as never);
+  const { data, error } = await supabase
+    .from('play_events')
+    .insert({
+      track_id: trackId,
+      user_id: user?.id ?? null,
+      source: input.source ?? 'player',
+      completion: input.completion ?? null,
+    } as never)
+    .select('id')
+    .single();
 
   if (error) {
     console.warn('[play_events] browser insert failed:', error.message);
-    return false;
+    return null;
   }
-  return true;
+  return (data as { id: string } | null)?.id ?? null;
 }

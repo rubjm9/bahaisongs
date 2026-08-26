@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { useLocale, useTranslations } from 'next-intl';
@@ -12,6 +12,8 @@ import { SearchBox } from '@/features/catalog/components/SearchBox';
 import { SearchResultItem } from '@/features/catalog/components/SearchResultItem';
 import { TrackList } from '@/features/catalog/components/TrackList';
 import { useSearch } from '@/features/catalog/hooks/useSearch';
+import { useDebouncedValue } from '@/shared/hooks/useDebouncedValue';
+import { track } from '@/shared/lib/analytics/track';
 import type { SearchFilters } from '@/features/catalog/lib/search-engine';
 import { categoryLabel } from '@/features/catalog/lib/category-labels';
 import {
@@ -91,6 +93,17 @@ export function DiscoverPageClient({
     limit: PAGE_LIMIT,
     filters,
   });
+
+  const debouncedQuery = useDebouncedValue(query, 400);
+  const lastTrackedSearchRef = useRef('');
+
+  useEffect(() => {
+    const term = debouncedQuery.trim();
+    if (term.length < 2) return;
+    if (term === lastTrackedSearchRef.current) return;
+    lastTrackedSearchRef.current = term;
+    track('search', { search_term: term });
+  }, [debouncedQuery]);
 
   const catalogCount = allTracks.length;
 
@@ -281,7 +294,7 @@ export function DiscoverPageClient({
           </Box>
           <Stack spacing={0.5} role="listbox" aria-label={t('title')}>
             {results.map((r) => (
-              <SearchResultItem key={r.entry.slug} result={r} locale={locale} />
+              <SearchResultItem key={r.entry.slug} result={r} locale={locale} playSource="search" />
             ))}
           </Stack>
         </>

@@ -29,6 +29,8 @@ interface Props {
   queueIndex?: number;
   /** Optional 1-based position label on the left. */
   position?: number;
+  /** Analytics source for play actions. */
+  playSource?: string;
 }
 
 /**
@@ -36,7 +38,7 @@ interface Props {
  * the only client island and stops propagation so a click on it doesn't
  * navigate.
  */
-export function TrackRow({ track, locale: _locale, queue, queueIndex, position }: Props) {
+export function TrackRow({ track, locale: _locale, queue, queueIndex, position, playSource = 'discover' }: Props) {
   const t = useTranslations('catalog.tooltips');
   const href = trackPath(track.slug);
   const languageLabel =
@@ -114,6 +116,7 @@ export function TrackRow({ track, locale: _locale, queue, queueIndex, position }
               track={track}
               {...(queue ? { queue } : {})}
               {...(typeof queueIndex === 'number' ? { queueIndex } : {})}
+              source={playSource}
               size={32}
               variant="ghost"
             />

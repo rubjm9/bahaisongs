@@ -9,6 +9,8 @@ interface Props {
   locale: Locale;
   /** When true, prefix rows with their 1-based position. */
   numbered?: boolean;
+  /** Analytics source passed to PlayButton. */
+  playSource?: string;
 }
 
 /**
@@ -16,7 +18,7 @@ interface Props {
  * The whole list becomes the player queue context — clicking play on row N
  * starts playback at index N.
  */
-export function TrackList({ tracks, locale, numbered = false }: Props) {
+export function TrackList({ tracks, locale, numbered = false, playSource = 'discover' }: Props) {
   const queue = toPlayableList(tracks);
 
   return (
@@ -33,6 +35,7 @@ export function TrackList({ tracks, locale, numbered = false }: Props) {
           locale={locale}
           queue={queue}
           queueIndex={idx}
+          playSource={playSource}
           {...(numbered ? { position: idx + 1 } : {})}
         />
       ))}

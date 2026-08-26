@@ -21,19 +21,37 @@ import {
 } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import { cssVars, radii } from '@/shared/theme/tokens';
+import { PlayButton } from '@/features/player/components/PlayButton';
+import { toPlayableList } from '@/features/player/lib/playable';
+import type { PlayableTrack } from '@/features/player/lib/types';
 import { usePlaylistTracks } from '../hooks/usePlaylistTracks';
 import type { PlaylistEntry } from '@/entities/playlist';
+import { isTrackLanguage } from '@/features/catalog/lib/track-languages';
 
 function noop() {
   return undefined;
 }
 
+function buildPlaylistQueue(tracks: readonly PlaylistEntry[]): PlayableTrack[] {
+  return toPlayableList(
+    tracks.map((e) => ({
+      id: e.track.id,
+      slug: e.track.slug,
+      title: e.track.title,
+      artist: e.track.primaryArtistName ?? '',
+      artistSlug: e.track.slug,
+      language: isTrackLanguage(e.track.language) ? e.track.language : 'es',
+    })),
+  );
+}
+
 interface Props {
   playlistId: string;
+  playlistSlug: string;
   isOwner: boolean;
 }
 
-export function PlaylistEditor({ playlistId, isOwner }: Props) {
+export function PlaylistEditor({ playlistId, playlistSlug, isOwner }: Props) {
   const t = useTranslations('playlist');
   const { tracks, loading, removeTrack, reorderTracks } = usePlaylistTracks(playlistId);
 
@@ -70,6 +88,9 @@ export function PlaylistEditor({ playlistId, isOwner }: Props) {
     );
   }
 
+  const queue = buildPlaylistQueue(tracks);
+  const playSource = `playlist:${playlistSlug}`;
+
   if (!isOwner) {
     return (
       <Stack spacing={0.5}>
@@ -80,6 +101,9 @@ export function PlaylistEditor({ playlistId, isOwner }: Props) {
             index={idx}
             isOwner={false}
             onRemove={noop}
+            queue={queue}
+            queueIndex={idx}
+            playSource={playSource}
           />
         ))}
       </Stack>
@@ -98,6 +122,8 @@ export function PlaylistEditor({ playlistId, isOwner }: Props) {
               entry={entry}
               index={idx}
               onRemove={() => removeTrack(entry.track.id || entry.track.slug)}
+              queue={queue}
+              playSource={playSource}
             />
           ))}
         </Stack>
@@ -112,12 +138,18 @@ function TrackItem({
   isOwner,
   onRemove,
   dragHandle,
+  queue,
+  queueIndex,
+  playSource,
 }: {
   entry: PlaylistEntry;
   index: number;
   isOwner: boolean;
   onRemove: () => void;
   dragHandle?: React.ReactNode;
+  queue?: readonly PlayableTrack[];
+  queueIndex?: number;
+  playSource?: string;
 }) {
   const t = useTranslations('playlist');
 
@@ -138,6 +170,16 @@ function TrackItem({
     >
       {dragHandle}
       <Box sx={{ color: cssVars.textMuted, fontSize: '0.78rem', minWidth: 24 }}>{index + 1}</Box>
+      {queue && typeof queueIndex === 'number' ? (
+        <PlayButton
+          track={queue[queueIndex]!}
+          queue={queue}
+          queueIndex={queueIndex}
+          {...(playSource ? { source: playSource } : {})}
+          size={28}
+          variant="ghost"
+        />
+      ) : null}
       <Box sx={{ flex: 1, minWidth: 0 }}>
         <Box
           sx={{
@@ -175,10 +217,14 @@ function SortableTrackItem({
   entry,
   index,
   onRemove,
+  queue,
+  playSource,
 }: {
   entry: PlaylistEntry;
   index: number;
   onRemove: () => void;
+  queue: readonly PlayableTrack[];
+  playSource: string;
 }) {
   const id = entry.track.id || entry.track.slug;
   const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({
@@ -217,6 +263,9 @@ function SortableTrackItem({
         isOwner={true}
         onRemove={onRemove}
         dragHandle={dragHandle}
+        queue={queue}
+        queueIndex={index}
+        playSource={playSource}
       />
     </Box>
   );

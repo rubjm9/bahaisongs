@@ -226,6 +226,7 @@ export function TrendingTracksTable({ tracks }: Props) {
                       track={playable}
                       queue={queue}
                       queueIndex={idx}
+                      source="discover"
                       size={32}
                       variant="ghost"
                     />

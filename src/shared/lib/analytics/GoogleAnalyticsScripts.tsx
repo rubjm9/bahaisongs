@@ -1,7 +1,25 @@
 import { GA_MEASUREMENT_ID, isGoogleAnalyticsEnabled } from './gtag';
 
-/** Inline + async gtag in <head> so GA loads on first paint (SSR, no hydration wait). */
-export function GoogleAnalyticsScripts() {
+/** Inline consent defaults in <head> — must run before any GA tag loads. */
+export function GoogleAnalyticsConsentScript() {
+  if (!isGoogleAnalyticsEnabled()) return null;
+
+  const script = `
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('consent', 'default', {
+      analytics_storage: 'granted',
+      ad_storage: 'denied',
+      ad_user_data: 'denied',
+      ad_personalization: 'denied'
+    });
+  `.trim();
+
+  return <script dangerouslySetInnerHTML={{ __html: script }} />;
+}
+
+/** Async gtag loader — mounted by default (tacit analytics consent). */
+export function GoogleAnalyticsTagScripts() {
   if (!isGoogleAnalyticsEnabled()) return null;
 
   const initScript = `

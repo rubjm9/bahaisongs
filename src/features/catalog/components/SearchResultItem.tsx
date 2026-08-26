@@ -10,6 +10,7 @@ import { TrackLikeSlot } from '@/features/favorites/components/TrackLikeSlot';
 import type { SearchResult } from '@/features/catalog/lib/search-engine';
 import { accent, cssVars, radii } from '@/shared/theme/tokens';
 import { trackPath } from '@/shared/lib/seo/paths';
+import { track } from '@/shared/lib/analytics/track';
 import {
   isTrackLanguage,
   trackLanguageLabels,
@@ -22,9 +23,17 @@ interface Props {
   /** Optional ref hook for keyboard scroll-into-view. */
   itemRef?: (node: HTMLAnchorElement | null) => void;
   onSelect?: () => void;
+  playSource?: string;
 }
 
-export function SearchResultItem({ result, locale: _locale, active = false, itemRef, onSelect }: Props) {
+export function SearchResultItem({
+  result,
+  locale: _locale,
+  active = false,
+  itemRef,
+  onSelect,
+  playSource: _playSource,
+}: Props) {
   const t = useTranslations('catalog.tooltips');
   const { entry, matches } = result;
   const languageLabel =
@@ -40,7 +49,10 @@ export function SearchResultItem({ result, locale: _locale, active = false, item
     <Link
       {...(itemRef ? { ref: itemRef } : {})}
       href={href}
-      {...(onSelect ? { onClick: onSelect } : {})}
+      onClick={() => {
+        track('select_content', { content_type: 'search_result', item_id: entry.slug });
+        onSelect?.();
+      }}
       role="option"
       aria-selected={active}
       style={{ textDecoration: 'none', display: 'block' }}

@@ -7,7 +7,7 @@ export async function recordPlayAction(input: {
   trackId?: string;
   slug?: string;
   source?: string;
-}): Promise<{ ok: boolean }> {
+}): Promise<{ ok: boolean; eventId?: string }> {
   if (!supabaseEnabled) {
     return { ok: false };
   }
@@ -39,15 +39,42 @@ export async function recordPlayAction(input: {
   }
 
   // RLS allows anon/authenticated inserts (user_id null or auth.uid()); no service role needed.
-  const { error } = await sessionClient.from('play_events').insert({
-    track_id: trackId,
-    user_id: userId,
-    source: input.source ?? 'player',
-    completion: null,
-  } as never);
+  const { data, error } = await sessionClient
+    .from('play_events')
+    .insert({
+      track_id: trackId,
+      user_id: userId,
+      source: input.source ?? 'player',
+      completion: null,
+    } as never)
+    .select('id')
+    .single();
 
   if (error) {
     console.error('[recordPlayAction]', error.message);
+    return { ok: false };
+  }
+
+  const eventId = (data as { id: string } | null)?.id;
+  return { ok: true, ...(eventId ? { eventId } : {}) };
+}
+
+export async function updatePlayCompletionAction(input: {
+  eventId: string;
+  completion: number;
+}): Promise<{ ok: boolean }> {
+  if (!supabaseEnabled || !input.eventId) return { ok: false };
+
+  const completion = Math.min(1, Math.max(0, input.completion));
+  const client = hasServiceRoleKey ? getSupabaseServiceClient() : await getSupabaseServerClient();
+
+  const { error } = await client
+    .from('play_events')
+    .update({ completion } as never)
+    .eq('id' as never, input.eventId);
+
+  if (error) {
+    console.error('[updatePlayCompletionAction]', error.message);
     return { ok: false };
   }
 

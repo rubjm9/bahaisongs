@@ -10,6 +10,7 @@ import { SearchBox, type SearchBoxHandle } from './SearchBox';
 import { SearchResultItem } from './SearchResultItem';
 import { useSearch } from '@/features/catalog/hooks/useSearch';
 import { useSearchHistory } from '../hooks/useSearchHistory';
+import { track } from '@/shared/lib/analytics/track';
 import { accent, cssVars, radii } from '@/shared/theme/tokens';
 import type { Locale } from '@/shared/lib/i18n/config';
 import { appPath, trackPath } from '@/shared/lib/seo/paths';
@@ -81,10 +82,12 @@ export function SearchPalette() {
         const target = visibleResults[activeIdx];
         if (target) {
           addEntry(query);
+          if (trimmed.length >= 2) track('search', { search_term: trimmed });
           router.push(trackPath(target.entry.slug));
           setOpen(false);
         } else if (trimmed.length > 0) {
           addEntry(query);
+          if (trimmed.length >= 2) track('search', { search_term: trimmed });
           router.push(`${appPath(locale, 'discover')}?q=${encodeURIComponent(trimmed)}`);
           setOpen(false);
         }

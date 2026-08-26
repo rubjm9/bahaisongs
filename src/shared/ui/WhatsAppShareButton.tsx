@@ -5,6 +5,7 @@ import { usePathname } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 import { Box, IconButton, Typography } from '@mui/material';
 import { accent, cssVars } from '@/shared/theme/tokens';
+import { track } from '@/shared/lib/analytics/track';
 import { MOBILE_WHATSAPP_BOTTOM } from '@/shared/ui/shellLayout';
 
 function WhatsAppIcon() {
@@ -112,6 +113,12 @@ export function WhatsAppShareButton() {
         target="_blank"
         rel="noopener noreferrer"
         aria-label={t('ariaLabel')}
+        onClick={() => {
+          track('share', {
+            method: 'whatsapp',
+            content_type: pathname.includes('/song/') ? 'song' : 'page',
+          });
+        }}
         sx={{
           pointerEvents: 'auto',
           width: 52,

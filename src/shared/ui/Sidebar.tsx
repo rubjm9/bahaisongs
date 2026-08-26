@@ -81,7 +81,7 @@ export function Sidebar({ collapsed, onToggleCollapsed }: SidebarProps) {
           <BrandMark
             label={tBrand('name')}
             showWordmark={!collapsed}
-            size={collapsed ? 28 : 168}
+            size={collapsed ? 26 : 140}
           />
         </Link>
         {!collapsed ? (
@@ -125,46 +125,54 @@ export function Sidebar({ collapsed, onToggleCollapsed }: SidebarProps) {
         {navItems.map(({ href, labelKey, Icon }) => {
           const fullHref = appPath(locale, href);
           const isActive = isAppPathActive(locale, href, pathname);
-          return (
-            <Tooltip key={labelKey} title={t(labelKey)} placement="right" arrow>
-              <Link href={fullHref} style={{ textDecoration: 'none' }}>
-                <Box
-                  sx={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: collapsed ? 'center' : 'flex-start',
-                    gap: collapsed ? 0 : 1.5,
-                    paddingX: collapsed ? 1 : 1.5,
-                    paddingY: 1.25,
-                    borderRadius: `${radii.md}px`,
-                    color: isActive ? cssVars.textPrimary : cssVars.textMuted,
-                    background: isActive ? cssVars.navActiveBg : 'transparent',
-                    border: `1px solid ${isActive ? cssVars.borderStrong : 'transparent'}`,
-                    transition: 'background-color 160ms, color 160ms, border-color 160ms',
-                    '&:hover': {
-                      background: cssVars.hoverSubtle,
-                      color: cssVars.textPrimary,
-                    },
-                  }}
-                >
-                  <Icon size={18} aria-hidden />
-                  {!collapsed ? (
-                    <Box
-                      component="span"
-                      sx={{
-                        fontWeight: 500,
-                        fontSize: '0.9rem',
-                        whiteSpace: 'nowrap',
-                        overflow: 'hidden',
-                        textOverflow: 'ellipsis',
-                      }}
-                    >
-                      {t(labelKey)}
-                    </Box>
-                  ) : null}
-                </Box>
-              </Link>
+          const label = t(labelKey);
+          const link = (
+            <Link href={fullHref} style={{ textDecoration: 'none' }} aria-label={label}>
+              <Box
+                sx={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: collapsed ? 'center' : 'flex-start',
+                  gap: collapsed ? 0 : 1.5,
+                  paddingX: collapsed ? 1 : 1.5,
+                  paddingY: 1.25,
+                  borderRadius: `${radii.md}px`,
+                  color: isActive ? cssVars.textPrimary : cssVars.textMuted,
+                  background: isActive ? cssVars.navActiveBg : 'transparent',
+                  border: `1px solid ${isActive ? cssVars.borderStrong : 'transparent'}`,
+                  transition: 'background-color 160ms, color 160ms, border-color 160ms',
+                  '&:hover': {
+                    background: cssVars.hoverSubtle,
+                    color: cssVars.textPrimary,
+                  },
+                }}
+              >
+                <Icon size={18} aria-hidden />
+                {!collapsed ? (
+                  <Box
+                    component="span"
+                    sx={{
+                      fontWeight: 500,
+                      fontSize: '0.9rem',
+                      whiteSpace: 'nowrap',
+                      overflow: 'hidden',
+                      textOverflow: 'ellipsis',
+                    }}
+                  >
+                    {label}
+                  </Box>
+                ) : null}
+              </Box>
+            </Link>
+          );
+
+          // Solo útil cuando el menú está colapsado (solo iconos).
+          return collapsed ? (
+            <Tooltip key={labelKey} title={label} placement="right" arrow>
+              {link}
             </Tooltip>
+          ) : (
+            <Box key={labelKey}>{link}</Box>
           );
         })}
       </Stack>

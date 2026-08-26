@@ -29,6 +29,7 @@ import { TRACK_LANGUAGES, trackLanguageLabels } from '@/features/catalog/lib/tra
 import { useUser } from '@/features/auth/hooks/useUser';
 import { useLoginPrompt } from '@/features/auth/hooks/useLoginPrompt';
 import { submitSuggestion } from '@/features/suggestions/actions/submitSuggestion';
+import { track } from '@/shared/lib/analytics/track';
 import { accent, cssVars, radii } from '@/shared/theme/tokens';
 import { GlowButton } from '@/shared/ui/GlowButton';
 
@@ -259,6 +260,7 @@ export function SuggestForm({ locale, categorySlugs, artistNames }: Props) {
           }
 
           setSuccess(true);
+          track('generate_lead', {});
         } catch {
           setFormError(errorMessage('uploadFailed'));
           setUploadProgress(null);

@@ -18,6 +18,8 @@ interface Props {
    *  `queueIndex` instead of an isolated single-track queue. */
   queue?: readonly PlayableTrack[];
   queueIndex?: number;
+  /** Analytics source label (discover, search, playlist:slug, player). */
+  source?: string;
   size?: number;
   variant?: 'solid' | 'ghost';
   sx?: SxProps<Theme>;
@@ -28,6 +30,7 @@ export function PlayButton({
   track,
   queue,
   queueIndex,
+  source = 'player',
   size = 36,
   variant = 'solid',
   sx,
@@ -60,9 +63,9 @@ export function PlayButton({
     }
 
     if (queue && queue.length > 0 && typeof queueIndex === 'number') {
-      useQueueStore.getState().playList(queue, queueIndex);
+      useQueueStore.getState().playList(queue, queueIndex, source);
     } else {
-      useQueueStore.getState().playNow(track);
+      useQueueStore.getState().playNow(track, source);
     }
   };
 

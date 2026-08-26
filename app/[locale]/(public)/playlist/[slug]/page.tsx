@@ -130,7 +130,7 @@ export default async function PlaylistPage({ params }: { params: Params }) {
         </Stack>
       </Box>
 
-      <PlaylistEditorWrapper playlistId={playlist.id} isOwner={isOwner} />
+      <PlaylistEditorWrapper playlistId={playlist.id} playlistSlug={slug} isOwner={isOwner} />
     </Stack>
   );
 }
